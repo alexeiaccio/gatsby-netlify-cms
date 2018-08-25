@@ -7518,8 +7518,8 @@ name-all-modules-plugin@^1.0.1:
   resolved "https://registry.yarnpkg.com/name-all-modules-plugin/-/name-all-modules-plugin-1.0.1.tgz#0abfb6ad835718b9fb4def0674e06657a954375c"
 
 nan@^2.10.0, nan@^2.9.2:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.0.tgz#574e360e4d954ab16966ec102c0c049fd961a099"
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -7572,15 +7572,15 @@ netlify-cms-backend-git-gateway@^2.0.6:
     jwt-decode "^2.2.0"
 
 netlify-cms-backend-github@^2.0.6:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/netlify-cms-backend-github/-/netlify-cms-backend-github-2.0.5.tgz#de73878439a6490b936304a1ebad2317c146937b"
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/netlify-cms-backend-github/-/netlify-cms-backend-github-2.0.6.tgz#b2a27d43f8ffb8e934bc6f8ba04e5cb407bb14d2"
   dependencies:
     js-base64 "^2.4.8"
     semaphore "^1.1.0"
 
 netlify-cms-backend-gitlab@^2.0.5:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/netlify-cms-backend-gitlab/-/netlify-cms-backend-gitlab-2.0.4.tgz#5556d4b4acb872621fbfa5af32e4752df90f7142"
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/netlify-cms-backend-gitlab/-/netlify-cms-backend-gitlab-2.0.5.tgz#fec4e44b5db8b827039478725b2720c800891129"
   dependencies:
     js-base64 "^2.4.8"
     semaphore "^1.1.0"
@@ -7754,7 +7754,7 @@ netlify-cms-widget-text@^2.0.5:
   dependencies:
     react-textarea-autosize "^5.2.0"
 
-netlify-cms@^2.0.8:
+netlify-cms@^2.0.10:
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/netlify-cms/-/netlify-cms-2.0.10.tgz#2e109134ae7e888442507e6d1082e8812cec5ce8"
   dependencies:
