@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import { kebabCase } from "lodash";
 import Helmet from "react-helmet";
 import { Link } from "gatsby";
+import { graphql } from "gatsby";
+
 import Content, { HTMLContent } from "../components/Content";
+import Layout from "../components/layouts";
 
 export const ArticleTemplate = ({
   authors,
@@ -16,7 +19,6 @@ export const ArticleTemplate = ({
   helmet
 }) => {
   const ArticleContent = contentComponent || Content;
-
   return (
     <section className="section">
       {helmet || ""}
@@ -34,13 +36,13 @@ export const ArticleTemplate = ({
                   {authors.map(author => (
                     <span key={author + `author`}> {author} ·</span>
                   ))}
-                  <span>
-                     |
-                    {date}
-                  </span>
                 </div>
               </div>
             ) : null}
+            <span>
+              |&ensp;
+              {date}
+            </span>
             <p>{description}</p>
             <ArticleContent content={content} />
             {tags && tags.length ? (
@@ -71,19 +73,20 @@ ArticleTemplate.propTypes = {
 };
 
 const Article = ({ data }) => {
-  const { markdownRemark: post } = data;
-
+  const { markdownRemark: article } = data;
   return (
-    <ArticleTemplate
-      authors={post.frontmatter.authors}
-      content={post.html}
-      contentComponent={HTMLContent}
-      date={post.frontmatter.date}
-      description={post.frontmatter.description}
-      helmet={<Helmet title={post.frontmatter.title} />}
-      tags={post.frontmatter.tags}
-      title={post.frontmatter.title}
-    />
+    <Layout>
+      <ArticleTemplate
+        authors={article.frontmatter.authors}
+        content={article.html}
+        contentComponent={HTMLContent}
+        date={article.frontmatter.date}
+        description={article.frontmatter.description}
+        helmet={<Helmet title={article.frontmatter.title} />}
+        tags={article.frontmatter.tags}
+        title={article.frontmatter.title}
+      />
+    </Layout>
   );
 };
 
@@ -101,7 +104,8 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        authors
+        date(formatString: "DD MMMM YYYY")
         title
         description
         tags
