@@ -1,18 +1,17 @@
 import CMS from "netlify-cms";
 
-import styles from "./styles.css";
 import ArticlePreview from "./preview-templates/ArticlePreview";
 
 CMS.registerPreviewTemplate("articles", ArticlePreview);
 
-CMS.registerPreviewStyle(styles);
+CMS.registerPreviewStyle("./admin/styles.css");
 
 CMS.registerEditorComponent({
   id: "youtube",
   label: "Youtube",
   icon: "video",
   fields: [{ name: "id", label: "Youtube Video ID" }],
-  pattern: /^<.+youtube\.com\/embed\/(\S+)[?].+>$/,
+  pattern: /^<.+youtube\.com\/embed\/(\S+)\?.+>$/,
   fromBlock: match => ({
     id: match[1]
   }),
