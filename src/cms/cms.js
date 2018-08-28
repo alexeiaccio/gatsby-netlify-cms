@@ -11,7 +11,7 @@ CMS.registerEditorComponent({
   label: "Youtube",
   icon: "video",
   fields: [{ name: "id", label: "Youtube Video ID" }],
-  pattern: /youtube\.com\/embed\/(\S+)[\?]/,
+  pattern: /^<.+youtube\.com\/embed\/(\S+)[\?].+>$/,
   fromBlock: match => ({
     id: match[1]
   }),
