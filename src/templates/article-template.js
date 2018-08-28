@@ -14,6 +14,7 @@ export const ArticleTemplate = ({
   contentComponent,
   date,
   description,
+  image,
   tags,
   title,
   helmet
@@ -25,9 +26,22 @@ export const ArticleTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
+            <div
+              className="full-width-image-container margin-top-0"
+              style={{ backgroundImage: `url(${image})` }}
+            >
+              <h1
+                className="has-text-weight-bold is-size-1"
+                style={{
+                  boxShadow: "0.5rem 0 0 #f40, -0.5rem 0 0 #f40",
+                  backgroundColor: "#f40",
+                  color: "white",
+                  padding: "1rem"
+                }}
+              >
+                {title}
+              </h1>
+            </div>
             {authors && authors.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -65,9 +79,12 @@ export const ArticleTemplate = ({
 };
 
 ArticleTemplate.propTypes = {
+  authors: PropTypes.arrayOf(PropTypes.string),
   content: PropTypes.string.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
+  image: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   helmet: PropTypes.instanceOf(Object)
 };
@@ -83,6 +100,7 @@ const Article = ({ data }) => {
         date={article.frontmatter.date}
         description={article.frontmatter.description}
         helmet={<Helmet title={article.frontmatter.title} />}
+        image={article.frontmatter.image}
         tags={article.frontmatter.tags}
         title={article.frontmatter.title}
       />
@@ -106,6 +124,7 @@ export const pageQuery = graphql`
       frontmatter {
         authors
         date(formatString: "DD MMMM YYYY")
+        image
         title
         description
         tags

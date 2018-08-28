@@ -18,5 +18,6 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Authors", name: "authors", widget: "list"}
       - {label: "Description", name: "description", widget: "text"}
+      - {label: Image, name: image, widget: image}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Tags", name: "tags", widget: "list", required: false}
