@@ -5,15 +5,17 @@ import Helmet from "react-helmet";
 import { Link } from "gatsby";
 import Content, { HTMLContent } from "../components/Content";
 
-export const BlogPostTemplate = ({
+export const ArticleTemplate = ({
+  authors,
   content,
   contentComponent,
+  date,
   description,
   tags,
   title,
   helmet
 }) => {
-  const PostContent = contentComponent || Content;
+  const ArticleContent = contentComponent || Content;
 
   return (
     <section className="section">
@@ -24,8 +26,23 @@ export const BlogPostTemplate = ({
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title}
             </h1>
+            {authors && authors.length ? (
+              <div style={{ marginTop: `4rem` }}>
+                <h4>Tags</h4>
+                <div className="taglist">
+                  <span>·</span>
+                  {authors.map(author => (
+                    <span key={author + `author`}> {author} ·</span>
+                  ))}
+                  <span>
+                     |
+                    {date}
+                  </span>
+                </div>
+              </div>
+            ) : null}
             <p>{description}</p>
-            <PostContent content={content} />
+            <ArticleContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -45,7 +62,7 @@ export const BlogPostTemplate = ({
   );
 };
 
-BlogPostTemplate.propTypes = {
+ArticleTemplate.propTypes = {
   content: PropTypes.string.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
@@ -53,28 +70,30 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.instanceOf(Object)
 };
 
-const BlogPost = ({ data }) => {
+const Article = ({ data }) => {
   const { markdownRemark: post } = data;
 
   return (
-    <BlogPostTemplate
+    <ArticleTemplate
+      authors={post.frontmatter.authors}
       content={post.html}
       contentComponent={HTMLContent}
+      date={post.frontmatter.date}
       description={post.frontmatter.description}
-      helmet={<Helmet title={`${post.frontmatter.title} | Blog`} />}
+      helmet={<Helmet title={post.frontmatter.title} />}
       tags={post.frontmatter.tags}
       title={post.frontmatter.title}
     />
   );
 };
 
-BlogPost.propTypes = {
+Article.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.object
   })
 };
 
-export default BlogPost;
+export default Article;
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
