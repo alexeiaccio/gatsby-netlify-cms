@@ -4,7 +4,7 @@ import ArticlePreview from "./preview-templates/ArticlePreview";
 
 CMS.registerPreviewTemplate("articles", ArticlePreview);
 
-CMS.registerPreviewStyle("./admin/styles.css");
+CMS.registerPreviewStyle("./styles.css");
 
 CMS.registerEditorComponent({
   id: "youtube",
