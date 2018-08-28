@@ -7,7 +7,7 @@ import "./all.sass";
 
 const Layout = ({ children }) => (
   <div>
-    <Helmet title="Home | Gatsby + Netlify CMS" />
+    <Helmet title="К·Р·А·П·И·В·А" />
     <Navbar />
     <div>{children}</div>
   </div>

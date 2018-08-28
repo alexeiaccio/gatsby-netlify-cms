@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
+import { graphql } from "gatsby";
 
 import Layout from "../components/layouts";
 
@@ -58,7 +59,7 @@ export const pageQuery = graphql`
   query IndexQuery {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+      filter: { frontmatter: { templateKey: { eq: "article-template" } } }
     ) {
       edges {
         node {
@@ -70,7 +71,8 @@ export const pageQuery = graphql`
           frontmatter {
             title
             templateKey
-            date(formatString: "MMMM DD, YYYY")
+            authors
+            date(formatString: "DD MMMM YYYY")
           }
         }
       }
