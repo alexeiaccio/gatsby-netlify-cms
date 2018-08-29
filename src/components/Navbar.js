@@ -36,7 +36,7 @@ const Navbar = () => (
         ${tw([
           'bg-white',
           'font-montserrat',
-          'pb-1',
+          'pb-2',
           'text-black',
           'text-center',
           'text-xs',
