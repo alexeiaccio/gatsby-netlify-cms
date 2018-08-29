@@ -10,7 +10,11 @@ CMS.registerEditorComponent({
   id: 'cut',
   label: 'Cut',
   icon: 'cut',
+  fields: [{ name: 'cut', label: 'Cut' }],
   pattern: /<!-- end -->/,
+  fromBlock: match => ({
+    cut: '',
+  }),
   toBlock: () => `<!-- end -->`,
   toPreview: () => `<hr />`,
 })
