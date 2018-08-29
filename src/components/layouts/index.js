@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 
-import "typeface-cormorant";
-import "typeface-montserrat";
+import 'typeface-cormorant'
+import 'typeface-montserrat'
 
-import Navbar from "../Navbar";
+import Navbar from '../Navbar'
 
 const Layout = ({ children }) => (
   <div>
@@ -13,10 +13,10 @@ const Layout = ({ children }) => (
     <Navbar />
     <div>{children}</div>
   </div>
-);
+)
 
 Layout.propTypes = {
-  children: PropTypes.object
-};
+  children: PropTypes.object,
+}
 
-export default Layout;
+export default Layout
