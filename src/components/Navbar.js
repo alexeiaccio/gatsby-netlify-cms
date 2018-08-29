@@ -6,7 +6,7 @@ import { css } from 'react-emotion'
 const Navbar = () => (
   <nav
     className={css`
-      ${tw(['pin-t', 'sticky'])};
+      ${tw(['pin-t', 'sticky', 'z-1000'])};
     `}
   >
     <div
