@@ -19,23 +19,43 @@ module.exports = {
         name: "images"
       }
     },
-    "gatsby-plugin-sharp",
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`
+      }
+    },
     "gatsby-transformer-sharp",
     {
       resolve: "gatsby-transformer-remark",
       options: {
-        plugins: []
-      }
-    },
-    {
-      resolve: "gatsby-plugin-google-fonts",
-      options: {
-        fonts: [
-          `Cormorant\:400,400i,700,700i&amp;subset=cyrillic`,
-          `Montserrat\:600&amp;subset=cyrillic`
+        excerpt_separator: `<!-- end -->`,
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 740
+            }
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`
+            }
+          },
+          `gatsby-remark-copy-linked-files`,
+          {
+            resolve: `gatsby-remark-smartypants`,
+            options: {
+              dashes: `oldschool`
+            }
+          }
         ]
       }
     },
+    "gatsby-plugin-sharp",
+    `gatsby-plugin-catch-links`,
+    `gatsby-plugin-emotion`,
     {
       resolve: "gatsby-plugin-netlify-cms",
       options: {

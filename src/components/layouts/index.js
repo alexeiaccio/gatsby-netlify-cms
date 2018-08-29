@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 
+import "typeface-cormorant";
+import "typeface-montserrat";
+
 import Navbar from "../Navbar";
-import "./all.sass";
 
 const Layout = ({ children }) => (
   <div>
