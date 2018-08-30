@@ -37,6 +37,7 @@ const Layout = ({ children }) => (
           'max-w-lg',
           'mx-auto',
           'px-4',
+          'sm:px-8',
           'py-8',
           'relative',
           'text-white',

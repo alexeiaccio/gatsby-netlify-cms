@@ -21,3 +21,15 @@ export const localDate = date => {
   const match = date.match(/(\d{2})\s(\w+)\s(\d{4})/)
   return `${match[1]} ${months[match[2]]} ${match[3]}`
 }
+
+const categories = {
+  reviews: 'ревью',
+  analitics: 'аналитика',
+  discussions: 'дискуссии',
+  persons: 'персона',
+  palces: 'места',
+  videos: 'видео',
+  zins: 'журнал',
+}
+
+export const getCategory = x => categories[x]

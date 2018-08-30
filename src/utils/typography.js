@@ -17,11 +17,16 @@ const options = {
   bodyFontFamily: [`Cormorant`, `serif`],
   overrideStyles: ({ rhythm, scale }, options) => {
     return {
+      h1: {
+        marginBottom: '1rem',
+        marginTop: '2rem',
+      },
       h2: {
-        marginTop: '2.5rem',
+        marginBottom: '0.75rem',
+        marginTop: '2rem',
       },
       a: {
-        borderColor: `${colors.link}`,
+        borderColor: `${colors.black}`,
         color: `${colors.link}`,
         textDecoration: `none`,
       },
@@ -33,8 +38,8 @@ const options = {
         fontSize: '150%',
         marginLeft: 0,
         marginRight: '1rem',
-        marginTop: '2rem',
-        marginBottom: '2rem',
+        marginTop: '1rem',
+        marginBottom: '1rem',
         paddingLeft: '1rem',
         paddingRight: 0,
         paddingTop: 0,

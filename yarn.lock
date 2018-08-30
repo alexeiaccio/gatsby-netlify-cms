@@ -11716,6 +11716,10 @@ typeface-montserrat@^0.0.54:
   version "0.0.54"
   resolved "https://registry.yarnpkg.com/typeface-montserrat/-/typeface-montserrat-0.0.54.tgz#3fc338db6428d73485b75aa7bd2af8c9a55b9ab3"
 
+typograf@^6.7.2:
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/typograf/-/typograf-6.7.2.tgz#13ec2caa3af0086b99ba1b82fdc6bfb2111ebe77"
+
 typography-normalize@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/typography-normalize/-/typography-normalize-0.14.0.tgz#1d77c1fe2aaf4a51b3673c4c85c85a65a2d4b573"
