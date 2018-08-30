@@ -14,7 +14,6 @@ export const ArticleTemplate = ({
   contentComponent,
   date,
   description,
-  image,
   tags,
   title,
   helmet,
@@ -26,10 +25,7 @@ export const ArticleTemplate = ({
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">
-            <div
-              className="full-width-image-container margin-top-0"
-              style={{ backgroundImage: `url(${image})` }}
-            >
+            <div className="full-width-image-container margin-top-0">
               <h1
                 className="has-text-weight-bold is-size-1"
                 style={{
@@ -82,7 +78,6 @@ ArticleTemplate.propTypes = {
   content: PropTypes.string.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
-  image: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   helmet: PropTypes.instanceOf(Object),
@@ -99,7 +94,6 @@ const Article = ({ data }) => {
         date={article.frontmatter.date}
         description={article.frontmatter.description}
         helmet={<Helmet title={article.frontmatter.title} />}
-        image={article.frontmatter.image}
         tags={article.frontmatter.tags}
         title={article.frontmatter.title}
       />
@@ -116,14 +110,13 @@ Article.propTypes = {
 export default Article
 
 export const pageQuery = graphql`
-  query BlogPostByID($id: String!) {
+  query ArticleByID($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
       html
       frontmatter {
         authors
         date(formatString: "DD MMMM YYYY")
-        image
         title
         description
         tags
