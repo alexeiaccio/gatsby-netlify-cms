@@ -18,12 +18,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography.js`,
-      },
-    },
-    {
       resolve: 'gatsby-transformer-remark',
       options: {
         excerpt_separator: `<!-- end -->`,
@@ -53,6 +47,21 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: [
+          `Cormorant\:500,500i,700,700i`,
+          `Montserrat\:500,500i,600,600i,800&amp;subset=cyrillic`,
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
       },
     },
     `gatsby-plugin-catch-links`,

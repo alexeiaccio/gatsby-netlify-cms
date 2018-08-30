@@ -5,13 +5,11 @@ import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 import { startCase } from 'lodash'
-import Typograf from 'typograf'
 
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
-import { getCategory, localDate } from '../utils'
+import { getCategory, tp, localDate } from '../utils'
 
-const tp = new Typograf({ locale: ['ru', 'en-US'] })
 const Excerpt = HTMLContent || Content
 
 export default class IndexPage extends React.Component {

@@ -4812,6 +4812,10 @@ gatsby-plugin-emotion@^2.0.0-rc.0:
   dependencies:
     "@babel/runtime" "7.0.0-beta.52"
 
+gatsby-plugin-google-fonts@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-fonts/-/gatsby-plugin-google-fonts-0.0.4.tgz#dc1402a71f27c3ae6caee10777d10adadf74bd7c"
+
 gatsby-plugin-netlify-cms@^3.0.0-rc.0:
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-cms/-/gatsby-plugin-netlify-cms-3.0.0-rc.0.tgz#b2f4f600ff451a63c2fe52bc1bbae260ebc183d4"
@@ -11707,14 +11711,6 @@ type-of@^2.0.1:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
-
-typeface-cormorant@^0.0.54:
-  version "0.0.54"
-  resolved "https://registry.yarnpkg.com/typeface-cormorant/-/typeface-cormorant-0.0.54.tgz#a6105864f90a2dc3bc867a3cdf3d7f60d6304286"
-
-typeface-montserrat@^0.0.54:
-  version "0.0.54"
-  resolved "https://registry.yarnpkg.com/typeface-montserrat/-/typeface-montserrat-0.0.54.tgz#3fc338db6428d73485b75aa7bd2af8c9a55b9ab3"
 
 typograf@^6.7.2:
   version "6.7.2"

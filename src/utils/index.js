@@ -1,6 +1,9 @@
 import * as uuid from 'uuid/v1'
+import Typograf from 'typograf'
 
-export { uuid }
+const tp = new Typograf({ locale: ['ru', 'en-US'] })
+
+export { tp, uuid }
 
 const months = {
   January: 'января',

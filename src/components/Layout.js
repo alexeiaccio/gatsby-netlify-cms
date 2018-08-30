@@ -4,9 +4,6 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { css } from 'react-emotion'
 
-import 'typeface-cormorant'
-import 'typeface-montserrat'
-
 import Navbar from './Navbar'
 
 const Layout = ({ children }) => (
