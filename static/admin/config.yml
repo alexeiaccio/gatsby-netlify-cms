@@ -8,8 +8,9 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "article"
+  - name: "articles"
     label: "Articles"
+    label_singular: "Article"
     folder: "src/pages/articles"
     create: true
     slug: "{{slug}}-{{day}}-{{month}}-{{year}}"
