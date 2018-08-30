@@ -1,67 +1,72 @@
 module.exports = {
   siteMetadata: {
-    title: "Gatsby + Netlify CMS Starter"
+    title: 'Gatsby + Netlify CMS Starter',
   },
   plugins: [
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sass",
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sass',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
-        name: "pages"
-      }
+        path: `${__dirname}/static/img`,
+        name: 'uploads',
+      },
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/img`,
-        name: "images"
-      }
+        path: `${__dirname}/src/pages`,
+        name: 'pages',
+      },
     },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography.js`
-      }
+        pathToConfigModule: `src/utils/typography.js`,
+      },
     },
-    "gatsby-transformer-sharp",
+    'gatsby-transformer-sharp',
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: 'gatsby-transformer-remark',
       options: {
         excerpt_separator: `<!-- end -->`,
         plugins: [
           {
+            resolve: `gatsby-remark-relative-images`,
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 740
-            }
+              maxWidth: 740,
+            },
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`
-            }
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
           },
           `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-external-links`,
+          `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-smartypants`,
             options: {
-              dashes: `oldschool`
-            }
-          }
-        ]
-      }
+              dashes: `oldschool`,
+            },
+          },
+        ],
+      },
     },
-    "gatsby-plugin-sharp",
+    'gatsby-plugin-sharp',
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-emotion`,
     {
-      resolve: "gatsby-plugin-netlify-cms",
+      resolve: 'gatsby-plugin-netlify-cms',
       options: {
-        modulePath: `${__dirname}/src/cms/cms.js`
-      }
+        modulePath: `${__dirname}/src/cms/cms.js`,
+      },
     },
-    "gatsby-plugin-netlify" // make sure to keep it last in the array
-  ]
-};
+    'gatsby-plugin-netlify', // make sure to keep it last in the array
+  ],
+}

@@ -2,51 +2,58 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { css } from 'react-emotion'
+import { uuid } from '../utils'
+
+import RunningString from './RunningString'
 
 const Navbar = () => (
   <nav
     className={css`
-      ${tw(['pin-t', 'sticky', 'z-1000'])};
+      ${tw(['bg-white', 'md:bg-black', 'pin-t', 'sticky', 'z-1000'])};
     `}
   >
     <div
       className={css`
-        ${tw(['bg-black', 'flex', 'flex-col', 'items-center'])};
+        ${tw([
+          'font-semibold',
+          'font-montserrat',
+          'overflow-hidden',
+          'text-black',
+          'text-center',
+          'text-green-dark',
+          'text-xxs',
+          'tracking-wide',
+        ])};
+        line-height: 0.8;
+        font-variant-caps: all-small-caps;
       `}
     >
-      <div
+      <RunningString string="· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм " />
+    </div>
+    <div>
+      <Link
+        to="/"
         className={css`
-          ${tw(['font-extrabold', 'font-montserrat'])};
+          ${tw([
+            'flex',
+            'font-extrabold',
+            'font-montserrat',
+            'justify-between',
+            'px-8',
+            'text-black',
+            'md:text-white',
+            'text-xs',
+            'md:text-body',
+            'w-full',
+          ])};
           letter-spacing: 1em;
           line-height: 0.75;
         `}
       >
-        <Link
-          to="/"
-          className={css`
-            ${tw(['text-white'])};
-          `}
-        >
-          ·К·Р·А·П·И·В·А·
-        </Link>
-      </div>
-    </div>
-    <div
-      className={css`
-        ${tw([
-          'bg-white',
-          'font-montserrat',
-          'pb-2',
-          'text-black',
-          'text-center',
-          'text-xs',
-          'tracking-wide',
-        ])};
-        line-height: 0.35;
-        font-variant-caps: all-small-caps;
-      `}
-    >
-      ·&ensp;культура&ensp;·&ensp;ревью&ensp;·&ensp;аналитика&ensp;·&ensp;петербург&ensp;·&ensp;искусство&ensp;·&ensp;вовлеченность&ensp;·&ensp;активизм&ensp;·
+        {`·К·Р·А·П·И·В·А·`.split('').map(char => (
+          <span key={uuid()}>{char}</span>
+        ))}
+      </Link>
     </div>
   </nav>
 )

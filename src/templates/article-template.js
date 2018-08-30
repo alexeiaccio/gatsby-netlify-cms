@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { kebabCase } from "lodash";
-import Helmet from "react-helmet";
-import { Link } from "gatsby";
-import { graphql } from "gatsby";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { kebabCase } from 'lodash'
+import Helmet from 'react-helmet'
+import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
-import Content, { HTMLContent } from "../components/Content";
-import Layout from "../components/layouts";
+import Content, { HTMLContent } from '../components/Content'
+import Layout from '../components/Layout'
 
 export const ArticleTemplate = ({
   authors,
@@ -17,12 +17,12 @@ export const ArticleTemplate = ({
   image,
   tags,
   title,
-  helmet
+  helmet,
 }) => {
-  const ArticleContent = contentComponent || Content;
+  const ArticleContent = contentComponent || Content
   return (
     <section className="section">
-      {helmet || ""}
+      {helmet || ''}
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">
@@ -33,10 +33,9 @@ export const ArticleTemplate = ({
               <h1
                 className="has-text-weight-bold is-size-1"
                 style={{
-                  boxShadow: "0.5rem 0 0 #f40, -0.5rem 0 0 #f40",
-                  backgroundColor: "#f40",
-                  color: "white",
-                  padding: "1rem"
+                  boxShadow: '0.5rem 0 0 #f40, -0.5rem 0 0 #f40',
+                  color: 'white',
+                  padding: '1rem',
                 }}
               >
                 {title}
@@ -75,8 +74,8 @@ export const ArticleTemplate = ({
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
 ArticleTemplate.propTypes = {
   authors: PropTypes.arrayOf(PropTypes.string),
@@ -86,11 +85,11 @@ ArticleTemplate.propTypes = {
   image: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
-  helmet: PropTypes.instanceOf(Object)
-};
+  helmet: PropTypes.instanceOf(Object),
+}
 
 const Article = ({ data }) => {
-  const { markdownRemark: article } = data;
+  const { markdownRemark: article } = data
   return (
     <Layout>
       <ArticleTemplate
@@ -105,16 +104,16 @@ const Article = ({ data }) => {
         title={article.frontmatter.title}
       />
     </Layout>
-  );
-};
+  )
+}
 
 Article.propTypes = {
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object
-  })
-};
+    markdownRemark: PropTypes.object,
+  }),
+}
 
-export default Article;
+export default Article
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
@@ -131,4 +130,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 
-import Layout from '../components/layouts'
+import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import { localDate } from '../utils'
+
 const Excerpt = HTMLContent || Content
 
 export default class IndexPage extends React.Component {
@@ -15,33 +17,43 @@ export default class IndexPage extends React.Component {
     const excerpt = x => (match(x) ? match(x)[1] : x)
     return (
       <Layout>
-        <section className="section">
-          <div className="container">
-            <div className="content" />
-            {posts.map(({ node: post }) => (
-              <div
-                className="content"
-                style={{ border: '1px solid #eaecee', padding: '2em 4em' }}
-                key={post.id}
-              >
-                <p>
-                  <Link className="has-text-primary" to={post.fields.slug}>
-                    {post.frontmatter.title}
-                  </Link>
-                  <span> &bull; </span>
-                  <small>{post.frontmatter.date}</small>
-                </p>
-                <div>
-                  <Excerpt content={excerpt(post.html)} />
-                  <br />
-                  <br />
-                  <Link className="button is-small" to={post.fields.slug}>
-                    Keep Reading →
-                  </Link>
-                </div>
+        <section>
+          {posts.map(({ node: post }) => (
+            <article className="content" key={post.id}>
+              <h1>
+                <Link className="has-text-primary" to={post.fields.slug}>
+                  {post.frontmatter.title}
+                </Link>
+              </h1>
+              <div>
+                {post.frontmatter.authors && post.frontmatter.authors.length ? (
+                  <span>
+                    <span>·</span>
+                    {post.frontmatter.authors.map(author => (
+                      <span key={author + `author`}> {author} ·</span>
+                    ))}
+                  </span>
+                ) : null}
+                <span
+                  style={{
+                    fontFamily: 'Montserrat',
+                    fontVariant: 'unicase',
+                  }}
+                >
+                  <span> </span>
+                  {localDate(post.frontmatter.date)}
+                </span>
               </div>
-            ))}
-          </div>
+              <div>
+                <Excerpt content={excerpt(post.html)} />
+                <br />
+                <br />
+                <Link className="button is-small" to={post.fields.slug}>
+                  Продолжение →
+                </Link>
+              </div>
+            </article>
+          ))}
         </section>
       </Layout>
     )
