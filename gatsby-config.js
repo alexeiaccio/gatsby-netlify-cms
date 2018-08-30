@@ -3,15 +3,6 @@ module.exports = {
     title: 'Gatsby + Netlify CMS Starter',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/static/img`,
-        name: 'uploads',
-      },
-    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -20,12 +11,18 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/static/img`,
+        name: 'images',
+      },
+    },
+    {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography.js`,
       },
     },
-    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -58,15 +55,27 @@ module.exports = {
         ],
       },
     },
-    'gatsby-plugin-sharp',
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-emotion`,
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
         modulePath: `${__dirname}/src/cms/cms.js`,
+        enableIdentityWidget: `true`,
+        publicPath: `admin`,
+        htmlTitle: `Content Manager`,
       },
     },
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
+    {
+      resolve: 'gatsby-plugin-netlify',
+      options: {
+        mergeSecurityHeaders: true,
+        mergeLinkHeaders: true,
+        mergeCachingHeaders: true,
+      },
+    },
   ],
 }
