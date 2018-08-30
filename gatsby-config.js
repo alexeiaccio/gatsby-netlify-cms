@@ -6,15 +6,15 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        path: `${__dirname}/static/img`,
+        name: 'img',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/static/img`,
-        name: 'images',
+        path: `${__dirname}/src/pages`,
+        name: 'pages',
       },
     },
     {
@@ -24,11 +24,17 @@ module.exports = {
         plugins: [
           {
             resolve: `gatsby-remark-relative-images`,
+            options: {
+              name: 'img',
+            },
           },
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 740,
+              maxWidth: 1200,
+              quality: 80,
+              sizeByPixelDensity: true,
+              linkImagesToOriginal: false,
             },
           },
           {
@@ -37,15 +43,15 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-external-links`,
-          `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-smartypants`,
             options: {
               dashes: `oldschool`,
             },
           },
+          `gatsby-remark-autolink-headers`,
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-external-links`,
         ],
       },
     },
@@ -66,6 +72,7 @@ module.exports = {
     },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-netlify-cache`,
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',

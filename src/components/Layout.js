@@ -24,6 +24,22 @@ const Layout = ({ children }) => (
         ])};
       `}
     />
+    <div
+      className={css`
+        ${tw([
+          'border-2',
+          'md:border-4',
+          'border-white',
+          'md:border-black',
+          'border-solid',
+          'fixed',
+          'pin-b',
+          'pin-l',
+          'pin-r',
+          'z-1000',
+        ])};
+      `}
+    />
     <Navbar />
     <div
       className={css`

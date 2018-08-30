@@ -16,7 +16,6 @@ exports.createPages = ({ actions, graphql }) => {
               slug
             }
             frontmatter {
-              tags
               templateKey
             }
           }
@@ -51,6 +50,8 @@ exports.createPages = ({ actions, graphql }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
+  fmImagesToRelative(node)
+
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
@@ -59,8 +60,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
-
-  fmImagesToRelative(node)
 }
 
 exports.onCreateBabelConfig = ({ actions }) => {
