@@ -16,7 +16,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <section>
-        {articles.map(({ node }) => {
+        {articles.map(({ node }, i) => {
           const article = node.data
           const cuttedArticle = article.body
             .reduceRight((acc, cur) => {
@@ -30,7 +30,7 @@ const IndexPage = ({ data }) => {
           return (
             <article
               className={css`
-                ${tw(['mb-q48'])};
+                ${tw(['mb-q144'])};
               `}
               key={uuid()}
             >
@@ -46,7 +46,7 @@ const IndexPage = ({ data }) => {
                   ])};
                   background-image: url(${logo});
                   height: 45px;
-                  transform: rotateZ(135deg);
+                  transform: rotateZ(${180 - 45 * (i + 1)}deg);
                   width: 90px;
                 `}
               />
@@ -64,7 +64,7 @@ const IndexPage = ({ data }) => {
               <ArticleBody key={uuid()} article={{ body: cuttedArticle }} />
               <Link
                 className={css`
-                  ${tw(['block', 'mt-q24', 'mx-auto'])};
+                  ${tw(['block', 'mt-q48', 'mx-auto'])};
                   max-width: 12rem;
                 `}
                 key={uuid()}
