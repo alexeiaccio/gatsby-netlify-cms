@@ -3,14 +3,10 @@ import { css } from 'react-emotion'
 
 import {
   Body,
-  ButtonText,
-  ButtonSmallText,
   Heading2,
   Heading3,
   Heading4,
   Heading5,
-  Heading6,
-  LeadText,
   List,
 } from './Typography'
 
@@ -44,13 +40,6 @@ export const RichText = css`
   & p {
     ${tw(['mb-q16', 'md:mb-q24'])};
   }
-  & .lead {
-    ${LeadText};
-    ${tw(['m-0'])};
-  }
-  & .link {
-    ${ButtonText};
-  }
   & strong {
     ${tw(['font-semibold'])};
   }
@@ -81,13 +70,6 @@ export const RichTextSmall = css`
   & h4 {
     ${Heading5};
     ${tw(['mb-q16', 'md:mb-q24'])};
-  }
-  & .lead {
-    ${Heading6};
-    ${tw(['m-0'])};
-  }
-  & .link {
-    ${ButtonSmallText};
   }
   & ul {
     ${List};
