@@ -65,7 +65,7 @@ const IndexPage = ({ data }) => {
               <Link
                 className={css`
                   ${tw(['block', 'mt-q24', 'mx-auto'])};
-                  max-width: 9rem;
+                  max-width: 12rem;
                 `}
                 key={uuid()}
                 to={node.fields.slug}
@@ -88,7 +88,6 @@ const IndexPage = ({ data }) => {
                       'hover:text-white',
                       'text-sm',
                       'uppercase',
-                      'w-full',
                     ])};
                     transition: all 200ms ease-in-out;
                   `}
