@@ -23,7 +23,7 @@ export const ArticleBody = ({ article }) => (
             />
             <figcaption
               className={css`
-                ${tw(['italic', 'text-center', 'text-list'])};
+                ${tw(['italic', 'mb-q48', 'text-center', 'text-list'])};
               `}
               key={uuid()}
             >

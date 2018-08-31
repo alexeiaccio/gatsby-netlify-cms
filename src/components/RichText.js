@@ -38,7 +38,7 @@ export const RichText = css`
     ${tw(['my-q16', 'md:mb-q24'])};
   }
   & p {
-    ${tw(['mb-q16', 'md:mb-q24'])};
+    ${tw(['mb-q16', 'md:mb-q24', 'text-justify'])};
   }
   & strong {
     ${tw(['font-semibold'])};
