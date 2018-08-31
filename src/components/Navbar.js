@@ -9,10 +9,13 @@ import logo from '../img/logo.svg'
 const Navbar = () => (
   <nav
     className={css`
+      position: absolute;
       ${tw([
         'bg-white',
         'md:bg-black',
         'overflow-hidden',
+        'pin-l',
+        'pin-r',
         'pin-t',
         'sticky',
         'z-1000',

@@ -65,7 +65,7 @@ const Layout = ({ children }) => (
           'px-q12',
           'sm:px-q24',
           'md:px-q48',
-          'py-8',
+          'py-q72',
           'relative',
           'text-white',
           'md:text-black',
