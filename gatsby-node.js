@@ -1,59 +1,50 @@
-const _ = require('lodash')
 const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
-const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const { makePath } = require('./src/utils/makePath')
 
-exports.createPages = ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
 
-  return graphql(`
+  const pageMaker = () => data => {
+    data.edges.forEach(({ node }) => {
+      const { fields, type } = node
+      const { slug } = fields
+      console.log(slug)
+      createPage({
+        component: path.resolve(`src/templates/${type}.js`),
+        context: {
+          slug: slug,
+        },
+        path: slug,
+      })
+    })
+  }
+
+  const pages = await graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allPrismicArticles(limit: 2000) {
         edges {
           node {
-            id
+            type
             fields {
               slug
-            }
-            frontmatter {
-              templateKey
             }
           }
         }
       }
     }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()))
-      return Promise.reject(result.errors)
-    }
+  `)
 
-    const posts = result.data.allMarkdownRemark.edges
-
-    posts.forEach(edge => {
-      const id = edge.node.id
-      createPage({
-        path: edge.node.fields.slug,
-        tags: edge.node.frontmatter.tags,
-        component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-        ),
-        // additional data can be passed via context
-        context: {
-          id,
-        },
-      })
-    })
-  })
+  for (const key in pages.data) {
+    pageMaker(key)(pages.data[key])
+  }
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  fmImagesToRelative(node)
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+  if (node.internal.type === `PrismicArticles`) {
+    const { title, date } = node.data
+    const value = makePath(title.text, date)
     createNodeField({
       name: `slug`,
       node,

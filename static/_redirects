@@ -1,0 +1,2 @@
+# Redirect default Netlify subdomain to primary domain
+https://krapiva.netlify.com/* https://www.krapiva.org/:splat 301!
