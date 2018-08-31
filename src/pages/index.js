@@ -62,24 +62,33 @@ const IndexPage = ({ data }) => {
               </Link>
               <ArticleHeader key={uuid()} {...{ article }} />
               <ArticleBody key={uuid()} article={{ body: cuttedArticle }} />
-              <Link key={uuid()} to={node.fields.slug}>
+              <Link
+                className={css`
+                  ${tw(['block', 'mt-q24', 'mx-auto'])};
+                  max-width: 9rem;
+                `}
+                key={uuid()}
+                to={node.fields.slug}
+              >
                 <span
                   className={css`
                     ${tw([
                       'bg-white',
                       'hover:bg-black',
-                      'inline-block',
+                      'inline-flex',
                       'border',
                       'border-black',
                       'border-solid',
                       'font-montserrat',
-                      'mt-4',
+                      'items-center',
+                      'justify-center',
                       'px-q24',
                       'py-q12',
                       'text-black',
                       'hover:text-white',
                       'text-sm',
                       'uppercase',
+                      'w-full',
                     ])};
                     transition: all 200ms ease-in-out;
                   `}
@@ -112,6 +121,11 @@ export const pageQuery = graphql`
           type
           fields {
             slug
+          }
+          data {
+            title {
+              text
+            }
           }
         }
       }

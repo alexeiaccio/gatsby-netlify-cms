@@ -49,9 +49,6 @@ export const ArticleHeader = ({ article }) => (
 export const articleHeaderQuery = graphql`
   fragment ArticleHeader on PrismicArticles {
     data {
-      title {
-        text
-      }
       category
       date
       authors {

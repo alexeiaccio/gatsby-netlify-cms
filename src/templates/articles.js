@@ -15,7 +15,7 @@ const Article = ({ data }) => {
     <Layout>
       <article
         className={css`
-          ${tw(['mb-q48'])};
+          ${tw(['my-q48 '])};
         `}
       >
         <h1 className={Heading1}>{article.title.text}</h1>
@@ -39,6 +39,11 @@ export const pageQuery = graphql`
     prismicArticles(fields: { slug: { eq: $slug } }) {
       ...ArticleHeader
       ...ArticleBody
+      data {
+        title {
+          text
+        }
+      }
     }
   }
 `

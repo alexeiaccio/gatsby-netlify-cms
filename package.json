@@ -28,9 +28,12 @@
     "react": "^16.4.0",
     "react-emotion": "^9.2.8",
     "react-helmet": "^5.2.0",
+    "react-transition-group": "^2.4.0",
+    "recompose": "^0.30.0",
     "tailwindcss": "^0.6.5",
     "typograf": "^6.7.2",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "whatwg-fetch": "^2.0.4"
   },
   "keywords": [
     "gatsby"
