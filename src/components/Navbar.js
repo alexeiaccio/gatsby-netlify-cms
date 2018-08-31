@@ -56,6 +56,8 @@ const Navbar = () => (
             'font-extrabold',
             'font-montserrat',
             'px-8',
+            'pt-q8',
+            'sm:pt-0',
             'text-black',
             'md:text-white',
             'hover:text-green',
