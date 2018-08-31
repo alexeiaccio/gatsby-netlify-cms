@@ -5,8 +5,9 @@ import Helmet from 'react-helmet'
 import { css } from 'react-emotion'
 import { injectGlobal } from 'emotion'
 
-import Navbar from './Navbar'
 import favicon from '../img/favicon.png'
+import { Footer } from './Footer'
+import Navbar from './Navbar'
 
 injectGlobal`
   body {
@@ -74,6 +75,7 @@ const Layout = ({ children }) => (
     >
       {children}
     </div>
+    <Footer />
   </div>
 )
 
