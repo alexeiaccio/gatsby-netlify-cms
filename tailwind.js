@@ -57,13 +57,13 @@ var colors = {
   'grey-lightest': '#fafcfc',
   white: '#ffffff',
 
-  'red-darkest': '#420806',
-  'red-darker': '#6a1b19',
-  'red-dark': '#cc1f1a',
-  red: '#e3342f',
-  'red-light': '#ef5753',
-  'red-lighter': '#f9acaa',
-  'red-lightest': '#fcebea',
+  'red-darkest': '#590624',
+  'red-darker': '#8c0a39',
+  'red-dark': '#bf0d4d',
+  red: '#f21162',
+  'red-light': '#f52c74',
+  'red-lighter': '#fb70a2',
+  'red-lightest': '#f5b5cc',
 
   'orange-darkest': '#542605',
   'orange-darker': '#7f4012',
@@ -81,13 +81,13 @@ var colors = {
   'yellow-lighter': '#fff9c2',
   'yellow-lightest': '#fcfbeb',
 
-  'green-darkest': '#032d19',
-  'green-darker': '#0b4228',
-  'green-dark': '#1f9d55',
-  green: '#38c172',
-  'green-light': '#51d88a',
-  'green-lighter': '#a2f5bf',
-  'green-lightest': '#e3fcec',
+  'green-darkest': '#03402e',
+  'green-darker': '#067352',
+  'green-dark': '#08a676',
+  green: '#0cf3ad',
+  'green-light': '#0cf2ad',
+  'green-lighter': '#41f3bd',
+  'green-lightest': '#aff4df',
 
   'teal-darkest': '#0d3331',
   'teal-darker': '#174e4b',
@@ -263,7 +263,7 @@ module.exports = {
     '5xl': '3rem', // 48px
     // Custom
     xxs: '.625rem', // 10px
-    body: 'calc(16px + 5 * ((100vw - 320px) / 1280))',
+    body: 'calc(18px + 6 * ((100vw - 320px) / 1280))',
     description: 'calc(10px + 4 * ((100vw - 320px) / 1280))',
     heading0: 'calc(104px + 72 * ((100vw - 320px) / 1280))',
     heading1: 'calc(48px + 72 * ((100vw - 320px) / 1280))',

@@ -2,16 +2,95 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { css } from 'react-emotion'
-import { uuid } from '../utils'
 
 import RunningString from './RunningString'
+import logo from '../img/logo.svg'
 
 const Navbar = () => (
   <nav
     className={css`
-      ${tw(['bg-white', 'md:bg-black', 'pin-t', 'sticky', 'z-1000'])};
+      ${tw([
+        'bg-white',
+        'md:bg-black',
+        'overflow-hidden',
+        'pin-t',
+        'sticky',
+        'z-1000',
+      ])};
     `}
   >
+    <div
+      className={css`
+        ${tw([
+          'flex',
+          'flex-row',
+          'justify-center',
+          'sm:justify-between',
+          'w-full',
+        ])};
+      `}
+    >
+      <Link
+        to="/"
+        className={css`
+          ${tw([
+            'bg-center',
+            'bg-contain',
+            'bg-no-repeat',
+            'hidden',
+            'md:block',
+            'mr-q48',
+          ])};
+          background-image: url(${logo});
+          width: 60px;
+        `}
+      />
+      <Link
+        to="/"
+        className={css`
+          ${tw([
+            'inline-block',
+            'font-extrabold',
+            'font-montserrat',
+            'px-8',
+            'text-black',
+            'md:text-white',
+            'hover:text-green',
+            'text-sm',
+            'sm:text-heading5',
+          ])};
+          letter-spacing: 0.3em;
+          line-height: 1.45;
+        `}
+      >
+        ·К·Р·А·П·И·В·А·
+      </Link>
+      <span
+        className={css`
+          ${tw([
+            'bg-black',
+            'md:bg-white',
+            'hover:bg-green',
+            'cursor-pointer',
+            'font-montserrat',
+            'font-medium',
+            'hidden',
+            'sm:inline-flex',
+            'items-center',
+            'justify-center',
+            'px-q24',
+            'text-white',
+            'md:text-black',
+            'hover:text-white',
+            'text-md',
+            'uppercase',
+          ])};
+          transition: all 200ms ease-in-out;
+        `}
+      >
+        Подписка
+      </span>
+    </div>
     <div
       className={css`
         ${tw([
@@ -21,39 +100,15 @@ const Navbar = () => (
           'text-black',
           'text-center',
           'text-green-dark',
-          'text-xxs',
+          'text-xs',
+          'md:text-md',
           'tracking-wide',
         ])};
-        line-height: 0.8;
+        line-height: 2;
         font-variant-caps: all-small-caps;
       `}
     >
       <RunningString string="· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм " />
-    </div>
-    <div>
-      <Link
-        to="/"
-        className={css`
-          ${tw([
-            'flex',
-            'font-extrabold',
-            'font-montserrat',
-            'justify-between',
-            'px-8',
-            'text-black',
-            'md:text-white',
-            'text-xs',
-            'md:text-body',
-            'w-full',
-          ])};
-          letter-spacing: 1em;
-          line-height: 0.75;
-        `}
-      >
-        {`·К·Р·А·П·И·В·А·`.split('').map(char => (
-          <span key={uuid()}>{char}</span>
-        ))}
-      </Link>
     </div>
   </nav>
 )
