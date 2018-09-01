@@ -6,6 +6,7 @@ import { css } from 'react-emotion'
 
 import { HTMLContent } from '../components/Content'
 import { RichText } from '../components/RichText'
+import { LeadText } from '../components/Typography'
 import { uuid } from '../utils'
 
 export const ArticleBody = ({ article }) => (
@@ -31,6 +32,13 @@ export const ArticleBody = ({ article }) => (
             </figcaption>
           </figure>
         )}
+        {__typename === 'PrismicArticlesBodyLead' && (
+          <HTMLContent
+            className={LeadText}
+            content={primary.text.html}
+            key={uuid()}
+          />
+        )}
         {__typename === 'PrismicArticlesBodyText' && (
           <HTMLContent
             className={RichText}
@@ -39,10 +47,15 @@ export const ArticleBody = ({ article }) => (
           />
         )}
         {__typename === 'PrismicArticlesBodyQuote' && (
-          <figure key={uuid()}>
+          <figure
+            className={css`
+              ${tw(['m-0', 'p-0'])};
+            `}
+            key={uuid()}
+          >
             <blockquote
               className={css`
-                ${tw(['m-0', 'text-heading5'])};
+                ${tw(['m-0', 'p-0', 'text-heading5'])};
               `}
               key={uuid()}
             >
@@ -89,6 +102,13 @@ export const articleBodyQuery = graphql`
         }
         ... on PrismicArticlesBodyCut {
           id
+        }
+        ... on PrismicArticlesBodyLead {
+          primary {
+            text {
+              html
+            }
+          }
         }
         ... on PrismicArticlesBodyImage {
           primary {
