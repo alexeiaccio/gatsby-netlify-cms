@@ -89,9 +89,13 @@ const withToggle = withStateHandlers(
       if (document.getElementsByName('bot-field')[0].value.length === 0) {
         console.log(`An email was submitted: ${email}, ${name} `)
 
-        fetch(`${process.env.SLS}/subscribe?name=${name}&email=${email}`, {
-          mode: 'no-cors',
-        })
+        fetch(
+          `${process.env.SLS ||
+            'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}/subscribe?name=${name}&email=${email}`,
+          {
+            mode: 'no-cors',
+          }
+        )
           .then(response => console.log('parsed json', response))
           .catch(error => console.log('parsing failed', error))
 
