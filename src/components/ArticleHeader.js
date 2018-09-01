@@ -8,7 +8,7 @@ import { startCase } from 'lodash'
 import { HTMLContent } from '../components/Content'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
-export const ArticleHeader = ({ article }) => (
+export const ArticleHeader = ({ article, date }) => (
   <div>
     <div
       className={css`
@@ -17,7 +17,7 @@ export const ArticleHeader = ({ article }) => (
     >
       <span>{startCase(getCategory(article.category))}</span>
       <span> · </span>
-      <span>{toLocalDate(article.date)}</span>
+      <span>{toLocalDate(date)}</span>
       <span>
         <span> ·</span>
         {article.authors.map(({ author }) =>
@@ -50,7 +50,6 @@ export const articleHeaderQuery = graphql`
   fragment ArticleHeader on PrismicArticles {
     data {
       category
-      date
       authors {
         author {
           document {

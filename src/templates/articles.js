@@ -21,16 +21,21 @@ const Article = ({ data }) => {
 
   return (
     <Layout>
-      <article
-        className={css`
-          ${tw(['my-q48 '])};
-        `}
-      >
-        <h1 className={Heading1}>{article.title.text}</h1>
-        <ArticleHeader {...{ article }} />
-        <ArticleBody {...{ article }} />
-      </article>
-      <Context {...{ context }} />
+      <>
+        <article
+          className={css`
+            ${tw(['my-q48 '])};
+          `}
+        >
+          <h1 className={Heading1}>{article.title.text}</h1>
+          <ArticleHeader
+            {...{ article }}
+            date={data.article.first_publication_date}
+          />
+          <ArticleBody {...{ article }} />
+        </article>
+        <Context {...{ context }} />
+      </>
     </Layout>
   )
 }
@@ -48,6 +53,7 @@ export const pageQuery = graphql`
     article: prismicArticles(fields: { slug: { eq: $slug } }) {
       ...ArticleHeader
       ...ArticleBody
+      first_publication_date
       data {
         title {
           text
@@ -57,12 +63,13 @@ export const pageQuery = graphql`
         slug
       }
     }
-    context: allPrismicArticles {
+    context: allPrismicArticles(sort: { order: DESC, fields: [data___date] }) {
       edges {
         next {
           fields {
             slug
           }
+          first_publication_date
           data {
             title {
               text
@@ -93,6 +100,7 @@ export const pageQuery = graphql`
           fields {
             slug
           }
+          first_publication_date
           data {
             title {
               text

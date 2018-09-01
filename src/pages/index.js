@@ -60,7 +60,11 @@ const IndexPage = ({ data }) => {
                   {article.title.text}
                 </h2>
               </Link>
-              <ArticleHeader key={uuid()} {...{ article }} />
+              <ArticleHeader
+                key={uuid()}
+                {...{ article }}
+                date={node.first_publication_date}
+              />
               <ArticleBody key={uuid()} article={{ body: cuttedArticle }} />
               <Link
                 className={css`
@@ -108,20 +112,18 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allPrismicArticles(
-      sort: { order: DESC, fields: [first_publication_date] }
-    ) {
+    allPrismicArticles(sort: { order: DESC, fields: [data___date] }) {
       edges {
         node {
           ...ArticleHeader
           ...ArticleBody
           first_publication_date
-          last_publication_date
           type
           fields {
             slug
           }
           data {
+            date
             title {
               text
             }

@@ -50,7 +50,7 @@ const Preview = ({ article }) => (
       </h4>
       <span>{startCase(getCategory(article.data.category))}</span>
       <span> · </span>
-      <span>{toLocalDate(article.data.date)}</span>
+      <span>{toLocalDate(article.first_publication_date)}</span>
       <span>
         <span> ·</span>
         {article.data.authors.map(({ author }) =>
