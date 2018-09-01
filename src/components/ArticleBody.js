@@ -64,7 +64,7 @@ export const ArticleBody = ({ article }) => (
             <footer key={uuid()}>
               <cite
                 className={css`
-                  ${tw(['px-8', 'text-right', 'text-list'])};
+                  ${tw(['px-8', 'text-right', 'text-body'])};
                 `}
                 key={uuid()}
               >
