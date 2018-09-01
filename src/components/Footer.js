@@ -1,6 +1,5 @@
 /* global tw */
 import React from 'react'
-//import { Link } from 'gatsby'
 import { css } from 'react-emotion'
 
 import publicdomain from '../img/publicdomain.svg'
@@ -43,6 +42,7 @@ export const Footer = () => (
           ${tw(['flex', 'items-center'])};
         `}
       >
+        <span>2018</span>
         <span
           className={css`
             ${tw([
@@ -50,7 +50,7 @@ export const Footer = () => (
               'bg-no-repeat',
               'h-q16',
               'inline-block',
-              'mr-q12',
+              'mx-q12',
               'w-q16',
             ])};
             @media (max-width: 768px) {
@@ -88,12 +88,35 @@ export const Footer = () => (
           ])};
         `}
         href="https://yasobe.ru/na/krapiva"
-        target="_blank"
         rel="noopener noreferrer"
+        target="_blank"
       >
         Поддержать
       </a>
-      <div>2018</div>
+      <div
+        className={css`
+          ${tw(['flex', 'flex-no-wrap'])};
+        `}
+      >
+        <span
+          className={css`
+            ${tw(['hidden', 'sm:block', 'mr-q8'])};
+          `}
+        >
+          Разработка
+        </span>
+        <a
+          className={css`
+            ${tw(['font-semibold'])};
+            font-variant: small-caps;
+          `}
+          href="https://beta.accio.pro"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          accio
+        </a>
+      </div>
     </div>
   </footer>
 )
