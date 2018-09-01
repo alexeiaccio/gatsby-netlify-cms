@@ -21,7 +21,7 @@ export const Appear = ({ children, inProp }) => (
   <Transition
     in={inProp}
     mountOnEnter
-    timeout={{ enter: 0, exit: 400 }}
+    timeout={{ enter: 0, exit: 600 }}
     unmountOnExit
   >
     {state => (
@@ -29,7 +29,7 @@ export const Appear = ({ children, inProp }) => (
         className={css`
           max-height: 0px;
           overflow: hidden;
-          transition: max-height 400ms linear;
+          transition: max-height 600ms ease-in-out;
         `}
         style={{
           ...transitionStyles[state],
