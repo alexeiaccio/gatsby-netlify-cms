@@ -43,8 +43,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `PrismicArticles`) {
-    const { title, date } = node.data
-    const value = makePath(title.text, date)
+    const { data, first_publication_date } = node
+    const value = makePath(data.title.text, first_publication_date)
     createNodeField({
       name: `slug`,
       node,

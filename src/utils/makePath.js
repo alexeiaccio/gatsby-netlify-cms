@@ -65,6 +65,56 @@ const cyrillicToLatin = {
   ь: "'",
   б: 'b',
   ю: 'yu',
+  a: 'a',
+  b: 'b',
+  d: 'd',
+  e: 'e',
+  f: 'f',
+  g: 'g',
+  h: 'h',
+  i: 'i',
+  j: 'j',
+  k: 'k',
+  l: 'l',
+  m: 'm',
+  n: 'n',
+  o: 'o',
+  p: 'p',
+  q: 'q',
+  r: 'r',
+  s: 's',
+  t: 't',
+  u: 'u',
+  v: 'v',
+  w: 'w',
+  x: 'x',
+  y: 'y',
+  z: 'z',
+  A: 'A',
+  B: 'B',
+  D: 'D',
+  E: 'E',
+  F: 'F',
+  G: 'G',
+  H: 'H',
+  I: 'I',
+  J: 'J',
+  K: 'K',
+  L: 'L',
+  M: 'M',
+  N: 'N',
+  O: 'O',
+  P: 'P',
+  Q: 'Q',
+  R: 'R',
+  S: 'S',
+  T: 'T',
+  U: 'U',
+  V: 'V',
+  W: 'W',
+  X: 'X',
+  Y: 'Y',
+  Z: 'Z',
 }
 
 const getDate = date => {
@@ -73,15 +123,14 @@ const getDate = date => {
 }
 
 const trslt = library => str =>
-  str.search(/[a-zA-Z0-9]/) &&
+  str.search(/[0-9]/) &&
   str
     .split('')
     .map(char => library[char] || '-')
     .join('')
-    .replace(/-+/g, '-')
     .toLowerCase()
 
 const fromCyrillicToLatin = trslt(cyrillicToLatin)
 
 exports.makePath = (text, date) =>
-  `${fromCyrillicToLatin(text)}-${getDate(date)}`
+  `${fromCyrillicToLatin(text)}-${getDate(date)}`.replace(/-+/g, '-')
