@@ -25,7 +25,8 @@ export const Footer = () => (
       className={css`
         ${tw([
           'flex',
-          'flex-row',
+          'flex-col',
+          'sm:flex-row',
           'font-montserrat',
           'items-center',
           'justify-between',
@@ -74,8 +75,8 @@ export const Footer = () => (
             'items-center',
             'justify-center',
             'mx-q4',
-            'my-q4',
-            'md:my-0',
+            'my-q24',
+            'sm:my-0',
             'outline-none',
             'px-q24',
             'py-q12',
@@ -100,7 +101,7 @@ export const Footer = () => (
       >
         <span
           className={css`
-            ${tw(['hidden', 'sm:block', 'mr-q8'])};
+            ${tw(['mr-q8'])};
           `}
         >
           Разработка
