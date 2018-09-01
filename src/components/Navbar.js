@@ -119,7 +119,7 @@ const Navbar = withToggle(
           'pin-r',
           'pin-t',
           'sticky',
-          'z-1000',
+          'z-2000',
         ])};
       `}
     >

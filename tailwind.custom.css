@@ -7362,6 +7362,10 @@ table {
   z-index: 1000;
 }
 
+.z-2000 {
+  z-index: 2000;
+}
+
 .z-auto {
   z-index: auto;
 }
@@ -14094,6 +14098,10 @@ table {
 
   .sm\:z-1000 {
     z-index: 1000;
+  }
+
+  .sm\:z-2000 {
+    z-index: 2000;
   }
 
   .sm\:z-auto {
@@ -20831,6 +20839,10 @@ table {
     z-index: 1000;
   }
 
+  .md\:z-2000 {
+    z-index: 2000;
+  }
+
   .md\:z-auto {
     z-index: auto;
   }
@@ -27564,6 +27576,10 @@ table {
 
   .lg\:z-1000 {
     z-index: 1000;
+  }
+
+  .lg\:z-2000 {
+    z-index: 2000;
   }
 
   .lg\:z-auto {
@@ -34301,6 +34317,10 @@ table {
     z-index: 1000;
   }
 
+  .xl\:z-2000 {
+    z-index: 2000;
+  }
+
   .xl\:z-auto {
     z-index: auto;
   }
@@ -41036,6 +41056,10 @@ table {
     z-index: 1000;
   }
 
+  .screen\:z-2000 {
+    z-index: 2000;
+  }
+
   .screen\:z-auto {
     z-index: auto;
   }
@@ -47769,6 +47793,10 @@ table {
 
   .desktop\:z-1000 {
     z-index: 1000;
+  }
+
+  .desktop\:z-2000 {
+    z-index: 2000;
   }
 
   .desktop\:z-auto {
