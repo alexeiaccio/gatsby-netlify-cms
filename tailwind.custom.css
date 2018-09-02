@@ -6879,11 +6879,11 @@ table {
 }
 
 .text-heading1 {
-  font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+  font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
 }
 
 .text-heading2 {
-  font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+  font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
 }
 
 .text-heading3 {
@@ -13617,11 +13617,11 @@ table {
   }
 
   .sm\:text-heading1 {
-    font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-heading2 {
-    font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-heading3 {
@@ -20356,11 +20356,11 @@ table {
   }
 
   .md\:text-heading1 {
-    font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-heading2 {
-    font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-heading3 {
@@ -27095,11 +27095,11 @@ table {
   }
 
   .lg\:text-heading1 {
-    font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-heading2 {
-    font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-heading3 {
@@ -33834,11 +33834,11 @@ table {
   }
 
   .xl\:text-heading1 {
-    font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-heading2 {
-    font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-heading3 {
@@ -40573,11 +40573,11 @@ table {
   }
 
   .screen\:text-heading1 {
-    font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-heading2 {
-    font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-heading3 {
@@ -47312,11 +47312,11 @@ table {
   }
 
   .desktop\:text-heading1 {
-    font-size: calc(48px + 72 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 108 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-heading2 {
-    font-size: calc(44px + 34 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-heading3 {
