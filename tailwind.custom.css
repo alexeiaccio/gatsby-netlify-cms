@@ -6866,6 +6866,10 @@ table {
   font-size: .625rem;
 }
 
+.text-mobile {
+  font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+}
+
 .text-body {
   font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
 }
@@ -13602,6 +13606,10 @@ table {
 
   .sm\:text-xxs {
     font-size: .625rem;
+  }
+
+  .sm\:text-mobile {
+    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
   }
 
   .sm\:text-body {
@@ -20343,6 +20351,10 @@ table {
     font-size: .625rem;
   }
 
+  .md\:text-mobile {
+    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+  }
+
   .md\:text-body {
     font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
@@ -27080,6 +27092,10 @@ table {
 
   .lg\:text-xxs {
     font-size: .625rem;
+  }
+
+  .lg\:text-mobile {
+    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
   }
 
   .lg\:text-body {
@@ -33821,6 +33837,10 @@ table {
     font-size: .625rem;
   }
 
+  .xl\:text-mobile {
+    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+  }
+
   .xl\:text-body {
     font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
@@ -40560,6 +40580,10 @@ table {
     font-size: .625rem;
   }
 
+  .screen\:text-mobile {
+    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
+  }
+
   .screen\:text-body {
     font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
@@ -47297,6 +47321,10 @@ table {
 
   .desktop\:text-xxs {
     font-size: .625rem;
+  }
+
+  .desktop\:text-mobile {
+    font-size: calc(14px + 12 * ((100vw - 320px) / 576));
   }
 
   .desktop\:text-body {

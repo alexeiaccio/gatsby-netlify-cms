@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { css } from 'emotion'
 
+import aboutImage from '../img/about-image.jpg'
 import { AboutBody } from '../components/AboutBody'
 import { HTMLContent } from '../components/Content'
 import { RichTextSmall } from '../components/RichText'
@@ -11,12 +12,17 @@ import Layout from '../components/Layout'
 import { Heading1, Heading2, Heading6 } from '../components/Typography'
 import { uuid } from '../utils'
 
-const AboutPage = ({ data }) => {
+const AboutPage = ({ data, location }) => {
   const about = data.about.data
   const { edges: authors } = data.authors
 
   return (
-    <Layout>
+    <Layout
+      image={{
+        localFile: { childImageSharp: { fluid: { src: aboutImage } } },
+      }}
+      {...{ location }}
+    >
       <>
         <h1 className={Heading1}>{about.title.text}</h1>
         <AboutBody {...{ about }} />

@@ -36,7 +36,7 @@ export const ArticleBody = ({ article }) => (
           <HTMLContent
             className={css`
               ${LeadText};
-              ${tw(['mb-q48', 'text-justify'])};
+              ${tw(['mb-q48'])};
             `}
             content={primary.text.html}
             key={uuid()}

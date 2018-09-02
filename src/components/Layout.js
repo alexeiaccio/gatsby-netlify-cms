@@ -1,12 +1,11 @@
 /* global tw */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
 import { css } from 'react-emotion'
 import { injectGlobal } from 'emotion'
 
-import favicon from '../img/favicon.png'
 import { Footer } from './Footer'
+import { SEO } from './SEO'
 import Navbar from './Navbar'
 
 injectGlobal`
@@ -18,11 +17,19 @@ injectGlobal`
   }
 `
 
-const Layout = ({ children }) => (
+const Layout = ({ children, image, location }) => (
   <div>
-    <Helmet title="К·Р·А·П·И·В·А">
-      <link rel="icon" type="image/png" href={favicon} />
-    </Helmet>
+    <SEO
+      slug={location.pathname}
+      title={'К·Р·А·П·И·В·А'}
+      description={
+        'К.Р.А.П.И.В.А. — это онлайн-издание о современном искусстве в Санкт-Петербурге. Так получилось, что на сегодняшний день в пятимиллионном мегаполисе нет ни одного профильного издания по искусству. Наша основная задача — восполнить ощутимые пробелы в критическом и теоретическом осмыслении современной местной культурной ситуации, а также локальных историй искусств. '
+      }
+      keywords={
+        'Культура, Ревью, Аналитика, Петербург, Искусство, Вовлечённость, Активизм'
+      }
+      image={image}
+    />
     <div
       className={css`
         ${tw([

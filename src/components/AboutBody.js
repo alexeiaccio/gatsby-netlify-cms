@@ -36,7 +36,7 @@ export const AboutBody = ({ about }) => (
           <HTMLContent
             className={css`
               ${LeadText};
-              ${tw(['mb-q64', 'text-justify'])};
+              ${tw(['mb-q64'])};
             `}
             content={primary.text.html}
             key={uuid()}

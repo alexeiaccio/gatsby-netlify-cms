@@ -14,13 +14,13 @@ const getContext = slug => ctx => {
   return ctx.edges.filter(({ node }) => node.fields.slug === slug)
 }
 
-const Article = ({ data }) => {
+const Article = ({ data, location }) => {
   const article = data.article.data
   const slug = data.article.fields.slug
   const context = getContext(slug)(data.context)
 
   return (
-    <Layout>
+    <Layout image={article.image} {...{ location }}>
       <>
         <article
           className={css`

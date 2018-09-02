@@ -263,6 +263,7 @@ module.exports = {
     '5xl': '3rem', // 48px
     // Custom
     xxs: '.625rem', // 10px
+    mobile: 'calc(14px + 12 * ((100vw - 320px) / 576))',
     body: 'calc(18px + 6 * ((100vw - 320px) / 1280))',
     description: 'calc(10px + 4 * ((100vw - 320px) / 1280))',
     heading0: 'calc(104px + 72 * ((100vw - 320px) / 1280))',

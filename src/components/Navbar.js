@@ -166,7 +166,7 @@ const Navbar = withToggle(
               'text-black',
               'md:text-white',
               'hover:text-green',
-              'text-sm',
+              'text-mobile',
               'sm:text-heading5',
             ])};
             letter-spacing: 0.3em;

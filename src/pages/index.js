@@ -12,16 +12,16 @@ import { Heading1, Heading4 } from '../components/Typography'
 import logo from '../img/logo.svg'
 import { uuid } from '../utils'
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   const { edges: articles } = data.articles
   const about = data.about.data
 
   return (
-    <Layout>
+    <Layout {...{ location }}>
       <>
         <section
           className={css`
-            ${tw(['mb-q48'])};
+            ${tw(['mb-q144'])};
           `}
         >
           <div
