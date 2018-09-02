@@ -34,7 +34,10 @@ export const AboutBody = ({ about }) => (
         )}
         {__typename === 'PrismicAboutBodyLead' && (
           <HTMLContent
-            className={LeadText}
+            className={css`
+              ${LeadText};
+              ${tw(['mb-q64', 'text-justify'])};
+            `}
             content={primary.text.html}
             key={uuid()}
           />

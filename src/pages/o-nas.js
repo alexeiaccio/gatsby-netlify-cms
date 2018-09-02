@@ -100,7 +100,7 @@ export default AboutPage
 
 export const pageQuery = graphql`
   query AboutQuery {
-    authors: allPrismicAuthors {
+    authors: allPrismicAuthors(sort: { fields: [data___name] }) {
       edges {
         node {
           data {

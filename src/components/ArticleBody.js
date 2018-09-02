@@ -34,7 +34,10 @@ export const ArticleBody = ({ article }) => (
         )}
         {__typename === 'PrismicArticlesBodyLead' && (
           <HTMLContent
-            className={LeadText}
+            className={css`
+              ${LeadText};
+              ${tw(['mb-q48', 'text-justify'])};
+            `}
             content={primary.text.html}
             key={uuid()}
           />
@@ -64,11 +67,26 @@ export const ArticleBody = ({ article }) => (
             <footer key={uuid()}>
               <cite
                 className={css`
-                  ${tw(['px-8', 'text-right', 'text-body'])};
+                  ${tw([
+                    'block',
+                    'mt-q36',
+                    'mb-q48',
+                    'px-8',
+                    'text-right',
+                    'text-body',
+                  ])};
                 `}
                 key={uuid()}
               >
-                <HTMLContent content={primary.cite.html} key={uuid()} />
+                <HTMLContent
+                  className={css`
+                    & p {
+                      ${tw(['leading-normal', 'm-0'])};
+                    }
+                  `}
+                  content={primary.cite.html}
+                  key={uuid()}
+                />
               </cite>
             </footer>
           </figure>
