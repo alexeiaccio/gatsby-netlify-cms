@@ -18,7 +18,11 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <>
-        <section>
+        <section
+          className={css`
+            ${tw(['mb-q72'])};
+          `}
+        >
           <div
             to="/"
             className={css`

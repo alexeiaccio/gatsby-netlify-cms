@@ -87,13 +87,7 @@ export const Heading6 = css`
 `
 
 export const LeadText = css`
-  ${tw([
-    'font-plex',
-    'leading-none',
-    'tracking-tight',
-    'text-heading5',
-    'font-medium',
-  ])};
+  ${tw(['leading-tight', 'text-heading5', 'font-medium'])};
 `
 
 export const List = css`
