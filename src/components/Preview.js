@@ -12,7 +12,7 @@ export const Dummy = () => (
   <div
     className={css`
       ${tw(['flex-no-shrink', 'w-full'])};
-      max-width: calc(50% - 1rem);
+      max-width: calc(50% - 2rem);
     `}
   />
 )
@@ -22,6 +22,7 @@ export const Preview = ({ article }) => (
     className={css`
       ${tw([
         'flex-no-shrink',
+        'mb-q72',
         'mx-q16',
         'text-white',
         'md:text-black',
@@ -37,13 +38,13 @@ export const Preview = ({ article }) => (
     <Img fluid={article.data.image.localFile.childImageSharp.fluid} />
     <div
       className={css`
-        ${tw(['mt-q12'])};
+        ${tw(['mt-q16'])};
       `}
     >
       <h4
         className={css`
           ${Heading6};
-          ${tw(['mb-q8'])};
+          ${tw(['mb-q12'])};
         `}
       >
         {article.data.title.text}
