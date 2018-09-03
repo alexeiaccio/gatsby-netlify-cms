@@ -20,7 +20,7 @@ const Article = ({ data, location }) => {
   const context = getContext(slug)(data.context)
 
   return (
-    <Layout image={article.image} {...{ location }}>
+    <Layout image={article.image} {...{ location }} title={article.title.text}>
       <>
         <article
           className={css`

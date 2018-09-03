@@ -46,8 +46,7 @@ export const SEO = ({ slug, title, description, keywords, image }) => {
 
   return (
     <Helmet
-      defaultTitle="·К·Р·А·П·И·В·А·
-      "
+      defaultTitle="·К·Р·А·П·И·В·А·"
       titleTemplate={`%s | ·К·Р·А·П·И·В·А·`}
       title={title}
     >

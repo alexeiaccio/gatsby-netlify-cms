@@ -12,7 +12,7 @@ import { Cormorant, Montserrat } from './Fonts'
 injectGlobal`
   ${Cormorant};
   ${Montserrat};
-  
+
   body {
     ${tw(['m-0', 'font-cormorant', 'font-medium'])};
   }
@@ -21,11 +21,11 @@ injectGlobal`
   }
 `
 
-const Layout = ({ children, image, location }) => (
+const Layout = ({ children, image, location, title }) => (
   <div>
     <SEO
       slug={location.pathname}
-      title={'К·Р·А·П·И·В·А'}
+      title={title}
       description={
         'К.Р.А.П.И.В.А. — это онлайн-издание о современном искусстве в Санкт-Петербурге. Так получилось, что на сегодняшний день в пятимиллионном мегаполисе нет ни одного профильного издания по искусству. Наша основная задача — восполнить ощутимые пробелы в критическом и теоретическом осмыслении современной местной культурной ситуации, а также локальных историй искусств. '
       }

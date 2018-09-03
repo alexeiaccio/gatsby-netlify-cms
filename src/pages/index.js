@@ -17,7 +17,7 @@ const IndexPage = ({ data, location }) => {
   const about = data.about.data
 
   return (
-    <Layout {...{ location }}>
+    <Layout {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
       <>
         <section
           className={css`

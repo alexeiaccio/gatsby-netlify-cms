@@ -22,6 +22,7 @@ const AboutPage = ({ data, location }) => {
         localFile: { childImageSharp: { fluid: { src: aboutImage } } },
       }}
       {...{ location }}
+      title={about.title.text}
     >
       <>
         <h1 className={Heading1}>{about.title.text}</h1>
