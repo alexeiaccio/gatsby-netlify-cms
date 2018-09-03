@@ -51,8 +51,7 @@ const IndexPage = ({ data, location }) => {
           <AboutBody {...{ about }} />
           <Link
             className={css`
-              ${tw(['block', 'mt-q48', 'mx-auto'])};
-              max-width: 12rem;
+              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
             `}
             to={'/o-nas'}
           >

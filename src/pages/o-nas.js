@@ -72,7 +72,7 @@ const AboutPage = ({ data, location }) => {
                 />
                 <div
                   className={css`
-                    ${tw(['pl-q36'])};
+                    ${tw(['sm:pl-q36'])};
                   `}
                   key={uuid()}
                 >

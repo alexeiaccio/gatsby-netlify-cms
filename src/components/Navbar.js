@@ -281,6 +281,28 @@ const Navbar = withToggle(
               name="SubscriptionForm"
               onSubmit={subscribe}
             >
+              <span
+                className={css`
+                  ${tw([
+                    'font-montserrat',
+                    'font-medium',
+                    'items-center',
+                    'justify-center',
+                    'mb-q12',
+                    'md:mb-0',
+                    'px-q12',
+                    'py-q12',
+                    'text-black',
+                    'md:text-white',
+                    'text-center',
+                    'text-md',
+                    'uppercase',
+                  ])};
+                `}
+              >
+                Подписаться
+              </span>
+
               <p hidden>
                 <label>
                   Don’t fill this out: <input name="bot-field" />
@@ -316,6 +338,7 @@ const Navbar = withToggle(
       <div
         className={css`
           ${tw([
+            'cursor-pointer',
             'font-semibold',
             'font-montserrat',
             'overflow-hidden',
