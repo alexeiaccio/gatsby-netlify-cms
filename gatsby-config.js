@@ -7,15 +7,6 @@ module.exports = {
     title: 'Krapiva',
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-google-fonts',
-      options: {
-        fonts: [
-          `Cormorant\:500,500i,700,700i`,
-          `Montserrat\:500,500i,600,600i,800&amp;subset=cyrillic`,
-        ],
-      },
-    },
     `gatsby-plugin-emotion`,
     `gatsby-plugin-netlify-cache`,
     'gatsby-plugin-react-helmet',
@@ -27,6 +18,16 @@ module.exports = {
         repositoryName: 'krapiva-org',
         accessToken: process.env.PRICMIC_TOKEN,
       },
+    },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#0cf3ad`,
+        showSpinner: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
     },
     {
       resolve: 'gatsby-plugin-netlify',

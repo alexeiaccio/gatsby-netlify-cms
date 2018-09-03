@@ -43,7 +43,6 @@ export const SEO = ({ slug, title, description, keywords, image }) => {
     getImage,
     description,
   })
-  console.log(image)
 
   return (
     <Helmet

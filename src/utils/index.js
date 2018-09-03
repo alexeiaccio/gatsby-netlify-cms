@@ -2,6 +2,8 @@ import * as uuid from 'uuid/v1'
 import Typograf from 'typograf'
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] })
+tp.enableRule('common/html/url')
+tp.disableRule('common/nbsp/afterShortWord')
 
 export { tp, uuid }
 

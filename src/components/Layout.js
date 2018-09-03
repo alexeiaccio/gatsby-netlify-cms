@@ -7,8 +7,12 @@ import { injectGlobal } from 'emotion'
 import { Footer } from './Footer'
 import { SEO } from './SEO'
 import Navbar from './Navbar'
+import { Cormorant, Montserrat } from './Fonts'
 
 injectGlobal`
+  ${Cormorant};
+  ${Montserrat};
+  
   body {
     ${tw(['m-0', 'font-cormorant', 'font-medium'])};
   }
