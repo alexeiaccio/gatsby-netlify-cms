@@ -5,14 +5,21 @@ import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 import { startCase } from 'lodash'
 
-import { HTMLContent } from '../components/Content'
+import { HTMLContent } from './Content'
+import { Views } from './Views'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
-export const ArticleHeader = ({ article, date }) => (
+export const ArticleHeader = ({ article, date, location }) => (
   <div>
     <div
       className={css`
-        ${tw(['font-montserrat', 'italic', 'my-q36', 'text-xs'])};
+        ${tw([
+          'items-center',
+          'font-montserrat',
+          'italic',
+          'my-q24',
+          'text-xs',
+        ])};
       `}
     >
       <span>{startCase(getCategory(article.category))}</span>
@@ -26,6 +33,7 @@ export const ArticleHeader = ({ article, date }) => (
           ))
         )}
       </span>
+      <Views {...{ location }} />
     </div>
     <figure
       className={css`

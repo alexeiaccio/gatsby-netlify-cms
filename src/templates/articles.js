@@ -31,6 +31,7 @@ const Article = ({ data, location }) => {
           <ArticleHeader
             {...{ article }}
             date={data.article.first_publication_date}
+            {...{ location }}
           />
           <ArticleBody {...{ article }} />
         </article>

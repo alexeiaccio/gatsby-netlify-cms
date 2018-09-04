@@ -10,6 +10,7 @@ export const Footer = () => (
     className={css`
       ${tw([
         'bg-white',
+        'font-montserrat',
         'md:bg-black',
         'py-q24',
         'md:py-q36',
@@ -27,7 +28,6 @@ export const Footer = () => (
           'flex',
           'flex-col',
           'sm:flex-row',
-          'font-montserrat',
           'items-center',
           'justify-between',
           'max-w-md',
@@ -43,7 +43,6 @@ export const Footer = () => (
           ${tw(['flex', 'items-center'])};
         `}
       >
-        <span>2018</span>
         <span
           className={css`
             ${tw([
@@ -51,7 +50,7 @@ export const Footer = () => (
               'bg-no-repeat',
               'h-q16',
               'inline-block',
-              'mx-q12',
+              'mr-q12',
               'w-q16',
             ])};
             @media (max-width: 768px) {
@@ -94,6 +93,50 @@ export const Footer = () => (
       >
         Поддержать
       </a>
+      <span>2018</span>
+    </div>
+    <div
+      className={css`
+        ${tw([
+          'flex',
+          'flex-col',
+          'sm:flex-row',
+          'items-center',
+          'justify-between',
+          'max-w-md',
+          'mt-q24',
+          'md:mt-q36',
+          'mx-auto',
+          'px-q24',
+          'md:px-q48',
+          'text-xs',
+        ])};
+      `}
+    >
+      <div
+        className={css`
+          ${tw(['mb-q24', 'sm:mb-0', 'text-center'])};
+        `}
+      >
+        <span
+          className={css`
+            ${tw(['mr-q8'])};
+          `}
+        >
+          При поддержке фонда взаимопомощи
+        </span>
+        <a
+          className={css`
+            ${tw(['font-semibold'])};
+            font-variant: small-caps;
+          `}
+          href="https://chtodelat.org/category/aid-fund-ru/?lang=ru"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          «Что Делать»
+        </a>
+      </div>
       <div
         className={css`
           ${tw(['flex', 'flex-no-wrap'])};
