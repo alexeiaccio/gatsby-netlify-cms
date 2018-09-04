@@ -5,7 +5,8 @@ import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 import { startCase } from 'lodash'
 
-import { HTMLContent } from '../components/Content'
+import { HTMLContent } from './Content'
+import { Views } from './Views'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
 export const ArticleHeader = ({ article, date }) => (
@@ -26,6 +27,7 @@ export const ArticleHeader = ({ article, date }) => (
           ))
         )}
       </span>
+      <Views />
     </div>
     <figure
       className={css`
