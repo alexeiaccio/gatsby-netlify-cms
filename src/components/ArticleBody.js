@@ -50,32 +50,51 @@ export const ArticleBody = ({ article }) => (
           />
         )}
         {__typename === 'PrismicArticlesBodyQuote' && (
-          <div
+          <figure
             className={css`
               ${tw(['m-0'])};
-              max-width: calc(100vw - 4rem);
             `}
             key={uuid()}
           >
-            <HTMLContent
+            <blockquote
               className={css`
                 ${LeadText};
-                ${tw(['mb-q48'])};
+                ${tw(['m-0', 'mb-q36'])};
               `}
-              content={primary.quote.html}
               key={uuid()}
-            />
-            <HTMLContent
-              className={css`
-                ${tw(['mt-q36', 'mb-q48', 'text-right', 'text-body'])};
-                & p {
-                  ${tw(['leading-normal', 'm-0'])};
-                }
-              `}
-              content={primary.cite.html}
-              key={uuid()}
-            />
-          </div>
+            >
+              <HTMLContent
+                className={css`
+                  ${tw(['italic'])};
+                  & em {
+                    letter-spacing: 0.2em;
+                  }
+                `}
+                content={primary.quote.html}
+                key={uuid()}
+              />
+            </blockquote>
+            <footer>
+              <cite>
+                <HTMLContent
+                  className={css`
+                    ${tw([
+                      'italic',
+                      'mt-q36',
+                      'mb-q48',
+                      'text-right',
+                      'text-body',
+                    ])};
+                    & p {
+                      ${tw(['leading-normal', 'm-0'])};
+                    }
+                  `}
+                  content={primary.cite.html}
+                  key={uuid()}
+                />
+              </cite>
+            </footer>
+          </figure>
         )}
       </Fragment>
     ))}

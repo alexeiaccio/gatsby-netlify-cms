@@ -19,6 +19,9 @@ injectGlobal`
   a, a:hover {
     ${tw(['no-underline', 'text-green-dark'])}
   }
+  a.link {
+    ${tw(['break-words'])}
+  }
 `
 
 const Layout = ({ children, image, location, title }) => (
@@ -83,7 +86,13 @@ const Layout = ({ children, image, location, title }) => (
         ])};
       `}
     >
-      <div>{children}</div>
+      <div
+        className={css`
+          max-width: calc(100vw - 2rem);
+        `}
+      >
+        {children}
+      </div>
     </div>
     <Footer />
   </div>

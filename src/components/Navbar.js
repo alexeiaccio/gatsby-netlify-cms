@@ -21,7 +21,6 @@ const Input = css`
     'p-q12',
     'rounded-lg',
     'text-semibold',
-    'uppercase',
   ])};
 `
 
