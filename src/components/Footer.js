@@ -38,27 +38,7 @@ export const Footer = () => (
         ])};
       `}
     >
-      <div
-        className={css`
-          ${tw(['flex', 'items-center'])};
-        `}
-      >
-        <span
-          className={css`
-            ${tw([
-              'bg-contain',
-              'bg-no-repeat',
-              'h-q16',
-              'inline-block',
-              'mr-q12',
-              'w-q16',
-            ])};
-            @media (max-width: 768px) {
-              background-image: url(${publicdomainBlack});
-            }
-            background-image: url(${publicdomain});
-          `}
-        />
+      <div>
         <span>·К·Р·А·П·И·В·А·</span>
       </div>
       <a
@@ -93,7 +73,30 @@ export const Footer = () => (
       >
         Поддержать
       </a>
-      <span>2018</span>
+      <div
+        className={css`
+          ${tw(['flex', 'items-center'])};
+        `}
+      >
+        <span
+          className={css`
+            ${tw([
+              'bg-contain',
+              'bg-no-repeat',
+              'h-q16',
+              'inline-block',
+              'mr-q8',
+              'w-q16',
+            ])};
+            @media (max-width: 768px) {
+              background-image: url(${publicdomainBlack});
+            }
+            background-image: url(${publicdomain});
+          `}
+          title="Общественное достояние"
+        />
+        <span>2018</span>
+      </div>
     </div>
     <div
       className={css`
