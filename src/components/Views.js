@@ -1,32 +1,69 @@
 /* global tw */
 import React from 'react'
 import { css } from 'react-emotion'
-import { lifecycle } from 'recompose'
+import { compose, lifecycle, pure } from 'recompose'
 import 'whatwg-fetch'
 
-export const Views = lifecycle({
-  state: {
-    views: 0,
-    burned: 0,
-  },
-  componentDidMount() {
-    fetch(
-      `${process.env.SLS ||
-        'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}get`,
-      {
-        mode: 'no-cors',
-      }
-    )
-      .then(response => console.log('parsed json', response))
-      .catch(error => console.log('parsing failed', error))
-    return false //({views, burned})
-  },
-})(({ views, burned }) => (
-  <span
-    className={css`
-      ${tw([''])};
-    `}
-  >
-    {views}
-  </span>
+import eye from '../img/eye.svg'
+import eyeBlack from '../img/eye-black.svg'
+
+export const Views = compose(
+  pure,
+  lifecycle({
+    state: {
+      views: null,
+      burned: null,
+    },
+    fetch(props) {
+      fetch(
+        `${process.env.SLS ||
+          'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}get`
+      )
+        .then(res => res.json())
+        .then(json => json.values)
+        .then(arr => arr.filter(x => x[0] === `${props.location.pathname}/`))
+        .then(cont => cont[0])
+        .then(data => {
+          this.setState({ views: data[1], burned: data[2] })
+        })
+        .catch(error => console.log('parsing failed', error))
+    },
+    componentDidMount() {
+      this.fetch(this.props)
+    },
+    componentDidUpdate(prevProps) {
+      prevProps !== this.props && this.setState({ views: null, burned: null })
+      prevProps !== this.props && this.fetch(this.props)
+    },
+  })
+)(({ views }) => (
+  <>
+    {views && (
+      <span
+        className={css`
+          ${tw(['ml-q8', 'pl-q24', 'relative'])};
+          &::before {
+            content: '';
+            ${tw([
+              'block',
+              'absolute',
+              'bg-contain',
+              'bg-no-repeat',
+              'h-full',
+              'inline-block',
+              'pin-l',
+              'pin-t',
+              'w-q20',
+            ])};
+            @media (max-width: 768px) {
+              background-image: url(${eye});
+            }
+            background-image: url(${eyeBlack});
+          }
+        `}
+      >
+        {views}
+      </span>
+    )}
+  </>
 ))

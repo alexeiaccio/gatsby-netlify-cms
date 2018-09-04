@@ -3,6 +3,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'react-emotion'
 import { injectGlobal } from 'emotion'
+import { compose, lifecycle, pure } from 'recompose'
+import 'whatwg-fetch'
 
 import { Footer } from './Footer'
 import { SEO } from './SEO'
@@ -24,7 +26,32 @@ injectGlobal`
   }
 `
 
-const Layout = ({ children, image, location, title }) => (
+const enhance = compose(
+  pure,
+  lifecycle({
+    fetch(props) {
+      fetch(
+        `${process.env.SLS ||
+          'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}counter?path=${props.location.pathname.replace(
+          /\/$/,
+          ''
+        )}/&view=1&burned=0`
+      )
+        .then(res => console.log('parsing failed', res))
+        .catch(error => console.log('parsing failed', error))
+    },
+    componentDidMount() {
+      process.env.NODE_ENV === 'production' && this.fetch(this.props)
+    },
+    componentDidUpdate(prevProps) {
+      process.env.NODE_ENV === 'production' &&
+        prevProps !== this.props &&
+        this.fetch(this.props)
+    },
+  })
+)
+
+const Layout = enhance(({ children, image, location, title }) => (
   <div>
     <SEO
       slug={location.pathname}
@@ -96,7 +123,7 @@ const Layout = ({ children, image, location, title }) => (
     </div>
     <Footer />
   </div>
-)
+))
 
 Layout.propTypes = {
   children: PropTypes.object,
