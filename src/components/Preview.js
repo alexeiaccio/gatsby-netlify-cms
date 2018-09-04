@@ -29,7 +29,9 @@ export const Preview = ({ article }) => (
         'hover:text-green',
         'w-full',
       ])};
-      max-width: calc(50% - 2rem);
+      @media (min-width: 459px) {
+        max-width: calc(50% - 2rem);
+      }
       transition: all 200ms ease-in-out;
     `}
     title={article.data.title.text}

@@ -21,7 +21,14 @@ export const Context = ({ context }) => (
     </h2>
     <div
       className={css`
-        ${tw(['flex', 'flex-row', 'flex-no-wrap', '-mx-4', 'w-full'])};
+        ${tw([
+          'flex',
+          'flex-row',
+          'flex-wrap',
+          'sm:flex-no-wrap',
+          '-mx-4',
+          'w-full',
+        ])};
       `}
     >
       {context[0].previous ? (

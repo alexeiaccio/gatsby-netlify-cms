@@ -38,8 +38,30 @@ export const Footer = () => (
         ])};
       `}
     >
-      <div>
+      <div
+        className={css`
+          ${tw(['flex', 'items-center'])};
+        `}
+      >
         <span>·К·Р·А·П·И·В·А·</span>
+        <span
+          className={css`
+            ${tw([
+              'bg-contain',
+              'bg-no-repeat',
+              'h-q16',
+              'inline-block',
+              'mx-q8',
+              'w-q16',
+            ])};
+            @media (max-width: 768px) {
+              background-image: url(${publicdomainBlack});
+            }
+            background-image: url(${publicdomain});
+          `}
+          title="Общественное достояние"
+        />
+        <span>2018</span>
       </div>
       <a
         className={css`
@@ -75,27 +97,33 @@ export const Footer = () => (
       </a>
       <div
         className={css`
-          ${tw(['flex', 'items-center'])};
+          ${tw(['font-semibold'])};
+          font-variant: small-caps;
         `}
       >
-        <span
-          className={css`
-            ${tw([
-              'bg-contain',
-              'bg-no-repeat',
-              'h-q16',
-              'inline-block',
-              'mr-q8',
-              'w-q16',
-            ])};
-            @media (max-width: 768px) {
-              background-image: url(${publicdomainBlack});
-            }
-            background-image: url(${publicdomain});
-          `}
-          title="Общественное достояние"
-        />
-        <span>2018</span>
+        <a
+          href="mailto:krapiva@krapiva.org"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MAIL
+        </a>
+        <span>{' · '}</span>
+        <a
+          href="https://www.facebook.com/krapivapiter"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          FB
+        </a>
+        <span>{' · '}</span>
+        <a
+          href="https://vk.com/krapiva_piter"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          VK
+        </a>
       </div>
     </div>
     <div
