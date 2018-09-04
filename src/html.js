@@ -14,28 +14,28 @@ export default class HTML extends React.Component {
           />
           <link
             rel="preload"
-            href="./static/files/Cormorant-Medium.woff2"
+            href="../static/files/Cormorant-Medium.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="true"
           />
           <link
             rel="preload"
-            href="./static/files/Cormorant-MediumItalic.woff2"
+            href="../static/files/Cormorant-MediumItalic.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="true"
           />
           <link
             rel="preload"
-            href="./static/files/Montserrat-Medium.woff2"
+            href="../static/files/Montserrat-Medium.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="true"
           />
           <link
             rel="preload"
-            href="./static/files/Montserrat-ExtraBold.woff2"
+            href="../static/files/Montserrat-ExtraBold.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="true"
