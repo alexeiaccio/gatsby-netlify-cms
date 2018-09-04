@@ -21,7 +21,15 @@ export const Views = compose(
       )
         .then(res => res.json())
         .then(json => json.values)
-        .then(arr => arr.filter(x => x[0] === `${props.location.pathname}/`))
+        .then(arr =>
+          arr.filter(
+            x => x[0] === `${props.location.pathname.replace(/\/$/, '')}/`
+          )
+        )
+        .then(x => {
+          console.log(x)
+          return x
+        })
         .then(cont => cont[0])
         .then(data => {
           this.setState({ views: data[1], burned: data[2] })
