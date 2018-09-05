@@ -69,6 +69,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
+        host: 'https://www.krapiva.org',
+        sitemap: 'https://www.krapiva.org/sitemap.xml',
         resolveEnv: () => NETLIFY_ENV,
         env: {
           production: {
