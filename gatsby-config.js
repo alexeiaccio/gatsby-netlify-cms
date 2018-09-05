@@ -18,6 +18,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-offline`,
     {
       resolve: 'gatsby-source-prismic',
       options: {
@@ -49,11 +50,24 @@ module.exports = {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         color: `#0cf3ad`,
+        parent: '#nprogress-container',
         showSpinner: false,
       },
     },
     {
       resolve: `gatsby-plugin-sitemap`,
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `·К·Р·А·П·И·В·А·`,
+        short_name: `Krapiva`,
+        start_url: `/`,
+        background_color: `#000000`,
+        theme_color: `#0cf3ad`,
+        display: `minimal-ui`,
+        icon: `src/img/logo-192-192.png`,
+      },
     },
     {
       resolve: 'gatsby-plugin-netlify',

@@ -52,7 +52,7 @@ const enhance = compose(
 )
 
 const Layout = enhance(({ children, image, location, title }) => (
-  <div>
+  <div id="nprogress-container">
     <SEO
       slug={location.pathname}
       title={title}

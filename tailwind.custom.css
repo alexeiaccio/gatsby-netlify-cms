@@ -7366,8 +7366,8 @@ table {
   z-index: 1000;
 }
 
-.z-2000 {
-  z-index: 2000;
+.z-1001 {
+  z-index: 1001;
 }
 
 .z-auto {
@@ -14108,8 +14108,8 @@ table {
     z-index: 1000;
   }
 
-  .sm\:z-2000 {
-    z-index: 2000;
+  .sm\:z-1001 {
+    z-index: 1001;
   }
 
   .sm\:z-auto {
@@ -20851,8 +20851,8 @@ table {
     z-index: 1000;
   }
 
-  .md\:z-2000 {
-    z-index: 2000;
+  .md\:z-1001 {
+    z-index: 1001;
   }
 
   .md\:z-auto {
@@ -27594,8 +27594,8 @@ table {
     z-index: 1000;
   }
 
-  .lg\:z-2000 {
-    z-index: 2000;
+  .lg\:z-1001 {
+    z-index: 1001;
   }
 
   .lg\:z-auto {
@@ -34337,8 +34337,8 @@ table {
     z-index: 1000;
   }
 
-  .xl\:z-2000 {
-    z-index: 2000;
+  .xl\:z-1001 {
+    z-index: 1001;
   }
 
   .xl\:z-auto {
@@ -41080,8 +41080,8 @@ table {
     z-index: 1000;
   }
 
-  .screen\:z-2000 {
-    z-index: 2000;
+  .screen\:z-1001 {
+    z-index: 1001;
   }
 
   .screen\:z-auto {
@@ -47823,8 +47823,8 @@ table {
     z-index: 1000;
   }
 
-  .desktop\:z-2000 {
-    z-index: 2000;
+  .desktop\:z-1001 {
+    z-index: 1001;
   }
 
   .desktop\:z-auto {
