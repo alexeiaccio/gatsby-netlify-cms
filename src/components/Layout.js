@@ -67,12 +67,10 @@ const Layout = enhance(({ children, image, location, title }) => (
     <div
       className={css`
         ${tw([
-          'bg-black',
-          'md:bg-white',
+          'bg-white',
           'border-4',
           'md:border-8',
-          'border-white',
-          'md:border-black',
+          'border-black',
           'border-solid',
           'fixed',
           'pin',
@@ -84,8 +82,7 @@ const Layout = enhance(({ children, image, location, title }) => (
         ${tw([
           'border-2',
           'md:border-4',
-          'border-white',
-          'md:border-black',
+          'border-black',
           'border-solid',
           'fixed',
           'pin-b',
@@ -108,8 +105,7 @@ const Layout = enhance(({ children, image, location, title }) => (
           'md:px-q48',
           'py-q72',
           'relative',
-          'text-white',
-          'md:text-black',
+          'text-black',
         ])};
       `}
     >

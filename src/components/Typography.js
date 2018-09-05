@@ -4,7 +4,7 @@ import { css } from 'react-emotion'
 export const Body = css`
   ${tw([
     'font-source',
-    'font-normal',
+    'font-medium',
     'leading-body',
     'text-body',
     'tracking-normal',

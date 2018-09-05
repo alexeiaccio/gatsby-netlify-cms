@@ -4,7 +4,6 @@ import { css } from 'react-emotion'
 import { compose, lifecycle, pure } from 'recompose'
 import 'whatwg-fetch'
 
-import eye from '../img/eye.svg'
 import eyeBlack from '../img/eye-black.svg'
 
 export const Views = compose(
@@ -59,9 +58,6 @@ export const Views = compose(
               'pin-t',
               'w-q20',
             ])};
-            @media (max-width: 768px) {
-              background-image: url(${eye});
-            }
             background-image: url(${eyeBlack});
           }
         `}

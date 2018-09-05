@@ -3,20 +3,17 @@ import React from 'react'
 import { css } from 'react-emotion'
 
 import publicdomain from '../img/publicdomain.svg'
-import publicdomainBlack from '../img/publicdomain-black.svg'
 
 export const Footer = () => (
   <footer
     className={css`
       ${tw([
-        'bg-white',
         'font-montserrat',
-        'md:bg-black',
+        'bg-black',
         'py-q24',
         'md:py-q36',
         'relative',
-        'text-balck',
-        'md:text-white',
+        'text-white',
         'w-fill',
         'z-1000',
       ])};
@@ -54,9 +51,6 @@ export const Footer = () => (
               'mx-q8',
               'w-q16',
             ])};
-            @media (max-width: 768px) {
-              background-image: url(${publicdomainBlack});
-            }
             background-image: url(${publicdomain});
           `}
           title="Общественное достояние"

@@ -14,11 +14,13 @@ export const ArticleBody = ({ article }) => (
     {article.body.map(({ primary, __typename }) => (
       <Fragment key={uuid()}>
         {__typename === 'PrismicArticlesBodyImage' && (
-          <figure key={uuid()}>
+          <figure
+            className={css`
+              ${tw(['m-0'])};
+            `}
+            key={uuid()}
+          >
             <Img
-              className={css`
-                ${tw(['-mx-8'])};
-              `}
               fluid={primary.imageimage.localFile.childImageSharp.fluid}
               key={uuid()}
             />

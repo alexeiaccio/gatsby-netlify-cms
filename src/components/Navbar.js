@@ -27,8 +27,7 @@ const Input = css`
 const SubmitButton = styled('button')`
   ${tw([
     'bg-green',
-    'hover:bg-black',
-    'md:hover:bg-white',
+    'hover:bg-white',
     'border-none',
     'font-montserrat',
     'font-medium',
@@ -43,8 +42,7 @@ const SubmitButton = styled('button')`
     'py-q12',
     'rounded-lg',
     'text-black',
-    'hover:text-green',
-    'md:hover:text-black',
+    'hover:text-black',
     'text-md',
     'uppercase',
   ])};
@@ -115,8 +113,7 @@ const Navbar = withToggle(
       className={css`
         position: fixed;
         ${tw([
-          'bg-white',
-          'md:bg-black',
+          'bg-black',
           'overflow-hidden',
           'pin-l',
           'pin-r',
@@ -145,12 +142,30 @@ const Navbar = withToggle(
               'bg-contain',
               'bg-no-repeat',
               'hidden',
-              'md:block',
-              'mr-q48',
+              'sm:block',
+              'md:mr-q48',
             ])};
             background-image: url(${logo});
             width: 60px;
           `}
+        />
+        <div
+          className={css`
+            ${tw([
+              'bg-center',
+              'bg-contain',
+              'bg-no-repeat',
+              'block',
+              'sm:hidden',
+              'cursor-pointer',
+              'flex-no-shrink',
+              'mr-auto',
+              'w-q48',
+              'sm:w-q64',
+            ])};
+            background-image: url(${logo});
+          `}
+          onClick={toggle}
         />
         <Link
           to="/"
@@ -159,11 +174,10 @@ const Navbar = withToggle(
               'inline-block',
               'font-extrabold',
               'font-montserrat',
-              'px-8',
+              'px-q12',
               'pt-q8',
               'sm:pt-0',
-              'text-black',
-              'md:text-white',
+              'text-white',
               'hover:text-green',
               'text-mobile',
               'sm:text-heading5',
@@ -174,11 +188,29 @@ const Navbar = withToggle(
         >
           ·К·Р·А·П·И·В·А·
         </Link>
+        <div
+          className={css`
+            ${tw([
+              'bg-center',
+              'bg-contain',
+              'bg-no-repeat',
+              'block',
+              'sm:hidden',
+              'cursor-pointer',
+              'flex-no-shrink',
+              'ml-auto',
+              'w-q48',
+              'sm:w-q64',
+            ])};
+            background-image: url(${logo});
+            transform: rotateX(180deg);
+          `}
+          onClick={toggle}
+        />
         <span
           className={css`
             ${tw([
-              'bg-black',
-              'md:bg-white',
+              'bg-white',
               'hover:bg-green',
               'cursor-pointer',
               'font-montserrat',
@@ -188,8 +220,7 @@ const Navbar = withToggle(
               'items-center',
               'justify-center',
               'px-q24',
-              'text-white',
-              'md:text-black',
+              'text-black',
               'hover:text-white',
               'text-md',
               'uppercase',
@@ -228,8 +259,7 @@ const Navbar = withToggle(
                   'md:mb-0',
                   'px-q24',
                   'py-q12',
-                  'text-black',
-                  'md:text-white',
+                  'text-white',
                   'text-center',
                   'text-md',
                   'uppercase',
@@ -251,7 +281,7 @@ const Navbar = withToggle(
                   'justify-center',
                   'px-q24',
                   'py-q12',
-                  'md:text-black',
+                  'text-black',
                   'text-md',
                   'uppercase',
                 ])};
@@ -291,8 +321,7 @@ const Navbar = withToggle(
                     'md:mb-0',
                     'px-q12',
                     'py-q12',
-                    'text-black',
-                    'md:text-white',
+                    'text-white',
                     'text-center',
                     'text-md',
                     'uppercase',

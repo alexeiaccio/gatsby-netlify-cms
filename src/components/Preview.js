@@ -24,15 +24,16 @@ export const Preview = ({ article }) => (
         'flex-no-shrink',
         'mb-q72',
         'mx-q16',
-        'text-white',
-        'md:text-black',
-        'hover:text-green',
+        'text-black',
+        'hover:text-black',
         'w-full',
       ])};
       @media (min-width: 459px) {
         max-width: calc(50% - 2rem);
       }
-      transition: all 200ms ease-in-out;
+      &:hover h4 {
+        ${tw(['text-green'])};
+      }
     `}
     title={article.data.title.text}
     to={article.fields.slug}
@@ -47,6 +48,7 @@ export const Preview = ({ article }) => (
         className={css`
           ${Heading6};
           ${tw(['mb-q12'])};
+          transition: all 200ms ease-in-out;
         `}
       >
         {article.data.title.text}

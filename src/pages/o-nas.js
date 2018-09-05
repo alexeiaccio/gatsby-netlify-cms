@@ -56,8 +56,7 @@ const AboutPage = ({ data, location }) => {
                     'flex-no-shrink',
                     'mb-q72',
                     'mx-q16',
-                    'text-white',
-                    'md:text-black',
+                    'text-black',
                     'w-full',
                   ])};
                   max-width: calc(50% - 2rem);

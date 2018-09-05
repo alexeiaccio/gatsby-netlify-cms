@@ -41,7 +41,7 @@ export const RichText = css`
     ${tw(['leading-tight', 'mb-q16', 'md:mb-q24', 'text-justify'])};
   }
   & strong {
-    ${tw(['font-bold'])};
+    ${tw(['font-bold', 'tracking-wide'])};
   }
   & ul {
     ${List};
