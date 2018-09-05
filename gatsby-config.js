@@ -19,7 +19,7 @@ const tp = require('./src/utils/tp')
 module.exports = {
   siteMetadata: {
     title: 'Krapiva',
-    siteUrl: 'https://www.krapiva.org/',
+    siteUrl,
   },
   plugins: [
     `gatsby-plugin-emotion`,
