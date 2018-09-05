@@ -32,6 +32,7 @@ const getSchemaOrgJSONLD = ({ url, title, getImage, description }) => [
 export const SEO = ({ slug, title, description, keywords, image }) => {
   const siteUrl = 'https://www.krapiva.org'
   const fbAppID = '2138336363160205'
+  const type = 'website'
   const url = `${siteUrl}${slug}`
   const getImage =
     image && image.localFile
@@ -64,6 +65,7 @@ export const SEO = ({ slug, title, description, keywords, image }) => {
       {/* OpenGraph tags */}
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
+      <meta property="og:type" content={type} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={getImage} />
       <meta property="fb:app_id" content={fbAppID} />
