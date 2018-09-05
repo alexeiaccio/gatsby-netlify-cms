@@ -2,15 +2,6 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const {
-  NODE_ENV,
-  URL: NETLIFY_SITE_URL = 'https://www.krapiva.org/',
-  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
-  CONTEXT: NETLIFY_ENV = NODE_ENV,
-} = process.env
-const isNetlifyProduction = NETLIFY_ENV === 'production'
-const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL
-
 const PrismicDOM = require('prismic-dom')
 const Elements = PrismicDOM.RichText.Elements
 const linkResolver = () => doc => doc
@@ -19,7 +10,7 @@ const tp = require('./src/utils/tp')
 module.exports = {
   siteMetadata: {
     title: 'Krapiva',
-    siteUrl,
+    siteUrl: 'https://www.krapiva.org/',
   },
   plugins: [
     `gatsby-plugin-emotion`,
@@ -71,20 +62,13 @@ module.exports = {
       options: {
         host: 'https://www.krapiva.org',
         sitemap: 'https://www.krapiva.org/sitemap.xml',
-        resolveEnv: () => NETLIFY_ENV,
+        resolveEnv: () => process.env.GATSBY_ENV,
         env: {
+          development: {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+          },
           production: {
-            policy: [{ userAgent: '*' }],
-          },
-          'branch-deploy': {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
-            sitemap: null,
-            host: null,
-          },
-          'deploy-preview': {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
-            sitemap: null,
-            host: null,
+            policy: [{ userAgent: '*', allow: '/' }],
           },
         },
       },
