@@ -62,8 +62,8 @@ var colors = {
   'red-dark': '#bf0d4d',
   red: '#f21162',
   'red-light': '#f52c74',
-  'red-lighter': '#fb70a2',
-  'red-lightest': '#f5b5cc',
+  'red-lighter': '#ff7e9d',
+  'red-lightest': '#ffceda',
 
   'orange-darkest': '#542605',
   'orange-darker': '#7f4012',
@@ -874,6 +874,10 @@ module.exports = {
   | details about these options, visit the configuration options documentation.
   |
   */
+
+  modules: {
+    backgroundColors: ['responsive', 'hover', 'group-hover', 'active'],
+  },
 
   options: {
     prefix: '',

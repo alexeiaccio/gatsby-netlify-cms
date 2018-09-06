@@ -2,8 +2,11 @@
 import React from 'react'
 import { css } from 'react-emotion'
 import { compose, lifecycle, pure } from 'recompose'
+import { isNull } from 'lodash'
 import 'whatwg-fetch'
 
+import { AppearSpan } from './Appear'
+import burnBlack from '../img/burn-black.svg'
 import eyeBlack from '../img/eye-black.svg'
 
 export const Views = compose(
@@ -39,9 +42,9 @@ export const Views = compose(
       prevProps !== this.props && this.fetch(this.props)
     },
   })
-)(({ views }) => (
+)(({ burned, views }) => (
   <>
-    {views && (
+    <AppearSpan inProp={!isNull(views)}>
       <span
         className={css`
           ${tw(['ml-q8', 'pl-q24', 'relative'])};
@@ -61,9 +64,35 @@ export const Views = compose(
             background-image: url(${eyeBlack});
           }
         `}
+        title={`${views} просмотр${views < 5 ? 'a' : 'ов'}`}
       >
         {views}
       </span>
-    )}
+    </AppearSpan>
+    <AppearSpan inProp={!isNull(burned)}>
+      <span
+        className={css`
+          ${tw(['ml-q12', 'pl-q20', 'relative'])};
+          &::before {
+            content: '';
+            ${tw([
+              'block',
+              'absolute',
+              'bg-contain',
+              'bg-no-repeat',
+              'h-full',
+              'inline-block',
+              'pin-l',
+              'pin-t',
+              'w-q20',
+            ])};
+            background-image: url(${burnBlack});
+          }
+        `}
+        title={`${burned} раз${burned > 1 && burned < 5 ? 'a' : ''} прижгло`}
+      >
+        {burned}
+      </span>
+    </AppearSpan>
   </>
 ))
