@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-MediumItalic.woff2') format('woff2'),
+        url('subset-Cormorant-MediumItalic.woff') format('woff'),
+        url('subset-Cormorant-MediumItalic.ttf') format('truetype'),
+        url('subset-Cormorant-MediumItalic.svg#Cormorant-MediumItalic') format('svg');
+    font-display: swap;
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-LightItalic.woff2') format('woff2'),
+        url('subset-Cormorant-LightItalic.woff') format('woff'),
+        url('subset-Cormorant-LightItalic.ttf') format('truetype'),
+        url('subset-Cormorant-LightItalic.svg#Cormorant-LightItalic') format('svg');
+    font-display: swap;
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-Regular.woff2') format('woff2'),
+        url('subset-Cormorant-Regular.woff') format('woff'),
+        url('subset-Cormorant-Regular.ttf') format('truetype'),
+        url('subset-Cormorant-Regular.svg#Cormorant-Regular') format('svg');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-SemiBoldItalic.woff2') format('woff2'),
+        url('subset-Cormorant-SemiBoldItalic.woff') format('woff'),
+        url('subset-Cormorant-SemiBoldItalic.ttf') format('truetype'),
+        url('subset-Cormorant-SemiBoldItalic.svg#Cormorant-SemiBoldItalic') format('svg');
+    font-display: swap;
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-Light.woff2') format('woff2'),
+        url('subset-Cormorant-Light.woff') format('woff'),
+        url('subset-Cormorant-Light.ttf') format('truetype'),
+        url('subset-Cormorant-Light.svg#Cormorant-Light') format('svg');
+    font-display: swap;
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-BoldItalic.woff2') format('woff2'),
+        url('subset-Cormorant-BoldItalic.woff') format('woff'),
+        url('subset-Cormorant-BoldItalic.ttf') format('truetype'),
+        url('subset-Cormorant-BoldItalic.svg#Cormorant-BoldItalic') format('svg');
+    font-display: swap;
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-Bold.woff2') format('woff2'),
+        url('subset-Cormorant-Bold.woff') format('woff'),
+        url('subset-Cormorant-Bold.ttf') format('truetype'),
+        url('subset-Cormorant-Bold.svg#Cormorant-Bold') format('svg');
+    font-display: swap;
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-Italic.woff2') format('woff2'),
+        url('subset-Cormorant-Italic.woff') format('woff'),
+        url('subset-Cormorant-Italic.ttf') format('truetype'),
+        url('subset-Cormorant-Italic.svg#Cormorant-Italic') format('svg');
+    font-display: swap;
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-Medium.woff2') format('woff2'),
+        url('subset-Cormorant-Medium.woff') format('woff'),
+        url('subset-Cormorant-Medium.ttf') format('truetype'),
+        url('subset-Cormorant-Medium.svg#Cormorant-Medium') format('svg');
+    font-display: swap;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cormorant';
+    src: url('subset-Cormorant-SemiBold.woff2') format('woff2'),
+        url('subset-Cormorant-SemiBold.woff') format('woff'),
+        url('subset-Cormorant-SemiBold.ttf') format('truetype'),
+        url('subset-Cormorant-SemiBold.svg#Cormorant-SemiBold') format('svg');
+    font-display: swap;
+    font-weight: 600;
+    font-style: normal;
+}
+
