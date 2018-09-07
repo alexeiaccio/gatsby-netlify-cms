@@ -1,7 +1,7 @@
 /* global tw */
 import React, { Component } from 'react'
 import { css } from 'react-emotion'
-import { add, isNull } from 'lodash'
+import { add, throttle, isNull } from 'lodash'
 import 'whatwg-fetch'
 
 import { AppearSpan } from './Appear'
@@ -17,6 +17,7 @@ export class Burn extends Component {
       clicked: false,
     }
   }
+
   async burn() {
     fetch(
       `${process.env.SLS ||
@@ -65,122 +66,167 @@ export class Burn extends Component {
     return (
       <div
         className={css`
-          ${tw(['flex', 'items-center', 'justify-center', 'my-q72', 'w-full'])};
+          ${tw([
+            'flex',
+            'flex-col',
+            'sm:flex-row',
+            'items-center',
+            'justify-center',
+            'my-q72',
+            'md:my-q112',
+            'w-full',
+          ])};
         `}
       >
         <div
           className={css`
+            ${tw(['font-montserrat', 'text-body', 'text-right'])};
+          `}
+        >
+          Понравилась статья? →
+        </div>
+        <div
+          className={css`
             ${tw([
-              'border-2',
-              'border-solid',
-              'cursor-pointer',
               'flex',
+              'flex-row',
               'items-center',
-              'h-q64',
               'justify-center',
-              'relative',
-              'rounded-full',
-              'w-q64',
+              'mx-q24',
+              'md:mx-q36',
+              'my-q24',
+              'md:my-0',
             ])};
-            ${clicked
-              ? tw([
-                  'bg-red-lightest',
-                  'hover:bg-red-lightest',
-                  'border-red-lighter',
-                  'hover:border-red-lighter',
-                ])
-              : tw([
-                  'bg-green',
-                  'hover:bg-black',
-                  'border-green-darker',
-                  'hover:border-black',
-                ])};
-            transition: all 400ms ease-in-out;
-            & svg {
-              * {
-                transition: all 400ms ease-in-out;
-              }
-              #leaf {
-                opacity: ${clicked ? 0 : 1};
-              }
-              #shadow {
-                fill: ${clicked && '#ff7e9d'};
-              }
-            }
-            &:hover svg {
-              #leaf {
-                transform: ${!clicked &&
-                  'rotateZ(-15deg) translate(-11px, 4px)'};
-              }
-              #leaf-fill {
-                fill: ${!clicked && '#0cf3ad'};
-              }
-              #shadow {
-                fill: ${!clicked && '#ffffff'};
-              }
-            }
-            &:active {
-              background-color: #ffceda;
-              border-color: #ff7e9d;
+          `}
+        >
+          <button
+            className={css`
+              ${tw([
+                'border-2',
+                'border-solid',
+                'cursor-pointer',
+                'flex',
+                'flex-no-shrink',
+                'flex-row',
+                'items-center',
+                'h-q64',
+                'justify-center',
+                'outline-none',
+                'relative',
+                'rounded-full',
+                'w-q64',
+              ])};
+              ${clicked
+                ? tw([
+                    'bg-red-lightest',
+                    'hover:bg-red-lightest',
+                    'border-red-lighter',
+                    'hover:border-red-lighter',
+                  ])
+                : tw([
+                    'bg-green',
+                    'hover:bg-black',
+                    'border-green-darker',
+                    'hover:border-black',
+                  ])};
+              transition: all 400ms ease-in-out;
               & svg {
+                * {
+                  transition: all 400ms ease-in-out;
+                }
                 #leaf {
-                  transform: ${!clicked && 'rotateZ(0deg) translate(0, 0)'};
+                  opacity: ${clicked ? 0 : 1};
                 }
                 #shadow {
-                  fill: ${!clicked && '#ff7e9d'};
+                  fill: ${clicked && '#ff7e9d'};
                 }
               }
-            }
-          `}
-          onMouseUp={() => {
-            this.count(1)
-            this.click(true)
-            this.burn()
-            setTimeout(() => this.click(false), 2000)
-          }}
-          title={'Прижги!'}
-        >
-          <svg
-            width="42"
-            height="50"
-            viewBox="0 0 42 50"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
+              &:hover svg {
+                #leaf {
+                  transform: ${!clicked &&
+                    'rotateZ(-15deg) translate(-11px, 4px)'};
+                }
+                #leaf-fill {
+                  fill: ${!clicked && '#0cf3ad'};
+                }
+                #shadow {
+                  fill: ${!clicked && '#ffffff'};
+                }
+              }
+              &:active {
+                background-color: #ffceda;
+                border-color: #ff7e9d;
+                & svg {
+                  #leaf {
+                    transform: ${!clicked && 'rotateZ(0deg) translate(0, 0)'};
+                  }
+                  #shadow {
+                    fill: ${!clicked && '#ff7e9d'};
+                  }
+                }
+              }
+            `}
+            onMouseUp={throttle(
+              () => {
+                this.count(1)
+                this.click(true)
+                this.burn()
+                setTimeout(() => this.click(false), 2000)
+              },
+              2000,
+              { trailing: false }
+            )}
+            title={'Прижги!'}
           >
-            <use id="shadow" xlinkHref="#fill" />
-            <g id="leaf">
-              <use id="leaf-fill" xlinkHref="#fill" fill="#ffffff" />
-              <use id="leaf-stroke" xlinkHref="#stroke" fill="#067352" />
-            </g>
-            <BurnDefs />
-          </svg>
-          <Fly inProp={clicked}>
+            <svg
+              width="42"
+              height="50"
+              viewBox="0 0 42 50"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              <use id="shadow" xlinkHref="#fill" />
+              <g id="leaf">
+                <use id="leaf-fill" xlinkHref="#fill" fill="#ffffff" />
+                <use id="leaf-stroke" xlinkHref="#stroke" fill="#067352" />
+              </g>
+              <BurnDefs />
+            </svg>
+            <Fly inProp={clicked}>
+              <span
+                className={css`
+                  ${tw([
+                    'font-montserrat',
+                    'font-semibold',
+                    'text-body',
+                    'text-red-lighter',
+                  ])};
+                `}
+              >
+                {`+${clickCount}`}
+              </span>
+            </Fly>
+          </button>
+          <AppearSpan inProp={!isNull(burned)}>
             <span
               className={css`
-                ${tw([
-                  'font-montserrat',
-                  'font-semibold',
-                  'text-body',
-                  'text-red-lighter',
-                ])};
+                ${tw(['font-montserrat', 'font-semibold', 'ml-q8', 'text-sm'])};
+                ${clicked && tw(['text-red-lightest'])};
+                transition: all 200ms ease-in-out;
               `}
             >
-              {`+${clickCount}`}
+              {burned}
             </span>
-          </Fly>
+          </AppearSpan>
         </div>
-        <AppearSpan inProp={!isNull(burned)}>
-          <span
-            className={css`
-              ${tw(['font-montserrat', 'font-semibold', 'ml-q8', 'text-sm'])};
-              ${clicked && tw(['text-red-lightest'])};
-              transition: all 200ms ease-in-out;
-            `}
-          >
-            {burned}
-          </span>
-        </AppearSpan>
+        <div
+          className={css`
+            ${tw(['font-montserrat', 'text-body'])};
+          `}
+        >
+          ← Прижги!
+        </div>
       </div>
     )
   }
