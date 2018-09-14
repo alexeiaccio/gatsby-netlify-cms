@@ -83,7 +83,14 @@ export class Burn extends Component {
             ${tw(['font-montserrat', 'text-body', 'text-right'])};
           `}
         >
-          Понравилась статья? →
+          Понравилось?
+          <span
+            className={css`
+              ${tw(['hidden', 'md:inline-block'])};
+            `}
+          >
+            →
+          </span>
         </div>
         <div
           className={css`
@@ -225,7 +232,14 @@ export class Burn extends Component {
             ${tw(['font-montserrat', 'text-body'])};
           `}
         >
-          ← Прижги!
+          <span
+            className={css`
+              ${tw(['hidden', 'md:inline-block'])};
+            `}
+          >
+            ←
+          </span>
+           Прижги!
         </div>
       </div>
     )
