@@ -49,7 +49,7 @@ const categories = {
   persons: 'персона',
   palces: 'места',
   videos: 'видео',
-  zins: 'журнал',
+  archive: 'архив',
 }
 
 export const getCategory = x => categories[x]

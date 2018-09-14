@@ -1,17 +1,18 @@
 /* global tw */
 import React, { Fragment } from 'react'
 import Img from 'gatsby-image'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { css } from 'react-emotion'
 
-import { HTMLContent } from '../components/Content'
-import { RichText } from '../components/RichText'
-import { LeadText } from '../components/Typography'
+import { HTMLContent } from './Content'
+import { RichText } from './RichText'
+import { Preview } from './Preview'
+import { LeadText } from './Typography'
 import { uuid } from '../utils'
 
 export const ArticleBody = ({ article }) => (
   <div>
-    {article.body.map(({ primary, __typename }) => (
+    {article.body.map(({ items, primary, __typename }) => (
       <Fragment key={uuid()}>
         {__typename === 'PrismicArticlesBodyImage' && (
           <figure
@@ -34,6 +35,78 @@ export const ArticleBody = ({ article }) => (
             </figcaption>
           </figure>
         )}
+        {__typename === 'PrismicArticlesBodyMedialink' && (
+          <figure
+            className={css`
+              ${tw(['flex', 'flex-col', 'sm:flex-row', 'm-0', 'sm:-mx-4'])};
+            `}
+            key={uuid()}
+          >
+            <Link
+              className={css`
+                ${tw(['flex-1', 'mb-q24', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
+              `}
+              to={primary.medialink.url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Img
+                fluid={primary.mediacover.localFile.childImageSharp.fluid}
+                key={uuid()}
+              />
+            </Link>
+            <figcaption
+              className={css`
+                ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
+                & h3 {
+                  ${tw([
+                    'font-semibold',
+                    'font-montserrat',
+                    'mt-0',
+                    'text-heading5',
+                  ])};
+                }
+                & p {
+                  ${tw(['text-list'])};
+                }
+              `}
+              key={uuid()}
+            >
+              <HTMLContent content={primary.mediacaption.html} key={uuid()} />
+              <a
+                href={primary.medialink.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span
+                  className={css`
+                    ${tw([
+                      'bg-white',
+                      'hover:bg-black',
+                      'inline-flex',
+                      'border',
+                      'border-black',
+                      'border-solid',
+                      'font-montserrat',
+                      'items-center',
+                      'justify-center',
+                      'mt-q24',
+                      'px-q24',
+                      'py-q12',
+                      'text-black',
+                      'hover:text-white',
+                      'text-sm',
+                      'uppercase',
+                    ])};
+                    transition: all 200ms ease-in-out;
+                  `}
+                >
+                  Скачать PDF ⭳
+                </span>
+              </a>
+            </figcaption>
+          </figure>
+        )}
         {__typename === 'PrismicArticlesBodyLead' && (
           <HTMLContent
             className={css`
@@ -50,6 +123,25 @@ export const ArticleBody = ({ article }) => (
             content={primary.text.html}
             key={uuid()}
           />
+        )}
+        {__typename === 'PrismicArticlesBodyListOfArticles' && (
+          <div
+            className={css`
+              ${tw([
+                'flex',
+                'flex-row',
+                'flex-wrap',
+                '-mx-4',
+                'mt-q64',
+                'w-full',
+              ])};
+            `}
+          >
+            {items.map(({ articlelink }) => {
+              const article = articlelink.document[0]
+              return <Preview {...{ article }} key={uuid()} />
+            })}
+          </div>
         )}
         {__typename === 'PrismicArticlesBodyQuote' && (
           <figure
@@ -148,6 +240,61 @@ export const articleBodyQuery = graphql`
             }
             imagecaption {
               html
+            }
+          }
+        }
+        ... on PrismicArticlesBodyListOfArticles {
+          items {
+            articlelink {
+              document {
+                first_publication_date
+                fields {
+                  slug
+                }
+                data {
+                  title {
+                    text
+                  }
+                  category
+                  authors {
+                    author {
+                      document {
+                        data {
+                          name
+                        }
+                      }
+                    }
+                  }
+                  image {
+                    localFile {
+                      childImageSharp {
+                        fluid(maxWidth: 640, quality: 80) {
+                          ...GatsbyImageSharpFluid_tracedSVG
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        ... on PrismicArticlesBodyMedialink {
+          primary {
+            mediacover {
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 640, quality: 80) {
+                    ...GatsbyImageSharpFluid_tracedSVG
+                  }
+                }
+              }
+            }
+            mediacaption {
+              html
+            }
+            medialink {
+              url
             }
           }
         }

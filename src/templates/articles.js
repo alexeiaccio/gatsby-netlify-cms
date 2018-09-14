@@ -66,7 +66,9 @@ export const pageQuery = graphql`
         slug
       }
     }
-    context: allPrismicArticles(sort: { order: DESC, fields: [data___date] }) {
+    context: allPrismicArticles(
+      sort: { order: DESC, fields: [first_publication_date] }
+    ) {
       edges {
         next {
           fields {
@@ -78,7 +80,6 @@ export const pageQuery = graphql`
               text
             }
             category
-            date
             authors {
               author {
                 document {
@@ -109,7 +110,6 @@ export const pageQuery = graphql`
               text
             }
             category
-            date
             authors {
               author {
                 document {

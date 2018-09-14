@@ -13,15 +13,14 @@ export const ArticleHeader = ({ article, date, location }) => (
   <div>
     <div
       className={css`
-        ${tw([
-          'items-center',
-          'font-montserrat',
-          'italic',
-          'my-q24',
-          'text-xs',
-        ])};
+        ${tw(['font-montserrat', 'italic', 'my-q24', 'text-xs'])};
       `}
     >
+      <span
+        className={css`
+          ${tw(['inline-flex', 'items-center'])};
+        `}
+      />
       <span>{startCase(getCategory(article.category))}</span>
       <span> · </span>
       <span>{toLocalDate(date)}</span>
