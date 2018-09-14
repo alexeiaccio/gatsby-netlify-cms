@@ -2,17 +2,34 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { css } from 'react-emotion'
+import { withStateHandlers } from 'recompose'
+import { compose, get, sortBy, startCase, uniqBy } from 'lodash/fp'
 
 import { AboutBody } from '../components/AboutBody'
+import { ButtonOutlined, ButtonOutlinedBlock } from '../components/Buttons'
 import Layout from '../components/Layout'
 import { Preview } from '../components/Preview'
-import { Heading1 } from '../components/Typography'
+import { Heading1, Heading3 } from '../components/Typography'
 import logo from '../img/logo.svg'
-import { uuid } from '../utils'
+import { getCategory, uuid } from '../utils'
 
-const IndexPage = ({ data, location }) => {
+const enhance = withStateHandlers(({ init = null }) => ({ filter: init }), {
+  chooseFilter: () => value => ({
+    filter: value,
+  }),
+})
+
+const IndexPage = enhance(({ chooseFilter, data, filter, location }) => {
   const { edges: articles } = data.articles
   const about = data.about.data
+  const getCategoryPath = get(['node', 'data', 'category'])
+  const getCategoriesList = compose(
+    sortBy(getCategoryPath),
+    uniqBy(getCategoryPath)
+  )
+  const getFiltered = filter => xs =>
+    xs.filter(({ node }) => node.data.category === filter)
+  const filteredArticles = filter ? getFiltered(filter)(articles) : articles
 
   return (
     <Layout {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
@@ -47,14 +64,48 @@ const IndexPage = ({ data, location }) => {
               ${tw([
                 'flex',
                 'flex-row',
-                'flex-wrap',
-                '-mx-4',
-                'mt-q64',
-                'w-full',
+                'flex-no-wrap',
+                'justify-beetween',
+                'sm:justify-center',
+                'overflow-x-scroll',
+                'md:overflow-hidden',
+                'md:w-full',
               ])};
             `}
           >
-            {articles.map(({ node: article }) => (
+            <ButtonOutlinedBlock
+              active={filter === null}
+              key={uuid()}
+              onClick={() => chooseFilter(null)}
+            >
+              Все статьи
+            </ButtonOutlinedBlock>
+            {getCategoriesList(articles).map(({ node }) => (
+              <ButtonOutlinedBlock
+                active={filter === node.data.category}
+                key={uuid()}
+                onClick={() => chooseFilter(node.data.category)}
+              >
+                {startCase(getCategory(node.data.category))}
+              </ButtonOutlinedBlock>
+            ))}
+          </div>
+          {filter && (
+            <h2
+              className={css`
+                ${Heading3};
+                ${tw(['mt-q36', 'text-center'])};
+              `}
+            >
+              {startCase(getCategory(filter))}
+            </h2>
+          )}
+          <div
+            className={css`
+              ${tw(['flex', 'flex-row', 'flex-wrap', 'mt-q64', 'w-full'])};
+            `}
+          >
+            {filteredArticles.map(({ node: article }) => (
               <Preview {...{ article }} key={uuid()} />
             ))}
           </div>
@@ -96,24 +147,7 @@ const IndexPage = ({ data, location }) => {
           >
             <span
               className={css`
-                ${tw([
-                  'bg-white',
-                  'hover:bg-black',
-                  'inline-flex',
-                  'border',
-                  'border-black',
-                  'border-solid',
-                  'font-montserrat',
-                  'items-center',
-                  'justify-center',
-                  'px-q24',
-                  'py-q12',
-                  'text-black',
-                  'hover:text-white',
-                  'text-sm',
-                  'uppercase',
-                ])};
-                transition: all 200ms ease-in-out;
+                ${ButtonOutlined};
               `}
             >
               Редакция →
@@ -123,7 +157,7 @@ const IndexPage = ({ data, location }) => {
       </>
     </Layout>
   )
-}
+})
 
 export default IndexPage
 

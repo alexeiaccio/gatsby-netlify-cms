@@ -23,14 +23,13 @@ export const Preview = ({ article }) => (
       ${tw([
         'flex-no-shrink',
         'mb-q72',
-        'mx-q16',
+        'sm:px-q16',
         'text-black',
         'hover:text-black',
         'w-full',
+        'sm:w-1/2',
       ])};
-      @media (min-width: 459px) {
-        max-width: calc(50% - 2rem);
-      }
+      box-sizing: border-box;
       &:hover h4 {
         ${tw(['text-green'])};
       }

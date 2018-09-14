@@ -4,6 +4,7 @@ import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
+import { ButtonOutlined } from '../components/Buttons'
 import { HTMLContent } from './Content'
 import { RichText } from './RichText'
 import { Preview } from './Preview'
@@ -67,7 +68,7 @@ export const ArticleBody = ({ article }) => (
                   ])};
                 }
                 & p {
-                  ${tw(['text-list'])};
+                  ${tw(['my-q4', 'text-list'])};
                 }
               `}
               key={uuid()}
@@ -80,25 +81,8 @@ export const ArticleBody = ({ article }) => (
               >
                 <span
                   className={css`
-                    ${tw([
-                      'bg-white',
-                      'hover:bg-black',
-                      'inline-flex',
-                      'border',
-                      'border-black',
-                      'border-solid',
-                      'font-montserrat',
-                      'items-center',
-                      'justify-center',
-                      'mt-q24',
-                      'px-q24',
-                      'py-q12',
-                      'text-black',
-                      'hover:text-white',
-                      'text-sm',
-                      'uppercase',
-                    ])};
-                    transition: all 200ms ease-in-out;
+                    ${ButtonOutlined};
+                    ${tw(['mt-q24'])};
                   `}
                 >
                   Скачать PDF ⭳
