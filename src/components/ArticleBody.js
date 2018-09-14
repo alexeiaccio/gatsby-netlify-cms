@@ -111,14 +111,7 @@ export const ArticleBody = ({ article }) => (
         {__typename === 'PrismicArticlesBodyListOfArticles' && (
           <div
             className={css`
-              ${tw([
-                'flex',
-                'flex-row',
-                'flex-wrap',
-                '-mx-4',
-                'mt-q64',
-                'w-full',
-              ])};
+              ${tw(['flex', 'flex-row', 'flex-wrap', 'mt-q64', 'w-full'])};
             `}
           >
             {items.map(({ articlelink }) => {
