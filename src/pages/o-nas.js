@@ -1,15 +1,13 @@
 /* global tw */
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import { css } from 'emotion'
 
 import aboutImage from '../img/about-image.jpg'
 import { AboutBody } from '../components/AboutBody'
-import { HTMLContent } from '../components/Content'
-import { RichTextSmall } from '../components/RichText'
+import { Author } from '../components/Author'
 import Layout from '../components/Layout'
-import { Heading1, Heading2, Heading6 } from '../components/Typography'
+import { Heading1, Heading2 } from '../components/Typography'
 import { uuid } from '../utils'
 
 const AboutPage = ({ data, location }) => {
@@ -33,6 +31,33 @@ const AboutPage = ({ data, location }) => {
             ${tw(['mt-q72'])};
           `}
         >
+          Редсовет
+        </h2>
+        <div
+          className={css`
+            ${tw([
+              'flex',
+              'flex-row',
+              'flex-wrap',
+              '-mx-4',
+              'mt-q64',
+              'w-full',
+            ])};
+          `}
+        >
+          {authors
+            .filter(x => x.node.data.type === 'redsovet')
+            .map(({ node }) => {
+              const author = node.data
+              return <Author key={uuid()} {...{ author }} />
+            })}
+        </div>
+        <h2
+          className={css`
+            ${Heading2};
+            ${tw(['mt-q48'])};
+          `}
+        >
           Авторы
         </h2>
         <div
@@ -47,55 +72,12 @@ const AboutPage = ({ data, location }) => {
             ])};
           `}
         >
-          {authors.map(({ node }) => {
-            const author = node.data
-            return (
-              <div
-                className={css`
-                  ${tw([
-                    'flex-no-shrink',
-                    'mb-q72',
-                    'mx-q16',
-                    'text-black',
-                    'w-full',
-                  ])};
-                  max-width: calc(50% - 2rem);
-                `}
-                key={uuid()}
-              >
-                <Img
-                  className={css`
-                    ${tw(['rounded-full'])};
-                  `}
-                  key={uuid()}
-                  fluid={author.avatar.localFile.childImageSharp.fluid}
-                />
-                <div
-                  className={css`
-                    ${tw(['sm:pl-q36'])};
-                  `}
-                  key={uuid()}
-                >
-                  <h3
-                    className={css`
-                      ${Heading6};
-                      ${tw(['my-q48'])};
-                    `}
-                    key={uuid()}
-                  >
-                    {author.name}
-                  </h3>
-                  {author.statement.html && (
-                    <HTMLContent
-                      className={RichTextSmall}
-                      content={author.statement.html}
-                      key={uuid()}
-                    />
-                  )}
-                </div>
-              </div>
-            )
-          })}
+          {authors
+            .filter(x => x.node.data.type === 'author')
+            .map(({ node }) => {
+              const author = node.data
+              return <Author key={uuid()} {...{ author }} />
+            })}
         </div>
       </>
     </Layout>
@@ -110,6 +92,7 @@ export const pageQuery = graphql`
       edges {
         node {
           data {
+            type
             name
             statement {
               html
