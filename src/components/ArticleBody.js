@@ -1,7 +1,7 @@
 /* global tw */
 import React, { Fragment } from 'react'
 import Img from 'gatsby-image'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
 import { HTMLContent } from './Content'
@@ -42,11 +42,11 @@ export const ArticleBody = ({ article }) => (
             `}
             key={uuid()}
           >
-            <Link
+            <a
               className={css`
                 ${tw(['flex-1', 'mb-q24', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
               `}
-              to={primary.medialink.url}
+              href={primary.medialink.url}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -54,7 +54,7 @@ export const ArticleBody = ({ article }) => (
                 fluid={primary.mediacover.localFile.childImageSharp.fluid}
                 key={uuid()}
               />
-            </Link>
+            </a>
             <figcaption
               className={css`
                 ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
