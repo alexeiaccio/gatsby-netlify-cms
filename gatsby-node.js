@@ -1,16 +1,17 @@
 const path = require('path')
 const { makePath } = require('./src/utils/makePath')
+const lodash = require('lodash/fp')
+const { get, uniqBy } = lodash
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const pageMaker = () => data => {
-    data.edges.forEach(({ node }) => {
-      const { fields, type } = node
+  const articlesMaker = data => {
+    data.map(({ node }) => {
+      const { fields } = node
       const { slug } = fields
-      console.log(slug)
       createPage({
-        component: path.resolve(`src/templates/${type}.js`),
+        component: path.resolve(`src/templates/articles.js`),
         context: {
           slug: slug,
         },
@@ -19,14 +20,28 @@ exports.createPages = async ({ actions, graphql }) => {
     })
   }
 
+  const categoriesMaker = data => {
+    data.map(category => {
+      createPage({
+        component: path.resolve(`src/templates/categories.js`),
+        context: {
+          slug: category,
+        },
+        path: category,
+      })
+    })
+  }
+
   const pages = await graphql(`
     {
-      allPrismicArticles(limit: 2000) {
+      articles: allPrismicArticles(limit: 2000) {
         edges {
           node {
-            type
             fields {
               slug
+            }
+            data {
+              category
             }
           }
         }
@@ -34,9 +49,14 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `)
 
-  for (const key in pages.data) {
-    pageMaker(key)(pages.data[key])
-  }
+  const { edges: articles } = pages.data.articles
+
+  const getCategoryPath = get(['node', 'data', 'category'])
+  const getCategoriesList = uniqBy(getCategoryPath)
+  const categories = getCategoriesList(articles).map(getCategoryPath)
+
+  articlesMaker(articles)
+  categoriesMaker(categories)
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

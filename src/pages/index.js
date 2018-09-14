@@ -169,7 +169,6 @@ export const pageQuery = graphql`
       edges {
         node {
           ...ArticleHeader
-          ...ArticleBody
           first_publication_date
           type
           fields {

@@ -1,7 +1,7 @@
 /* global tw */
 import React from 'react'
 import Img from 'gatsby-image'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { css } from 'react-emotion'
 import { startCase } from 'lodash'
 
@@ -21,7 +21,9 @@ export const ArticleHeader = ({ article, date, location }) => (
           ${tw(['inline-flex', 'items-center'])};
         `}
       />
-      <span>{startCase(getCategory(article.category))}</span>
+      <Link to={article.category}>
+        {startCase(getCategory(article.category))}
+      </Link>
       <span> · </span>
       <span>{toLocalDate(date)}</span>
       <span>
@@ -55,6 +57,7 @@ export const ArticleHeader = ({ article, date, location }) => (
 
 export const articleHeaderQuery = graphql`
   fragment ArticleHeader on PrismicArticles {
+    first_publication_date
     data {
       category
       authors {
