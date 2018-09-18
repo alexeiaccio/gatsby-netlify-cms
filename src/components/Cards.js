@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import { startCase } from 'lodash'
 
+import logo from '../img/logo.svg'
 import { Heading6 } from '../components/Typography'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
@@ -62,33 +63,43 @@ export const Placeholder = () => (
   <>
     <div
       className={css`
-        ${tw(['bg-green', 'h-q144', 'mb-q16', 'rounded-sm', 'w-full'])};
+        ${tw([
+          'bg-grey-lighter',
+          'h-q144',
+          'mb-q16',
+          'overflow-hidden',
+          'rounded-sm',
+          'w-full',
+        ])};
       `}
-      key={uuid()}
+    >
+      <div
+        className={css`
+          ${tw(['bg-center', 'bg-no-repeat', 'h-q144', 'w-full'])};
+          background-image: url(${logo});
+          transform: rotateZ(135deg);
+        `}
+      />
+    </div>
+    <div
+      className={css`
+        ${tw(['bg-grey-lighter', 'h-q24', 'mb-q16', 'rounded-sm', 'w-4/5'])};
+      `}
     />
     <div
       className={css`
-        ${tw(['bg-green', 'h-q24', 'mb-q16', 'rounded-sm', 'w-4/5'])};
+        ${tw(['bg-grey-lighter', 'h-q12', 'mb-q8', 'rounded-sm', 'w-3/5'])};
       `}
-      key={uuid()}
     />
     <div
       className={css`
-        ${tw(['bg-green', 'h-q12', 'mb-q8', 'rounded-sm', 'w-3/5'])};
+        ${tw(['bg-grey-lighter', 'h-q12', 'mb-q8', 'rounded-sm', 'w-3/4'])};
       `}
-      key={uuid()}
     />
     <div
       className={css`
-        ${tw(['bg-green', 'h-q12', 'mb-q8', 'rounded-sm', 'w-3/4'])};
+        ${tw(['bg-grey-lighter', 'h-q12', 'rounded-sm', 'w-3/5'])};
       `}
-      key={uuid()}
-    />
-    <div
-      className={css`
-        ${tw(['bg-green', 'h-q12', 'rounded-sm', 'w-3/5'])};
-      `}
-      key={uuid()}
     />
   </>
 )
