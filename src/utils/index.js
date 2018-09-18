@@ -48,8 +48,9 @@ const categories = {
   discussions: 'дискуссии',
   persons: 'персона',
   palces: 'места',
-  videos: 'видео',
   archive: 'архив',
+  opinions: 'мнения',
+  summaries: 'конспекты',
 }
 
 export const getCategory = x => categories[x]

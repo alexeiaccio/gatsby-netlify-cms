@@ -109,6 +109,7 @@ const Layout = enhance(({ children, image, location, title }) => (
     >
       <div
         className={css`
+          ${tw(['w-full'])};
           max-width: calc(100vw - 2rem);
         `}
       >
