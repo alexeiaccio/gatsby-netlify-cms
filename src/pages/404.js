@@ -39,7 +39,6 @@ const NotFoundPage = ({ location }) => (
       <p
         className={css`
           ${tw(['text-center', 'text-heading5'])};
-          max-width: 18rem;
         `}
       >
         Извините, нет такой страницы.

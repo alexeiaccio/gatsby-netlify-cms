@@ -1,35 +1,26 @@
 /* global tw */
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link, graphql } from 'gatsby'
 import { css } from 'react-emotion'
-import { withStateHandlers } from 'recompose'
-import { compose, get, sortBy, startCase, uniqBy } from 'lodash/fp'
 
 import { AboutBody } from '../components/AboutBody'
-import { ButtonOutlined, ButtonOutlinedBlock } from '../components/Buttons'
+import { ButtonOutlined } from '../components/Buttons'
+import { Placeholder, PreviewCard } from '../components/Cards'
+import { HTMLContent } from '../components/Content'
+import { Column, Row } from '../components/Grid'
 import Layout from '../components/Layout'
-import { Preview } from '../components/Preview'
-import { Heading1, Heading3 } from '../components/Typography'
 import logo from '../img/logo.svg'
-import { getCategory, uuid } from '../utils'
+import { Heading1, Heading3 } from '../components/Typography'
+import { uuid } from '../utils'
 
-const enhance = withStateHandlers(({ init = null }) => ({ filter: init }), {
-  chooseFilter: () => value => ({
-    filter: value,
-  }),
-})
-
-const IndexPage = enhance(({ chooseFilter, data, filter, location }) => {
+export default ({ data, location }) => {
   const { edges: articles } = data.articles
   const about = data.about.data
-  const getCategoryPath = get(['node', 'data', 'category'])
-  const getCategoriesList = compose(
-    sortBy(getCategoryPath),
-    uniqBy(getCategoryPath)
-  )
+  const index = data.index.data
   const getFiltered = filter => xs =>
-    xs.filter(({ node }) => node.data.category === filter)
-  const filteredArticles = filter ? getFiltered(filter)(articles) : articles
+    xs
+      .filter(({ node }) => node.data.category === filter)
+      .filter((_, i) => i < 4)
 
   return (
     <Layout {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
@@ -54,61 +45,80 @@ const IndexPage = enhance(({ chooseFilter, data, filter, location }) => {
           <h1
             className={css`
               ${Heading1};
-              ${tw(['text-center', 'my-q72', 'text-black'])};
+              ${tw(['text-center', 'my-q72'])};
             `}
           >
-            ·К·Р·А·П·И·В·А·
+            {index.title.text}{' '}
           </h1>
-          <div
-            className={css`
-              ${tw([
-                'flex',
-                'flex-row',
-                'flex-no-wrap',
-                'justify-beetween',
-                'sm:justify-center',
-                'overflow-x-scroll',
-                'md:overflow-hidden',
-                'md:w-full',
-              ])};
-            `}
-          >
-            <ButtonOutlinedBlock
-              active={filter === null}
-              key={uuid()}
-              onClick={() => chooseFilter(null)}
-            >
-              Все статьи
-            </ButtonOutlinedBlock>
-            {getCategoriesList(articles).map(({ node }) => (
-              <ButtonOutlinedBlock
-                active={filter === node.data.category}
-                key={uuid()}
-                onClick={() => chooseFilter(node.data.category)}
-              >
-                {startCase(getCategory(node.data.category))}
-              </ButtonOutlinedBlock>
-            ))}
-          </div>
-          {filter && (
-            <h2
-              className={css`
-                ${Heading3};
-                ${tw(['mt-q36', 'text-center'])};
-              `}
-            >
-              {startCase(getCategory(filter))}
-            </h2>
-          )}
-          <div
-            className={css`
-              ${tw(['flex', 'flex-row', 'flex-wrap', 'mt-q64', 'w-full'])};
-            `}
-          >
-            {filteredArticles.map(({ node: article }) => (
-              <Preview {...{ article }} key={uuid()} />
-            ))}
-          </div>
+          {index.categories.map(category => {
+            const filteredArticles = getFiltered(category.categoryid)(articles)
+            return (
+              <Fragment key={uuid()}>
+                <h2
+                  className={css`
+                    ${Heading3};
+                    ${tw(['mt-q72', 'text-center'])};
+                  `}
+                  key={uuid()}
+                >
+                  {category.categorytitle.text}
+                </h2>
+                <div
+                  className={css`
+                    ${tw(['my-q48', 'sm:px-q12', 'text-body', 'text-justify'])};
+                  `}
+                  key={uuid()}
+                >
+                  <HTMLContent
+                    content={category.categorydescription.html}
+                    key={uuid()}
+                  />
+                </div>
+                <Row key={uuid()}>
+                  {filteredArticles.length > 0 ? (
+                    filteredArticles.map(({ node: article }) => (
+                      <Column key={uuid()}>
+                        <PreviewCard {...{ article }} key={uuid()} />
+                      </Column>
+                    ))
+                  ) : (
+                    <>
+                      <Column key={uuid()}>
+                        <Placeholder />
+                      </Column>
+                      <Column
+                        className={css`
+                          ${tw(['hidden', 'sm:block'])};
+                        `}
+                        key={uuid()}
+                      >
+                        <Placeholder />
+                      </Column>
+                    </>
+                  )}
+                </Row>
+                {filteredArticles.length > 0 && (
+                  <div
+                    className={css`
+                      ${tw(['mb-q144', 'mx-auto', 'text-center'])};
+                    `}
+                    key={uuid()}
+                  >
+                    <Link to={category.categoryid} key={uuid()}>
+                      <span
+                        className={css`
+                          ${ButtonOutlined};
+                        `}
+                        key={uuid()}
+                      >
+                        {`Рубрика «${category.categorytitle.text}» →`}
+                      </span>
+                    </Link>
+                  </div>
+                )}
+              </Fragment>
+            )
+          })}
         </section>
         <section
           className={css`
@@ -157,9 +167,7 @@ const IndexPage = enhance(({ chooseFilter, data, filter, location }) => {
       </>
     </Layout>
   )
-})
-
-export default IndexPage
+}
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -178,6 +186,22 @@ export const pageQuery = graphql`
             title {
               text
             }
+          }
+        }
+      }
+    }
+    index: prismicIndex {
+      data {
+        title {
+          text
+        }
+        categories {
+          categoryid
+          categorytitle {
+            text
+          }
+          categorydescription {
+            html
           }
         }
       }
