@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
 import { AboutBody } from '../components/AboutBody'
-import { ButtonOutlined } from '../components/Buttons'
+import { ButtonOutlined, ButtonOutlinedBlock } from '../components/Buttons'
 import { Placeholder, PreviewCard } from '../components/Cards'
 import { HTMLContent } from '../components/Content'
 import { Column, Row } from '../components/Grid'
@@ -50,10 +50,30 @@ export default ({ data, location }) => {
           >
             {index.title.text}{' '}
           </h1>
+          <div
+            className={css`
+              ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-1'])};
+            `}
+          >
+            {index.categories.map(category => (
+              <Link
+                className={css`
+                  ${tw(['flex-1', 'mb-q8', 'px-q4'])};
+                `}
+                key={uuid()}
+                to={`#${category.categoryid}`}
+              >
+                <ButtonOutlinedBlock key={uuid()}>
+                  {category.categorytitle.text}
+                </ButtonOutlinedBlock>
+              </Link>
+            ))}
+          </div>
           {index.categories.map(category => {
             const filteredArticles = getFiltered(category.categoryid)(articles)
             return (
               <Fragment key={uuid()}>
+                <div key={uuid()} id={category.categoryid} />
                 <h2
                   className={css`
                     ${Heading3};
