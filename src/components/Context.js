@@ -2,8 +2,9 @@
 import React from 'react'
 import { css } from 'react-emotion'
 
+import { Placeholder, PreviewCard } from '../components/Cards'
+import { Column, Row } from '../components/Grid'
 import { Heading4 } from '../components/Typography'
-import { Dummy, Preview } from './Preview'
 
 export const Context = ({ context }) => (
   <aside
@@ -19,24 +20,33 @@ export const Context = ({ context }) => (
     >
       Читать дальше
     </h2>
-    <div
-      className={css`
-        ${tw([
-          'flex',
-          'flex-row',
-          'flex-wrap',
-          'sm:flex-no-wrap',
-          '-mx-4',
-          'w-full',
-        ])};
-      `}
-    >
+    <Row>
       {context[0].previous ? (
-        <Preview article={context[0].previous} />
+        <Column>
+          <PreviewCard article={context[0].previous} />
+        </Column>
       ) : (
-        <Dummy />
+        <Column
+          className={css`
+            ${tw(['hidden', 'sm:block'])};
+          `}
+        >
+          <Placeholder />
+        </Column>
       )}
-      {context[0].next ? <Preview article={context[0].next} /> : <Dummy />}
-    </div>
+      {context[0].next ? (
+        <Column>
+          <PreviewCard article={context[0].next} />
+        </Column>
+      ) : (
+        <Column
+          className={css`
+            ${tw(['hidden', 'sm:block'])};
+          `}
+        >
+          <Placeholder />
+        </Column>
+      )}
+    </Row>
   </aside>
 )

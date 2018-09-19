@@ -39,18 +39,16 @@ export default ({ data, location }) => {
           </h1>
           <div
             className={css`
-              ${tw(['my-q48', 'sm:px-q12', 'text-body', 'text-justify'])};
+              ${tw(['my-q48', 'text-body', 'text-justify'])};
             `}
-            key={uuid()}
           >
             {
               <HTMLContent
                 content={indexCategory[0].categorydescription.html}
-                key={uuid()}
               />
             }
           </div>
-          <Row key={uuid()}>
+          <Row>
             {articles.map(({ node: article }) => (
               <Column key={uuid()}>
                 <PreviewCard {...{ article }} key={uuid()} />

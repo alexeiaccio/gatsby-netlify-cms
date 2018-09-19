@@ -5,9 +5,10 @@ import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
 import { ButtonOutlined } from '../components/Buttons'
+import { PreviewCard } from '../components/Cards'
 import { HTMLContent } from './Content'
+import { Column, Row } from '../components/Grid'
 import { RichText } from './RichText'
-import { Preview } from './Preview'
 import { LeadText } from './Typography'
 import { uuid } from '../utils'
 
@@ -246,16 +247,16 @@ export class ArticleBody extends Component {
               />
             )}
             {__typename === 'PrismicArticlesBodyListOfArticles' && (
-              <div
-                className={css`
-                  ${tw(['flex', 'flex-row', 'flex-wrap', 'mt-q64', 'w-full'])};
-                `}
-              >
+              <Row>
                 {items.map(({ articlelink }) => {
                   const article = articlelink.document[0]
-                  return <Preview {...{ article }} key={uuid()} />
+                  return (
+                    <Column>
+                      <PreviewCard {...{ article }} key={uuid()} />
+                    </Column>
+                  )
                 })}
-              </div>
+              </Row>
             )}
             {__typename === 'PrismicArticlesBodyQuote' && (
               <figure

@@ -65,7 +65,7 @@ export default ({ data, location }) => {
                 </h2>
                 <div
                   className={css`
-                    ${tw(['my-q48', 'sm:px-q12', 'text-body', 'text-justify'])};
+                    ${tw(['my-q48', 'text-body', 'text-justify'])};
                   `}
                   key={uuid()}
                 >
