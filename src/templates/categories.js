@@ -5,14 +5,19 @@ import { css } from 'react-emotion'
 import { startCase } from 'lodash/fp'
 
 import { ButtonOutlined } from '../components/Buttons'
+import { PreviewCard } from '../components/Cards'
+import { HTMLContent } from '../components/Content'
+import { Column, Row } from '../components/Grid'
 import Layout from '../components/Layout'
-import { Preview } from '../components/Preview'
 import { Heading1 } from '../components/Typography'
 import { getCategory, uuid } from '../utils'
 
 export default ({ data, location }) => {
   const { edges: articles } = data.articles
-
+  const { data: index } = data.index
+  const indexCategory = index.categories.filter(
+    ({ categoryid }) => categoryid === articles[0].node.data.category
+  )
   return (
     <Layout {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
       <>
@@ -34,13 +39,24 @@ export default ({ data, location }) => {
           </h1>
           <div
             className={css`
-              ${tw(['flex', 'flex-row', 'flex-wrap', 'mt-q64', 'w-full'])};
+              ${tw(['my-q48', 'sm:px-q12', 'text-body', 'text-justify'])};
             `}
+            key={uuid()}
           >
-            {articles.map(({ node: article }) => (
-              <Preview {...{ article }} key={uuid()} />
-            ))}
+            {
+              <HTMLContent
+                content={indexCategory[0].categorydescription.html}
+                key={uuid()}
+              />
+            }
           </div>
+          <Row key={uuid()}>
+            {articles.map(({ node: article }) => (
+              <Column key={uuid()}>
+                <PreviewCard {...{ article }} key={uuid()} />
+              </Column>
+            ))}
+          </Row>
           <Link
             className={css`
               ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
@@ -74,9 +90,26 @@ export const pageQuery = graphql`
             slug
           }
           data {
+            category
             title {
               text
             }
+          }
+        }
+      }
+    }
+    index: prismicIndex {
+      data {
+        title {
+          text
+        }
+        categories {
+          categoryid
+          categorytitle {
+            text
+          }
+          categorydescription {
+            html
           }
         }
       }
