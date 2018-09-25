@@ -51,6 +51,7 @@ const categories = {
   archive: 'архив',
   opinions: 'мнения',
   summaries: 'конспекты',
+  practice: 'практика письма',
 }
 
 export const getCategory = x => categories[x]
