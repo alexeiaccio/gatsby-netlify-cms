@@ -37,12 +37,12 @@ export const ButtonOutlinedDisabled = styled('button')`
     'bg-black',
     'inline-flex',
     'border',
-    'border-white',
+    'border-green',
     'border-solid',
     'font-montserrat',
     'items-center',
     'justify-center',
-    'text-white',
+    'text-green',
     'uppercase',
   ])};
   ${tw(['px-q24', 'py-q8', 'text-xs', 'w-full', 'whitespace-no-wrap'])};

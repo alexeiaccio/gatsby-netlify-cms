@@ -40,7 +40,7 @@ export const Menu = ({ toggle, toggledOn }) => (
             'justify-center',
             'py-q36',
             'px-q24',
-            'md:px-q48',
+            'sm:px-q48',
           ])};
         `}
       >
@@ -80,7 +80,14 @@ export const Menu = ({ toggle, toggledOn }) => (
         })}
         <Link
           className={css`
-            ${tw(['flex-auto', 'md:hidden', 'px-q4', 'w-full'])};
+            ${tw([
+              'flex-auto',
+              'md:flex-1',
+              'mb-q8',
+              'px-q4',
+              'w-full',
+              'md:w-auto',
+            ])};
           `}
           key={uuid()}
           to={`/o-nas`}
@@ -96,13 +103,13 @@ export const Menu = ({ toggle, toggledOn }) => (
         </Link>
         <span
           className={css`
-            ${tw(['flex-auto', 'md:hidden', 'mt-q8', 'px-q4', 'w-full'])};
+            ${tw(['flex-auto', 'md:hidden', 'px-q4', 'w-full'])};
           `}
           key={uuid()}
         >
           <ButtonOutlinedBlock
             className={css`
-              ${tw(['bg-green', 'hover:bg-black'])};
+              ${tw(['bg-green', 'hover:bg-white', 'hover:text-black'])};
             `}
             onClick={toggle}
           >
