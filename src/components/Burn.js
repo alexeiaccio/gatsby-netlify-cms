@@ -239,7 +239,7 @@ export class Burn extends Component {
           >
             ←
           </span>
-           Прижги!
+          Прижги!
         </div>
       </div>
     )

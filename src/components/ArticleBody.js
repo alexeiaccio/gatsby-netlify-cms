@@ -170,20 +170,21 @@ export class ArticleBody extends Component {
             {__typename === 'PrismicArticlesBodyMedialink' && (
               <figure
                 className={css`
-                  ${tw(['flex', 'flex-col', 'sm:flex-row', 'm-0', 'sm:-mx-4'])};
+                  ${tw([
+                    'flex',
+                    'flex-col',
+                    'sm:flex-row',
+                    'mb-q24',
+                    'm-0',
+                    'sm:-mx-4',
+                  ])};
                 `}
                 key={uuid()}
               >
                 {primary.mediacover.localFile && (
                   <a
                     className={css`
-                      ${tw([
-                        'flex-1',
-                        'mb-q24',
-                        'sm:px-q12',
-                        'w-full',
-                        'sm:w-1/2',
-                      ])};
+                      ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
                     `}
                     href={primary.medialink.url}
                     rel="noopener noreferrer"
@@ -200,12 +201,13 @@ export class ArticleBody extends Component {
                     className={css`
                       ${tw([
                         'flex-1',
-                        'h-q48',
-                        'mb-q24',
                         'sm:px-q12',
+                        'mb-q8',
                         'w-full',
                         'sm:w-1/2',
                       ])};
+                      height: 3rem;
+                      max-height: 3rem;
                     `}
                     controls="true"
                     name="media"
@@ -215,7 +217,13 @@ export class ArticleBody extends Component {
                 )}
                 <figcaption
                   className={css`
-                    ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
+                    ${tw([
+                      'flex-1',
+                      'sm:px-q12',
+                      'mb-q12',
+                      'w-full',
+                      'sm:w-1/2',
+                    ])};
                     & h3 {
                       ${tw([
                         'font-semibold',
