@@ -6,8 +6,9 @@ import 'whatwg-fetch'
 import { withStateHandlers } from 'recompose'
 
 import { Appear } from './Appear'
-import RunningString from './RunningString'
 import logo from '../img/logo.svg'
+import { Menu } from './Menu'
+import RunningString from './RunningString'
 
 const Input = css`
   ${tw([
@@ -57,13 +58,21 @@ const SubmitButton = styled('button')`
 const withToggle = withStateHandlers(
   ({ init = false }) => ({
     email: '',
+    menuOn: init,
     name: '',
     submit: init,
     success: init,
     toggledOn: init,
   }),
   {
-    toggle: ({ toggledOn }) => () => ({ toggledOn: !toggledOn }),
+    toggle: ({ menuOn, toggledOn }) => () => ({
+      menuOn: (toggledOn || menuOn) && false,
+      toggledOn: !toggledOn,
+    }),
+    menu: ({ menuOn }) => () => ({
+      menuOn: !menuOn,
+      toggledOn: menuOn && false,
+    }),
     handleChange: ({ email, name }) => event => {
       const target = event.target
       const value = target.value
@@ -108,7 +117,17 @@ const withToggle = withStateHandlers(
 )
 
 const Navbar = withToggle(
-  ({ handleChange, good, subscribe, submit, success, toggle, toggledOn }) => (
+  ({
+    handleChange,
+    good,
+    menu,
+    menuOn,
+    subscribe,
+    submit,
+    success,
+    toggle,
+    toggledOn,
+  }) => (
     <header
       className={css`
         position: fixed;
@@ -149,24 +168,6 @@ const Navbar = withToggle(
             width: 60px;
           `}
         />
-        <div
-          className={css`
-            ${tw([
-              'bg-center',
-              'bg-contain',
-              'bg-no-repeat',
-              'block',
-              'sm:hidden',
-              'cursor-pointer',
-              'flex-no-shrink',
-              'mr-auto',
-              'w-q48',
-              'sm:w-q64',
-            ])};
-            background-image: url(${logo});
-          `}
-          onClick={toggle}
-        />
         <Link
           to="/"
           className={css`
@@ -174,6 +175,7 @@ const Navbar = withToggle(
               'inline-block',
               'font-extrabold',
               'font-montserrat',
+              'mx-auto',
               'px-q12',
               'pt-q8',
               'sm:pt-0',
@@ -188,40 +190,21 @@ const Navbar = withToggle(
         >
           ·К·Р·А·П·И·В·А·
         </Link>
-        <div
-          className={css`
-            ${tw([
-              'bg-center',
-              'bg-contain',
-              'bg-no-repeat',
-              'block',
-              'sm:hidden',
-              'cursor-pointer',
-              'flex-no-shrink',
-              'ml-auto',
-              'w-q48',
-              'sm:w-q64',
-            ])};
-            background-image: url(${logo});
-            transform: rotateX(180deg);
-          `}
-          onClick={toggle}
-        />
         <span
           className={css`
             ${tw([
-              'bg-white',
-              'hover:bg-green',
+              'bg-green',
+              'hover:bg-black',
               'cursor-pointer',
               'font-montserrat',
               'font-medium',
               'hidden',
-              'sm:inline-flex',
+              'md:inline-flex',
               'items-center',
               'justify-center',
+              'ml-auto',
               'px-q24',
-              'text-black',
-              'hover:text-white',
+              'text-white',
               'text-md',
               'uppercase',
             ])};
@@ -232,7 +215,36 @@ const Navbar = withToggle(
         >
           {toggledOn ? '֍' : 'Подписка'}
         </span>
+        <span
+          className={css`
+            ${tw([
+              'bg-white',
+              'hover:bg-black',
+              'cursor-pointer',
+              'font-montserrat',
+              'font-medium',
+              'inline-flex',
+              'items-center',
+              'justify-center',
+              'px-q12',
+              'sm:px-q24',
+              'text-black',
+              'hover:text-white',
+              'text-sm',
+              'sm:text-md',
+              'uppercase',
+            ])};
+            min-width: 6.25rem;
+            transition: all 200ms ease-in-out;
+          `}
+          onClick={menu}
+        >
+          {menuOn ? '֍' : 'Рубрики'}
+        </span>
       </nav>
+      <Appear inProp={menuOn}>
+        <Menu {...{ toggle }} {...{ toggledOn }} />
+      </Appear>
       <Appear inProp={toggledOn}>
         <Appear inProp={success}>
           <div
@@ -380,7 +392,7 @@ const Navbar = withToggle(
           line-height: 2;
           font-variant-caps: all-small-caps;
         `}
-        onClick={toggle}
+        onClick={menu}
       >
         <RunningString string="· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм " />
       </div>

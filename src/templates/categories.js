@@ -14,7 +14,7 @@ import { getCategory, uuid } from '../utils'
 
 export default ({ data, location }) => {
   const { edges: articles } = data.articles
-  const { data: index } = data.index
+  const index = data.index.data
   const indexCategory = index.categories.filter(
     ({ categoryid }) => categoryid === articles[0].node.data.category
   )

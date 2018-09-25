@@ -23,7 +23,7 @@ export default ({ data, location }) => {
       .filter((_, i) => i < 4)
 
   return (
-    <Layout {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
+    <Layout {...{ index }} {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
       <>
         <section>
           <div

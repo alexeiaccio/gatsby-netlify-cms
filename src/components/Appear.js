@@ -7,7 +7,7 @@ const transitionStyles = {
     maxHeight: '0px',
   },
   entered: {
-    maxHeight: '400px',
+    maxHeight: '600px',
   },
   exiting: {
     maxHeight: '0px',
