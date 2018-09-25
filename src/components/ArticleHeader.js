@@ -41,7 +41,9 @@ export const ArticleHeader = ({ article, date, location }) => (
         ${tw(['mx-0', 'my-q48'])};
       `}
     >
-      <Img fluid={article.image.localFile.childImageSharp.fluid} />
+      {article.image.localFile && (
+        <Img fluid={article.image.localFile.childImageSharp.fluid} />
+      )}
       <figcaption>
         <HTMLContent
           className={css`

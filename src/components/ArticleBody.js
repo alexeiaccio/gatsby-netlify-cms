@@ -92,13 +92,15 @@ export class ArticleBody extends Component {
                     ${tw(['relative'])};
                   `}
                 >
-                  <Img
-                    fluid={
-                      items[this.state.sliders[i]].sliderimage.localFile
-                        .childImageSharp.fluid
-                    }
-                    key={uuid()}
-                  />
+                  {items[this.state.sliders[i]].sliderimage.localFile && (
+                    <Img
+                      fluid={
+                        items[this.state.sliders[i]].sliderimage.localFile
+                          .childImageSharp.fluid
+                      }
+                      key={uuid()}
+                    />
+                  )}
                   <div
                     className={css`
                       ${tw([
@@ -172,25 +174,45 @@ export class ArticleBody extends Component {
                 `}
                 key={uuid()}
               >
-                <a
-                  className={css`
-                    ${tw([
-                      'flex-1',
-                      'mb-q24',
-                      'sm:px-q12',
-                      'w-full',
-                      'sm:w-1/2',
-                    ])};
-                  `}
-                  href={primary.medialink.url}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Img
-                    fluid={primary.mediacover.localFile.childImageSharp.fluid}
-                    key={uuid()}
-                  />
-                </a>
+                {primary.mediacover.localFile && (
+                  <a
+                    className={css`
+                      ${tw([
+                        'flex-1',
+                        'mb-q24',
+                        'sm:px-q12',
+                        'w-full',
+                        'sm:w-1/2',
+                      ])};
+                    `}
+                    href={primary.medialink.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <Img
+                      fluid={primary.mediacover.localFile.childImageSharp.fluid}
+                      key={uuid()}
+                    />
+                  </a>
+                )}
+                {!primary.medialink.url.includes('.pdf') && (
+                  <video
+                    className={css`
+                      ${tw([
+                        'flex-1',
+                        'h-q48',
+                        'mb-q24',
+                        'sm:px-q12',
+                        'w-full',
+                        'sm:w-1/2',
+                      ])};
+                    `}
+                    controls="true"
+                    name="media"
+                  >
+                    <source src={primary.medialink.url} type="audio/mp4" />
+                  </video>
+                )}
                 <figcaption
                   className={css`
                     ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
@@ -208,24 +230,28 @@ export class ArticleBody extends Component {
                   `}
                   key={uuid()}
                 >
-                  <HTMLContent
-                    content={primary.mediacaption.html}
-                    key={uuid()}
-                  />
-                  <a
-                    href={primary.medialink.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span
-                      className={css`
-                        ${ButtonOutlined};
-                        ${tw(['mt-q24'])};
-                      `}
+                  {primary.mediacaption && (
+                    <HTMLContent
+                      content={primary.mediacaption.html}
+                      key={uuid()}
+                    />
+                  )}
+                  {primary.medialink.url.includes('.pdf') && (
+                    <a
+                      href={primary.medialink.url}
+                      rel="noopener noreferrer"
+                      target="_blank"
                     >
-                      Скачать PDF ⭳
-                    </span>
-                  </a>
+                      <span
+                        className={css`
+                          ${ButtonOutlined};
+                          ${tw(['mt-q24'])};
+                        `}
+                      >
+                        Скачать PDF ⭳
+                      </span>
+                    </a>
+                  )}
                 </figcaption>
               </figure>
             )}

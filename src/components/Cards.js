@@ -29,7 +29,9 @@ export const PreviewCard = ({ article }) => (
     title={article.data.title.text}
     to={article.fields.slug}
   >
-    <Img fluid={article.data.image.localFile.childImageSharp.fluid} />
+    {article.data.image.localFile && (
+      <Img fluid={article.data.image.localFile.childImageSharp.fluid} />
+    )}
     <div
       className={css`
         ${tw(['mt-q16'])};

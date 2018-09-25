@@ -26,7 +26,7 @@ export const ButtonOutlined = css`
 
 export const ButtonOutlinedBlock = styled('button')`
   ${OutlinedTemplate};
-  ${tw(['px-q24', 'py-q8', 'text-xs', 'w-full'])};
+  ${tw(['px-q24', 'py-q8', 'text-xs', 'w-full', 'whitespace-no-wrap'])};
   ${({ active }) =>
     active ? tw(['bg-black', 'text-white']) : tw(['cursor-pointer'])};
 `
