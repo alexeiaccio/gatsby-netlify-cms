@@ -83,7 +83,7 @@ export const Footer = () => (
             'uppercase',
           ])};
         `}
-        href="https://yasobe.ru/na/krapiva"
+        href="https://money.yandex.ru/to/410012396039377"
         rel="noopener noreferrer"
         target="_blank"
       >
