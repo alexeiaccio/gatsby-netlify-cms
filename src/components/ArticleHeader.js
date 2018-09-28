@@ -1,11 +1,11 @@
 /* global tw */
 import React from 'react'
-import Img from 'gatsby-image'
 import { graphql, Link } from 'gatsby'
 import { css } from 'react-emotion'
 import { startCase } from 'lodash'
 
 import { HTMLContent } from './Content'
+import {Img} from './Img'
 import { Views } from './Views'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
@@ -42,7 +42,7 @@ export const ArticleHeader = ({ article, date, location }) => (
       `}
     >
       {article.image.localFile && (
-        <Img fluid={article.image.localFile.childImageSharp.fluid} />
+        <Img src={article.image} />
       )}
       <figcaption>
         <HTMLContent
@@ -72,6 +72,7 @@ export const articleHeaderQuery = graphql`
         }
       }
       image {
+        url
         localFile {
           childImageSharp {
             fluid(maxWidth: 640, quality: 80) {

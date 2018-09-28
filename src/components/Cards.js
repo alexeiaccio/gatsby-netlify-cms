@@ -2,11 +2,11 @@
 import React from 'react'
 import { css } from 'react-emotion'
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
 import { startCase } from 'lodash'
 
 import logo from '../img/logo.svg'
-import { Heading6 } from '../components/Typography'
+import {Img} from './Img'
+import { Heading6 } from './Typography'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
 export const Dummy = () => (
@@ -30,7 +30,7 @@ export const PreviewCard = ({ article }) => (
     to={article.fields.slug}
   >
     {article.data.image.localFile && (
-      <Img fluid={article.data.image.localFile.childImageSharp.fluid} />
+      <Img src={article.data.image} />
     )}
     <div
       className={css`

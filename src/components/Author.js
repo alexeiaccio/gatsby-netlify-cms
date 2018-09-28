@@ -1,9 +1,9 @@
 /* global tw */
 import React from 'react'
-import Img from 'gatsby-image'
 import { css } from 'emotion'
 
 import { HTMLContent } from '../components/Content'
+import {Img} from './Img'
 import { RichTextSmall } from '../components/RichText'
 import { Heading6 } from '../components/Typography'
 
@@ -18,7 +18,7 @@ export const Author = ({ author }) => (
       className={css`
         ${tw(['rounded-full'])};
       `}
-      fluid={author.avatar.localFile.childImageSharp.fluid}
+      src={author.avatar}
     />
     <div
       className={css`

@@ -1,6 +1,5 @@
 /* global tw */
 import React, { Fragment, Component } from 'react'
-import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
@@ -8,6 +7,7 @@ import { ButtonOutlined } from '../components/Buttons'
 import { PreviewCard } from '../components/Cards'
 import { HTMLContent } from './Content'
 import { Column, Row } from '../components/Grid'
+import {Img} from './Img'
 import { RichText } from './RichText'
 import { LeadText } from './Typography'
 import { uuid } from '../utils'
@@ -64,7 +64,7 @@ export class ArticleBody extends Component {
                 key={uuid()}
               >
                 <Img
-                  fluid={primary.imageimage.localFile.childImageSharp.fluid}
+                  src={primary.imageimage}
                   key={uuid()}
                 />
                 <figcaption
@@ -94,9 +94,8 @@ export class ArticleBody extends Component {
                 >
                   {items[this.state.sliders[i]].sliderimage.localFile && (
                     <Img
-                      fluid={
-                        items[this.state.sliders[i]].sliderimage.localFile
-                          .childImageSharp.fluid
+                      src={
+                        items[this.state.sliders[i]].sliderimage
                       }
                       key={uuid()}
                     />
@@ -191,7 +190,7 @@ export class ArticleBody extends Component {
                     target="_blank"
                   >
                     <Img
-                      fluid={primary.mediacover.localFile.childImageSharp.fluid}
+                      src={primary.mediacover}
                       key={uuid()}
                     />
                   </a>
@@ -381,6 +380,7 @@ export const articleBodyQuery = graphql`
         ... on PrismicArticlesBodyImage {
           primary {
             imageimage {
+              url
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 640, quality: 80) {
@@ -417,6 +417,7 @@ export const articleBodyQuery = graphql`
                     }
                   }
                   image {
+                    url
                     localFile {
                       childImageSharp {
                         fluid(maxWidth: 640, quality: 80) {
@@ -433,6 +434,7 @@ export const articleBodyQuery = graphql`
         ... on PrismicArticlesBodyMedialink {
           primary {
             mediacover {
+              url
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 640, quality: 80) {
@@ -452,6 +454,7 @@ export const articleBodyQuery = graphql`
         ... on PrismicArticlesBodySlider {
           items {
             sliderimage {
+              url
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 640, quality: 80) {

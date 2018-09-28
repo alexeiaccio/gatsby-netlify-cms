@@ -1,10 +1,10 @@
 /* global tw */
 import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import { css } from 'react-emotion'
 
 import { HTMLContent } from '../components/Content'
+import {Img} from './Img'
 import { RichText } from '../components/RichText'
 import { LeadText } from '../components/Typography'
 import { uuid } from '../utils'
@@ -19,7 +19,7 @@ export const AboutBody = ({ about }) => (
               className={css`
                 ${tw(['-mx-8'])};
               `}
-              fluid={primary.imageimage.localFile.childImageSharp.fluid}
+              src={primary.imageimage}
               key={uuid()}
             />
             <figcaption
@@ -76,6 +76,7 @@ export const fragmentQuery = graphql`
         ... on PrismicAboutBodyImage {
           primary {
             imageimage {
+              url
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 640, quality: 80) {

@@ -98,6 +98,7 @@ export const pageQuery = graphql`
               html
             }
             avatar {
+              url
               localFile {
                 childImageSharp {
                   fluid(maxWidth: 320, quality: 80) {
