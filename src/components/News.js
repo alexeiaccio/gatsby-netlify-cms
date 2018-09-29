@@ -89,7 +89,7 @@ export const News = withStateHandlers(
           rel="noopener noreferrer"
           target="_blank"
         >
-          Регестрация
+          Регистрация
         </a>
         <button
           className={css`
