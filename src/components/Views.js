@@ -64,9 +64,9 @@ export const Views = compose(
             background-image: url(${eyeBlack});
           }
         `}
-        title={`${views} просмотр${views < 5 ? 'a' : 'ов'}`}
+        title={`${views} просмотр${views < 5 ? views === 1 ? '' : 'a' : 'ов'}`}
       >
-        {views}
+        {views > 1000 ? `${Math.floor(views / 1000)} тыс.` : views}
       </span>
     </AppearSpan>
     <AppearSpan inProp={!isNull(burned)}>

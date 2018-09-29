@@ -4,8 +4,7 @@ import { css } from 'react-emotion'
 import { Link } from 'gatsby'
 import { startCase } from 'lodash'
 
-import logo from '../img/logo.svg'
-import {Img} from './Img'
+import { Img, ImgHolder } from './Img'
 import { Heading6 } from './Typography'
 import { getCategory, toLocalDate, uuid } from '../utils'
 
@@ -29,9 +28,7 @@ export const PreviewCard = ({ article }) => (
     title={article.data.title.text}
     to={article.fields.slug}
   >
-    {article.data.image.localFile && (
-      <Img src={article.data.image} />
-    )}
+    {article.data.image.localFile && <Img src={article.data.image} />}
     <div
       className={css`
         ${tw(['mt-q16'])};
@@ -63,26 +60,11 @@ export const PreviewCard = ({ article }) => (
 
 export const Placeholder = () => (
   <>
-    <div
+    <ImgHolder
       className={css`
-        ${tw([
-          'bg-grey-lighter',
-          'h-q144',
-          'mb-q16',
-          'overflow-hidden',
-          'rounded-sm',
-          'w-full',
-        ])};
+        ${tw(['h-q144', 'mb-q16'])};
       `}
-    >
-      <div
-        className={css`
-          ${tw(['bg-center', 'bg-no-repeat', 'h-q144', 'w-full'])};
-          background-image: url(${logo});
-          transform: rotateZ(135deg);
-        `}
-      />
-    </div>
+    />
     <div
       className={css`
         ${tw(['bg-grey-lighter', 'h-q24', 'mb-q16', 'rounded-sm', 'w-4/5'])};

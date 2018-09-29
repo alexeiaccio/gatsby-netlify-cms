@@ -1,7 +1,7 @@
 /* global tw */
 import styled, { css } from 'react-emotion'
 
-const OutlinedTemplate = css`
+export const OutlinedTemplate = css`
   ${tw([
     'bg-white',
     'hover:bg-black',
@@ -17,6 +17,7 @@ const OutlinedTemplate = css`
     'hover:text-white',
     'uppercase',
   ])};
+  box-sizing: border-box;
   transition: all 200ms ease-in-out;
 `
 
