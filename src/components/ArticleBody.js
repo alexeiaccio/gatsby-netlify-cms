@@ -3,11 +3,11 @@ import React, { Fragment, Component } from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
-import { ButtonOutlined } from '../components/Buttons'
-import { PreviewCard } from '../components/Cards'
+import { PreviewCard } from './Cards'
 import { HTMLContent } from './Content'
-import { Column, Row } from '../components/Grid'
+import { Column, Row } from './Grid'
 import {Img} from './Img'
+import { MediaLink } from './MediaLink'
 import { RichText } from './RichText'
 import { LeadText } from './Typography'
 import { uuid } from '../utils'
@@ -167,100 +167,7 @@ export class ArticleBody extends Component {
               </figure>
             )}
             {__typename === 'PrismicArticlesBodyMedialink' && (
-              <figure
-                className={css`
-                  ${tw([
-                    'flex',
-                    'flex-col',
-                    'sm:flex-row',
-                    'mb-q24',
-                    'm-0',
-                    'sm:-mx-4',
-                  ])};
-                `}
-                key={uuid()}
-              >
-                {primary.mediacover.localFile && (
-                  <a
-                    className={css`
-                      ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
-                    `}
-                    href={primary.medialink.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <Img
-                      src={primary.mediacover}
-                      key={uuid()}
-                    />
-                  </a>
-                )}
-                {!primary.medialink.url.includes('.pdf') && (
-                  <video
-                    className={css`
-                      ${tw([
-                        'flex-1',
-                        'sm:px-q12',
-                        'mb-q8',
-                        'w-full',
-                        'sm:w-1/2',
-                      ])};
-                      height: 3rem;
-                      max-height: 3rem;
-                    `}
-                    controls="true"
-                    name="media"
-                  >
-                    <source src={primary.medialink.url} type="audio/mp4" />
-                  </video>
-                )}
-                <figcaption
-                  className={css`
-                    ${tw([
-                      'flex-1',
-                      'sm:px-q12',
-                      'mb-q12',
-                      'w-full',
-                      'sm:w-1/2',
-                    ])};
-                    & h3 {
-                      ${tw([
-                        'font-semibold',
-                        'font-montserrat',
-                        'mt-0',
-                        'text-heading5',
-                      ])};
-                    }
-                    & p {
-                      ${tw(['my-q4', 'text-list'])};
-                    }
-                  `}
-                  key={uuid()}
-                >
-                  {primary.mediacaption && (
-                    <HTMLContent
-                      content={primary.mediacaption.html}
-                      key={uuid()}
-                    />
-                  )}
-                  {primary.medialink.url.includes('.pdf') && (
-                    <a
-                      href={primary.medialink.url}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <span
-                        className={css`
-                          ${ButtonOutlined};
-                          ${tw(['mt-q24'])};
-                        `}
-                      >
-                        Скачать PDF ⭳
-                      </span>
-                    </a>
-                  )}
-                </figcaption>
-              </figure>
+              <MediaLink {...{primary}} />
             )}
             {__typename === 'PrismicArticlesBodyLead' && (
               <HTMLContent
