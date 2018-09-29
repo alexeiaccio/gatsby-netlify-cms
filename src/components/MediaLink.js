@@ -34,8 +34,8 @@ export const MediaLink = ({ primary }) => (
         <Img src={primary.mediacover} key={uuid()} />
       </a>
     )}
-    {!primary.medialink.url.includes('.pdf') &&
-      !primary.medialink.url.includes('.mp4') && (
+    {(primary.medialink.url.includes('.mp3') ||
+      primary.medialink.url.includes('.m4a')) && (
         <video
           className={css`
             ${tw(['flex-1', 'sm:px-q12', 'mb-q8', 'w-full', 'sm:w-1/2'])};
