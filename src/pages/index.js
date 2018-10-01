@@ -131,7 +131,7 @@ export default ({ data, location }) => {
                         `}
                         key={uuid()}
                       >
-                        {`Рубрика «${category.categorytitle.text}» →`}
+                        {`Все статьи «${category.categorytitle.text}» →`}
                       </span>
                     </Link>
                   </div>

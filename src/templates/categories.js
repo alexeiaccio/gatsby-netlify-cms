@@ -28,13 +28,6 @@ export default ({ data, location }) => {
               ${tw(['text-center', 'mb-q72', 'text-black'])};
             `}
           >
-            <small
-              className={css`
-                ${tw(['block', 'text-body'])};
-              `}
-            >
-              Рубрика
-            </small>
             {startCase(getCategory(location.pathname.replace(/\//g, '')))}
           </h1>
           <div
