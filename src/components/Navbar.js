@@ -9,7 +9,6 @@ import { Appear } from './Appear'
 import logo from '../img/logo.svg'
 import { Menu } from './Menu'
 import RunningString from './RunningString'
-import { News } from './News'
 
 const Input = css`
   ${tw([
@@ -143,7 +142,6 @@ const Navbar = withToggle(
         ])};
       `}
     >
-      <News />
       <nav
         className={css`
           ${tw([
