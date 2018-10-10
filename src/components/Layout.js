@@ -39,12 +39,12 @@ const enhance = compose(
         .catch(error => console.log('parsing failed', error))
     },
     componentDidMount() {
-      process.env.NODE_ENV === 'production' && this.fetch(this.props)
+      process.env.NODE_ENV === 'production' && this.fetch(this.props)      
     },
     componentDidUpdate(prevProps) {
       process.env.NODE_ENV === 'production' &&
-        prevProps !== this.props &&
-        this.fetch(this.props)
+      prevProps !== this.props &&
+      this.fetch(this.props)
     },
   })
 )

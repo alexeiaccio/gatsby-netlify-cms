@@ -54,6 +54,7 @@ export const Views = compose(
               'block',
               'absolute',
               'bg-contain',
+              'bg-center',
               'bg-no-repeat',
               'h-full',
               'inline-block',
@@ -72,13 +73,15 @@ export const Views = compose(
     <AppearSpan inProp={!isNull(burned)}>
       <span
         className={css`
-          ${tw(['ml-q12', 'pl-q20', 'relative'])};
+          ${tw(['ml-q12', 'relative'])};
+          padding-left: 1.75rem;
           &::before {
             content: '';
             ${tw([
               'block',
               'absolute',
               'bg-contain',
+              'bg-center',
               'bg-no-repeat',
               'h-full',
               'inline-block',

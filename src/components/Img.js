@@ -16,6 +16,10 @@ const Holder = styled('div')`
   ])};
 `
 
+const Image = styled('img')`
+  ${tw(['w-full'])};
+`
+
 export const ImgHolder = props => (
   <Holder {...props}>
     <div
@@ -37,12 +41,9 @@ export const Img = ({ src, ...props }) => (
         <GatsbyImage fixed={src.localFile.childImageSharp.fixed} {...props} />
       )
     ) : src.url ? (
-      <img
-        alt=""
-        className={css`
-          ${tw(['w-full'])};
-        `}
+      <Image
         src={src.url}
+        {...props}
       />
     ) : (
       <ImgHolder {...props} />

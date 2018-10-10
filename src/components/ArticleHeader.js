@@ -8,12 +8,13 @@ import { HTMLContent } from './Content'
 import {Img} from './Img'
 import { Views } from './Views'
 import { getCategory, toLocalDate, uuid } from '../utils'
+import { makeAuthorPath } from '../utils/makePath'
 
 export const ArticleHeader = ({ article, date, location }) => (
   <div>
     <div
       className={css`
-        ${tw(['font-montserrat', 'italic', 'my-q24', 'text-xs'])};
+        ${tw(['font-montserrat', 'italic', 'leading-loose', 'my-q24', 'text-xs'])};
       `}
     >
       <span
@@ -30,7 +31,9 @@ export const ArticleHeader = ({ article, date, location }) => (
         <span> ·</span>
         {article.authors.map(({ author }) =>
           author.document.map(({ data }) => (
-            <span key={uuid}> {data.name} ·</span>
+            <Link key={uuid} to={makeAuthorPath(data.name)}>
+              <span key={uuid}> {data.name} ·</span>
+            </Link>
           ))
         )}
       </span>

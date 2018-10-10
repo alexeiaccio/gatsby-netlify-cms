@@ -2,10 +2,10 @@
 import React from 'react'
 import { css } from 'emotion'
 
-import { HTMLContent } from '../components/Content'
+import { HTMLContent } from './Content'
 import {Img} from './Img'
-import { RichTextSmall } from '../components/RichText'
-import { Heading6 } from '../components/Typography'
+import { RichTextSmall } from './RichText'
+import { Heading6 } from './Typography'
 
 export const Author = ({ author }) => (
   <div

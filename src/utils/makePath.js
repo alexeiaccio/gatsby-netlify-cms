@@ -134,3 +134,5 @@ const fromCyrillicToLatin = trslt(cyrillicToLatin)
 
 exports.makePath = (text, date) =>
   `${fromCyrillicToLatin(text)}-${getDate(date)}`.replace(/-+/g, '-')
+
+exports.makeAuthorPath = fromCyrillicToLatin

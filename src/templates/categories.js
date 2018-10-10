@@ -18,8 +18,10 @@ export default ({ data, location }) => {
   const indexCategory = index.categories.filter(
     ({ categoryid }) => categoryid === articles[0].node.data.category
   )
+  const title = startCase(getCategory(location.pathname.replace(/\//g, '')))
+
   return (
-    <Layout {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
+    <Layout {...{ location }} {...{title}}>
       <>
         <section>
           <h1
@@ -28,7 +30,7 @@ export default ({ data, location }) => {
               ${tw(['text-center', 'mb-q72', 'text-black'])};
             `}
           >
-            {startCase(getCategory(location.pathname.replace(/\//g, '')))}
+            {title}
           </h1>
           <div
             className={css`
