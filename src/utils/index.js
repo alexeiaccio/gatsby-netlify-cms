@@ -47,7 +47,7 @@ const categories = {
   analitics: 'аналитика',
   discussions: 'дискуссии',
   persons: 'персона',
-  palces: 'места',
+  places: 'места',
   archive: 'архив',
   opinions: 'мнения',
   summaries: 'конспекты',
