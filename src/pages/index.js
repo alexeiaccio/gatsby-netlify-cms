@@ -55,6 +55,14 @@ export default ({ data, location }) => {
               ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-1'])};
             `}
           >
+            <Link
+              className={css`
+                ${tw(['flex-1', 'mb-q8', 'px-q4'])};
+              `}
+              to="#new"
+            >
+              <ButtonOutlinedBlock>Новое</ButtonOutlinedBlock>
+            </Link>
             {index.categories.map(category => (
               <Link
                 className={css`
@@ -69,6 +77,40 @@ export default ({ data, location }) => {
               </Link>
             ))}
           </div>
+          <>
+            <div id="new" />
+            <h2
+              className={css`
+                ${Heading3};
+                ${tw(['mb-q48', 'mt-q72', 'text-center'])};
+              `}
+            >
+              Новое
+            </h2>
+            <Row>
+              {articles.slice(0, 4).map(({ node: article }) => (
+                <Column key={uuid()}>
+                  <PreviewCard {...{ article }} key={uuid()} />
+                </Column>
+              ))}
+            </Row>
+            <div
+              className={css`
+                ${tw(['mb-q144', 'mx-auto', 'text-center'])};
+              `}
+            >
+              <Link to="/new">
+                <span
+                  className={css`
+                    ${ButtonOutlined};
+                  `}
+                >
+                  {`Все новые статьи →`}
+                </span>
+              </Link>
+            </div>
+          </>
+          {/* Cateroties */}
           {index.categories.map(category => {
             const filteredArticles = getFiltered(category.categoryid)(articles)
             return (

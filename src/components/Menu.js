@@ -44,6 +44,27 @@ export const Menu = ({ toggle, toggledOn }) => (
           ])};
         `}
       >
+        <Link
+          className={css`
+            ${tw([
+              'flex-auto',
+              'md:flex-1',
+              'mb-q8',
+              'px-q4',
+              'w-full',
+              'md:w-auto',
+            ])};
+          `}
+          to={`/new`}
+        >
+          <ButtonOutlinedBlock
+            className={css`
+              ${tw(['hover:bg-green'])};
+            `}
+          >
+            Новое
+          </ButtonOutlinedBlock>
+        </Link>
         {index.data.categories.map(category => {
           const pageExist = pages.edges.some(
             ({ node }) => node.path.replace(/\//g, '') === category.categoryid
@@ -89,14 +110,12 @@ export const Menu = ({ toggle, toggledOn }) => (
               'md:w-auto',
             ])};
           `}
-          key={uuid()}
           to={`/o-nas`}
         >
           <ButtonOutlinedBlock
             className={css`
               ${tw(['hover:bg-green'])};
             `}
-            key={uuid()}
           >
             О Редакции
           </ButtonOutlinedBlock>

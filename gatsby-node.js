@@ -76,7 +76,7 @@ exports.createPages = async ({ actions, graphql }) => {
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `PrismicArticles`) {
+  if (node && node.internal.type === `PrismicArticles`) {
     const { data, first_publication_date } = node
     const value = makePath(data.title.text, first_publication_date)
     createNodeField({
@@ -85,7 +85,7 @@ exports.onCreateNode = ({ node, actions }) => {
       value,
     })
   }
-  if (node.internal.type === `PrismicAuthors`) {
+  if (node && node.internal.type === `PrismicAuthors`) {
     const { data } = node
     const value = makeAuthorPath(data.name)
     createNodeField({
