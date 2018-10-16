@@ -6,7 +6,7 @@ import { css } from 'react-emotion'
 import { PreviewCard } from './Cards'
 import { HTMLContent } from './Content'
 import { Column, Row } from './Grid'
-import {Img} from './Img'
+import { Img } from './Img'
 import { MediaLink } from './MediaLink'
 import { RichText } from './RichText'
 import { LeadText } from './Typography'
@@ -63,10 +63,7 @@ export class ArticleBody extends Component {
                 `}
                 key={uuid()}
               >
-                <Img
-                  src={primary.imageimage}
-                  key={uuid()}
-                />
+                <Img src={primary.imageimage} key={uuid()} />
                 <figcaption
                   className={css`
                     ${tw(['italic', 'mb-q48', 'text-center', 'text-list'])};
@@ -94,9 +91,7 @@ export class ArticleBody extends Component {
                 >
                   {items[this.state.sliders[i]].sliderimage.localFile && (
                     <Img
-                      src={
-                        items[this.state.sliders[i]].sliderimage
-                      }
+                      src={items[this.state.sliders[i]].sliderimage}
                       key={uuid()}
                     />
                   )}
@@ -167,7 +162,7 @@ export class ArticleBody extends Component {
               </figure>
             )}
             {__typename === 'PrismicArticlesBodyMedialink' && (
-              <MediaLink {...{primary}} />
+              <MediaLink {...{ primary }} />
             )}
             {__typename === 'PrismicArticlesBodyLead' && (
               <HTMLContent
@@ -197,6 +192,44 @@ export class ArticleBody extends Component {
                   )
                 })}
               </Row>
+            )}
+            {__typename === 'PrismicArticlesBodyYoutube' && (
+              <figure
+                className={css`
+                  ${tw(['m-0'])};
+                `}
+                key={uuid()}
+              >
+                <HTMLContent
+                  className={css`
+                    & iframe {
+                      ${tw(['w-full'])};
+                      height: 50vh;
+                    }
+                  `}
+                  content={primary.youtubeid.html}
+                  key={uuid()}
+                />
+                <figcaption
+                  className={css`
+                    ${tw([
+                      'flex',
+                      'flex-row',
+                      'italic',
+                      'justify-between',
+                      'mb-q48',
+                      'text-center',
+                      'text-list',
+                    ])};
+                  `}
+                  key={uuid()}
+                >
+                  <HTMLContent
+                    content={primary.videoresource.html}
+                    key={uuid()}
+                  />
+                </figcaption>
+              </figure>
             )}
             {__typename === 'PrismicArticlesBodyQuote' && (
               <figure
@@ -371,6 +404,16 @@ export const articleBodyQuery = graphql`
               }
             }
             slidercaptions {
+              html
+            }
+          }
+        }
+        ... on PrismicArticlesBodyYoutube {
+          primary {
+            youtubeid {
+              html
+            }
+            videoresource {
               html
             }
           }
