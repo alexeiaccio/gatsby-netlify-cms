@@ -93,7 +93,7 @@ export const LeadText = css`
 export const List = css`
   ${tw([
     'font-source',
-    'font-normal',
+    'font-medium',
     'leading-normal',
     'text-list',
     'tracking-normal',
