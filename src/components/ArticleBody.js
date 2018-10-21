@@ -45,7 +45,7 @@ export class ArticleBody extends Component {
           ? (newCoords = Object.assign(newCoords, {
               [i]: {
                 x: current.offsetLeft + 12 - current.offsetWidth / 2,
-                y: current.offsetTop + 12 + current.offsetHeight,
+                y: current.offsetTop + 13 + current.offsetHeight,
               },
             }))
           : false
