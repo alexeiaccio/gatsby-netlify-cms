@@ -32,6 +32,21 @@ const spanStyles = {
   },
 }
 
+const spanStylesHundred = {
+  entering: {
+    maxHeight: '0px',
+  },
+  entered: {
+    maxHeight: '300px',
+  },
+  exiting: {
+    maxHeight: '0px',
+  },
+  exited: {
+    maxHeight: '0px',
+  },
+}
+
 export const Appear = ({ children, inProp }) => (
   <Transition
     in={inProp}
@@ -74,6 +89,33 @@ export const AppearSpan = ({ children, inProp }) => (
         style={{
           ...spanStyles[state],
         }}
+      >
+        {children}
+      </span>
+    )}
+  </Transition>
+)
+
+export const AppearSpanHundred = ({ children, inProp, ...props }) => (
+  <Transition
+    in={inProp}
+    mountOnEnter
+    unmountOnExit
+    timeout={{ enter: 0, exit: 600 }}
+  >
+    {state => (
+      <span
+        className={css`
+          display: inline-flex;
+          max-height: 0px;
+          overflow: hidden;
+          transition: max-height 600ms ease-in-out;
+          width: 100%;
+        `}
+        style={{
+          ...spanStylesHundred[state],
+        }}
+        {...props}
       >
         {children}
       </span>

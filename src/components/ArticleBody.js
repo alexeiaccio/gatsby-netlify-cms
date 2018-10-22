@@ -3,7 +3,7 @@ import React, { Fragment, Component, createRef } from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'react-emotion'
 
-import { Appear } from './Appear'
+import { AppearSpanHundred } from './Appear'
 import { PreviewCard } from './Cards'
 import { HTMLContent, SpanHTMLContent } from './Content'
 import { Column, Row } from './Grid'
@@ -18,7 +18,8 @@ import Next from '../img/next.svg'
 export class ArticleBody extends Component {
   constructor(props) {
     super(props)
-    this.refReference = props.article.body.map((_, i) => createRef())
+    this.refAnchors = props.article.body.map((_, i) => createRef())
+    this.refRefs = props.article.body.map((_, i) => createRef())
     this.state = {
       sliders: Array.from(props.article.body, () => 0),
       referenceIsOpen: {},
@@ -39,17 +40,30 @@ export class ArticleBody extends Component {
 
   getCoords = () => {
     let newCoords = {}
-    this.refReference.forEach(
-      ({ current }, i) =>
-        current
-          ? (newCoords = Object.assign(newCoords, {
-              [i]: {
-                x: current.offsetLeft + 12 - current.offsetWidth / 2,
-                y: current.offsetTop + 13 + current.offsetHeight,
-              },
-            }))
-          : false
-    )
+    this.refAnchors.forEach(({ current }, i) => {
+      if (current && this.refRefs[i].current) {
+        const leftBorder =
+          current.offsetLeft - this.refRefs[i].current.offsetLeft
+        const rightBorder =
+          this.refRefs[i].current.offsetLeft +
+          this.refRefs[i].current.offsetWidth -
+          (current.offsetLeft + current.offsetWidth)
+        newCoords = Object.assign(newCoords, {
+          [i]: {
+            x:
+              leftBorder < 6
+                ? this.refRefs[i].current.offsetLeft + 5
+                : rightBorder < 13
+                  ? this.refRefs[i].current.offsetLeft +
+                    this.refRefs[i].current.offsetWidth -
+                    29
+                  : current.offsetLeft + 10 - current.offsetWidth / 2,
+            y: current.offsetTop + 13 + current.offsetHeight,
+          },
+        })
+      }
+      return false
+    })
     this.setState({
       coords: newCoords,
     })
@@ -274,51 +288,62 @@ export class ArticleBody extends Component {
                       ${tw(['cursor-pointer', 'text-green', 'text-list'])};
                     `}
                     onClick={() => this.toggleReference(i)}
-                    ref={this.refReference[i]}
+                    ref={this.refAnchors[i]}
                     id={primary.referenceanchor.replace(/\s/g, '')}
                   >
                     {primary.referenceanchor}
                   </span>
-                  <Appear key={uuid()} inProp={this.state.referenceIsOpen[i]}>
-                    <span key={uuid()} onClick={() => this.toggleReference(i)}>
-                      <SpanHTMLContent
-                        className={css`
-                          ${RichTextSmall};
+                  <AppearSpanHundred
+                    key={uuid()}
+                    inProp={this.state.referenceIsOpen[i]}
+                  >
+                    <span
+                      className={css`
+                        ${RichTextSmall};
+                        ${tw([
+                          'bg-black',
+                          'cursor-pointer',
+                          'inline-flex',
+                          'flex-col',
+                          'my-q24',
+                          'p-q24',
+                          'text-white',
+                          'text-center',
+                          'w-full',
+                        ])};
+                        box-sizing: border-box;
+                        &::after {
                           ${tw([
+                            'absolute',
                             'bg-black',
-                            'cursor-pointer',
-                            'inline-flex',
-                            'flex-col',
-                            'my-q24',
-                            'p-q24',
-                            'text-white',
-                            'text-center',
-                            'w-full',
+                            'hidden',
+                            'h-q24',
+                            'w-q24',
                           ])};
-                          box-sizing: border-box;
-                          &::after {
-                            ${tw([
-                              'absolute',
-                              'bg-black',
-                              'block',
-                              'h-q24',
-                              'w-q24',
-                            ])};
-                            content: '';
-                            top: ${this.state.coords[i] &&
-                              this.state.coords[i].y}px;
-                            left: ${this.state.coords[i] &&
-                              this.state.coords[i].x}px;
-                            transform: rotateZ(45deg);
-                          }
-                        `}
+                          ${this.state.referenceIsOpen[i] && tw(['block'])};
+                          content: '';
+                          top: ${this.state.coords[i] &&
+                            this.state.coords[i].y}px;
+                          left: ${this.state.coords[i] &&
+                            this.state.coords[i].x}px;
+                          transform: rotateZ(45deg);
+                        }
+                        & span {
+                          ${tw(['inline-block'])};
+                        }
+                      `}
+                      key={uuid()}
+                      onClick={() => this.toggleReference(i)}
+                      ref={this.refRefs[i]}
+                    >
+                      <SpanHTMLContent
                         content={`<p>${primary.referenceanchor} </p>${
                           primary.referencetext.html
                         }`}
                         key={uuid()}
                       />
                     </span>
-                  </Appear>
+                  </AppearSpanHundred>
                   {!isPreviousRedline &&
                     FirstPContent(i) && (
                       <SpanHTMLContent
