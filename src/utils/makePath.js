@@ -1,3 +1,7 @@
+const lodash = require('lodash/fp')
+
+const { words } = lodash
+
 const cyrillicToLatin = {
   Ё: 'YO',
   Й: 'I',
@@ -11,7 +15,7 @@ const cyrillicToLatin = {
   Щ: 'SCH',
   З: 'Z',
   Х: 'H',
-  Ъ: "'",
+  Ъ: "",
   ё: 'yo',
   й: 'i',
   ц: 'ts',
@@ -24,7 +28,7 @@ const cyrillicToLatin = {
   щ: 'sch',
   з: 'z',
   х: 'h',
-  ъ: "'",
+  ъ: "",
   Ф: 'F',
   Ы: 'I',
   В: 'V',
@@ -53,7 +57,7 @@ const cyrillicToLatin = {
   М: 'M',
   И: 'I',
   Т: 'T',
-  Ь: "'",
+  Ь: "",
   Б: 'B',
   Ю: 'YU',
   я: 'ya',
@@ -62,7 +66,7 @@ const cyrillicToLatin = {
   м: 'm',
   и: 'i',
   т: 't',
-  ь: "'",
+  ь: "",
   б: 'b',
   ю: 'yu',
   a: 'a',
@@ -132,7 +136,9 @@ const trslt = library => str =>
 
 const fromCyrillicToLatin = trslt(cyrillicToLatin)
 
-exports.makePath = (text, date) =>
-  `${fromCyrillicToLatin(text)}-${getDate(date)}`.replace(/-+/g, '-')
+const getThreeWords = text => words(text).slice(0, 3).join('-')
+
+exports.makePath = (text, date) => 
+  `${fromCyrillicToLatin(getThreeWords(text))}-${getDate(date)}`.replace(/-+/g, '-')
 
 exports.makeAuthorPath = fromCyrillicToLatin
