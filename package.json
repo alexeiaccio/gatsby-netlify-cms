@@ -22,7 +22,7 @@
     "gatsby-plugin-sharp": "^2.0.0-rc.0",
     "gatsby-plugin-sitemap": "^2.0.0-rc.0",
     "gatsby-source-filesystem": "^2.0.1-rc.0",
-    "gatsby-source-prismic": "^1.1.0",
+    "gatsby-source-prismic": "^2.0.0",
     "gatsby-transformer-sharp": "^2.1.1-rc.0",
     "lodash": "^4.17.5",
     "lodash-webpack-plugin": "^0.11.4",
