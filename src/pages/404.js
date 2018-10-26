@@ -1,13 +1,33 @@
 /* global tw */
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { css } from 'react-emotion'
+import { lifecycle } from 'recompose'
+import { words } from 'lodash'
 
 import Layout from '../components/Layout'
 import logo from '../img/logo.svg'
 import { Heading1 } from '../components/Typography'
 
-const NotFoundPage = ({ location }) => (
+const redirects = {
+  'bubnezh-o': 'bubnezh-o-lokal-noi-02-09-2018',
+  'elina-petrova': '',
+  'chto-mi': 'chto-mi-vidim-01-09-2018',
+  'vse-techet': 'vse-techet-ili-01-10-2018',
+  'kak-roman': 'kak-roman-sergeevich-28-09-2018',
+  'kak-zhit': 'kak-zhit-vmeste-14-09-2018',
+  'prusskoe-pole': 'prusskoe-pole-eksperimenta-16-10-2018',
+  'feministki-peterburga': 'feministki-peterburga-ili-24-10-2018',
+}
+
+const NotFoundPage = lifecycle({
+  componentDidMount() {
+    const match = words(this.props.location.pathname.replace(/\//g, ''))
+      .slice(0, 2)
+      .join('-')
+    match && navigate(redirects[match])
+  },
+})(({ location }) => (
   <Layout {...{ location }}>
     <div
       className={css`
@@ -79,6 +99,6 @@ const NotFoundPage = ({ location }) => (
       </p>
     </div>
   </Layout>
-)
+))
 
 export default NotFoundPage
