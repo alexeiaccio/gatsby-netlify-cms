@@ -25,7 +25,7 @@ const NotFoundPage = lifecycle({
     const match = words(this.props.location.pathname.replace(/\//g, ''))
       .slice(0, 2)
       .join('-')
-    match && navigate(redirects[match])
+    redirects[match] && navigate(redirects[match])
   },
 })(({ location }) => (
   <Layout {...{ location }}>
