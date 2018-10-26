@@ -1,5 +1,3 @@
-# Redirect default Netlify subdomain to primary domain
-https://krapiva.netlify.com/* https://www.krapiva.org/:splat 301!
 # Changed pathways
 /bubnezh-o-lokal&#039;noi-povestke-02-09-2018 /bubnezh-o-lokalnoi-02-09-2018
 /zhurnal-krapiva-nulevoi-nomer-14-09-2018 /zhurnal-krapiva-nulevoi-14-09-2018
@@ -19,3 +17,6 @@ https://krapiva.netlify.com/* https://www.krapiva.org/:splat 301!
 /-reviziya-mesta-i-soobschestva-podvodnii-kontinent-30-09-2018 /reviziya-mesta-i-30-09-2018
 /prusskoe-pole-eksperimenta-interv&#039;yu-s-burkhardom-bainsom-i-ignatsom-shikom-perlonex-berlin-16-10-2018 /prusskoe-pole-eksperimenta-16-10-2018
 /-feministki-peterburga-ili-ne-ochen&#039;-kratkii-obzor-peterburgskih-hudozhestvennih-initsiativ-s-gendernoi-problematikoi-v-h-24-10-2018 /feministki-peterburga-ili-24-10-2018
+
+# Redirect default Netlify subdomain to primary domain
+https://krapiva.netlify.com/* https://www.krapiva.org/:splat 301!
