@@ -24,7 +24,6 @@ export const Headers = css`
 
 export const RichText = css`
   ${Body};
-  ${tw(['mb-q36', 'md:mb-q48'])};
   & h2 {
     ${Heading2};
     ${tw(['my-q36', 'md:mb-q48'])};
@@ -50,7 +49,7 @@ export const RichText = css`
   & li {
     ${tw(['mb-q12', 'pl-q32', 'relative'])};
   }
-  & li::after {
+  & ul > li::after {
     content: '';
     ${tw(['absolute', 'bg-black', 'block', 'h-q8', 'pin-l', 'pin-t', 'w-q8'])};
     top: 0.625rem;
@@ -78,7 +77,7 @@ export const RichTextSmall = css`
   & li {
     ${tw(['mb-q12', 'pl-q32', 'relative'])};
   }
-  & li::after {
+  & ul > li::after {
     content: '';
     ${tw(['absolute', 'bg-black', 'block', 'h-q8', 'pin-l', 'pin-t', 'w-q8'])};
     top: 0.625rem;

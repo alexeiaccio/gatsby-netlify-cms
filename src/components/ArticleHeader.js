@@ -44,7 +44,7 @@ export const ArticleHeader = ({ article, date, location }) => (
         ${tw(['mx-0', 'my-q48'])};
       `}
     >
-      {article.image.localFile && (
+      {article.image && (
         <Img src={article.image} />
       )}
       <figcaption>

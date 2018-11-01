@@ -4,7 +4,9 @@ require('dotenv').config({
 
 const PrismicDOM = require('prismic-dom')
 const Elements = PrismicDOM.RichText.Elements
-const linkResolver = () => doc => doc
+const linkResolver = ({ node, key, value }) => doc => {
+  return doc.slug
+}
 const tp = require('./src/utils/tp')
 
 module.exports = {

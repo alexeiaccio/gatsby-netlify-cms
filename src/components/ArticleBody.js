@@ -58,7 +58,7 @@ export class ArticleBody extends Component {
                     this.refRefs[i].current.offsetWidth -
                     29
                   : current.offsetLeft + 10 - current.offsetWidth / 2,
-            y: current.offsetTop + 13 + current.offsetHeight,
+            y: current.offsetTop + 14 + current.offsetHeight,
           },
         })
       }
@@ -110,25 +110,22 @@ export class ArticleBody extends Component {
 
   render() {
     const { article } = this.props
-    const hasNext = i => article.body[i + 1]
-    const hasPrevious = i => article.body[i - 1]
+    const nextItem = i => article.body[i + 1]
+    const previousItem = i => article.body[i - 1]
     const isNextReference = i =>
-      hasNext(i) &&
-      article.body[i + 1].__typename === 'PrismicArticlesBodyReference'
+      nextItem(i) && nextItem(i).__typename === 'PrismicArticlesBodyReference'
     const isPreviousReference = i =>
-      hasPrevious(i) &&
-      article.body[i - 1].__typename === 'PrismicArticlesBodyReference'
+      previousItem(i) &&
+      previousItem(i).__typename === 'PrismicArticlesBodyReference'
     const isPreviousRedline = i =>
-      hasPrevious(i) && article.body[i - 1].primary.referenceredline === 'yes'
+      previousItem(i) &&
+      isPreviousReference(i) &&
+      previousItem(i).primary.referenceredline.includes('yes')
     const withoutLastP = str => str.replace(/<p>.+<\/p>$/, '')
     const withoutFirstP = str => str.replace(/^<p>.+<\/p>/, '')
-    const LastPContent = i =>
-      hasNext(i) &&
-      article.body[i - 1].primary.text.html.match(/<p>(.+)<\/p>$/)[1]
+    const LastPContent = i => nextItem(i) && previousItem(i).primary.text.html
     const FirstPContent = i =>
-      hasPrevious(i) &&
-      !isPreviousRedline(i) &&
-      article.body[i + 1].primary.text.html.match(/^<p>(.+)<\/p>/)[1]
+      previousItem(i) && !isPreviousRedline(i) && nextItem(i).primary.text.html
     const makeText = i => {
       let res = article.body[i].primary.text.html
       if (isPreviousReference(i) && !isPreviousRedline(i)) {
@@ -147,7 +144,7 @@ export class ArticleBody extends Component {
               {__typename === 'PrismicArticlesBodyImage' && (
                 <figure
                   className={css`
-                    ${tw(['m-0'])};
+                    ${tw(['m-0', 'mt-q36', 'md:mt-q48'])};
                   `}
                   key={uuid()}
                 >
@@ -168,7 +165,7 @@ export class ArticleBody extends Component {
               {__typename === 'PrismicArticlesBodySlider' && (
                 <figure
                   className={css`
-                    ${tw(['m-0'])};
+                    ${tw(['m-0', 'mt-q36', 'md:mt-q48'])};
                   `}
                   key={uuid()}
                 >
@@ -177,7 +174,7 @@ export class ArticleBody extends Component {
                       ${tw(['relative'])};
                     `}
                   >
-                    {items[this.state.sliders[i]].sliderimage.localFile && (
+                    {items[this.state.sliders[i]].sliderimage && (
                       <Img
                         src={items[this.state.sliders[i]].sliderimage}
                         key={uuid()}
@@ -276,12 +273,19 @@ export class ArticleBody extends Component {
                     key={uuid()}
                   />
                 )}
+
               {__typename === 'PrismicArticlesBodyReference' && (
-                <span key={uuid()} className={RichText}>
+                <div
+                  key={uuid()}
+                  className={css`
+                    ${RichText};
+                    ${tw(['mt-q24', 'leading-tight'])};
+                    ${!this.state.referenceIsOpen[i] && tw(['text-justify'])};
+                  `}
+                >
                   {LastPContent(i) && (
                     <SpanHTMLContent key={uuid()} content={LastPContent(i)} />
                   )}
-                  <span key={uuid()}> </span>
                   <span
                     key={uuid()}
                     className={css`
@@ -291,7 +295,9 @@ export class ArticleBody extends Component {
                     ref={this.refAnchors[i]}
                     id={primary.referenceanchor.replace(/\s/g, '')}
                   >
+                    <span key={uuid()}> [ </span>
                     {primary.referenceanchor}
+                    <span key={uuid()}> ] </span>
                   </span>
                   <AppearSpanHundred
                     key={uuid()}
@@ -344,14 +350,14 @@ export class ArticleBody extends Component {
                       />
                     </span>
                   </AppearSpanHundred>
-                  {!isPreviousRedline &&
+                  {!primary.referenceredline.includes('yes') &&
                     FirstPContent(i) && (
                       <SpanHTMLContent
                         key={uuid()}
                         content={FirstPContent(i)}
                       />
                     )}
-                </span>
+                </div>
               )}
               {__typename === 'PrismicArticlesBodyListOfArticles' && (
                 <Row>
@@ -472,7 +478,9 @@ export class ArticleBody extends Component {
                           )}`}
                           key={uuid()}
                         >
+                          <span key={uuid()}>[ </span>
                           {primary.referenceanchor}
+                          <span key={uuid()}> ]</span>
                         </a>
                         <span key={uuid()}> </span>
                         <SpanHTMLContent

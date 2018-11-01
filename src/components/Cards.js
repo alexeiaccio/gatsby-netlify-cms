@@ -28,7 +28,7 @@ export const PreviewCard = ({ article }) => (
     title={article.data.title.text}
     to={article.fields.slug}
   >
-    {article.data.image.localFile && <Img src={article.data.image} />}
+    {article.data.image && <Img src={article.data.image} />}
     <div
       className={css`
         ${tw(['mt-q16'])};

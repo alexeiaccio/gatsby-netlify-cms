@@ -37,7 +37,7 @@ const spanStylesHundred = {
     maxHeight: '0px',
   },
   entered: {
-    maxHeight: '300px',
+    maxHeight: '600px',
   },
   exiting: {
     maxHeight: '0px',

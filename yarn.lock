@@ -5557,10 +5557,10 @@ gatsby-source-filesystem@^2.0.1-rc.0:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-prismic@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-prismic/-/gatsby-source-prismic-2.0.0.tgz#ad018d39a37747471fa42d14dc07041c06d8d33b"
-  integrity sha512-bE7yWHo+8VYfrPjYxXpX76JguXKTGmxbBDetRtBUOK+vq4oYqcKBWfSldwzgEaa7c8v8ods+iB2nYlosdnL/eg==
+gatsby-source-prismic@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-prismic/-/gatsby-source-prismic-2.1.0.tgz#5d433e5c3a847c9055260cc02ab2ccea2c5699df"
+  integrity sha512-hCPM6HqWg3eiL6F3dlbGjI+1rq7bswCzgy9Ye3mMCV/vIGSQ0HWZXNkG0Nco1cM6yuVIVnrMAwFVj11wCcCySQ==
   dependencies:
     asyncro "^3.0.0"
     gatsby-node-helpers "^0.3.0"
