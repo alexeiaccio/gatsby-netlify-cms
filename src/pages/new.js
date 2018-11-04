@@ -55,8 +55,18 @@ export default ({ data, location }) => {
 export const pageQuery = graphql`
   query NewQuery {
     articles: allPrismicArticles(
-      sort: { order: DESC, fields: [first_publication_date] },
-      limit: 10
+      sort: {
+        order: DESC,
+        fields: [first_publication_date] 
+      },
+      limit: 10,
+      filter: {
+        data: {
+          category: {
+            ne: "afisha"
+          }
+        }
+      }
     ) {
       edges {
         node {

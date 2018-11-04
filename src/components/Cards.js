@@ -26,7 +26,9 @@ export const PreviewCard = ({ article }) => (
       }
     `}
     title={article.data.title.text}
-    to={article.fields.slug}
+    to={article.fields.slug.includes('afisha')
+      ? 'afisha'
+      : article.fields.slug}
   >
     {article.data.image && <Img src={article.data.image} />}
     <div
@@ -48,10 +50,11 @@ export const PreviewCard = ({ article }) => (
       <span>{toLocalDate(article.first_publication_date)}</span>
       <span>
         <span> ·</span>
-        {article.data.authors.map(({ author }) =>
-          author.document.map(({ data }) => (
-            <span key={uuid}> {data.name} ·</span>
-          ))
+        {article.data.authors &&
+          article.data.authors.map(({ author }) =>
+            author && author.document.map(({ data }) => (
+              <span key={uuid}> {data.name} ·</span>
+            ))
         )}
       </span>
     </div>

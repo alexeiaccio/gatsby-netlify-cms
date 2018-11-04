@@ -29,8 +29,8 @@ export const ArticleHeader = ({ article, date, location }) => (
       <span>{toLocalDate(date)}</span>
       <span>
         <span> ·</span>
-        {article.authors.map(({ author }) =>
-          author.document.map(({ data }) => (
+        {article.authors && article.authors.map(({ author }) =>
+          author && author.document.map(({ data }) => (
             <Link key={uuid} to={makeAuthorPath(data.name)}>
               <span key={uuid}> {data.name} ·</span>
             </Link>

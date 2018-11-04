@@ -63,6 +63,14 @@ export default ({ data, location }) => {
             >
               <ButtonOutlinedBlock>Новое</ButtonOutlinedBlock>
             </Link>
+            <Link
+              className={css`
+                ${tw(['flex-1', 'mb-q8', 'px-q4'])};
+              `}
+              to="#afisha"
+            >
+              <ButtonOutlinedBlock>Афиша</ButtonOutlinedBlock>
+            </Link>
             {index.categories.map(category => (
               <Link
                 className={css`
@@ -88,7 +96,10 @@ export default ({ data, location }) => {
               Новое
             </h2>
             <Row>
-              {articles.slice(0, 4).map(({ node: article }) => (
+              {articles
+                .filter(({ node })  => node.data.category !== 'afisha')
+                .slice(0, 4)
+                .map(({ node: article }) => (
                 <Column key={uuid()}>
                   <PreviewCard {...{ article }} key={uuid()} />
                 </Column>
@@ -109,6 +120,26 @@ export default ({ data, location }) => {
                 </span>
               </Link>
             </div>
+          </>
+          {/* Afisha */}
+          <>
+            <div id="afisha" />
+            <h2
+              className={css`
+                ${Heading3};
+                ${tw(['mb-q48', 'mt-q72', 'text-center'])};
+              `}
+            >
+              Афиша
+            </h2>
+            <Row className={css`${tw(['justify-center'])}`}>
+              {articles
+                .filter(({ node })  => node.data.category === 'afisha')
+                .slice(0, 1)
+                .map(({ node: article }) => (
+                  <PreviewCard {...{ article }} key={uuid()} />
+              ))}
+            </Row>
           </>
           {/* Cateroties */}
           {index.categories.map(category => {
@@ -234,7 +265,10 @@ export default ({ data, location }) => {
 export const pageQuery = graphql`
   query IndexQuery {
     articles: allPrismicArticles(
-      sort: { order: DESC, fields: [first_publication_date] }
+      sort: {
+        order: DESC,
+        fields: [first_publication_date]
+      }
     ) {
       edges {
         node {

@@ -65,6 +65,27 @@ export const Menu = ({ toggle, toggledOn }) => (
             Новое
           </ButtonOutlinedBlock>
         </Link>
+        <Link
+          className={css`
+            ${tw([
+              'flex-auto',
+              'md:flex-1',
+              'mb-q8',
+              'px-q4',
+              'w-full',
+              'md:w-auto',
+            ])};
+          `}
+          to={`/afisha`}
+        >
+          <ButtonOutlinedBlock
+            className={css`
+              ${tw(['hover:bg-green'])};
+            `}
+          >
+            Афиша
+          </ButtonOutlinedBlock>
+        </Link>
         {index.data.categories.map(category => {
           const pageExist = pages.edges.some(
             ({ node }) => node.path.replace(/\//g, '') === category.categoryid

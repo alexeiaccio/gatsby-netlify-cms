@@ -34,7 +34,16 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const pages = await graphql(`
     {
-      articles: allPrismicArticles(limit: 2000) {
+      articles: allPrismicArticles(
+        limit: 2000,
+        filter: {
+          data: {
+            category: {
+              ne: "afisha"
+            }
+          }
+        }
+      ) {
         edges {
           node {
             fields {
