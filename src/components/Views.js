@@ -67,7 +67,7 @@ export const Views = compose(
         `}
         title={`${views} просмотр${views < 5 ? views === 1 ? '' : 'a' : 'ов'}`}
       >
-        {views > 1000 ? `${Math.floor(views / 1000)} тыс.` : views}
+        {views}
       </span>
     </AppearSpan>
     <AppearSpan inProp={!isNull(burned)}>
