@@ -6,6 +6,7 @@ import { graphql } from 'gatsby'
 
 import { ArticleHeader } from '../components/ArticleHeader'
 import { ArticleBody } from '../components/ArticleBody'
+import { Burn } from '../components/Burn'
 import { Context } from '../components/Context'
 import Layout from '../components/Layout'
 import { Heading1 } from '../components/Typography'
@@ -15,8 +16,8 @@ const getContext = slug => ctx => {
 }
 
 const Article = ({ data, location }) => {
-  const article = data.article.data
-  const slug = data.article.fields.slug
+  const article = data.article.edges[0].node.data
+  const slug = data.article.edges[0].node.fields.slug
   const context = getContext(slug)(data.context)
 
   return (
@@ -30,10 +31,11 @@ const Article = ({ data, location }) => {
           <h1 className={Heading1}>{article.title.text}</h1>
           <ArticleHeader
             {...{ article }}
-            date={data.article.first_publication_date}
+            date={data.article.edges[0].node.first_publication_date}
             {...{ location }}
           />
           <ArticleBody {...{ article }} />
+          <Burn {...{ location }} />
         </article>
         <Context {...{ context }} />
       </>
@@ -51,17 +53,25 @@ export default Article
 
 export const pageQuery = graphql`
   query AfishaQuery {
-    article: prismicArticles(data: {category: {eq: "afisha"}}) {
-      ...ArticleHeader
-      ...ArticleBody
-      first_publication_date
-      data {
-        title {
-          text
+    article: allPrismicArticles(
+      filter: { data: { category: { eq: "afisha" } } },
+      sort: { order: DESC, fields: [first_publication_date] },
+      limit: 1,
+    ) {
+      edges {
+        node {
+          ...ArticleHeader
+          ...ArticleBody
+          first_publication_date
+          data {
+            title {
+              text
+            }
+          }
+          fields {
+            slug
+          }
         }
-      }
-      fields {
-        slug
       }
     }
     context: allPrismicArticles(
