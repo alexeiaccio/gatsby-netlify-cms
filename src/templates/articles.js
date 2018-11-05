@@ -67,6 +67,7 @@ export const pageQuery = graphql`
       }
     }
     context: allPrismicArticles(
+      filter: { data: { category: { ne: "afisha" } } },
       sort: { order: DESC, fields: [first_publication_date] }
     ) {
       edges {
