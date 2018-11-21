@@ -110,32 +110,7 @@ export class ArticleBody extends Component {
 
   render() {
     const { article } = this.props
-    const nextItem = i => article.body[i + 1]
-    const previousItem = i => article.body[i - 1]
-    const isNextReference = i =>
-      nextItem(i) && nextItem(i).__typename === 'PrismicArticlesBodyReference'
-    const isPreviousReference = i =>
-      previousItem(i) &&
-      previousItem(i).__typename === 'PrismicArticlesBodyReference'
-    const isPreviousRedline = i =>
-      previousItem(i) &&
-      isPreviousReference(i) &&
-      previousItem(i).primary.referenceredline.includes('yes')
-    const withoutLastP = str => str.replace(/<p>.+<\/p>$/, '')
-    const withoutFirstP = str => str.replace(/^<p>.+<\/p>/, '')
-    const LastPContent = i => nextItem(i) && previousItem(i).primary.text.html
-    const FirstPContent = i =>
-      previousItem(i) && !isPreviousRedline(i) && nextItem(i).primary.text.html
-    const makeText = i => {
-      let res = article.body[i].primary.text.html
-      if (isPreviousReference(i) && !isPreviousRedline(i)) {
-        res = withoutFirstP(res)
-      }
-      if (isNextReference(i)) {
-        res = withoutLastP(res)
-      }
-      return res
-    }
+    
     return (
       <div>
         {article.body.map(({ items, primary, __typename }, i) => {
@@ -260,105 +235,18 @@ export class ArticleBody extends Component {
                 />
               )}
               {__typename === 'PrismicArticlesBodyText' &&
-                makeText(i) && (
-                  <HTMLContent
-                    className={css`
-                      ${RichText};
-                      & span {
-                        float: right;
-                        margin-top: -2.75rem;
-                      }
-                    `}
-                    content={makeText(i)}
-                    key={uuid()}
-                  />
-                )}
-
-              {__typename === 'PrismicArticlesBodyReference' && (
-                <div
-                  key={uuid()}
+                <HTMLContent
                   className={css`
                     ${RichText};
-                    ${tw(['mt-q24', 'leading-tight'])};
-                    ${!this.state.referenceIsOpen[i] && tw(['text-justify'])};
+                    & span {
+                      float: right;
+                      margin-top: -2.75rem;
+                    }
                   `}
-                >
-                  {LastPContent(i) && (
-                    <SpanHTMLContent key={uuid()} content={LastPContent(i)} />
-                  )}
-                  <span
-                    key={uuid()}
-                    className={css`
-                      ${tw(['cursor-pointer', 'text-green', 'text-list'])};
-                    `}
-                    onClick={() => this.toggleReference(i)}
-                    ref={this.refAnchors[i]}
-                    id={primary.referenceanchor.replace(/\s/g, '')}
-                  >
-                    <span key={uuid()}> [ </span>
-                    {primary.referenceanchor}
-                    <span key={uuid()}> ] </span>
-                  </span>
-                  <AppearSpanHundred
-                    key={uuid()}
-                    inProp={this.state.referenceIsOpen[i]}
-                  >
-                    <span
-                      className={css`
-                        ${RichTextSmall};
-                        ${tw([
-                          'bg-black',
-                          'cursor-pointer',
-                          'inline-flex',
-                          'flex-col',
-                          'my-q24',
-                          'p-q24',
-                          'text-white',
-                          'text-center',
-                          'w-full',
-                        ])};
-                        box-sizing: border-box;
-                        &::after {
-                          ${tw([
-                            'absolute',
-                            'bg-black',
-                            'hidden',
-                            'h-q24',
-                            'w-q24',
-                          ])};
-                          ${this.state.referenceIsOpen[i] && tw(['block'])};
-                          content: '';
-                          top: ${this.state.coords[i] &&
-                            this.state.coords[i].y}px;
-                          left: ${this.state.coords[i] &&
-                            this.state.coords[i].x}px;
-                          transform: rotateZ(45deg);
-                        }
-                        & span {
-                          ${tw(['inline-block'])};
-                        }
-                      `}
-                      key={uuid()}
-                      onClick={() => this.toggleReference(i)}
-                      ref={this.refRefs[i]}
-                    >
-                      <SpanHTMLContent
-                        content={`<p>${primary.referenceanchor} </p>${
-                          primary.referencetext.html
-                        }`}
-                        key={uuid()}
-                      />
-                    </span>
-                  </AppearSpanHundred>
-                  {!primary.referenceredline.includes('yes') &&
-                    FirstPContent(i) && (
-                      <SpanHTMLContent
-                        key={uuid()}
-                        content={FirstPContent(i)}
-                      />
-                    )}
-                </div>
-              )}
+                  content={primary.text.html}
+                  key={uuid()}
+                />
+              }
               {__typename === 'PrismicArticlesBodyListOfArticles' && (
                 <Row>
                   {items.map(({ articlelink }) => {
@@ -638,7 +526,6 @@ export const articleBodyQuery = graphql`
             referencetext {
               html
             }
-            referenceredline
           }
         }
         ... on PrismicArticlesBodyReferencesList {
