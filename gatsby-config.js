@@ -12,7 +12,7 @@ const tp = require('./src/utils/tp')
 module.exports = {
   siteMetadata: {
     title: 'Krapiva',
-    siteUrl: 'https://www.krapiva.org',
+    siteUrl: 'https://stage.krapiva.org',
   },
   plugins: [
     `gatsby-plugin-emotion`,
@@ -24,7 +24,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'krapiva-org',
+        repositoryName: 'krapiva-dev',
         accessToken: process.env.PRICMIC_TOKEN,
         linkResolver: linkResolver,
         htmlSerializer: ({ node, key, value }) => (
