@@ -25,7 +25,7 @@ const Article = ({ data, location }) => {
       <>
         <article
           className={css`
-            ${tw(['my-q48'])};
+            ${tw(['my-q48', 'relative'])};
           `}
         >
           <h1 className={Heading1}>{article.title.text}</h1>

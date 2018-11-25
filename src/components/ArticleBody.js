@@ -1,71 +1,132 @@
 /* global tw */
 import React, { Fragment, Component, createRef } from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'react-emotion'
+import styled, { css } from 'react-emotion'
+import { delay, throttle } from 'lodash'
 
-import { AppearSpanHundred } from './Appear'
+import { Appear } from './Appear'
 import { PreviewCard } from './Cards'
 import { HTMLContent, SpanHTMLContent } from './Content'
 import { Column, Row } from './Grid'
 import { Img } from './Img'
 import { MediaLink } from './MediaLink'
 import { RichText, RichTextSmall } from './RichText'
+import TextWithReference from './TextWithReference'
 import { LeadText } from './Typography'
 import { uuid } from '../utils'
 
 import Next from '../img/next.svg'
 
+const Reference = styled('div')`
+  ${RichTextSmall};
+  ${tw([
+    'absolute',
+    'bg-black',
+    'px-q24',
+    'text-center',
+    'text-white',
+    'w-full',
+  ])};
+  top: ${({ coords }) => parseInt(coords.top) + parseInt(coords.height) + 24}px;
+  &:before {
+    ${tw(['absolute', 'bg-black', 'block', 'h-q24', 'w-q24'])};
+    content: '';
+    left: ${({ coords }) => parseInt(coords.left) < 6 ? 6
+      : parseInt(coords.left) > parseInt(coords.width) - 24
+        ? parseInt(coords.width) - 30
+        : parseInt(coords.left) - 2
+    }px;
+    top: -11px;
+    transform: rotateZ(45deg);
+  }
+`
+
 export class ArticleBody extends Component {
   constructor(props) {
     super(props)
-    this.refAnchors = props.article.body.map((_, i) => createRef())
-    this.refRefs = props.article.body.map((_, i) => createRef())
+    this.textRefs = props.article.body.map(() => createRef())
+    this.getCoords = throttle(this.handleResize, 100)
     this.state = {
       sliders: Array.from(props.article.body, () => 0),
-      referenceIsOpen: {},
-      coords: {},
+      referenceIsOpen: null,
+      references: {}
     }
   }
 
   componentDidMount() {
+    delay(this.handleResize, 600)
     if (window !== 'undefined') {
-      window.addEventListener('resize', this.getCoords)
-      this.getCoords()
+      window.addEventListener('resize', this.handleResize)
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.referenceIsOpen !== this.state.referenceIsOpen) {
+      this.handleReference()
+    }
+  }
+  
   componentWillUnmount() {
-    window.removeEventListener('resize', this.getCoords)
+    this.textRefs.forEach(({ current }) => {
+      if (current) {
+        const references = current.querySelectorAll('span[data-type="reference"]')
+        if (references.length) {
+          for (let node of references) {
+            node.removeEventListener('click', this.toggleReference)
+          }
+        }
+      }
+    })
+    if (window !== 'undefined') {
+      window.removeEventListener('resize', this.handleResize)
+    }
   }
 
-  getCoords = () => {
-    let newCoords = {}
-    this.refAnchors.forEach(({ current }, i) => {
-      if (current && this.refRefs[i].current) {
-        const leftBorder =
-          current.offsetLeft - this.refRefs[i].current.offsetLeft
-        const rightBorder =
-          this.refRefs[i].current.offsetLeft +
-          this.refRefs[i].current.offsetWidth -
-          (current.offsetLeft + current.offsetWidth)
-        newCoords = Object.assign(newCoords, {
-          [i]: {
-            x:
-              leftBorder < 6
-                ? this.refRefs[i].current.offsetLeft + 5
-                : rightBorder < 13
-                  ? this.refRefs[i].current.offsetLeft +
-                    this.refRefs[i].current.offsetWidth -
-                    29
-                  : current.offsetLeft + 10 - current.offsetWidth / 2,
-            y: current.offsetTop + 14 + current.offsetHeight,
-          },
-        })
+  handleScroll = ref => {
+    if (window !== undefined) {
+      window.scrollTo({
+        top: this.state.references[ref].top,
+        behavior: 'smooth',
+      })
+    }
+  }
+
+  handleResize = () => {
+    let newReferences = {}
+    this.textRefs.forEach(({ current }) => {
+      if (current) {
+        const references = current.querySelectorAll('span[data-type="reference"]')
+        if (references.length) {
+          for (let node of references) {
+            node.textContent = `[${node.textContent}]`
+            newReferences = {
+              ...newReferences,
+              [node.dataset.href]: { 
+                height: node.offsetHeight,
+                left: node.offsetLeft,
+                top: node.offsetTop,
+                width: node.parentNode.offsetWidth,
+              }
+            }
+          }
+        }
       }
-      return false
     })
-    this.setState({
-      coords: newCoords,
+    this.setState({ references: newReferences },
+      () => this.handleReference())
+  }
+
+  handleReference = () => {
+    this.textRefs.forEach(({ current }) => {
+      if (current) {
+        const references = current.querySelectorAll('span[data-type="reference"]')
+        if (references.length) {
+          for (let node of references) {
+            node.addEventListener('click', () => this.toggleReference(node.dataset.href))
+            node.textContent = `[${node.textContent}]`            
+          }
+        }
+      }
     })
   }
 
@@ -99,43 +160,12 @@ export class ArticleBody extends Component {
 
   toggleReference = i => {
     const { referenceIsOpen } = this.state
-    this.setState({
-      referenceIsOpen: {
-        ...referenceIsOpen,
-        [i]: referenceIsOpen[i] ? !referenceIsOpen[i] : true,
-      },
-    })
-    setTimeout(() => this.getCoords(), 0)
+    this.setState({ referenceIsOpen: referenceIsOpen === i ? null : i })
   }
 
   render() {
     const { article } = this.props
-    const nextItem = i => article.body[i + 1]
-    const previousItem = i => article.body[i - 1]
-    const isNextReference = i =>
-      nextItem(i) && nextItem(i).__typename === 'PrismicArticlesBodyReference'
-    const isPreviousReference = i =>
-      previousItem(i) &&
-      previousItem(i).__typename === 'PrismicArticlesBodyReference'
-    const isPreviousRedline = i =>
-      previousItem(i) &&
-      isPreviousReference(i) &&
-      previousItem(i).primary.referenceredline.includes('yes')
-    const withoutLastP = str => str.replace(/<p>.+<\/p>$/, '')
-    const withoutFirstP = str => str.replace(/^<p>.+<\/p>/, '')
-    const LastPContent = i => nextItem(i) && previousItem(i).primary.text.html
-    const FirstPContent = i =>
-      previousItem(i) && !isPreviousRedline(i) && nextItem(i).primary.text.html
-    const makeText = i => {
-      let res = article.body[i].primary.text.html
-      if (isPreviousReference(i) && !isPreviousRedline(i)) {
-        res = withoutFirstP(res)
-      }
-      if (isNextReference(i)) {
-        res = withoutLastP(res)
-      }
-      return res
-    }
+    
     return (
       <div>
         {article.body.map(({ items, primary, __typename }, i) => {
@@ -260,105 +290,46 @@ export class ArticleBody extends Component {
                 />
               )}
               {__typename === 'PrismicArticlesBodyText' &&
-                makeText(i) && (
-                  <HTMLContent
-                    className={css`
-                      ${RichText};
-                      & span {
-                        float: right;
-                        margin-top: -2.75rem;
-                      }
-                    `}
-                    content={makeText(i)}
-                    key={uuid()}
-                  />
-                )}
-
-              {__typename === 'PrismicArticlesBodyReference' && (
-                <div
-                  key={uuid()}
+                <TextWithReference
                   className={css`
                     ${RichText};
-                    ${tw(['mt-q24', 'leading-tight'])};
-                    ${!this.state.referenceIsOpen[i] && tw(['text-justify'])};
+                    & .reference {
+                      ${tw(['cursor-pointer', 'text-green-dark'])};
+                    }
                   `}
-                >
-                  {LastPContent(i) && (
-                    <SpanHTMLContent key={uuid()} content={LastPContent(i)} />
-                  )}
-                  <span
+                  content={primary.text.html}
+                  contentRef={this.textRefs[i]}
+                  key={uuid()}
+                />
+              }
+              {__typename === 'PrismicArticlesBodyReference' &&
+                <Appear inProp={this.state.referenceIsOpen === primary.referenceanchor}>
+                  <Reference
+                    coords={this.state.references[primary.referenceanchor] ||
+                      { height: 0, left: 0, top: 0 }}
                     key={uuid()}
-                    className={css`
-                      ${tw(['cursor-pointer', 'text-green', 'text-list'])};
-                    `}
-                    onClick={() => this.toggleReference(i)}
-                    ref={this.refAnchors[i]}
-                    id={primary.referenceanchor.replace(/\s/g, '')}
                   >
-                    <span key={uuid()}> [ </span>
-                    {primary.referenceanchor}
-                    <span key={uuid()}> ] </span>
-                  </span>
-                  <AppearSpanHundred
-                    key={uuid()}
-                    inProp={this.state.referenceIsOpen[i]}
-                  >
-                    <span
+                    <h5 key={uuid()}>[ {primary.referenceanchor} ]</h5>
+                    <HTMLContent
+                      content={primary.referencetext.html} key={uuid()} />
+                    <div
                       className={css`
-                        ${RichTextSmall};
                         ${tw([
-                          'bg-black',
                           'cursor-pointer',
-                          'inline-flex',
-                          'flex-col',
-                          'my-q24',
-                          'p-q24',
-                          'text-white',
-                          'text-center',
-                          'w-full',
-                        ])};
-                        box-sizing: border-box;
-                        &::after {
-                          ${tw([
-                            'absolute',
-                            'bg-black',
-                            'hidden',
-                            'h-q24',
-                            'w-q24',
-                          ])};
-                          ${this.state.referenceIsOpen[i] && tw(['block'])};
-                          content: '';
-                          top: ${this.state.coords[i] &&
-                            this.state.coords[i].y}px;
-                          left: ${this.state.coords[i] &&
-                            this.state.coords[i].x}px;
-                          transform: rotateZ(45deg);
-                        }
-                        & span {
-                          ${tw(['inline-block'])};
-                        }
+                          'font-montserrat',
+                          'font-medium',
+                          'py-q20',
+                          'text-xxs',
+                          'text-green',
+                          'uppercase',
+                        ])}
                       `}
+                      onClick={this.toggleReference}
                       key={uuid()}
-                      onClick={() => this.toggleReference(i)}
-                      ref={this.refRefs[i]}
-                    >
-                      <SpanHTMLContent
-                        content={`<p>${primary.referenceanchor} </p>${
-                          primary.referencetext.html
-                        }`}
-                        key={uuid()}
-                      />
-                    </span>
-                  </AppearSpanHundred>
-                  {!primary.referenceredline.includes('yes') &&
-                    FirstPContent(i) && (
-                      <SpanHTMLContent
-                        key={uuid()}
-                        content={FirstPContent(i)}
-                      />
-                    )}
-                </div>
-              )}
+                    >закрыть</div>
+                  </Reference>
+                </Appear>
+              }
               {__typename === 'PrismicArticlesBodyListOfArticles' && (
                 <Row>
                   {items.map(({ articlelink }) => {
@@ -471,17 +442,17 @@ export class ArticleBody extends Component {
                     )
                     .map(({ primary }) => (
                       <p key={uuid()}>
-                        <a
-                          href={`#${primary.referenceanchor.replace(
-                            /\s/g,
-                            ''
-                          )}`}
+                        <span
+                          className={css`
+                            ${tw(['cursor-pointer', 'text-green-dark'])};
+                          `}
+                          onClick={() => this.handleScroll(primary.referenceanchor)}
                           key={uuid()}
                         >
                           <span key={uuid()}>[ </span>
                           {primary.referenceanchor}
                           <span key={uuid()}> ]</span>
-                        </a>
+                        </span>
                         <span key={uuid()}> </span>
                         <SpanHTMLContent
                           content={primary.referencetext.html}
@@ -638,7 +609,6 @@ export const articleBodyQuery = graphql`
             referencetext {
               html
             }
-            referenceredline
           }
         }
         ... on PrismicArticlesBodyReferencesList {
