@@ -25,6 +25,7 @@ const Reference = styled('div')`
     'px-q24',
     'text-center',
     'text-white',
+    'w-full',
   ])};
   top: ${({ coords }) => parseInt(coords.top) + parseInt(coords.height) + 24}px;
   &:before {
