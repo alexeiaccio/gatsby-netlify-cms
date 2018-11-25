@@ -294,7 +294,7 @@ export class ArticleBody extends Component {
                   className={css`
                     ${RichText};
                     & .reference {
-                      ${tw(['cursor-pointer', 'text-green'])};
+                      ${tw(['cursor-pointer', 'text-green-dark'])};
                     }
                   `}
                   content={primary.text.html}
@@ -444,7 +444,7 @@ export class ArticleBody extends Component {
                       <p key={uuid()}>
                         <span
                           className={css`
-                            ${tw(['cursor-pointer', 'text-green'])};
+                            ${tw(['cursor-pointer', 'text-green-dark'])};
                           `}
                           onClick={() => this.handleScroll(primary.referenceanchor)}
                           key={uuid()}
