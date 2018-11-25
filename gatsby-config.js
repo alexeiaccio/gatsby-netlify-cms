@@ -12,7 +12,7 @@ const tp = require('./src/utils/tp')
 module.exports = {
   siteMetadata: {
     title: 'Krapiva',
-    siteUrl: 'https://stage.krapiva.org',
+    siteUrl: 'https://www.krapiva.org',
   },
   plugins: [
     `gatsby-plugin-emotion`,
@@ -24,7 +24,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'krapiva-dev',
+        repositoryName: 'krapiva-org',
         accessToken: process.env.PRICMIC_TOKEN,
         linkResolver: linkResolver,
         htmlSerializer: ({ node, key, value }) => (
@@ -37,11 +37,15 @@ module.exports = {
             case Elements.paragraph:
               return `<p>${tp.execute(children.join(''))}</p>`
             case Elements.hyperlink:
-              const target = element.data.target
-                ? `target="${element.data.target}" rel="noopener noreferrer"`
-                : ''
-              const linkUrl = PrismicDOM.Link.url(element.data, linkResolver)
-              return `<a class="link" ${target} href="${linkUrl}">${content}</a>`
+              if (element.data.type === 'reference') {
+                return `<span class="reference" data-type="reference" data-href=${content}>${content}</span>`
+              } else {
+                const target = element.data.target
+                  ? `target="${element.data.target}" rel="noopener noreferrer"`
+                  : ''
+                const linkUrl = PrismicDOM.Link.url(element.data, doc => doc.slug)
+                return `<a class="link" ${target} href="${linkUrl}">${content}</a>`
+              }
             default:
               return null
           }
@@ -59,22 +63,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
     },
-    /* {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        host: 'https://www.krapiva.org',
-        sitemap: 'https://www.krapiva.org/sitemap.xml',
-        resolveEnv: () => process.env.GATSBY_ENV,
-        env: {
-          development: {
-            policy: [{ userAgent: '*', disallow: ['/'] }],
-          },
-          production: {
-            policy: [{ userAgent: '*', allow: '/' }],
-          },
-        },
-      },
-    }, */
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
