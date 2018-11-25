@@ -6,7 +6,7 @@ import { startCase } from 'lodash'
 
 import { HTMLContent } from './Content'
 import {Img} from './Img'
-// import { Views } from './Views'
+import { Views } from './Views'
 import { getCategory, toLocalDate, uuid } from '../utils'
 import { makeAuthorPath } from '../utils/makePath'
 
@@ -37,7 +37,7 @@ export const ArticleHeader = ({ article, date, location }) => (
           ))
         )}
       </span>
-      {/* <Views {...{ location }} /> */}
+      <Views {...{ location }} />
     </div>
     <figure
       className={css`

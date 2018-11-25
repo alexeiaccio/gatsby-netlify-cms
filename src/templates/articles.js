@@ -9,7 +9,7 @@ import { ArticleBody } from '../components/ArticleBody'
 import { Context } from '../components/Context'
 import { Heading1 } from '../components/Typography'
 import Layout from '../components/Layout'
-// import { Burn } from '../components/Burn'
+import { Burn } from '../components/Burn'
 
 const getContext = slug => ctx => {
   return ctx.edges.filter(({ node }) => node.fields.slug === slug)
@@ -35,7 +35,7 @@ const Article = ({ data, location }) => {
             {...{ location }}
           />
           <ArticleBody {...{ article }} />
-          {/* <Burn {...{ location }} /> */}
+          <Burn {...{ location }} />
         </article>
         <Context {...{ context }} />
       </>
