@@ -26,7 +26,9 @@ export default ({ data, location }) => {
             Новые статьи
           </h1>
           <Row>
-            {articles.map(({ node: article }) => (
+            {articles
+              .filter(({ node })  => node.data.category !== 'documents')
+              .map(({ node: article }) => (
               <Column key={uuid()}>
                 <PreviewCard {...{ article }} key={uuid()} />
               </Column>

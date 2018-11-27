@@ -98,6 +98,7 @@ export default ({ data, location }) => {
             <Row>
               {articles
                 .filter(({ node })  => node.data.category !== 'afisha')
+                .filter(({ node })  => node.data.category !== 'documents')
                 .slice(0, 4)
                 .map(({ node: article }) => (
                 <Column key={uuid()}>

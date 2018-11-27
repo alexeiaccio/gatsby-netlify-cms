@@ -50,7 +50,7 @@ const categories = {
   places: 'места',
   archive: 'архив',
   opinions: 'мнения',
-  summaries: 'конспекты',
+  documents: 'документы',
   practice: 'практика письма',
   afisha  : 'афиша',
 }
