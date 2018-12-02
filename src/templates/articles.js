@@ -12,7 +12,8 @@ import Layout from '../components/Layout'
 import { Burn } from '../components/Burn'
 
 const getContext = slug => ctx => {
-  return ctx.edges.filter(({ node }) => node.fields.slug === slug)
+  return ctx.edges
+    .filter(({ node }) => node.fields.slug === slug)
 }
 
 const Article = ({ data, location }) => {
@@ -67,7 +68,13 @@ export const pageQuery = graphql`
       }
     }
     context: allPrismicArticles(
-      filter: { data: { category: { ne: "afisha" } } },
+      filter: {
+        data: {
+          category: {
+            regex: "/reviews|analitics|discussions|persons|places|archive|opinions|practice/"
+          }
+        }
+      },
       sort: { order: DESC, fields: [first_publication_date] }
     ) {
       edges {

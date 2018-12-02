@@ -269,7 +269,8 @@ export const pageQuery = graphql`
       sort: {
         order: DESC,
         fields: [first_publication_date]
-      }
+      },
+      limit: 40
     ) {
       edges {
         node {

@@ -27,7 +27,6 @@ export default ({ data, location }) => {
           </h1>
           <Row>
             {articles
-              .filter(({ node })  => node.data.category !== 'documents')
               .map(({ node: article }) => (
               <Column key={uuid()}>
                 <PreviewCard {...{ article }} key={uuid()} />
@@ -65,7 +64,7 @@ export const pageQuery = graphql`
       filter: {
         data: {
           category: {
-            ne: "afisha"
+            regex: "/reviews|analitics|discussions|persons|places|archive|opinions|practice/"
           }
         }
       }
