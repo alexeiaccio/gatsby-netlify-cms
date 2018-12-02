@@ -21,7 +21,7 @@ export const Context = ({ context }) => (
       Читать дальше
     </h2>
     <Row>
-      {context[0].previous ? (
+      {context[0] && context[0].previous ? (
         <Column>
           <PreviewCard article={context[0].previous} />
         </Column>
@@ -34,7 +34,7 @@ export const Context = ({ context }) => (
           <Placeholder />
         </Column>
       )}
-      {context[0].next ? (
+      {context[0] && context[0].next ? (
         <Column>
           <PreviewCard article={context[0].next} />
         </Column>
