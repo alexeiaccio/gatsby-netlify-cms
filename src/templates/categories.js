@@ -11,38 +11,66 @@ import { Column, Row } from '../components/Grid'
 import Layout from '../components/Layout'
 import { Heading1 } from '../components/Typography'
 import { getCategory, uuid } from '../utils'
+import { ArticleHeader } from '../components/ArticleHeader'
+import { ArticleBody } from '../components/ArticleBody'
 
 export default ({ data, location }) => {
-  const { edges: articles } = data.articles
+  const { edges } = data.articles
   const index = data.index.data
+  const article = edges[0].node.data
   const indexCategory = index.categories.filter(
-    ({ categoryid }) => categoryid === articles[0].node.data.category
+    ({ categoryid }) => categoryid === article.category
   )
+  const isAfisha = article.category === 'afisha'
+  const articles = isAfisha ? edges.slice(1) : edges
   const title = startCase(getCategory(location.pathname.replace(/\//g, '')))
 
+  console.log(article);
+  
   return (
     <Layout {...{ location }} {...{title}}>
       <>
-        <section>
-          <h1
-            className={css`
-              ${Heading1};
-              ${tw(['text-center', 'mb-q72', 'text-black'])};
-            `}
-          >
-            {title}
-          </h1>
-          <div
-            className={css`
-              ${tw(['my-q48', 'text-body', 'text-justify'])};
-            `}
-          >
-            {
-              <HTMLContent
-                content={indexCategory[0].categorydescription.html}
+        {isAfisha && (
+          <section>
+            <article
+              className={css`
+                ${tw(['my-q48'])};
+              `}
+            >
+              <h1 className={Heading1}>{article.title.text}</h1>
+              <ArticleHeader
+                {...{ article }}
+                date={edges[0].node.first_publication_date}
+                {...{ location }}
               />
-            }
-          </div>
+              <ArticleBody {...{ article }} />
+            </article>
+          </section>
+        )}
+        <section>
+          {!isAfisha && (
+            <>
+              <h1
+                className={css`
+                  ${Heading1};
+                  ${tw(['text-center', 'mb-q72', 'text-black'])};
+                `}
+              >
+                {title}
+              </h1>
+              <div
+                className={css`
+                  ${tw(['my-q48', 'text-body', 'text-justify'])};
+                `}
+              >
+                {
+                  <HTMLContent
+                    content={indexCategory[0].categorydescription.html}
+                  />
+                }
+              </div>
+            </>
+          )}
           <Row>
             {articles.map(({ node: article }) => (
               <Column key={uuid()}>
@@ -79,6 +107,8 @@ export const pageQuery = graphql`
       edges {
         node {
           ...ArticleHeader
+          ...ArticleBody
+          first_publication_date
           fields {
             slug
           }

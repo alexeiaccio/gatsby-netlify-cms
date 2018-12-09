@@ -26,9 +26,7 @@ export const PreviewCard = ({ article }) => (
       }
     `}
     title={article.data.title.text}
-    to={article.data.category.includes('afisha')
-      ? 'afisha'
-      : article.fields.slug}
+    to={article.fields.slug}
   >
     {article.data.image && <Img src={article.data.image} />}
     <div
