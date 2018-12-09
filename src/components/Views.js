@@ -2,7 +2,7 @@
 import React from 'react'
 import { css } from 'react-emotion'
 import { compose, lifecycle, pure } from 'recompose'
-import { isNull } from 'lodash'
+import { isNull, debounce } from 'lodash'
 import 'whatwg-fetch'
 
 import { AppearSpan } from './Appear'
@@ -35,12 +35,17 @@ export const Views = compose(
         .catch(error => console.log('parsing failed', error))
     },
     componentDidMount() {
-      this.fetch(this.props)
+      this.debounsedFetch = debounce(this.fetch, 500)
+      this.debounsedFetch(this.props)
     },
     componentDidUpdate(prevProps) {
+      this.debounsedFetch.cancel()
       prevProps !== this.props && this.setState({ views: null, burned: null })
-      prevProps !== this.props && this.fetch(this.props)
+      prevProps !== this.props && this.debounsedFetch(this.props)
     },
+    componentWillUnmount() {
+      this.debounsedFetch.cancel()
+    }
   })
 )(({ burned, views }) => (
   <>

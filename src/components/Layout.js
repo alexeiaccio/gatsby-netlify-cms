@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { css } from 'react-emotion'
 import { injectGlobal } from 'emotion'
 import { compose, lifecycle, pure } from 'recompose'
+import { debounce } from 'lodash'
 import 'whatwg-fetch'
 
 import { Footer } from './Footer'
@@ -39,13 +40,18 @@ const enhance = compose(
         .catch(error => console.log('parsing failed', error))
     },
     componentDidMount() {
-      process.env.NODE_ENV === 'production' && this.fetch(this.props)      
+      this.debounsedFetch = debounce(this.fetch, 10000)
+      process.env.NODE_ENV === 'production' && this.debounsedFetch(this.props)
     },
     componentDidUpdate(prevProps) {
+      this.debounsedFetch.cancel()
       process.env.NODE_ENV === 'production' &&
       prevProps !== this.props &&
-      this.fetch(this.props)
+      this.debounsedFetch(this.props)
     },
+    componentWillUnmount() {
+      this.debounsedFetch.cancel()
+    }
   })
 )
 

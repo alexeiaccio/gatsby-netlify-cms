@@ -1,7 +1,7 @@
 /* global tw */
 import React, { Component } from 'react'
 import { css } from 'react-emotion'
-import { add, throttle, isNull } from 'lodash'
+import { add, throttle, isNull, debounce } from 'lodash'
 import 'whatwg-fetch'
 
 import { AppearSpan } from './Appear'
@@ -16,6 +16,7 @@ export class Burn extends Component {
       clickCount: 0,
       clicked: false,
     }
+    this.burn = debounce(this.burn, 1000)
   }
 
   async burn() {
