@@ -24,8 +24,6 @@ export default ({ data, location }) => {
   const isAfisha = article.category === 'afisha'
   const articles = isAfisha ? edges.slice(1) : edges
   const title = startCase(getCategory(location.pathname.replace(/\//g, '')))
-
-  console.log(article);
   
   return (
     <Layout {...{ location }} {...{title}}>
