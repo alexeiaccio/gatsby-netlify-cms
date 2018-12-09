@@ -20,6 +20,7 @@ const Article = ({ data, location }) => {
   const article = data.article.data
   const slug = data.article.fields.slug
   const context = getContext(slug)(data.context)
+  const isAfisha = article.category === 'afisha'
 
   return (
     <Layout image={article.image} {...{ location }} title={article.title.text}>
@@ -38,7 +39,7 @@ const Article = ({ data, location }) => {
           <ArticleBody {...{ article }} />
           <Burn {...{ location }} />
         </article>
-        <Context {...{ context }} />
+        {!isAfisha && <Context {...{ context }} />}
       </>
     </Layout>
   )

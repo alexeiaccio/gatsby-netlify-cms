@@ -26,7 +26,7 @@ export default ({ data, location }) => {
   const title = startCase(getCategory(location.pathname.replace(/\//g, '')))
   
   return (
-    <Layout {...{ location }} {...{title}}>
+    <Layout image={article.image} {...{ location }} {...{title}}>
       <>
         {isAfisha && (
           <section>
