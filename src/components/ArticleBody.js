@@ -31,11 +31,12 @@ const Reference = styled('div')`
   &:before {
     ${tw(['absolute', 'bg-black', 'block', 'h-q24', 'w-q24'])};
     content: '';
-    left: ${({ coords }) => parseInt(coords.left) < 6 ? 6
-      : parseInt(coords.left) > parseInt(coords.width) - 24
+    left: ${({ coords }) =>
+      parseInt(coords.left) < 6
+        ? 6
+        : parseInt(coords.left) > parseInt(coords.width) - 24
         ? parseInt(coords.width) - 30
-        : parseInt(coords.left) - 2
-    }px;
+        : parseInt(coords.left) - 2}px;
     top: -11px;
     transform: rotateZ(45deg);
   }
@@ -49,7 +50,7 @@ export class ArticleBody extends Component {
     this.state = {
       sliders: Array.from(props.article.body, () => 0),
       referenceIsOpen: null,
-      references: {}
+      references: {},
     }
   }
 
@@ -65,11 +66,13 @@ export class ArticleBody extends Component {
       this.handleReference()
     }
   }
-  
+
   componentWillUnmount() {
     this.textRefs.forEach(({ current }) => {
       if (current) {
-        const references = current.querySelectorAll('span[data-type="reference"]')
+        const references = current.querySelectorAll(
+          'span[data-type="reference"]'
+        )
         if (references.length) {
           for (let node of references) {
             node.removeEventListener('click', this.toggleReference)
@@ -95,35 +98,40 @@ export class ArticleBody extends Component {
     let newReferences = {}
     this.textRefs.forEach(({ current }) => {
       if (current) {
-        const references = current.querySelectorAll('span[data-type="reference"]')
+        const references = current.querySelectorAll(
+          'span[data-type="reference"]'
+        )
         if (references.length) {
           for (let node of references) {
             node.textContent = `[${node.textContent}]`
             newReferences = {
               ...newReferences,
-              [node.dataset.href]: { 
+              [node.dataset.href]: {
                 height: node.offsetHeight,
                 left: node.offsetLeft,
                 top: node.offsetTop,
                 width: node.parentNode.offsetWidth,
-              }
+              },
             }
           }
         }
       }
     })
-    this.setState({ references: newReferences },
-      () => this.handleReference())
+    this.setState({ references: newReferences }, () => this.handleReference())
   }
 
   handleReference = () => {
     this.textRefs.forEach(({ current }) => {
       if (current) {
-        const references = current.querySelectorAll('span[data-type="reference"]')
+        const references = current.querySelectorAll(
+          'span[data-type="reference"]'
+        )
         if (references.length) {
           for (let node of references) {
-            node.addEventListener('click', () => this.toggleReference(node.dataset.href))
-            node.textContent = `[${node.textContent}]`            
+            node.addEventListener('click', () =>
+              this.toggleReference(node.dataset.href)
+            )
+            node.textContent = `[${node.textContent}]`
           }
         }
       }
@@ -133,13 +141,8 @@ export class ArticleBody extends Component {
   previous = count => {
     const sliderLength = this.props.article.body[count].items.length - 1
     this.setState({
-      sliders: this.state.sliders.map(
-        (x, i) =>
-          i === count
-            ? this.state.sliders[count] > 0
-              ? x - 1
-              : sliderLength
-            : x
+      sliders: this.state.sliders.map((x, i) =>
+        i === count ? (this.state.sliders[count] > 0 ? x - 1 : sliderLength) : x
       ),
     })
   }
@@ -147,13 +150,8 @@ export class ArticleBody extends Component {
   next = count => {
     const sliderLength = this.props.article.body[count].items.length - 1
     this.setState({
-      sliders: this.state.sliders.map(
-        (x, i) =>
-          i === count
-            ? this.state.sliders[count] < sliderLength
-              ? x + 1
-              : 0
-            : x
+      sliders: this.state.sliders.map((x, i) =>
+        i === count ? (this.state.sliders[count] < sliderLength ? x + 1 : 0) : x
       ),
     })
   }
@@ -165,7 +163,7 @@ export class ArticleBody extends Component {
 
   render() {
     const { article } = this.props
-    
+
     return (
       <div>
         {article.body.map(({ items, primary, __typename }, i) => {
@@ -178,7 +176,11 @@ export class ArticleBody extends Component {
                   `}
                   key={uuid()}
                 >
-                  <Img src={primary.imageimage} key={uuid()} />
+                  <Img
+                    imgStyle={{ objectFit: 'contain' }}
+                    src={primary.imageimage}
+                    key={uuid()}
+                  />
                   <figcaption
                     className={css`
                       ${tw(['italic', 'mb-q48', 'text-center', 'text-list'])};
@@ -289,7 +291,7 @@ export class ArticleBody extends Component {
                   key={uuid()}
                 />
               )}
-              {__typename === 'PrismicArticlesBodyText' &&
+              {__typename === 'PrismicArticlesBodyText' && (
                 <TextWithReference
                   className={css`
                     ${RichText};
@@ -301,17 +303,28 @@ export class ArticleBody extends Component {
                   contentRef={this.textRefs[i]}
                   key={uuid()}
                 />
-              }
-              {__typename === 'PrismicArticlesBodyReference' &&
-                <Appear inProp={this.state.referenceIsOpen === primary.referenceanchor}>
+              )}
+              {__typename === 'PrismicArticlesBodyReference' && (
+                <Appear
+                  inProp={
+                    this.state.referenceIsOpen === primary.referenceanchor
+                  }
+                >
                   <Reference
-                    coords={this.state.references[primary.referenceanchor] ||
-                      { height: 0, left: 0, top: 0 }}
+                    coords={
+                      this.state.references[primary.referenceanchor] || {
+                        height: 0,
+                        left: 0,
+                        top: 0,
+                      }
+                    }
                     key={uuid()}
                   >
                     <h5 key={uuid()}>[ {primary.referenceanchor} ]</h5>
                     <HTMLContent
-                      content={primary.referencetext.html} key={uuid()} />
+                      content={primary.referencetext.html}
+                      key={uuid()}
+                    />
                     <div
                       className={css`
                         ${tw([
@@ -326,10 +339,12 @@ export class ArticleBody extends Component {
                       `}
                       onClick={this.toggleReference}
                       key={uuid()}
-                    >закрыть</div>
+                    >
+                      закрыть
+                    </div>
                   </Reference>
                 </Appear>
-              }
+              )}
               {__typename === 'PrismicArticlesBodyListOfArticles' && (
                 <Row>
                   {items.map(({ articlelink }) => {
@@ -446,7 +461,9 @@ export class ArticleBody extends Component {
                           className={css`
                             ${tw(['cursor-pointer', 'text-green-dark'])};
                           `}
-                          onClick={() => this.handleScroll(primary.referenceanchor)}
+                          onClick={() =>
+                            this.handleScroll(primary.referenceanchor)
+                          }
                           key={uuid()}
                         >
                           <span key={uuid()}>[ </span>
