@@ -27,6 +27,7 @@ const Reference = styled('div')`
     'text-white',
     'w-full',
   ])};
+  box-sizing: border-box;
   top: ${({ coords }) => parseInt(coords.top) + parseInt(coords.height) + 24}px;
   &:before {
     ${tw(['absolute', 'bg-black', 'block', 'h-q24', 'w-q24'])};
