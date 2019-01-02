@@ -209,6 +209,7 @@ export class ArticleBody extends Component {
                   >
                     {items[this.state.sliders[i]].sliderimage && (
                       <Img
+                        imgStyle={{ objectFit: 'contain' }}                      
                         src={items[this.state.sliders[i]].sliderimage}
                         key={uuid()}
                       />
