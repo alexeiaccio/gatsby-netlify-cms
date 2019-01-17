@@ -44,7 +44,7 @@ export default ({ data, location }) => {
                 ${ButtonOutlined};
               `}
             >
-              ⭠ Все статьи
+              ← Все статьи
             </span>
           </Link>
         </section>

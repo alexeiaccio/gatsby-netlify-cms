@@ -46,7 +46,7 @@ const categories = {
   reviews: 'ревью',
   analitics: 'аналитика',
   discussions: 'дискуссии',
-  persons: 'персоналии',
+  persons: 'итервью',
   places: 'места',
   archive: 'архив',
   opinions: 'мнения',
