@@ -2,12 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const PrismicDOM = require('prismic-dom')
-const Elements = PrismicDOM.RichText.Elements
-const linkResolver = () => doc => {
-  return `/${doc.slug}`
-}
-const tp = require('./src/utils/tp')
+const { htmlSerializer, linkResolver } = require('./src/utils/prismic') 
 
 module.exports = {
   siteMetadata: {
@@ -27,29 +22,7 @@ module.exports = {
         repositoryName: 'krapiva-org',
         accessToken: process.env.PRICMIC_TOKEN,
         linkResolver,
-        htmlSerializer: ({ node, key, value }) => (
-          type,
-          element,
-          content,
-          children
-        ) => {
-          switch (type) {
-            case Elements.paragraph:
-              return `<p>${tp.execute(children.join(''))}</p>`
-            case Elements.hyperlink:
-              if (element.data.type === 'reference') {
-                return `<span class="reference" data-type="reference" data-href=${content}>${content}</span>`
-              } else {
-                const target = element.data.target
-                  ? `target="${element.data.target}" rel="noopener noreferrer"`
-                  : ''
-                const linkUrl = PrismicDOM.Link.url(element.data, linkResolver)
-                return `<a class="link" ${target} href="${linkUrl}">${content}</a>`
-              }
-            default:
-              return null
-          }
-        },
+        htmlSerializer,
       },
     },
     {
