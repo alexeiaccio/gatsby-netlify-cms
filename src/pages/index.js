@@ -270,7 +270,7 @@ export const pageQuery = graphql`
         order: DESC,
         fields: [first_publication_date]
       },
-      limit: 40
+      limit: 200
     ) {
       edges {
         node {

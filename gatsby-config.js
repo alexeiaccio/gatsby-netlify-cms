@@ -23,7 +23,9 @@ module.exports = {
         accessToken: process.env.PRICMIC_TOKEN,
         linkResolver,
         htmlSerializer,
-        // shouldNormalizeImage: () => false,
+        // shouldNormalizeImage: ({ node, key, value }) => {
+        //   console.log()
+        // },
       },
     },
     {
