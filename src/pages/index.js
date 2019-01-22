@@ -20,7 +20,7 @@ export default ({ data, location }) => {
   const getFiltered = filter => xs =>
     xs
       .filter(({ node }) => node.data.category === filter)
-      .filter((_, i) => i < 4)
+      .slice(0, 4)
 
   return (
     <Layout {...{ index }} {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
