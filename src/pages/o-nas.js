@@ -49,7 +49,7 @@ const AboutPage = ({ data, location }) => {
             .filter(x => x.node.data.type === 'redsovet')
             .map(({ node }) => {
               const author = node.data
-              return <Author key={uuid()} {...{ author }} />
+              return <Author key={uuid()} {...{ author }} {...{ location }} />
             })}
         </div>
         <h2
@@ -76,7 +76,7 @@ const AboutPage = ({ data, location }) => {
             .filter(x => x.node.data.type === 'author')
             .map(({ node }) => {
               const author = node.data
-              return <Author key={uuid()} {...{ author }} />
+              return <Author key={uuid()} {...{ author }} {...{ location }} />
             })}
         </div>
       </>

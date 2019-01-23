@@ -12,6 +12,7 @@ import { uuid } from '../utils'
 
 export default ({ data, location }) => {
   const { edges: articles } = data.articles
+  
 
   return (
     <Layout {...{ location }} title="Новое" >

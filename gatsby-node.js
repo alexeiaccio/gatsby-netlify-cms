@@ -1,7 +1,5 @@
 const path = require('path')
-const { makePath, makeAuthorPath } = require('./src/utils/makePath')
-const lodash = require('lodash/fp')
-const { get, uniqBy } = lodash
+const { makePath, makeAuthorPath, getCategories } = require('./src/utils/makePath')
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
@@ -9,11 +7,12 @@ exports.createPages = async ({ actions, graphql }) => {
   const pageMaker = (type, data) => {
     data.map(({ node }) => {
       const { fields } = node
-      const { slug } = fields
+      const { slug, tags } = fields
       createPage({
         component: path.resolve(`src/templates/${type}.js`),
         context: {
           slug: slug,
+          tags: tags,
         },
         path: slug,
       })
@@ -42,9 +41,7 @@ exports.createPages = async ({ actions, graphql }) => {
             fields {
               slug
             }
-            data {
-              category
-            }
+            tags
           }
         }
       }
@@ -65,10 +62,8 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const { edges: articles } = pages.data.articles
   const { edges: authors } = pages.data.authors
-
-  const getCategoryPath = get(['node', 'data', 'category'])
-  const getCategoriesList = uniqBy(getCategoryPath)
-  const categories = getCategoriesList(articles).map(getCategoryPath)
+  
+  const categories = getCategories(articles)
 
   pageMaker('articles', articles)
   pageMaker('authors', authors)
@@ -79,21 +74,24 @@ exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
 
   if (node && node.internal.type === `PrismicArticles`) {
-    const { data, first_publication_date } = node
-    const value = makePath(data.title.text, first_publication_date)
+    const { data, first_publication_date, tags } = node
     createNodeField({
-      name: `slug`,
       node,
-      value,
+      name: `slug`,
+      value: makePath(data.title.text, first_publication_date),
+    })
+    createNodeField({
+      node,
+      name: `tags`,
+      value: tags.map(tag => makeAuthorPath(tag)),
     })
   }
   if (node && node.internal.type === `PrismicAuthors`) {
     const { data } = node
-    const value = makeAuthorPath(data.name)
     createNodeField({
-      name: `slug`,
       node,
-      value,
+      name: `slug`,
+      value: makeAuthorPath(data.name),
     })
   }
 }

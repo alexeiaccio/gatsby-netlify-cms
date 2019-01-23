@@ -352,8 +352,8 @@ export class ArticleBody extends Component {
                   {items.map(({ articlelink }) => {
                     const article = articlelink.document[0]
                     return (
-                      <Column>
-                        <PreviewCard {...{ article }} key={uuid()} />
+                      <Column key={uuid()}>
+                        <PreviewCard {...{ article }} />
                       </Column>
                     )
                   })}

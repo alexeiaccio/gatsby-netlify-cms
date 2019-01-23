@@ -19,13 +19,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'krapiva-org',
-        accessToken: process.env.PRICMIC_TOKEN,
+        repositoryName: process.env.PRISMIC_API,
+        accessToken: process.env.PRISMIC_TOKEN,
         linkResolver,
         htmlSerializer,
-        // shouldNormalizeImage: ({ node, key, value }) => {
-        //   console.log()
-        // },
       },
     },
     {

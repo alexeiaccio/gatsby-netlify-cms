@@ -87,7 +87,7 @@ export default ({ data, location }) => {
                 ${ButtonOutlined};
               `}
             >
-              ⭠ Все статьи
+              ← Все статьи
             </span>
           </Link>
         </section>
@@ -97,21 +97,19 @@ export default ({ data, location }) => {
 }
 
 export const pageQuery = graphql`
-  query CategoriesQuery($slug: String!) {
+  query CategoriesQuery($slug: [String]) {
     articles: allPrismicArticles(
-      filter: { data: { category: { eq: $slug } } }
+      filter: { fields: { tags: { in: $slug } } }
       sort: { order: DESC, fields: [first_publication_date] }
     ) {
       edges {
         node {
           ...ArticleHeader
           ...ArticleBody
-          first_publication_date
           fields {
             slug
           }
           data {
-            category
             title {
               text
             }
