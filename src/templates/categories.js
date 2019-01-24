@@ -65,7 +65,7 @@ export default ({ data, location }) => {
               >
                 {
                   <HTMLContent
-                    content={indexCategory[0].categorydescription.html}
+                    content={get('[0].categorydescription.html', indexCategory)}
                   />
                 }
               </div>
