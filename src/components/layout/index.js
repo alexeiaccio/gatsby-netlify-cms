@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
+import { TransitionPortal } from 'gatsby-plugin-transition-link'
 
 import globalStyles from './global-styles'
+import Navbar from '../Navbar'
 
 class Layout extends PureComponent {
   render() {
     return (
       <>
         <Global styles={globalStyles} />
+        <TransitionPortal level="top">
+          <Navbar />
+        </TransitionPortal>
         <div
           css={css`
             ${tw([
-              'bg-white',
               'border-4',
               'md:border-8',
               'border-black',

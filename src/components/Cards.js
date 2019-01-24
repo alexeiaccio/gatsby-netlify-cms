@@ -44,7 +44,7 @@ export const PreviewCard = ({ article, location }) => (
       {article.tags &&
         article.tags
           .filter(tag => tag.search(/\d/) === -1)
-          .map(tag => <span> {tag} ·</span>)}
+          .map(tag => <span key={uuid()}> {tag} ·</span>)}
       <span> {toLocalDate(article.first_publication_date)}</span>
       <span>
         <span> ·</span>
@@ -53,7 +53,7 @@ export const PreviewCard = ({ article, location }) => (
             ({ author }) =>
               author &&
               author.document.map(({ data }) => (
-                <span key={uuid}> {data.name} ·</span>
+                <span key={uuid()}> {data.name} ·</span>
               ))
           )}
       </span>
