@@ -71,7 +71,6 @@ export const pageQuery = graphql`
             slug
           }
           data {
-            category
             title {
               text
             }

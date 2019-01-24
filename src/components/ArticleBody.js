@@ -550,7 +550,6 @@ export const articleBodyQuery = graphql`
                   title {
                     text
                   }
-                  category
                   authors {
                     author {
                       document {

@@ -81,7 +81,6 @@ export const articleHeaderQuery = graphql`
     first_publication_date
     tags
     data {
-      category
       authors {
         author {
           document {

@@ -24,7 +24,7 @@ export default ({ data, location }) => {
       data.authors.some(
         ({ author }) => get(author, 'document[0].data.name') === thatAuthor.name
       )
-    ).filter(({ node: { data } }) => data.category !== 'archive')
+    ).filter(({ node }) => node.tags.some(tag => tag !== 'Архив'))
 
   return (
     <Layout {...{ location }} title={author.name}>
@@ -140,7 +140,6 @@ export const pageQuery = graphql`
             slug
           }
           data {
-            category
             authors {
               author {
                 document {

@@ -294,7 +294,6 @@ export const pageQuery = graphql`
           text
         }
         categories {
-          categoryid
           categorytitle {
             text
           }
