@@ -140,15 +140,6 @@ export const pageQuery = graphql`
             slug
           }
           data {
-            authors {
-              author {
-                document {
-                  data {
-                    name
-                  }
-                }
-              }
-            }
             title {
               text
             }

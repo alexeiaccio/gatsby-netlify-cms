@@ -46,7 +46,7 @@ export const PreviewCard = ({ article, location }) => (
         article.tags
           .filter(tag => tag.search(/\d/) === -1)
           .map(tag => <span> {tag} ·</span>)}
-      <span>{toLocalDate(article.first_publication_date)}</span>
+      <span> {toLocalDate(article.first_publication_date)}</span>
       <span>
         <span> ·</span>
         {article.data.authors &&
