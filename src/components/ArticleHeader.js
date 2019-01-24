@@ -7,7 +7,7 @@ import { HTMLContent } from './Content'
 import { Img } from './Img'
 import { Views } from './Views'
 import { toLocalDate, uuid } from '../utils'
-import { makeAuthorPath } from '../utils/makePath'
+import { translite } from '../utils/makePath'
 
 export const ArticleHeader = ({ article, date, location, tags }) => (
   <div>
@@ -31,7 +31,7 @@ export const ArticleHeader = ({ article, date, location, tags }) => (
         tags.map(tag => (
           <Link
             key={uuid()}
-            to={makeAuthorPath(tag)}
+            to={translite(tag)}
             state={{ from: location.pathname }}
           >
             <span> {tag} ·</span>
@@ -47,7 +47,7 @@ export const ArticleHeader = ({ article, date, location, tags }) => (
               author.document.map(({ data }) => (
                 <Link
                   key={uuid()}
-                  to={makeAuthorPath(data.name)}
+                  to={translite(data.name)}
                   state={{ from: location.pathname }}
                 >
                   <span> {data.name} ·</span>

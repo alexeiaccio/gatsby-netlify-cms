@@ -1,5 +1,5 @@
 const path = require('path')
-const { makePath, makeAuthorPath, getCategories } = require('./src/utils/makePath')
+const { makePath, translite, getCategories } = require('./src/utils/makePath')
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
@@ -83,7 +83,7 @@ exports.onCreateNode = ({ node, actions }) => {
     createNodeField({
       node,
       name: `tags`,
-      value: tags.map(tag => makeAuthorPath(tag)),
+      value: tags.map(tag => translite(tag)),
     })
   }
   if (node && node.internal.type === `PrismicAuthors`) {
@@ -91,7 +91,7 @@ exports.onCreateNode = ({ node, actions }) => {
     createNodeField({
       node,
       name: `slug`,
-      value: makeAuthorPath(data.name),
+      value: translite(data.name),
     })
   }
 }

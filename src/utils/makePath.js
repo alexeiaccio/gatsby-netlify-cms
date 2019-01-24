@@ -162,14 +162,14 @@ const getThreeWords = text =>
 exports.makePath = (text, date) =>
   `${fromCyrillicToLatin(getThreeWords(text))}-${getDate(date)}`
 
-const makeAuthorPath = fromCyrillicToLatin
+const translite = fromCyrillicToLatin
 
 const getCategories = flowRight(
-  flatMap(makeAuthorPath),
+  flatMap(translite),
   filter(tag => tag.search(/\d/) === -1),
   uniq,
   flatMap(get(['node', 'tags']))
 )
 
-exports.makeAuthorPath = makeAuthorPath
+exports.translite = translite
 exports.getCategories = getCategories

@@ -8,7 +8,7 @@ import { Img } from './Img'
 import { RichTextSmall } from './RichText'
 import { Heading6 } from './Typography'
 import { uuid } from '../utils'
-import { makeAuthorPath } from '../utils/makePath'
+import { translite } from '../utils/makePath'
 
 export const Author = ({ author, location }) => (
   <div
@@ -17,7 +17,7 @@ export const Author = ({ author, location }) => (
       max-width: calc(50% - 2rem);
     `}
   >
-    <Link key={uuid} to={makeAuthorPath(author.name)} state={{from: location.pathname}}>
+    <Link key={uuid} to={translite(author.name)} state={{from: location.pathname}}>
       <Img
         className={css`
           ${tw(['rounded-full'])};

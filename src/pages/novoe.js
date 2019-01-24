@@ -62,13 +62,7 @@ export const pageQuery = graphql`
         fields: [first_publication_date] 
       },
       limit: 10,
-      filter: {
-        data: {
-          category: {
-            regex: "/reviews|analitics|discussions|persons|places|archive|opinions|practice/"
-          }
-        }
-      }
+      filter: { tags: { nin: "Афиша" } }
     ) {
       edges {
         node {

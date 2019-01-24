@@ -2,28 +2,30 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { css } from 'react-emotion'
-import { startCase } from 'lodash/fp'
+import { get } from 'lodash/fp'
 
-import { ButtonOutlined } from '../components/Buttons'
-import { PreviewCard } from '../components/Cards'
-import { HTMLContent } from '../components/Content'
-import { Column, Row } from '../components/Grid'
-import Layout from '../components/Layout'
-import { Heading1 } from '../components/Typography'
-import { getCategory, uuid } from '../utils'
 import { ArticleHeader } from '../components/ArticleHeader'
 import { ArticleBody } from '../components/ArticleBody'
+import { ButtonOutlined } from '../components/Buttons'
+import { Column, Row } from '../components/Grid'
+import { Heading1 } from '../components/Typography'
+import { HTMLContent } from '../components/Content'
+import Layout from '../components/Layout'
+import { PreviewCard } from '../components/Cards'
+import { uuid } from '../utils'
 
 export default ({ data, location }) => {
   const { edges } = data.articles
   const index = data.index.data
   const article = edges[0].node.data
   const indexCategory = index.categories.filter(
-    ({ categoryid }) => categoryid === article.category
+    ({ categorytitle }) => get('[0].node.tags', edges)
+      .some(tag => tag === categorytitle.text)
   )
-  const isAfisha = article.category === 'afisha'
+  const isAfisha = get('[0].node.tags', edges)
+    .some(tag => tag === 'Афиша')
   const articles = isAfisha ? edges.slice(1) : edges
-  const title = startCase(getCategory(location.pathname.replace(/\//g, '')))
+  const title = get('[0].categorytitle.text', indexCategory)
   
   return (
     <Layout image={article.image} {...{ location }} {...{title}}>
@@ -69,7 +71,7 @@ export default ({ data, location }) => {
               </div>
             </>
           )}
-          <Row>
+          <Row id="articles">
             {articles.map(({ node: article }) => (
               <Column key={uuid()}>
                 <PreviewCard {...{ article }} key={uuid()} />
@@ -123,7 +125,6 @@ export const pageQuery = graphql`
           text
         }
         categories {
-          categoryid
           categorytitle {
             text
           }

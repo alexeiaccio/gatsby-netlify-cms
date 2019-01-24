@@ -12,6 +12,7 @@ import Layout from '../components/Layout'
 import logo from '../img/logo.svg'
 import { Heading1, Heading3 } from '../components/Typography'
 import { uuid } from '../utils'
+import { translite } from '../utils/makePath'
 
 export default ({ data, location }) => {
   const { edges: articles } = data.articles
@@ -19,7 +20,7 @@ export default ({ data, location }) => {
   const index = data.index.data
   const getFiltered = filter => xs =>
     xs
-      .filter(({ node }) => node.data.category === filter)
+      .filter(({ node }) => node.tags.some(tag => tag === filter))
       .slice(0, 4)
 
   return (
@@ -77,9 +78,9 @@ export default ({ data, location }) => {
                   ${tw(['flex-1', 'mb-q8', 'px-q4'])};
                 `}
                 key={uuid()}
-                to={`#${category.categoryid}`}
+                to={`#${translite(category.categorytitle.text)}`}
               >
-                <ButtonOutlinedBlock key={uuid()}>
+                <ButtonOutlinedBlock>
                   {category.categorytitle.text}
                 </ButtonOutlinedBlock>
               </Link>
@@ -97,12 +98,11 @@ export default ({ data, location }) => {
             </h2>
             <Row>
               {articles
-                .filter(({ node })  => node.data.category !== 'afisha')
-                .filter(({ node })  => node.data.category !== 'documents')
+                .filter(({ node })  => node.tags.some(tag => tag !== 'Афиша'))
                 .slice(0, 4)
                 .map(({ node: article }) => (
                 <Column key={uuid()}>
-                  <PreviewCard {...{ article }} key={uuid()} />
+                  <PreviewCard {...{ article }} {...{ location }} />
                 </Column>
               ))}
             </Row>
@@ -135,19 +135,19 @@ export default ({ data, location }) => {
             </h2>
             <Row className={css`${tw(['justify-center'])}`}>
               {articles
-                .filter(({ node })  => node.data.category === 'afisha')
+                .filter(({ node })  => node.tags.some(tag => tag === 'Афиша'))
                 .slice(0, 1)
                 .map(({ node: article }) => (
-                  <PreviewCard {...{ article }} key={uuid()} />
+                  <PreviewCard {...{ article }} key={uuid()} {...{ location }} />
               ))}
             </Row>
           </>
           {/* Cateroties */}
           {index.categories.map(category => {
-            const filteredArticles = getFiltered(category.categoryid)(articles)
+            const filteredArticles = getFiltered(category.categorytitle.text)(articles)
             return (
               <Fragment key={uuid()}>
-                <div key={uuid()} id={category.categoryid} />
+                <div id={translite(category.categorytitle.text)} />
                 <h2
                   className={css`
                     ${Heading3};
@@ -172,7 +172,7 @@ export default ({ data, location }) => {
                   {filteredArticles.length > 0 ? (
                     filteredArticles.map(({ node: article }) => (
                       <Column key={uuid()}>
-                        <PreviewCard {...{ article }} key={uuid()} />
+                        <PreviewCard {...{ article }} key={uuid()} {...{ location }} />
                       </Column>
                     ))
                   ) : (

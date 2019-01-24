@@ -2,10 +2,11 @@
 import React from 'react'
 import { css } from 'react-emotion'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import { ArticleHeader } from '../components/ArticleHeader'
 import { ArticleBody } from '../components/ArticleBody'
+import { ButtonOutlined } from '../components/Buttons'
 import { Context } from '../components/Context'
 import { Heading1 } from '../components/Typography'
 import Layout from '../components/Layout'
@@ -20,7 +21,7 @@ const Article = ({ data, location }) => {
   const tags = data.article.tags.filter(tag => tag.search(/\d/) === -1)
   const slug = data.article.fields.slug
   const context = getContext(slug)(data.context)
-  const isAfisha = article.category === 'afisha'
+  const isAfisha = data.article.tags.some(tag => tag === 'Афиша')
 
   return (
     <Layout image={article.image} {...{ location }} title={article.title.text}>
@@ -41,6 +42,22 @@ const Article = ({ data, location }) => {
           <Burn {...{ location }} />
         </article>
         {!isAfisha && <Context {...{ context }} />}
+        {isAfisha && (
+          <Link
+            className={css`
+              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+            `}
+            to={'/afisha#articles'}
+          >
+            <span
+              className={css`
+                ${ButtonOutlined};
+              `}
+            >
+              ← Архив афиши
+            </span>
+          </Link>
+        )}
       </>
     </Layout>
   )
