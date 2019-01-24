@@ -155,8 +155,8 @@ const fromCyrillicToLatin = trslt(cyrillicToLatin)
 
 const getThreeWords = text =>
   words(text)
-    .filter(word => word.search(/\d/) === -1)
     .slice(0, 3)
+    .filter(word => word.search(/\d/) === -1)
     .join('-')
 
 exports.makePath = (text, date) =>

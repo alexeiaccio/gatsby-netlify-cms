@@ -14,6 +14,14 @@
 /zhurnal-krapiva-nulevoi-nomer-14-09-2018 /zhurnal-k-r-14-09-2018
 /zhurnal-krapiva-pervii-07-10-2018 /zhurnal-k-r-07-10-2018
 /zhurnal-krapiva-pervii-nomer-07-10-2018 /zhurnal-k-r-09-11-2018
+/new /novoe
+/reviews /revyu
+/analitics /analitika
+/discussions /diskussii
+/practice /praktiki-pisma
+/archive /arhiv
+/persons /intervyu
+/documents /dokumenti
 
 # Redirect default Netlify subdomain to primary domain
 https://krapiva.netlify.com/* https://www.krapiva.org/:splat 301!
