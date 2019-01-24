@@ -2,11 +2,10 @@
 import React from 'react'
 import { css } from 'react-emotion'
 import { Link } from 'gatsby'
-import { startCase } from 'lodash'
 
 import { Img, ImgHolder } from './Img'
 import { Heading6 } from './Typography'
-import { getCategory, toLocalDate, uuid } from '../utils'
+import { toLocalDate, uuid } from '../utils'
 
 export const Dummy = () => (
   <div
@@ -17,7 +16,7 @@ export const Dummy = () => (
   />
 )
 
-export const PreviewCard = ({ article }) => (
+export const PreviewCard = ({ article, location }) => (
   <Link
     className={css`
       ${tw(['text-black', 'hover:text-black', 'w-full'])};
@@ -43,17 +42,21 @@ export const PreviewCard = ({ article }) => (
       >
         {article.data.title.text}
       </h4>
-      <span>{startCase(getCategory(article.data.category))}</span>
-      <span> · </span>
+      {article.tags &&
+        article.tags
+          .filter(tag => tag.search(/\d/) === -1)
+          .map(tag => <span> {tag} ·</span>)}
       <span>{toLocalDate(article.first_publication_date)}</span>
       <span>
         <span> ·</span>
         {article.data.authors &&
-          article.data.authors.map(({ author }) =>
-            author && author.document.map(({ data }) => (
-              <span key={uuid}> {data.name} ·</span>
-            ))
-        )}
+          article.data.authors.map(
+            ({ author }) =>
+              author &&
+              author.document.map(({ data }) => (
+                <span key={uuid}> {data.name} ·</span>
+              ))
+          )}
       </span>
     </div>
   </Link>

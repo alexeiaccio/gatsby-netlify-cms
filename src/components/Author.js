@@ -1,25 +1,30 @@
 /* global tw */
 import React from 'react'
 import { css } from 'emotion'
+import { Link } from 'gatsby'
 
 import { HTMLContent } from './Content'
-import {Img} from './Img'
+import { Img } from './Img'
 import { RichTextSmall } from './RichText'
 import { Heading6 } from './Typography'
+import { uuid } from '../utils'
+import { translite } from '../utils/makePath'
 
-export const Author = ({ author }) => (
+export const Author = ({ author, location }) => (
   <div
     className={css`
       ${tw(['flex-no-shrink', 'mb-q72', 'mx-q16', 'text-black', 'w-full'])};
       max-width: calc(50% - 2rem);
     `}
   >
-    <Img
-      className={css`
-        ${tw(['rounded-full'])};
-      `}
-      src={author.avatar}
-    />
+    <Link key={uuid} to={translite(author.name)} state={{from: location.pathname}}>
+      <Img
+        className={css`
+          ${tw(['rounded-full'])};
+        `}
+        src={author.avatar}
+      />
+    </Link>
     <div
       className={css`
         ${tw(['sm:pl-q36'])};

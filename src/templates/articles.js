@@ -2,25 +2,26 @@
 import React from 'react'
 import { css } from 'react-emotion'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import { ArticleHeader } from '../components/ArticleHeader'
 import { ArticleBody } from '../components/ArticleBody'
+import { ButtonOutlined } from '../components/Buttons'
 import { Context } from '../components/Context'
 import { Heading1 } from '../components/Typography'
 import Layout from '../components/Layout'
 import { Burn } from '../components/Burn'
 
 const getContext = slug => ctx => {
-  return ctx.edges
-    .filter(({ node }) => node.fields.slug === slug)
+  return ctx.edges.filter(({ node }) => node.fields.slug === slug)
 }
 
 const Article = ({ data, location }) => {
   const article = data.article.data
+  const tags = data.article.tags.filter(tag => tag.search(/\d/) === -1)
   const slug = data.article.fields.slug
   const context = getContext(slug)(data.context)
-  const isAfisha = article.category === 'afisha'
+  const isAfisha = data.article.tags.some(tag => tag === 'Афиша')
 
   return (
     <Layout image={article.image} {...{ location }} title={article.title.text}>
@@ -35,11 +36,28 @@ const Article = ({ data, location }) => {
             {...{ article }}
             date={data.article.first_publication_date}
             {...{ location }}
+            {...{ tags }}
           />
           <ArticleBody {...{ article }} />
           <Burn {...{ location }} />
         </article>
         {!isAfisha && <Context {...{ context }} />}
+        {isAfisha && (
+          <Link
+            className={css`
+              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+            `}
+            to={'/afisha#articles'}
+          >
+            <span
+              className={css`
+                ${ButtonOutlined};
+              `}
+            >
+              ← Архив афиши
+            </span>
+          </Link>
+        )}
       </>
     </Layout>
   )
@@ -58,7 +76,6 @@ export const pageQuery = graphql`
     article: prismicArticles(fields: { slug: { eq: $slug } }) {
       ...ArticleHeader
       ...ArticleBody
-      first_publication_date
       data {
         title {
           text
@@ -69,13 +86,7 @@ export const pageQuery = graphql`
       }
     }
     context: allPrismicArticles(
-      filter: {
-        data: {
-          category: {
-            regex: "/reviews|analitics|discussions|persons|places|archive|opinions|practice/"
-          }
-        }
-      },
+      filter: { tags: { nin: "Афиша" } }
       sort: { order: DESC, fields: [first_publication_date] }
     ) {
       edges {
@@ -83,29 +94,10 @@ export const pageQuery = graphql`
           fields {
             slug
           }
-          first_publication_date
+          ...ArticleHeader
           data {
             title {
               text
-            }
-            category
-            authors {
-              author {
-                document {
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-            image {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 320, quality: 80) {
-                    ...GatsbyImageSharpFluid_tracedSVG
-                  }
-                }
-              }
             }
           }
         }
@@ -113,29 +105,10 @@ export const pageQuery = graphql`
           fields {
             slug
           }
-          first_publication_date
+          ...ArticleHeader
           data {
             title {
               text
-            }
-            category
-            authors {
-              author {
-                document {
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-            image {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 320, quality: 80) {
-                    ...GatsbyImageSharpFluid_tracedSVG
-                  }
-                }
-              }
             }
           }
         }

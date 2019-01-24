@@ -5,6 +5,7 @@ import { StaticQuery, Link, graphql } from 'gatsby'
 
 import { ButtonOutlinedBlock, ButtonOutlinedDisabled } from './Buttons'
 import { uuid } from '../utils'
+import { translite } from '../utils/makePath'
 
 export const Menu = ({ toggle, toggledOn }) => (
   <StaticQuery
@@ -20,7 +21,6 @@ export const Menu = ({ toggle, toggledOn }) => (
         index: prismicIndex {
           data {
             categories {
-              categoryid
               categorytitle {
                 text
               }
@@ -88,7 +88,7 @@ export const Menu = ({ toggle, toggledOn }) => (
         </Link>
         {index.data.categories.map(category => {
           const pageExist = pages.edges.some(
-            ({ node }) => node.path.replace(/\//g, '') === category.categoryid
+            ({ node }) => node.path.replace(/\//g, '') === translite(category.categorytitle.text)
           )
           return pageExist ? (
             <Link
@@ -96,7 +96,7 @@ export const Menu = ({ toggle, toggledOn }) => (
                 ${tw(['flex-1', 'mb-q8', 'px-q4'])};
               `}
               key={uuid()}
-              to={`${category.categoryid}`}
+              to={`/${translite(category.categorytitle.text)}`}
             >
               <ButtonOutlinedBlock
                 className={css`

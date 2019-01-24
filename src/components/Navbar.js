@@ -213,7 +213,7 @@ const Navbar = withToggle(
           `}
           onClick={toggle}
         >
-          {toggledOn ? '֍' : 'Подписка'}
+          {toggledOn ? '✕' : 'Подписка'}
         </span>
         <span
           className={css`
@@ -239,7 +239,7 @@ const Navbar = withToggle(
           `}
           onClick={menu}
         >
-          {menuOn ? '֍' : 'Рубрики'}
+          {menuOn ? '✕' : 'Рубрики'}
         </span>
       </nav>
       <Appear inProp={menuOn}>
