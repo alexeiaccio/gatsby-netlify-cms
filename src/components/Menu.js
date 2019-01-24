@@ -55,7 +55,7 @@ export const Menu = ({ toggle, toggledOn }) => (
               'md:w-auto',
             ])};
           `}
-          to={`/new`}
+          to={`/novoe`}
         >
           <ButtonOutlinedBlock
             className={css`
