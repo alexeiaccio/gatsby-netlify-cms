@@ -1,7 +1,6 @@
-/* global tw */
 import React, { Fragment } from 'react'
 import { Link, graphql } from 'gatsby'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 import { AboutBody } from '../components/AboutBody'
 import { ButtonOutlined, ButtonOutlinedBlock } from '../components/Buttons'
@@ -19,257 +18,263 @@ export default ({ data, location }) => {
   const about = data.about.data
   const index = data.index.data
   const getFiltered = filter => xs =>
-    xs
-      .filter(({ node }) => node.tags.some(tag => tag === filter))
-      .slice(0, 4)
+    xs.filter(({ node }) => node.tags.some(tag => tag === filter)).slice(0, 4)
 
   return (
-    <Layout {...{ index }} {...{ location }} title={'·К·Р·А·П·И·В·А·'}>
-      <>
-        <section>
-          <div
-            to="/"
+    <>
+      <section>
+        <div
+          to="/"
+          className={css`
+            ${tw([
+              'bg-center',
+              'bg-contain',
+              'bg-no-repeat',
+              'mx-auto',
+              'my-q64',
+            ])};
+            background-image: url(${logo});
+            height: 45px;
+            transform: rotateZ(90deg);
+            width: 90px;
+          `}
+        />
+        <h1
+          className={css`
+            ${Heading1};
+            ${tw(['text-center', 'my-q72'])};
+          `}
+        >
+          {index.title.text}{' '}
+        </h1>
+        <div
+          className={css`
+            ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-1'])};
+          `}
+        >
+          <Link
             className={css`
-              ${tw([
-                'bg-center',
-                'bg-contain',
-                'bg-no-repeat',
-                'mx-auto',
-                'my-q64',
-              ])};
-              background-image: url(${logo});
-              height: 45px;
-              transform: rotateZ(90deg);
-              width: 90px;
+              ${tw(['flex-1', 'mb-q8', 'px-q4'])};
             `}
-          />
-          <h1
-            className={css`
-              ${Heading1};
-              ${tw(['text-center', 'my-q72'])};
-            `}
+            to="#new"
           >
-            {index.title.text}{' '}
-          </h1>
-          <div
+            <ButtonOutlinedBlock>Новое</ButtonOutlinedBlock>
+          </Link>
+          <Link
             className={css`
-              ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-1'])};
+              ${tw(['flex-1', 'mb-q8', 'px-q4'])};
             `}
+            to="#afisha"
           >
+            <ButtonOutlinedBlock>Афиша</ButtonOutlinedBlock>
+          </Link>
+          {index.categories.map(category => (
             <Link
               className={css`
                 ${tw(['flex-1', 'mb-q8', 'px-q4'])};
               `}
-              to="#new"
+              key={uuid()}
+              to={`#${translite(category.categorytitle.text)}`}
             >
-              <ButtonOutlinedBlock>Новое</ButtonOutlinedBlock>
+              <ButtonOutlinedBlock>
+                {category.categorytitle.text}
+              </ButtonOutlinedBlock>
             </Link>
-            <Link
-              className={css`
-                ${tw(['flex-1', 'mb-q8', 'px-q4'])};
-              `}
-              to="#afisha"
-            >
-              <ButtonOutlinedBlock>Афиша</ButtonOutlinedBlock>
-            </Link>
-            {index.categories.map(category => (
-              <Link
-                className={css`
-                  ${tw(['flex-1', 'mb-q8', 'px-q4'])};
-                `}
-                key={uuid()}
-                to={`#${translite(category.categorytitle.text)}`}
-              >
-                <ButtonOutlinedBlock>
-                  {category.categorytitle.text}
-                </ButtonOutlinedBlock>
-              </Link>
-            ))}
-          </div>
-          <>
-            <div id="new" />
-            <h2
-              className={css`
-                ${Heading3};
-                ${tw(['mb-q48', 'mt-q72', 'text-center'])};
-              `}
-            >
-              Новое
-            </h2>
-            <Row>
-              {articles
-                .filter(({ node })  => node.tags.some(tag => tag !== 'Афиша'))
-                .slice(0, 4)
-                .map(({ node: article }) => (
+          ))}
+        </div>
+        <>
+          <div id="new" />
+          <h2
+            className={css`
+              ${Heading3};
+              ${tw(['mb-q48', 'mt-q72', 'text-center'])};
+            `}
+          >
+            Новое
+          </h2>
+          <Row>
+            {articles
+              .filter(({ node }) => node.tags.some(tag => tag !== 'Афиша'))
+              .slice(0, 4)
+              .map(({ node: article }) => (
                 <Column key={uuid()}>
                   <PreviewCard {...{ article }} {...{ location }} />
                 </Column>
               ))}
-            </Row>
-            <div
-              className={css`
-                ${tw(['mb-q144', 'mx-auto', 'text-center'])};
-              `}
-            >
-              <Link to="/novoe">
-                <span
-                  className={css`
-                    ${ButtonOutlined};
-                  `}
-                >
-                  {`Все новые статьи →`}
-                </span>
-              </Link>
-            </div>
-          </>
-          {/* Afisha */}
-          <>
-            <div id="afisha" />
-            <h2
-              className={css`
-                ${Heading3};
-                ${tw(['mb-q48', 'mt-q72', 'text-center'])};
-              `}
-            >
-              Афиша
-            </h2>
-            <Row className={css`${tw(['justify-center'])}`}>
-              {articles
-                .filter(({ node })  => node.tags.some(tag => tag === 'Афиша'))
-                .slice(0, 1)
-                .map(({ node: article }) => (
-                  <PreviewCard {...{ article }} key={uuid()} {...{ location }} />
+          </Row>
+          <div
+            className={css`
+              ${tw(['mb-q144', 'mx-auto', 'text-center'])};
+            `}
+          >
+            <Link to="/novoe">
+              <span
+                className={css`
+                  ${ButtonOutlined};
+                `}
+              >
+                {`Все новые статьи →`}
+              </span>
+            </Link>
+          </div>
+        </>
+        {/* Afisha */}
+        <>
+          <div id="afisha" />
+          <h2
+            className={css`
+              ${Heading3};
+              ${tw(['mb-q48', 'mt-q72', 'text-center'])};
+            `}
+          >
+            Афиша
+          </h2>
+          <Row
+            className={css`
+              ${tw(['justify-center'])}
+            `}
+          >
+            {articles
+              .filter(({ node }) => node.tags.some(tag => tag === 'Афиша'))
+              .slice(0, 1)
+              .map(({ node: article }) => (
+                <PreviewCard {...{ article }} key={uuid()} {...{ location }} />
               ))}
-            </Row>
-          </>
-          {/* Cateroties */}
-          {index.categories.map(category => {
-            const filteredArticles = getFiltered(category.categorytitle.text)(articles)
-            return (
-              <Fragment key={uuid()}>
-                <div id={translite(category.categorytitle.text)} />
-                <h2
-                  className={css`
-                    ${Heading3};
-                    ${tw(['mt-q72', 'text-center'])};
-                  `}
+          </Row>
+        </>
+        {/* Cateroties */}
+        {index.categories.map(category => {
+          const filteredArticles = getFiltered(category.categorytitle.text)(
+            articles
+          )
+          return (
+            <Fragment key={uuid()}>
+              <div id={translite(category.categorytitle.text)} />
+              <h2
+                className={css`
+                  ${Heading3};
+                  ${tw(['mt-q72', 'text-center'])};
+                `}
+                key={uuid()}
+              >
+                {category.categorytitle.text}
+              </h2>
+              <div
+                className={css`
+                  ${tw(['my-q48', 'text-body', 'text-justify'])};
+                `}
+                key={uuid()}
+              >
+                <HTMLContent
+                  content={category.categorydescription.html}
                   key={uuid()}
-                >
-                  {category.categorytitle.text}
-                </h2>
+                />
+              </div>
+              <Row key={uuid()}>
+                {filteredArticles.length > 0 ? (
+                  filteredArticles.map(({ node: article }) => (
+                    <Column key={uuid()}>
+                      <PreviewCard
+                        {...{ article }}
+                        key={uuid()}
+                        {...{ location }}
+                      />
+                    </Column>
+                  ))
+                ) : (
+                  <>
+                    <Column key={uuid()}>
+                      <Placeholder />
+                    </Column>
+                    <Column
+                      className={css`
+                        ${tw(['hidden', 'sm:block'])};
+                      `}
+                      key={uuid()}
+                    >
+                      <Placeholder />
+                    </Column>
+                  </>
+                )}
+              </Row>
+              {filteredArticles.length > 0 && (
                 <div
                   className={css`
-                    ${tw(['my-q48', 'text-body', 'text-justify'])};
+                    ${tw(['mb-q144', 'mx-auto', 'text-center'])};
                   `}
                   key={uuid()}
                 >
-                  <HTMLContent
-                    content={category.categorydescription.html}
-                    key={uuid()}
-                  />
-                </div>
-                <Row key={uuid()}>
-                  {filteredArticles.length > 0 ? (
-                    filteredArticles.map(({ node: article }) => (
-                      <Column key={uuid()}>
-                        <PreviewCard {...{ article }} key={uuid()} {...{ location }} />
-                      </Column>
-                    ))
-                  ) : (
-                    <>
-                      <Column key={uuid()}>
-                        <Placeholder />
-                      </Column>
-                      <Column
-                        className={css`
-                          ${tw(['hidden', 'sm:block'])};
-                        `}
-                        key={uuid()}
-                      >
-                        <Placeholder />
-                      </Column>
-                    </>
-                  )}
-                </Row>
-                {filteredArticles.length > 0 && (
-                  <div
-                    className={css`
-                      ${tw(['mb-q144', 'mx-auto', 'text-center'])};
-                    `}
+                  <Link
+                    to={`/${translite(category.categorytitle.text)}`}
                     key={uuid()}
                   >
-                    <Link to={`/${translite(category.categorytitle.text)}`} key={uuid()}>
-                      <span
-                        className={css`
-                          ${ButtonOutlined};
-                        `}
-                        key={uuid()}
-                      >
-                        {`Все статьи «${category.categorytitle.text}» →`}
-                      </span>
-                    </Link>
-                  </div>
-                )}
-              </Fragment>
-            )
-          })}
-        </section>
-        <section
+                    <span
+                      className={css`
+                        ${ButtonOutlined};
+                      `}
+                      key={uuid()}
+                    >
+                      {`Все статьи «${category.categorytitle.text}» →`}
+                    </span>
+                  </Link>
+                </div>
+              )}
+            </Fragment>
+          )
+        })}
+      </section>
+      <section
+        className={css`
+          ${tw(['mb-q144'])};
+        `}
+      >
+        <div
+          to="/"
           className={css`
-            ${tw(['mb-q144'])};
+            ${tw([
+              'bg-center',
+              'bg-contain',
+              'bg-no-repeat',
+              'mx-auto',
+              'my-q64',
+            ])};
+            background-image: url(${logo});
+            height: 45px;
+            width: 90px;
+          `}
+        />
+        <h1
+          className={css`
+            ${Heading1};
+            ${tw(['text-center', 'my-q64'])};
           `}
         >
-          <div
-            to="/"
+          {about.title.text}
+        </h1>
+        <AboutBody {...{ about }} />
+        <Link
+          className={css`
+            ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+          `}
+          to={'/o-nas'}
+        >
+          <span
             className={css`
-              ${tw([
-                'bg-center',
-                'bg-contain',
-                'bg-no-repeat',
-                'mx-auto',
-                'my-q64',
-              ])};
-              background-image: url(${logo});
-              height: 45px;
-              width: 90px;
-            `}
-          />
-          <h1
-            className={css`
-              ${Heading1};
-              ${tw(['text-center', 'my-q64'])};
+              ${ButtonOutlined};
             `}
           >
-            {about.title.text}
-          </h1>
-          <AboutBody {...{ about }} />
-          <Link
-            className={css`
-              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
-            `}
-            to={'/o-nas'}
-          >
-            <span
-              className={css`
-                ${ButtonOutlined};
-              `}
-            >
-              Редакция →
-            </span>
-          </Link>
-        </section>
-      </>
-    </Layout>
+            Редакция →
+          </span>
+        </Link>
+      </section>
+    </>
   )
 }
 
 export const pageQuery = graphql`
   query IndexQuery {
     articles: allPrismicArticles(
-      sort: {
-        order: DESC,
-        fields: [first_publication_date]
-      },
+      sort: { order: DESC, fields: [first_publication_date] }
       limit: 200
     ) {
       edges {

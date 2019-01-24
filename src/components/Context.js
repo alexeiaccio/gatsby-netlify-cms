@@ -1,6 +1,5 @@
-/* global tw */
 import React from 'react'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 import { Placeholder, PreviewCard } from '../components/Cards'
 import { Column, Row } from '../components/Grid'

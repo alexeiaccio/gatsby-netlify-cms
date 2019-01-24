@@ -1,6 +1,5 @@
-/* global tw */
 import React from 'react'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 import { ButtonOutlined } from './Buttons'
 import { HTMLContent } from './Content'

@@ -1,6 +1,5 @@
-/* global tw */
 import React, { Component, createRef } from 'react'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 class RunningString extends Component {
   constructor(props) {

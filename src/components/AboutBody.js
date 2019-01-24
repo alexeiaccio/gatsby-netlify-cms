@@ -1,7 +1,6 @@
-/* global tw */
 import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 import { HTMLContent } from '../components/Content'
 import {Img} from './Img'

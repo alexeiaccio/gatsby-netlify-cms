@@ -1,5 +1,4 @@
-/* global tw */
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 export const Body = css`
   ${tw([

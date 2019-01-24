@@ -1,8 +1,6 @@
-/* global tw */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'react-emotion'
-import { injectGlobal } from 'emotion'
+import { css, Global } from '@emotion/core'
 import { compose, lifecycle, pure } from 'recompose'
 import { debounce } from 'lodash'
 import 'whatwg-fetch'
@@ -13,7 +11,7 @@ import Navbar from './Navbar'
 import '../fonts/cormorant/stylesheet.css'
 import '../fonts/montserrat/stylesheet.css'
 
-injectGlobal`
+const globalStyles = css`
   body {
     ${tw(['m-0', 'font-cormorant', 'font-medium'])};
   }
@@ -57,6 +55,7 @@ const enhance = compose(
 
 const Layout = enhance(({ children, image, location, title }) => (
   <div id="nprogress-container">
+    <Global styles={globalStyles} />
     <SEO
       slug={location.pathname}
       title={title}

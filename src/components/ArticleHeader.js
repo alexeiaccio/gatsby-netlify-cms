@@ -1,7 +1,6 @@
-/* global tw */
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 import { HTMLContent } from './Content'
 import { Img } from './Img'

@@ -1,6 +1,5 @@
-/* global tw */
 import React from 'react'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { graphql, Link } from 'gatsby'
 
@@ -24,42 +23,40 @@ const Article = ({ data, location }) => {
   const isAfisha = data.article.tags.some(tag => tag === 'Афиша')
 
   return (
-    <Layout image={article.image} {...{ location }} title={article.title.text}>
-      <>
-        <article
+    <>
+      <article
+        className={css`
+          ${tw(['my-q48', 'relative'])};
+        `}
+      >
+        <h1 className={Heading1}>{article.title.text}</h1>
+        <ArticleHeader
+          {...{ article }}
+          date={data.article.first_publication_date}
+          {...{ location }}
+          {...{ tags }}
+        />
+        <ArticleBody {...{ article }} />
+        <Burn {...{ location }} />
+      </article>
+      {!isAfisha && <Context {...{ context }} />}
+      {isAfisha && (
+        <Link
           className={css`
-            ${tw(['my-q48', 'relative'])};
+            ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
+          to={'/afisha#articles'}
         >
-          <h1 className={Heading1}>{article.title.text}</h1>
-          <ArticleHeader
-            {...{ article }}
-            date={data.article.first_publication_date}
-            {...{ location }}
-            {...{ tags }}
-          />
-          <ArticleBody {...{ article }} />
-          <Burn {...{ location }} />
-        </article>
-        {!isAfisha && <Context {...{ context }} />}
-        {isAfisha && (
-          <Link
+          <span
             className={css`
-              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+              ${ButtonOutlined};
             `}
-            to={'/afisha#articles'}
           >
-            <span
-              className={css`
-                ${ButtonOutlined};
-              `}
-            >
-              ← Архив афиши
-            </span>
-          </Link>
-        )}
-      </>
-    </Layout>
+            ← Архив афиши
+          </span>
+        </Link>
+      )}
+    </>
   )
 }
 

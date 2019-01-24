@@ -1,7 +1,6 @@
-/* global tw */
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 
 import { ButtonOutlined } from '../components/Buttons'
 import { PreviewCard } from '../components/Cards'
@@ -12,56 +11,49 @@ import { uuid } from '../utils'
 
 export default ({ data, location }) => {
   const { edges: articles } = data.articles
-  
 
   return (
-    <Layout {...{ location }} title="Новое" >
-      <>
-        <section>
-          <h1
+    <>
+      <section>
+        <h1
+          className={css`
+            ${Heading1};
+            ${tw(['text-center', 'mb-q72', 'text-black'])};
+          `}
+        >
+          Новые статьи
+        </h1>
+        <Row>
+          {articles.map(({ node: article }) => (
+            <Column key={uuid()}>
+              <PreviewCard {...{ article }} key={uuid()} />
+            </Column>
+          ))}
+        </Row>
+        <Link
+          className={css`
+            ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+          `}
+          to={'/'}
+        >
+          <span
             className={css`
-              ${Heading1};
-              ${tw(['text-center', 'mb-q72', 'text-black'])};
+              ${ButtonOutlined};
             `}
           >
-            Новые статьи
-          </h1>
-          <Row>
-            {articles
-              .map(({ node: article }) => (
-              <Column key={uuid()}>
-                <PreviewCard {...{ article }} key={uuid()} />
-              </Column>
-            ))}
-          </Row>
-          <Link
-            className={css`
-              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
-            `}
-            to={'/'}
-          >
-            <span
-              className={css`
-                ${ButtonOutlined};
-              `}
-            >
-              ← Все статьи
-            </span>
-          </Link>
-        </section>
-      </>
-    </Layout>
+            ← Все статьи
+          </span>
+        </Link>
+      </section>
+    </>
   )
 }
 
 export const pageQuery = graphql`
   query NewQuery {
     articles: allPrismicArticles(
-      sort: {
-        order: DESC,
-        fields: [first_publication_date] 
-      },
-      limit: 10,
+      sort: { order: DESC, fields: [first_publication_date] }
+      limit: 10
       filter: { tags: { nin: "Афиша" } }
     ) {
       edges {

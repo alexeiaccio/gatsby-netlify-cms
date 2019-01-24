@@ -16,6 +16,12 @@ module.exports = {
     'gatsby-plugin-sharp',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,
+    { 
+      resolve: 'gatsby-plugin-transition-link',
+      options: {
+          layout: require.resolve(`./src/components/Layout.js`)
+        }
+    },
     {
       resolve: 'gatsby-source-prismic',
       options: {
@@ -23,6 +29,30 @@ module.exports = {
         accessToken: process.env.PRISMIC_TOKEN,
         linkResolver,
         htmlSerializer,
+      },
+    },
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        fields: [`title`, `data`, `tags`],
+        resolvers: {
+          PrismicArticles: {
+            data: node => {
+              const str = node.dataString
+              const regexp = new RegExp('(?:text":")(.+?)(?:",")', 'gi')
+              const arr = []
+              let result
+              // eslint-disable-next-line no-cond-assign
+              while ((result = regexp.exec(str))) {
+                arr.push(result[1])
+              }
+              return arr.join(' ').replace(/\\n?/g, '')
+            },
+            tags: node => node.tags,
+            title: node => node.data.title.text,
+            uid: node => node.uid,
+          },
+        },
       },
     },
     {

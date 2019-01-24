@@ -1,6 +1,5 @@
-/* global tw */
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
 import { HTMLContent } from './Content'

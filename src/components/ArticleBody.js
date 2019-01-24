@@ -1,7 +1,7 @@
-/* global tw */
 import React, { Fragment, Component, createRef } from 'react'
 import { graphql } from 'gatsby'
-import styled, { css } from 'react-emotion'
+import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import { delay, throttle } from 'lodash'
 
 import { Appear } from './Appear'

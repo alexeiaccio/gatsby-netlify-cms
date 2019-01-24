@@ -1,7 +1,6 @@
-/* global tw */
 import React from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 
 import aboutImage from '../img/about-image.jpg'
 import { AboutBody } from '../components/AboutBody'
@@ -15,72 +14,50 @@ const AboutPage = ({ data, location }) => {
   const { edges: authors } = data.authors
 
   return (
-    <Layout
-      image={{
-        localFile: { childImageSharp: { fluid: { src: aboutImage } } },
-      }}
-      {...{ location }}
-      title={about.title.text}
-    >
-      <>
-        <h1 className={Heading1}>{about.title.text}</h1>
-        <AboutBody {...{ about }} />
-        <h2
-          className={css`
-            ${Heading2};
-            ${tw(['mt-q72'])};
-          `}
-        >
-          Редсовет
-        </h2>
-        <div
-          className={css`
-            ${tw([
-              'flex',
-              'flex-row',
-              'flex-wrap',
-              '-mx-4',
-              'mt-q64',
-              'w-full',
-            ])};
-          `}
-        >
-          {authors
-            .filter(x => x.node.data.type === 'redsovet')
-            .map(({ node }) => {
-              const author = node.data
-              return <Author key={uuid()} {...{ author }} {...{ location }} />
-            })}
-        </div>
-        <h2
-          className={css`
-            ${Heading2};
-            ${tw(['mt-q48'])};
-          `}
-        >
-          Авторы
-        </h2>
-        <div
-          className={css`
-            ${tw([
-              'flex',
-              'flex-row',
-              'flex-wrap',
-              '-mx-4',
-              'mt-q64',
-              'w-full',
-            ])};
-          `}
-        >
-          {authors
-            .filter(x => x.node.data.type === 'author')
-            .map(({ node }) => {
-              const author = node.data
-              return <Author key={uuid()} {...{ author }} {...{ location }} />
-            })}
-        </div>
-      </>
-    </Layout>
+    <>
+      <h1 className={Heading1}>{about.title.text}</h1>
+      <AboutBody {...{ about }} />
+      <h2
+        className={css`
+          ${Heading2};
+          ${tw(['mt-q72'])};
+        `}
+      >
+        Редсовет
+      </h2>
+      <div
+        className={css`
+          ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-4', 'mt-q64', 'w-full'])};
+        `}
+      >
+        {authors
+          .filter(x => x.node.data.type === 'redsovet')
+          .map(({ node }) => {
+            const author = node.data
+            return <Author key={uuid()} {...{ author }} {...{ location }} />
+          })}
+      </div>
+      <h2
+        className={css`
+          ${Heading2};
+          ${tw(['mt-q48'])};
+        `}
+      >
+        Авторы
+      </h2>
+      <div
+        className={css`
+          ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-4', 'mt-q64', 'w-full'])};
+        `}
+      >
+        {authors
+          .filter(x => x.node.data.type === 'author')
+          .map(({ node }) => {
+            const author = node.data
+            return <Author key={uuid()} {...{ author }} {...{ location }} />
+          })}
+      </div>
+    </>
   )
 }
 

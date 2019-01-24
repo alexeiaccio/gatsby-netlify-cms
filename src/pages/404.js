@@ -1,7 +1,6 @@
-/* global tw */
 import React from 'react'
 import { Link, navigate } from 'gatsby'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 import { lifecycle } from 'recompose'
 import { words } from 'lodash'
 
@@ -28,7 +27,7 @@ const NotFoundPage = lifecycle({
     redirects[match] && navigate(redirects[match])
   },
 })(({ location }) => (
-  <Layout {...{ location }}>
+  <>
     <div
       className={css`
         ${tw(['h-screen'])};
@@ -98,7 +97,7 @@ const NotFoundPage = lifecycle({
         </Link>
       </p>
     </div>
-  </Layout>
+  </>
 ))
 
 export default NotFoundPage

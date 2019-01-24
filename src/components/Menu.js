@@ -1,7 +1,7 @@
-/* global tw */
 import React from 'react'
-import { css } from 'react-emotion'
-import { StaticQuery, Link, graphql } from 'gatsby'
+import { css } from '@emotion/core'
+import { StaticQuery, graphql } from 'gatsby'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 import { ButtonOutlinedBlock, ButtonOutlinedDisabled } from './Buttons'
 import { uuid } from '../utils'
@@ -44,7 +44,8 @@ export const Menu = ({ toggle, toggledOn }) => (
           ])};
         `}
       >
-        <Link
+        <AniLink
+          fade
           className={css`
             ${tw([
               'flex-auto',
@@ -55,7 +56,7 @@ export const Menu = ({ toggle, toggledOn }) => (
               'md:w-auto',
             ])};
           `}
-          to={`/new`}
+          to={`/novoe`}
         >
           <ButtonOutlinedBlock
             className={css`
@@ -64,8 +65,9 @@ export const Menu = ({ toggle, toggledOn }) => (
           >
             Новое
           </ButtonOutlinedBlock>
-        </Link>
-        <Link
+        </AniLink>
+        <AniLink
+          fade
           className={css`
             ${tw([
               'flex-auto',
@@ -85,13 +87,14 @@ export const Menu = ({ toggle, toggledOn }) => (
           >
             Афиша
           </ButtonOutlinedBlock>
-        </Link>
+        </AniLink>
         {index.data.categories.map(category => {
           const pageExist = pages.edges.some(
             ({ node }) => node.path.replace(/\//g, '') === translite(category.categorytitle.text)
           )
           return pageExist ? (
-            <Link
+            <AniLink
+              fade
               className={css`
                 ${tw(['flex-1', 'mb-q8', 'px-q4'])};
               `}
@@ -106,7 +109,7 @@ export const Menu = ({ toggle, toggledOn }) => (
               >
                 {category.categorytitle.text}
               </ButtonOutlinedBlock>
-            </Link>
+            </AniLink>
           ) : (
             <span
               className={css`
@@ -120,7 +123,8 @@ export const Menu = ({ toggle, toggledOn }) => (
             </span>
           )
         })}
-        <Link
+        <AniLink
+          fade
           className={css`
             ${tw([
               'flex-auto',
@@ -140,7 +144,7 @@ export const Menu = ({ toggle, toggledOn }) => (
           >
             О Редакции
           </ButtonOutlinedBlock>
-        </Link>
+        </AniLink>
         <span
           className={css`
             ${tw(['flex-auto', 'md:hidden', 'px-q4', 'w-full'])};

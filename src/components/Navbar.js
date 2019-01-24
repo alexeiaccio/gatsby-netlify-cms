@@ -1,7 +1,7 @@
-/* global tw */
 import React from 'react'
-import { Link } from 'gatsby'
-import styled, { css } from 'react-emotion'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
+import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import 'whatwg-fetch'
 import { withStateHandlers } from 'recompose'
 
@@ -153,7 +153,8 @@ const Navbar = withToggle(
           ])};
         `}
       >
-        <Link
+        <AniLink
+          fade
           to="/"
           className={css`
             ${tw([
@@ -168,7 +169,8 @@ const Navbar = withToggle(
             width: 60px;
           `}
         />
-        <Link
+        <AniLink
+          fade
           to="/"
           className={css`
             ${tw([
@@ -189,7 +191,7 @@ const Navbar = withToggle(
           `}
         >
           ·К·Р·А·П·И·В·А·
-        </Link>
+        </AniLink>
         <span
           className={css`
             ${tw([

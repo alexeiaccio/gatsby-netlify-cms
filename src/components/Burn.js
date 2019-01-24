@@ -1,6 +1,5 @@
-/* global tw */
 import React, { Component } from 'react'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 import { add, throttle, isNull, debounce } from 'lodash'
 import 'whatwg-fetch'
 

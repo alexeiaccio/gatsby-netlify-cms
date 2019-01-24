@@ -1,7 +1,6 @@
-/* global tw */
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import { css } from 'react-emotion'
+import { css } from '@emotion/core'
 import get from 'lodash/get'
 import { Img } from '../components/Img'
 
@@ -20,93 +19,99 @@ export default ({ data, location }) => {
   const from = get(location, 'state.from', '/')
 
   const getArticles = thatAuthor =>
-    articles.filter(({ node: { data } }) =>
-      data.authors.some(
-        ({ author }) => get(author, 'document[0].data.name') === thatAuthor.name
+    articles
+      .filter(({ node: { data } }) =>
+        data.authors.some(
+          ({ author }) =>
+            get(author, 'document[0].data.name') === thatAuthor.name
+        )
       )
-    ).filter(({ node }) => node.tags.some(tag => tag !== 'Архив'))
+      .filter(({ node }) => node.tags.some(tag => tag !== 'Архив'))
 
   return (
-    <Layout {...{ location }} title={author.name}>
-      <>
-        <section>
-          <div
+    <>
+      <section>
+        <div
+          className={css`
+            ${tw([
+              'mb-q36',
+              'items-center',
+              'justify-center',
+              'flex',
+              'w-full',
+            ])};
+          `}
+        >
+          <Img
             className={css`
-              ${tw([
-                'mb-q36',
-                'items-center',
-                'justify-center',
-                'flex',
-                'w-full',
-              ])};
+              ${tw(['rounded-full'])};
+              height: 320px;
+              max-height: 75vw;
+              max-width: 75vw;
+              width: 320px;
+            `}
+            src={author.avatar}
+          />
+        </div>
+        <h1
+          className={css`
+            ${Heading1};
+            ${tw(['text-center', 'mb-q48', 'text-black'])};
+          `}
+          alt={author.name}
+        >
+          {author.name}
+        </h1>
+        {author.statement.html && (
+          <HTMLContent
+            className={css`
+              ${RichTextSmall};
+              ${tw(['text-center'])};
+              & p {
+                ${tw(['m-0'])};
+              }
+            `}
+            content={author.statement.html}
+          />
+        )}
+        {author && getArticles(author).length > 0 && (
+          <h2
+            className={css`
+              ${Heading2};
+              ${tw(['mb-q48', 'mt-q72', 'text-center'])};
             `}
           >
-            <Img
-              className={css`
-                ${tw(['rounded-full'])};
-                height: 320px;
-                max-height: 75vw;
-                max-width: 75vw;
-                width: 320px;
-              `}
-              src={author.avatar}
-            />
-          </div>
-          <h1
-            className={css`
-              ${Heading1};
-              ${tw(['text-center', 'mb-q48', 'text-black'])};
-            `}
-            alt={author.name}
-          >
-            {author.name}
-          </h1>
-          {author.statement.html && (
-            <HTMLContent
-              className={css`
-                ${RichTextSmall};
-                ${tw(['text-center'])};
-                & p {
-                  ${tw(['m-0'])};
-                }
-              `}
-              content={author.statement.html}
-            />
-          )}
-          {author && getArticles(author).length > 0 && (
-            <h2
-              className={css`
-                ${Heading2};
-                ${tw(['mb-q48', 'mt-q72', 'text-center'])};
-              `}
-            >
-              Статьи
-            </h2>
-          )}
-          <Row>
-            {author && getArticles(author).map(({ node: article }) => (
+            Статьи
+          </h2>
+        )}
+        <Row>
+          {author &&
+            getArticles(author).map(({ node: article }) => (
               <Column key={uuid()}>
                 <PreviewCard {...{ article }} key={uuid()} />
               </Column>
             ))}
-          </Row>
-          <Link
+        </Row>
+        <Link
+          className={css`
+            ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+          `}
+          to={from}
+        >
+          <span
             className={css`
-              ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
+              ${ButtonOutlined};
             `}
-            to={from}
           >
-            <span
-              className={css`
-                ${ButtonOutlined};
-              `}
-            >
-              {from.includes('o-nas') ? '← Все авторы' : from === '/' ? '← На главную' : '← Вернуться'}
-            </span>
-          </Link>
-        </section>
-      </>
-    </Layout>
+            {from.includes('o-nas')
+              ? '← Все авторы'
+              : from === '/'
+              ? '← На главную'
+              : '← Вернуться'}
+          </span>
+        </Link>
+      </section>
+    </>
   )
 }
 
