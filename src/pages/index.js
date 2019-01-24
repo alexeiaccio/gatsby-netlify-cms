@@ -25,7 +25,7 @@ export default ({ data, location }) => {
       <section>
         <div
           to="/"
-          className={css`
+          css={css`
             ${tw([
               'bg-center',
               'bg-contain',
@@ -40,7 +40,7 @@ export default ({ data, location }) => {
           `}
         />
         <h1
-          className={css`
+          css={css`
             ${Heading1};
             ${tw(['text-center', 'my-q72'])};
           `}
@@ -48,12 +48,12 @@ export default ({ data, location }) => {
           {index.title.text}{' '}
         </h1>
         <div
-          className={css`
+          css={css`
             ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-1'])};
           `}
         >
           <Link
-            className={css`
+            css={css`
               ${tw(['flex-1', 'mb-q8', 'px-q4'])};
             `}
             to="#new"
@@ -61,7 +61,7 @@ export default ({ data, location }) => {
             <ButtonOutlinedBlock>Новое</ButtonOutlinedBlock>
           </Link>
           <Link
-            className={css`
+            css={css`
               ${tw(['flex-1', 'mb-q8', 'px-q4'])};
             `}
             to="#afisha"
@@ -70,7 +70,7 @@ export default ({ data, location }) => {
           </Link>
           {index.categories.map(category => (
             <Link
-              className={css`
+              css={css`
                 ${tw(['flex-1', 'mb-q8', 'px-q4'])};
               `}
               key={uuid()}
@@ -85,7 +85,7 @@ export default ({ data, location }) => {
         <>
           <div id="new" />
           <h2
-            className={css`
+            css={css`
               ${Heading3};
               ${tw(['mb-q48', 'mt-q72', 'text-center'])};
             `}
@@ -103,13 +103,13 @@ export default ({ data, location }) => {
               ))}
           </Row>
           <div
-            className={css`
+            css={css`
               ${tw(['mb-q144', 'mx-auto', 'text-center'])};
             `}
           >
             <Link to="/novoe">
               <span
-                className={css`
+                css={css`
                   ${ButtonOutlined};
                 `}
               >
@@ -122,7 +122,7 @@ export default ({ data, location }) => {
         <>
           <div id="afisha" />
           <h2
-            className={css`
+            css={css`
               ${Heading3};
               ${tw(['mb-q48', 'mt-q72', 'text-center'])};
             `}
@@ -130,7 +130,7 @@ export default ({ data, location }) => {
             Афиша
           </h2>
           <Row
-            className={css`
+            css={css`
               ${tw(['justify-center'])}
             `}
           >
@@ -151,7 +151,7 @@ export default ({ data, location }) => {
             <Fragment key={uuid()}>
               <div id={translite(category.categorytitle.text)} />
               <h2
-                className={css`
+                css={css`
                   ${Heading3};
                   ${tw(['mt-q72', 'text-center'])};
                 `}
@@ -160,7 +160,7 @@ export default ({ data, location }) => {
                 {category.categorytitle.text}
               </h2>
               <div
-                className={css`
+                css={css`
                   ${tw(['my-q48', 'text-body', 'text-justify'])};
                 `}
                 key={uuid()}
@@ -187,7 +187,7 @@ export default ({ data, location }) => {
                       <Placeholder />
                     </Column>
                     <Column
-                      className={css`
+                      css={css`
                         ${tw(['hidden', 'sm:block'])};
                       `}
                       key={uuid()}
@@ -199,7 +199,7 @@ export default ({ data, location }) => {
               </Row>
               {filteredArticles.length > 0 && (
                 <div
-                  className={css`
+                  css={css`
                     ${tw(['mb-q144', 'mx-auto', 'text-center'])};
                   `}
                   key={uuid()}
@@ -209,7 +209,7 @@ export default ({ data, location }) => {
                     key={uuid()}
                   >
                     <span
-                      className={css`
+                      css={css`
                         ${ButtonOutlined};
                       `}
                       key={uuid()}
@@ -224,13 +224,13 @@ export default ({ data, location }) => {
         })}
       </section>
       <section
-        className={css`
+        css={css`
           ${tw(['mb-q144'])};
         `}
       >
         <div
           to="/"
-          className={css`
+          css={css`
             ${tw([
               'bg-center',
               'bg-contain',
@@ -244,7 +244,7 @@ export default ({ data, location }) => {
           `}
         />
         <h1
-          className={css`
+          css={css`
             ${Heading1};
             ${tw(['text-center', 'my-q64'])};
           `}
@@ -253,13 +253,13 @@ export default ({ data, location }) => {
         </h1>
         <AboutBody {...{ about }} />
         <Link
-          className={css`
+          css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
           to={'/o-nas'}
         >
           <span
-            className={css`
+            css={css`
               ${ButtonOutlined};
             `}
           >

@@ -31,7 +31,7 @@ export const Menu = ({ toggle, toggledOn }) => (
     `}
     render={({ pages, index }) => (
       <div
-        className={css`
+        css={css`
           ${tw([
             'flex',
             'flex-row',
@@ -46,7 +46,7 @@ export const Menu = ({ toggle, toggledOn }) => (
       >
         <AniLink
           fade
-          className={css`
+          css={css`
             ${tw([
               'flex-auto',
               'md:flex-1',
@@ -59,7 +59,7 @@ export const Menu = ({ toggle, toggledOn }) => (
           to={`/novoe`}
         >
           <ButtonOutlinedBlock
-            className={css`
+            css={css`
               ${tw(['hover:bg-green'])};
             `}
           >
@@ -68,7 +68,7 @@ export const Menu = ({ toggle, toggledOn }) => (
         </AniLink>
         <AniLink
           fade
-          className={css`
+          css={css`
             ${tw([
               'flex-auto',
               'md:flex-1',
@@ -81,7 +81,7 @@ export const Menu = ({ toggle, toggledOn }) => (
           to={`/afisha`}
         >
           <ButtonOutlinedBlock
-            className={css`
+            css={css`
               ${tw(['hover:bg-green'])};
             `}
           >
@@ -95,14 +95,14 @@ export const Menu = ({ toggle, toggledOn }) => (
           return pageExist ? (
             <AniLink
               fade
-              className={css`
+              css={css`
                 ${tw(['flex-1', 'mb-q8', 'px-q4'])};
               `}
               key={uuid()}
               to={`/${translite(category.categorytitle.text)}`}
             >
               <ButtonOutlinedBlock
-                className={css`
+                css={css`
                   ${tw(['hover:bg-green'])};
                 `}
                 key={uuid()}
@@ -112,7 +112,7 @@ export const Menu = ({ toggle, toggledOn }) => (
             </AniLink>
           ) : (
             <span
-              className={css`
+              css={css`
                 ${tw(['flex-1', 'mb-q8', 'px-q4'])};
               `}
               key={uuid()}
@@ -125,7 +125,7 @@ export const Menu = ({ toggle, toggledOn }) => (
         })}
         <AniLink
           fade
-          className={css`
+          css={css`
             ${tw([
               'flex-auto',
               'md:flex-1',
@@ -138,7 +138,7 @@ export const Menu = ({ toggle, toggledOn }) => (
           to={`/o-nas`}
         >
           <ButtonOutlinedBlock
-            className={css`
+            css={css`
               ${tw(['hover:bg-green'])};
             `}
           >
@@ -146,13 +146,13 @@ export const Menu = ({ toggle, toggledOn }) => (
           </ButtonOutlinedBlock>
         </AniLink>
         <span
-          className={css`
+          css={css`
             ${tw(['flex-auto', 'md:hidden', 'px-q4', 'w-full'])};
           `}
           key={uuid()}
         >
           <ButtonOutlinedBlock
-            className={css`
+            css={css`
               ${tw(['bg-green', 'hover:bg-white', 'hover:text-black'])};
             `}
             onClick={toggle}

@@ -172,7 +172,7 @@ export class ArticleBody extends Component {
             <Fragment key={uuid()}>
               {__typename === 'PrismicArticlesBodyImage' && (
                 <figure
-                  className={css`
+                  css={css`
                     ${tw(['m-0', 'mt-q36', 'md:mt-q48'])};
                   `}
                   key={uuid()}
@@ -183,7 +183,7 @@ export class ArticleBody extends Component {
                     key={uuid()}
                   />
                   <figcaption
-                    className={css`
+                    css={css`
                       ${tw(['italic', 'mb-q48', 'text-center', 'text-list'])};
                     `}
                     key={uuid()}
@@ -197,13 +197,13 @@ export class ArticleBody extends Component {
               )}
               {__typename === 'PrismicArticlesBodySlider' && (
                 <figure
-                  className={css`
+                  css={css`
                     ${tw(['m-0', 'mt-q36', 'md:mt-q48'])};
                   `}
                   key={uuid()}
                 >
                   <div
-                    className={css`
+                    css={css`
                       ${tw(['relative'])};
                     `}
                   >
@@ -215,7 +215,7 @@ export class ArticleBody extends Component {
                       />
                     )}
                     <div
-                      className={css`
+                      css={css`
                         ${tw([
                           'absolute',
                           'bg-center',
@@ -235,7 +235,7 @@ export class ArticleBody extends Component {
                       onClick={() => this.previous(i)}
                     />
                     <div
-                      className={css`
+                      css={css`
                         ${tw([
                           'absolute',
                           'bg-center',
@@ -255,7 +255,7 @@ export class ArticleBody extends Component {
                     />
                   </div>
                   <figcaption
-                    className={css`
+                    css={css`
                       ${tw([
                         'flex',
                         'flex-row',
@@ -285,7 +285,7 @@ export class ArticleBody extends Component {
               )}
               {__typename === 'PrismicArticlesBodyLead' && (
                 <HTMLContent
-                  className={css`
+                  css={css`
                     ${LeadText};
                     ${tw(['mb-q48'])};
                   `}
@@ -295,7 +295,7 @@ export class ArticleBody extends Component {
               )}
               {__typename === 'PrismicArticlesBodyText' && (
                 <TextWithReference
-                  className={css`
+                  css={css`
                     ${RichText};
                     & .reference {
                       ${tw(['cursor-pointer', 'text-green-dark'])};
@@ -328,7 +328,7 @@ export class ArticleBody extends Component {
                       key={uuid()}
                     />
                     <div
-                      className={css`
+                      css={css`
                         ${tw([
                           'cursor-pointer',
                           'font-montserrat',
@@ -361,13 +361,13 @@ export class ArticleBody extends Component {
               )}
               {__typename === 'PrismicArticlesBodyYoutube' && (
                 <figure
-                  className={css`
+                  css={css`
                     ${tw(['m-0'])};
                   `}
                   key={uuid()}
                 >
                   <HTMLContent
-                    className={css`
+                    css={css`
                       & iframe {
                         ${tw(['w-full'])};
                         height: 50vh;
@@ -377,7 +377,7 @@ export class ArticleBody extends Component {
                     key={uuid()}
                   />
                   <figcaption
-                    className={css`
+                    css={css`
                       ${tw([
                         'flex',
                         'flex-row',
@@ -399,20 +399,20 @@ export class ArticleBody extends Component {
               )}
               {__typename === 'PrismicArticlesBodyQuote' && (
                 <figure
-                  className={css`
+                  css={css`
                     ${tw(['m-0'])};
                   `}
                   key={uuid()}
                 >
                   <blockquote
-                    className={css`
+                    css={css`
                       ${LeadText};
                       ${tw(['m-0', 'mb-q36'])};
                     `}
                     key={uuid()}
                   >
                     <HTMLContent
-                      className={css`
+                      css={css`
                         ${tw(['italic'])};
                         & em {
                           letter-spacing: 0.2em;
@@ -425,7 +425,7 @@ export class ArticleBody extends Component {
                   <footer>
                     <cite>
                       <HTMLContent
-                        className={css`
+                        css={css`
                           ${tw([
                             'italic',
                             'mt-q36',
@@ -447,7 +447,7 @@ export class ArticleBody extends Component {
               {__typename === 'PrismicArticlesBodyReferencesList' && (
                 <div
                   key={uuid()}
-                  className={css`
+                  css={css`
                     ${RichTextSmall};
                     ${tw(['mb-q48'])};
                   `}
@@ -460,7 +460,7 @@ export class ArticleBody extends Component {
                     .map(({ primary }) => (
                       <p key={uuid()}>
                         <span
-                          className={css`
+                          css={css`
                             ${tw(['cursor-pointer', 'text-green-dark'])};
                           `}
                           onClick={() =>

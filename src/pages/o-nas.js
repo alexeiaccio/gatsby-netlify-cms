@@ -18,7 +18,7 @@ const AboutPage = ({ data, location }) => {
       <h1 className={Heading1}>{about.title.text}</h1>
       <AboutBody {...{ about }} />
       <h2
-        className={css`
+        css={css`
           ${Heading2};
           ${tw(['mt-q72'])};
         `}
@@ -26,7 +26,7 @@ const AboutPage = ({ data, location }) => {
         Редсовет
       </h2>
       <div
-        className={css`
+        css={css`
           ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-4', 'mt-q64', 'w-full'])};
         `}
       >
@@ -38,7 +38,7 @@ const AboutPage = ({ data, location }) => {
           })}
       </div>
       <h2
-        className={css`
+        css={css`
           ${Heading2};
           ${tw(['mt-q48'])};
         `}
@@ -46,7 +46,7 @@ const AboutPage = ({ data, location }) => {
         Авторы
       </h2>
       <div
-        className={css`
+        css={css`
           ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-4', 'mt-q64', 'w-full'])};
         `}
       >

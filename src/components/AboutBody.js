@@ -15,14 +15,14 @@ export const AboutBody = ({ about }) => (
         {__typename === 'PrismicAboutBodyImage' && (
           <figure key={uuid()}>
             <Img
-              className={css`
+              css={css`
                 ${tw(['-mx-8'])};
               `}
               src={primary.imageimage}
               key={uuid()}
             />
             <figcaption
-              className={css`
+              css={css`
                 ${tw(['italic', 'mb-q48', 'text-center', 'text-list'])};
               `}
               key={uuid()}
@@ -33,7 +33,7 @@ export const AboutBody = ({ about }) => (
         )}
         {__typename === 'PrismicAboutBodyLead' && (
           <HTMLContent
-            className={css`
+            css={css`
               ${LeadText};
               ${tw(['mb-q64'])};
             `}

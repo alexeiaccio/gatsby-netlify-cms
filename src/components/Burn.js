@@ -65,7 +65,7 @@ export class Burn extends Component {
 
     return (
       <div
-        className={css`
+        css={css`
           ${tw([
             'flex',
             'flex-col',
@@ -79,13 +79,13 @@ export class Burn extends Component {
         `}
       >
         <div
-          className={css`
+          css={css`
             ${tw(['font-montserrat', 'text-body', 'text-right'])};
           `}
         >
           Понравилось?
           <span
-            className={css`
+            css={css`
               ${tw(['hidden', 'md:inline-block'])};
             `}
           >
@@ -93,7 +93,7 @@ export class Burn extends Component {
           </span>
         </div>
         <div
-          className={css`
+          css={css`
             ${tw([
               'flex',
               'flex-row',
@@ -107,7 +107,7 @@ export class Burn extends Component {
           `}
         >
           <button
-            className={css`
+            css={css`
               ${tw([
                 'border-2',
                 'border-solid',
@@ -202,7 +202,7 @@ export class Burn extends Component {
             </svg>
             <Fly inProp={clicked}>
               <span
-                className={css`
+                css={css`
                   ${tw([
                     'font-montserrat',
                     'font-semibold',
@@ -217,7 +217,7 @@ export class Burn extends Component {
           </button>
           <AppearSpan inProp={!isNull(burned)}>
             <span
-              className={css`
+              css={css`
                 ${tw(['font-montserrat', 'font-semibold', 'ml-q8', 'text-sm'])};
                 ${clicked && tw(['text-red-lightest'])};
                 transition: all 200ms ease-in-out;
@@ -228,12 +228,12 @@ export class Burn extends Component {
           </AppearSpan>
         </div>
         <div
-          className={css`
+          css={css`
             ${tw(['font-montserrat', 'text-body'])};
           `}
         >
           <span
-            className={css`
+            css={css`
               ${tw(['hidden', 'md:inline-block'])};
             `}
           >

@@ -50,7 +50,7 @@ export const Views = compose(
   <>
     <AppearSpan inProp={!isNull(views)}>
       <span
-        className={css`
+        css={css`
           ${tw(['ml-q8', 'pl-q24', 'relative'])};
           &::before {
             content: '';
@@ -76,7 +76,7 @@ export const Views = compose(
     </AppearSpan>
     <AppearSpan inProp={!isNull(burned)}>
       <span
-        className={css`
+        css={css`
           ${tw(['ml-q12', 'relative'])};
           padding-left: 1.75rem;
           &::before {

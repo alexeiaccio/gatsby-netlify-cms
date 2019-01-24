@@ -56,7 +56,7 @@ export const Appear = ({ children, inProp }) => (
   >
     {state => (
       <div
-        className={css`
+        css={css`
           max-height: 0px;
           overflow: hidden;
           transition: max-height 600ms ease-in-out;
@@ -80,7 +80,7 @@ export const AppearSpan = ({ children, inProp }) => (
   >
     {state => (
       <span
-        className={css`
+        css={css`
           display: inline-flex;
           max-height: 0px;
           overflow: hidden;
@@ -105,7 +105,7 @@ export const AppearSpanHundred = ({ children, inProp, ...props }) => (
   >
     {state => (
       <span
-        className={css`
+        css={css`
           display: inline-flex;
           max-height: 0px;
           overflow: hidden;

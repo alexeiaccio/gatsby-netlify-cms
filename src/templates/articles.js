@@ -25,8 +25,8 @@ const Article = ({ data, location }) => {
   return (
     <>
       <article
-        className={css`
-          ${tw(['my-q48', 'relative'])};
+        css={css`
+          ${tw(['bg-white', 'my-q48', 'relative'])};
         `}
       >
         <h1 className={Heading1}>{article.title.text}</h1>
@@ -42,13 +42,13 @@ const Article = ({ data, location }) => {
       {!isAfisha && <Context {...{ context }} />}
       {isAfisha && (
         <Link
-          className={css`
+          css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
           to={'/afisha#articles'}
         >
           <span
-            className={css`
+            css={css`
               ${ButtonOutlined};
             `}
           >

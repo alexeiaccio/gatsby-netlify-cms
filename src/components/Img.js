@@ -23,7 +23,7 @@ const Image = styled('img')`
 export const ImgHolder = props => (
   <Holder {...props}>
     <div
-      className={css`
+      css={css`
         ${tw(['bg-center', 'bg-no-repeat', 'h-q144', 'w-full'])};
         background-image: url(${logo});
         transform: rotateZ(135deg);

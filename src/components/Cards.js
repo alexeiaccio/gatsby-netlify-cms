@@ -8,7 +8,7 @@ import { toLocalDate, uuid } from '../utils'
 
 export const Dummy = () => (
   <div
-    className={css`
+    css={css`
       ${tw(['flex-no-shrink', 'w-full'])};
       max-width: calc(50% - 2rem);
     `}
@@ -17,7 +17,7 @@ export const Dummy = () => (
 
 export const PreviewCard = ({ article, location }) => (
   <Link
-    className={css`
+    css={css`
       ${tw(['text-black', 'hover:text-black', 'w-full'])};
       &:hover h4 {
         ${tw(['text-green'])};
@@ -28,12 +28,12 @@ export const PreviewCard = ({ article, location }) => (
   >
     {article.data.image && <Img src={article.data.image} />}
     <div
-      className={css`
+      css={css`
         ${tw(['mt-q16'])};
       `}
     >
       <h4
-        className={css`
+        css={css`
           ${Heading6};
           ${tw(['mb-q12'])};
           transition: all 200ms ease-in-out;
@@ -64,27 +64,27 @@ export const PreviewCard = ({ article, location }) => (
 export const Placeholder = () => (
   <>
     <ImgHolder
-      className={css`
+      css={css`
         ${tw(['h-q144', 'mb-q16'])};
       `}
     />
     <div
-      className={css`
+      css={css`
         ${tw(['bg-grey-lighter', 'h-q24', 'mb-q16', 'rounded-sm', 'w-4/5'])};
       `}
     />
     <div
-      className={css`
+      css={css`
         ${tw(['bg-grey-lighter', 'h-q12', 'mb-q8', 'rounded-sm', 'w-3/5'])};
       `}
     />
     <div
-      className={css`
+      css={css`
         ${tw(['bg-grey-lighter', 'h-q12', 'mb-q8', 'rounded-sm', 'w-3/4'])};
       `}
     />
     <div
-      className={css`
+      css={css`
         ${tw(['bg-grey-lighter', 'h-q12', 'rounded-sm', 'w-3/5'])};
       `}
     />

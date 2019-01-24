@@ -11,26 +11,26 @@ import { translite } from '../utils/makePath'
 
 export const Author = ({ author, location }) => (
   <div
-    className={css`
+    css={css`
       ${tw(['flex-no-shrink', 'mb-q72', 'mx-q16', 'text-black', 'w-full'])};
       max-width: calc(50% - 2rem);
     `}
   >
     <Link key={uuid} to={translite(author.name)} state={{from: location.pathname}}>
       <Img
-        className={css`
+        css={css`
           ${tw(['rounded-full'])};
         `}
         src={author.avatar}
       />
     </Link>
     <div
-      className={css`
+      css={css`
         ${tw(['sm:pl-q36'])};
       `}
     >
       <h3
-        className={css`
+        css={css`
           ${Heading6};
           ${tw(['my-q48'])};
         `}

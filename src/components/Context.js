@@ -7,12 +7,12 @@ import { Heading4 } from '../components/Typography'
 
 export const Context = ({ context }) => (
   <aside
-    className={css`
+    css={css`
       ${tw(['w-full'])};
     `}
   >
     <h2
-      className={css`
+      css={css`
         ${Heading4};
         ${tw(['my-q36'])};
       `}
@@ -26,7 +26,7 @@ export const Context = ({ context }) => (
         </Column>
       ) : (
         <Column
-          className={css`
+          css={css`
             ${tw(['hidden', 'sm:block'])};
           `}
         >
@@ -39,7 +39,7 @@ export const Context = ({ context }) => (
         </Column>
       ) : (
         <Column
-          className={css`
+          css={css`
             ${tw(['hidden', 'sm:block'])};
           `}
         >

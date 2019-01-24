@@ -129,7 +129,7 @@ const Navbar = withToggle(
     toggledOn,
   }) => (
     <header
-      className={css`
+      css={css`
         position: fixed;
         ${tw([
           'bg-black',
@@ -143,7 +143,7 @@ const Navbar = withToggle(
       `}
     >
       <nav
-        className={css`
+        css={css`
           ${tw([
             'flex',
             'flex-row',
@@ -156,7 +156,7 @@ const Navbar = withToggle(
         <AniLink
           fade
           to="/"
-          className={css`
+          css={css`
             ${tw([
               'bg-center',
               'bg-contain',
@@ -172,7 +172,7 @@ const Navbar = withToggle(
         <AniLink
           fade
           to="/"
-          className={css`
+          css={css`
             ${tw([
               'inline-block',
               'font-extrabold',
@@ -193,7 +193,7 @@ const Navbar = withToggle(
           ·К·Р·А·П·И·В·А·
         </AniLink>
         <span
-          className={css`
+          css={css`
             ${tw([
               'bg-green',
               'hover:bg-black',
@@ -218,7 +218,7 @@ const Navbar = withToggle(
           {toggledOn ? '✕' : 'Подписка'}
         </span>
         <span
-          className={css`
+          css={css`
             ${tw([
               'bg-white',
               'hover:bg-black',
@@ -250,7 +250,7 @@ const Navbar = withToggle(
       <Appear inProp={toggledOn}>
         <Appear inProp={success}>
           <div
-            className={css`
+            css={css`
               ${tw([
                 'flex',
                 'flex-col',
@@ -263,7 +263,7 @@ const Navbar = withToggle(
             `}
           >
             <span
-              className={css`
+              css={css`
                 ${tw([
                   'font-montserrat',
                   'font-medium',
@@ -283,7 +283,7 @@ const Navbar = withToggle(
               Вы подписаны на обновления ·К·Р·А·П·И·В·А·
             </span>
             <span
-              className={css`
+              css={css`
                 ${tw([
                   'bg-green',
                   'hover:bg-white',
@@ -313,19 +313,19 @@ const Navbar = withToggle(
         </Appear>
         <Appear inProp={!success}>
           <div
-            className={css`
+            css={css`
               ${tw(['flex', 'justify-center', 'py-q48', 'w-full'])};
             `}
           >
             <form
-              className={css`
+              css={css`
                 ${tw(['flex', 'flex-col', 'md:flex-row'])};
               `}
               name="SubscriptionForm"
               onSubmit={subscribe}
             >
               <span
-                className={css`
+                css={css`
                   ${tw([
                     'font-montserrat',
                     'font-medium',
@@ -378,7 +378,7 @@ const Navbar = withToggle(
         </Appear>
       </Appear>
       <div
-        className={css`
+        css={css`
           ${tw([
             'cursor-pointer',
             'font-semibold',

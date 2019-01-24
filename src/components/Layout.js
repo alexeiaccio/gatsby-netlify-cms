@@ -68,7 +68,7 @@ const Layout = enhance(({ children, image, location, title }) => (
       image={image}
     />
     <div
-      className={css`
+      css={css`
         ${tw([
           'bg-white',
           'border-4',
@@ -81,7 +81,7 @@ const Layout = enhance(({ children, image, location, title }) => (
       `}
     />
     <div
-      className={css`
+      css={css`
         ${tw([
           'border-2',
           'md:border-4',
@@ -97,7 +97,7 @@ const Layout = enhance(({ children, image, location, title }) => (
     />
     <Navbar />
     <div
-      className={css`
+      css={css`
         ${tw([
           'flex',
           'flex-col',
@@ -114,7 +114,7 @@ const Layout = enhance(({ children, image, location, title }) => (
       `}
     >
       <div
-        className={css`
+        css={css`
           ${tw(['w-full'])};
           max-width: calc(100vw - 2rem);
         `}

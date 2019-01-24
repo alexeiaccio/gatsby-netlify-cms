@@ -8,7 +8,7 @@ import { uuid } from '../utils'
 
 export const MediaLink = ({ primary }) => (
   <figure
-    className={css`
+    css={css`
       ${tw([
         'flex',
         'flex-col',
@@ -23,7 +23,7 @@ export const MediaLink = ({ primary }) => (
   >
     {primary.mediacover.localFile && (
       <a
-        className={css`
+        css={css`
           ${tw(['flex-1', 'sm:px-q12', 'w-full', 'sm:w-1/2'])};
         `}
         href={primary.medialink.url}
@@ -36,7 +36,7 @@ export const MediaLink = ({ primary }) => (
     {(primary.medialink.url.includes('.mp3') ||
       primary.medialink.url.includes('.m4a')) && (
         <video
-          className={css`
+          css={css`
             ${tw(['flex-1', 'sm:px-q12', 'mb-q8', 'w-full', 'sm:w-1/2'])};
             height: 3rem;
             max-height: 3rem;
@@ -49,12 +49,12 @@ export const MediaLink = ({ primary }) => (
       )}
     {primary.medialink.url.includes('.mp4') && (
       <div
-        className={css`
+        css={css`
           ${tw(['mb-q8', 'sm:px-q16', 'text-center', 'w-full'])};
         `}
       >
         <video
-          className={css`
+          css={css`
             ${tw(['max-w-full'])};
           `}
           controls="true"
@@ -65,7 +65,7 @@ export const MediaLink = ({ primary }) => (
       </div>
     )}
     <figcaption
-      className={css`
+      css={css`
         ${tw(['flex-1', 'sm:px-q12', 'mb-q12', 'w-full', 'sm:w-1/2'])};
         ${primary.medialink.url.includes('.mp4') && tw(['text-center'])};
         & h3 {
@@ -87,7 +87,7 @@ export const MediaLink = ({ primary }) => (
           target="_blank"
         >
           <span
-            className={css`
+            css={css`
               ${ButtonOutlined};
               ${tw(['mt-q24'])};
             `}

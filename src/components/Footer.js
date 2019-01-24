@@ -5,7 +5,7 @@ import publicdomain from '../img/publicdomain.svg'
 
 export const Footer = () => (
   <footer
-    className={css`
+    css={css`
       ${tw([
         'font-montserrat',
         'bg-black',
@@ -19,7 +19,7 @@ export const Footer = () => (
     `}
   >
     <div
-      className={css`
+      css={css`
         ${tw([
           'flex',
           'flex-col',
@@ -35,13 +35,13 @@ export const Footer = () => (
       `}
     >
       <div
-        className={css`
+        css={css`
           ${tw(['flex', 'items-center'])};
         `}
       >
         <span>·К·Р·А·П·И·В·А·</span>
         <span
-          className={css`
+          css={css`
             ${tw([
               'bg-contain',
               'bg-no-repeat',
@@ -57,7 +57,7 @@ export const Footer = () => (
         <span>2018</span>
       </div>
       <a
-        className={css`
+        css={css`
           ${tw([
             'bg-green',
             'hover:bg-black',
@@ -89,7 +89,7 @@ export const Footer = () => (
         Поддержать
       </a>
       <div
-        className={css`
+        css={css`
           ${tw(['font-semibold'])};
           font-variant: small-caps;
         `}
@@ -120,7 +120,7 @@ export const Footer = () => (
       </div>
     </div>
     <div
-      className={css`
+      css={css`
         ${tw([
           'flex',
           'flex-col',
@@ -138,19 +138,19 @@ export const Footer = () => (
       `}
     >
       <div
-        className={css`
+        css={css`
           ${tw(['mb-q24', 'sm:mb-0', 'text-center'])};
         `}
       >
         <span
-          className={css`
+          css={css`
             ${tw(['mr-q8'])};
           `}
         >
           При поддержке Фонда Взаимопомощи
         </span>
         <a
-          className={css`
+          css={css`
             ${tw(['font-semibold'])};
             font-variant: small-caps;
           `}
@@ -162,19 +162,19 @@ export const Footer = () => (
         </a>
       </div>
       <div
-        className={css`
+        css={css`
           ${tw(['flex', 'flex-no-wrap'])};
         `}
       >
         <span
-          className={css`
+          css={css`
             ${tw(['mr-q8'])};
           `}
         >
           Разработка
         </span>
         <a
-          className={css`
+          css={css`
             ${tw(['font-semibold'])};
             font-variant: small-caps;
           `}

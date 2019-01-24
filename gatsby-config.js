@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const { htmlSerializer, linkResolver } = require('./src/utils/prismic') 
+const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
 
 module.exports = {
   siteMetadata: {
@@ -16,11 +16,11 @@ module.exports = {
     'gatsby-plugin-sharp',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,
-    { 
+    {
       resolve: 'gatsby-plugin-transition-link',
       options: {
-          layout: require.resolve(`./src/components/Layout.js`)
-        }
+        layout: require.resolve(`./src/components/layout/index.js`),
+      },
     },
     {
       resolve: 'gatsby-source-prismic',

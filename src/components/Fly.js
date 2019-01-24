@@ -30,7 +30,7 @@ export const Fly = ({ children, inProp }) => (
   >
     {state => (
       <div
-        className={css`
+        css={css`
           ${tw(['absolute', 'pin-t'])};
           opacity: 0;
           right: 0px;

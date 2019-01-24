@@ -11,7 +11,7 @@ export const News = withStateHandlers(
 )(({ close, opened }) => (
   <Appear inProp={opened}>
     <div
-      className={css`
+      css={css`
         ${tw([
           'bg-green',
           'flex',
@@ -32,7 +32,7 @@ export const News = withStateHandlers(
         октября в 19:00
       </div>
       <div
-        className={css`
+        css={css`
           ${tw([
             'flex',
             'flex-row',
@@ -43,7 +43,7 @@ export const News = withStateHandlers(
         `}
       >
         <div
-          className={css`
+          css={css`
             ${tw(['font-semibold', 'px-q12', 'text-xs'])};
             font-variant: small-caps;
             & *,
@@ -71,7 +71,7 @@ export const News = withStateHandlers(
           <span>{' · '}</span>
         </div>
         <a
-          className={css`
+          css={css`
             ${OutlinedTemplate};
             ${tw([
               'bg-green',
@@ -91,7 +91,7 @@ export const News = withStateHandlers(
           Регистрация
         </a>
         <button
-          className={css`
+          css={css`
             ${OutlinedTemplate};
             ${tw([
               'bg-green',

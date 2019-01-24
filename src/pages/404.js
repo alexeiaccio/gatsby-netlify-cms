@@ -29,12 +29,12 @@ const NotFoundPage = lifecycle({
 })(({ location }) => (
   <>
     <div
-      className={css`
+      css={css`
         ${tw(['h-screen'])};
       `}
     >
       <div
-        className={css`
+        css={css`
           ${tw([
             'bg-center',
             'bg-contain',
@@ -48,7 +48,7 @@ const NotFoundPage = lifecycle({
         `}
       />
       <h1
-        className={css`
+        css={css`
           ${Heading1};
           ${tw(['text-center', 'my-q64'])};
         `}
@@ -56,7 +56,7 @@ const NotFoundPage = lifecycle({
         404
       </h1>
       <p
-        className={css`
+        css={css`
           ${tw(['text-center', 'text-heading5'])};
         `}
       >
@@ -64,14 +64,14 @@ const NotFoundPage = lifecycle({
       </p>
       <p>
         <Link
-          className={css`
+          css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
             max-width: 18rem;
           `}
           to={'/'}
         >
           <span
-            className={css`
+            css={css`
               ${tw([
                 'bg-white',
                 'hover:bg-black',

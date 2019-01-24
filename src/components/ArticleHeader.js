@@ -1,5 +1,6 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
 import { css } from '@emotion/core'
 
 import { HTMLContent } from './Content'
@@ -11,7 +12,7 @@ import { translite } from '../utils/makePath'
 export const ArticleHeader = ({ article, date, location, tags }) => (
   <div>
     <div
-      className={css`
+      css={css`
         ${tw([
           'font-montserrat',
           'italic',
@@ -22,19 +23,21 @@ export const ArticleHeader = ({ article, date, location, tags }) => (
       `}
     >
       <span
-        className={css`
+        css={css`
           ${tw(['inline-flex', 'items-center'])};
         `}
       />
       {tags &&
         tags.map(tag => (
-          <Link
+          <AniLink
+            paintDrip
+            hex="#0cf3ad"
             key={uuid()}
             to={translite(tag)}
             state={{ from: location.pathname }}
           >
             <span> {tag} ·</span>
-          </Link>
+          </AniLink>
         ))}
       <span> {toLocalDate(date)}</span>
       <span>
@@ -44,27 +47,29 @@ export const ArticleHeader = ({ article, date, location, tags }) => (
             ({ author }) =>
               author &&
               author.document.map(({ data }) => (
-                <Link
+                <AniLink
+                  paintDrip
+                  hex="#0cf3ad"
                   key={uuid()}
                   to={translite(data.name)}
                   state={{ from: location.pathname }}
                 >
                   <span> {data.name} ·</span>
-                </Link>
+                </AniLink>
               ))
           )}
       </span>
       <Views {...{ location }} />
     </div>
     <figure
-      className={css`
+      css={css`
         ${tw(['mx-0', 'my-q48'])};
       `}
     >
       {article.image && <Img src={article.image} />}
       <figcaption>
         <HTMLContent
-          className={css`
+          css={css`
             ${tw(['italic', 'text-center', 'text-list'])};
           `}
           content={article.caption.html}

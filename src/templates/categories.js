@@ -29,8 +29,8 @@ export default ({ data, location }) => {
       {isAfisha && (
         <section>
           <article
-            className={css`
-              ${tw(['my-q48'])};
+            css={css`
+              ${tw(['bg-white', 'my-q48'])};
             `}
           >
             <h1 className={Heading1}>{article.title.text}</h1>
@@ -47,7 +47,7 @@ export default ({ data, location }) => {
         {!isAfisha && (
           <>
             <h1
-              className={css`
+              css={css`
                 ${Heading1};
                 ${tw(['text-center', 'mb-q72', 'text-black'])};
               `}
@@ -55,7 +55,7 @@ export default ({ data, location }) => {
               {title}
             </h1>
             <div
-              className={css`
+              css={css`
                 ${tw(['my-q48', 'text-body', 'text-justify'])};
               `}
             >
@@ -75,13 +75,13 @@ export default ({ data, location }) => {
           ))}
         </Row>
         <Link
-          className={css`
+          css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
           to={'/'}
         >
           <span
-            className={css`
+            css={css`
               ${ButtonOutlined};
             `}
           >

@@ -32,8 +32,9 @@ export default ({ data, location }) => {
     <>
       <section>
         <div
-          className={css`
+          css={css`
             ${tw([
+              'bg-white',
               'mb-q36',
               'items-center',
               'justify-center',
@@ -43,7 +44,7 @@ export default ({ data, location }) => {
           `}
         >
           <Img
-            className={css`
+            css={css`
               ${tw(['rounded-full'])};
               height: 320px;
               max-height: 75vw;
@@ -54,7 +55,7 @@ export default ({ data, location }) => {
           />
         </div>
         <h1
-          className={css`
+          css={css`
             ${Heading1};
             ${tw(['text-center', 'mb-q48', 'text-black'])};
           `}
@@ -64,7 +65,7 @@ export default ({ data, location }) => {
         </h1>
         {author.statement.html && (
           <HTMLContent
-            className={css`
+            css={css`
               ${RichTextSmall};
               ${tw(['text-center'])};
               & p {
@@ -76,7 +77,7 @@ export default ({ data, location }) => {
         )}
         {author && getArticles(author).length > 0 && (
           <h2
-            className={css`
+            css={css`
               ${Heading2};
               ${tw(['mb-q48', 'mt-q72', 'text-center'])};
             `}
@@ -93,13 +94,13 @@ export default ({ data, location }) => {
             ))}
         </Row>
         <Link
-          className={css`
+          css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
           to={from}
         >
           <span
-            className={css`
+            css={css`
               ${ButtonOutlined};
             `}
           >

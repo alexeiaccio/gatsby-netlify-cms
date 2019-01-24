@@ -16,7 +16,7 @@ export default ({ data, location }) => {
     <>
       <section>
         <h1
-          className={css`
+          css={css`
             ${Heading1};
             ${tw(['text-center', 'mb-q72', 'text-black'])};
           `}
@@ -31,13 +31,13 @@ export default ({ data, location }) => {
           ))}
         </Row>
         <Link
-          className={css`
+          css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
           to={'/'}
         >
           <span
-            className={css`
+            css={css`
               ${ButtonOutlined};
             `}
           >

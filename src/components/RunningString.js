@@ -42,7 +42,7 @@ class RunningString extends Component {
   render() {
     return (
       <span
-        className={css`
+        css={css`
           ${tw(['whitespace-no-wrap'])};
         `}
         ref={this.stringRef}
