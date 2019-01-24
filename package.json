@@ -35,7 +35,7 @@
     "tailwindcss": "^0.7.3",
     "typograf": "^6.7.4",
     "uuid": "^3.3.2",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^2.0.4"
   },
   "keywords": [
     "gatsby"
