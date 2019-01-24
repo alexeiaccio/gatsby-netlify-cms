@@ -6,7 +6,6 @@ import { Link } from 'gatsby'
 import { Img, ImgHolder } from './Img'
 import { Heading6 } from './Typography'
 import { toLocalDate, uuid } from '../utils'
-import { translite } from '../utils/makePath'
 
 export const Dummy = () => (
   <div
