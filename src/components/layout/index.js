@@ -4,7 +4,7 @@ import { Global, css } from '@emotion/core'
 import { TransitionPortal } from 'gatsby-plugin-transition-link'
 
 import globalStyles from './global-styles'
-import Navbar from '../Navbar'
+import Header from './header'
 
 class Layout extends PureComponent {
   render() {
@@ -12,7 +12,7 @@ class Layout extends PureComponent {
       <>
         <Global styles={globalStyles} />
         <TransitionPortal level="top">
-          <Navbar />
+          <Header />
         </TransitionPortal>
         <div
           css={css`
