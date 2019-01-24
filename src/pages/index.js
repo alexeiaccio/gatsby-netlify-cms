@@ -111,7 +111,7 @@ export default ({ data, location }) => {
                 ${tw(['mb-q144', 'mx-auto', 'text-center'])};
               `}
             >
-              <Link to="/new">
+              <Link to="/novoe">
                 <span
                   className={css`
                     ${ButtonOutlined};
@@ -198,7 +198,7 @@ export default ({ data, location }) => {
                     `}
                     key={uuid()}
                   >
-                    <Link to={category.categoryid} key={uuid()}>
+                    <Link to={`/${translite(category.categorytitle.text)}`} key={uuid()}>
                       <span
                         className={css`
                           ${ButtonOutlined};
