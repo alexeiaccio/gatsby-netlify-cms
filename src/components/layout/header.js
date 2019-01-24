@@ -2,6 +2,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 
 import Link from '../elements/link'
+import RunningString from './running-string'
 
 function Header() {
   return (
@@ -52,6 +53,26 @@ function Header() {
           ·К·Р·А·П·И·В·А·
         </Link>
       </nav>
+      <div
+        css={css`
+          ${tw([
+            'cursor-pointer',
+            'font-semibold',
+            'font-montserrat',
+            'overflow-hidden',
+            'text-black',
+            'text-center',
+            'text-green-dark',
+            'text-xs',
+            'md:text-md',
+            'tracking-wide',
+          ])};
+          line-height: 2;
+          font-variant-caps: all-small-caps;
+        `}
+      >
+        <RunningString string="· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм " />
+      </div>
     </header>
   )
 }
