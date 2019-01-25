@@ -1,4 +1,6 @@
 import React, { memo, Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
@@ -24,12 +26,10 @@ const logoWrapperStyle = css`
     'flex-row',
     'items-center',
     'justify-center',
-    'mt-q8',
     'overflow-hidden',
     'w-full',
   ])};
-  transition: height 400ms ease-out;
-  transition: margin 200ms;
+  transition: margin 16ms;
 `
 
 const logoStyles = css`
@@ -41,11 +41,18 @@ const logoStyles = css`
 `
 
 const navStyles = css`
-  ${tw(['flex', 'flex-row', 'justify-center', 'w-full', 'sm:justify-between'])};
-  transition: margin 200ms;
+  ${tw([
+    'flex',
+    'flex-row',
+    'justify-center',
+    'mt-q8',
+    'w-full',
+    'sm:justify-between',
+  ])};
+  transition: margin 16ms;
 `
 
-const titleStyles = css`
+const Title = styled.span`
   ${tw([
     'inline-block',
     'font-extrabold',
@@ -65,16 +72,28 @@ const titleStyles = css`
 `
 
 class Header extends Component {
+  static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
   constructor() {
     super()
     this.state = {
       location: null,
       screen: null,
-      sticked: false,
+      scroll: 0,
+      string:
+        '· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм ',
+      title: '·К·Р·А·П·И·В·А·',
     }
   }
 
   componentDidMount() {
+    if (window !== undefined) {
+      window.addEventListener('scroll', this.handleScroll)
+    }
     this.handleLocation()
   }
 
@@ -84,39 +103,54 @@ class Header extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+
   handleLocation = () => {
     this.setState({ location: this.props.location.pathname })
   }
 
+  handleScroll = e => {
+    if (e.pageY < 100) {
+      this.setState({ scroll: e.pageY })
+    } else {
+      this.setState({ scroll: null })
+    }
+  }
+
   render() {
-    const { location } = this.state
+    const { location, scroll, string, title } = this.state
+    const LinkOrSpan =
+      location && location === '/' ? Title : Title.withComponent(Link)
+    const minusScroll = num => `${num - scroll > 0 ? num - scroll : 0}px`
 
     return (
       <header css={headerStyles}>
-        <div
-          css={css`
-            ${logoWrapperStyle};
-            ${location === '/' && tw(['mb-q24', 'mt-q72'])};
-            height: ${location === '/' ? '60px' : 0};
-          `}
-        >
-          <div css={logoStyles} />
-        </div>
+        {scroll !== null && (
+          <div
+            css={css`
+              ${logoWrapperStyle};
+              height: ${location === '/' ? minusScroll(60) : 0};
+              margin-bottom: ${location === '/' ? minusScroll(16) : 0};
+              margin-top: ${location === '/' ? minusScroll(72) : 0};
+              transition: height ${location === '/' ? 400 : 16}ms ease-out;
+            `}
+          >
+            <div css={logoStyles} />
+          </div>
+        )}
         <nav
           css={css`
             ${navStyles};
-            ${location === '/' && tw(['mb-q16'])};
+            margin-bottom: ${scroll !== null && location === '/'
+              ? minusScroll(16)
+              : 0};
           `}
         >
-          {location && location === '/' ? (
-            <span css={titleStyles}>·К·Р·А·П·И·В·А·</span>
-          ) : (
-            <Link css={titleStyles} to="/">
-              ·К·Р·А·П·И·В·А·
-            </Link>
-          )}
+          <LinkOrSpan to="/">{title}</LinkOrSpan>
         </nav>
-        <RunningString string="· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм " />
+        <RunningString string={string} />
       </header>
     )
   }
