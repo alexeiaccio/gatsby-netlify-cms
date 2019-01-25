@@ -11,5 +11,8 @@ export default function Link({ children, ...props }) {
 }
 
 Link.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]).isRequired,
 }
