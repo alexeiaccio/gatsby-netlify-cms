@@ -55,14 +55,14 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-nprogress`,
-      options: {
-        color: `#0cf3ad`,
-        parent: '#nprogress-container',
-        showSpinner: false,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-nprogress`,
+    //   options: {
+    //     color: `#0cf3ad`,
+    //     parent: '#nprogress-container',
+    //     showSpinner: false,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-sitemap`,
     },

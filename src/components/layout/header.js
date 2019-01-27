@@ -112,8 +112,12 @@ class Header extends Component {
   }
 
   handleScroll = e => {
-    if (e.pageY < 100) {
-      this.setState({ scroll: e.pageY })
+    const scroll = e.target
+      .getElementById('main-container')
+      .getBoundingClientRect().top
+
+    if (scroll > -100) {
+      this.setState({ scroll })
     } else {
       this.setState({ scroll: null })
     }
@@ -123,7 +127,7 @@ class Header extends Component {
     const { location, scroll, string, title } = this.state
     const LinkOrSpan =
       location && location === '/' ? Title : Title.withComponent(Link)
-    const minusScroll = num => `${num - scroll > 0 ? num - scroll : 0}px`
+    const minusScroll = num => `${num + scroll > 0 ? num + scroll : 0}px`
 
     return (
       <header css={headerStyles}>
