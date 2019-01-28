@@ -22,67 +22,8 @@ export default ({ data, location }) => {
   return (
     <>
       <section>
-        <div
-          to="/"
-          css={css`
-            ${tw([
-              'bg-center',
-              'bg-contain',
-              'bg-no-repeat',
-              'mx-auto',
-              'my-q64',
-            ])};
-            background-image: url(${logo});
-            height: 45px;
-            transform: rotateZ(90deg);
-            width: 90px;
-          `}
-        />
-        <h1
-          css={css`
-            ${Heading1};
-            ${tw(['text-center', 'my-q72'])};
-          `}
-        >
-          {index.title.text}{' '}
-        </h1>
-        <div
-          css={css`
-            ${tw(['flex', 'flex-row', 'flex-wrap', '-mx-1'])};
-          `}
-        >
-          <Link
-            css={css`
-              ${tw(['flex-1', 'mb-q8', 'px-q4'])};
-            `}
-            to="#new"
-          >
-            <ButtonOutlinedBlock>Новое</ButtonOutlinedBlock>
-          </Link>
-          <Link
-            css={css`
-              ${tw(['flex-1', 'mb-q8', 'px-q4'])};
-            `}
-            to="#afisha"
-          >
-            <ButtonOutlinedBlock>Афиша</ButtonOutlinedBlock>
-          </Link>
-          {index.categories.map(category => (
-            <Link
-              css={css`
-                ${tw(['flex-1', 'mb-q8', 'px-q4'])};
-              `}
-              key={uuid()}
-              to={`#${translite(category.categorytitle.text)}`}
-            >
-              <ButtonOutlinedBlock>
-                {category.categorytitle.text}
-              </ButtonOutlinedBlock>
-            </Link>
-          ))}
-        </div>
         <>
-          <div id="new" />
+          <div id="novoe" />
           <h2
             css={css`
               ${Heading3};

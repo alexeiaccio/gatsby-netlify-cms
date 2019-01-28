@@ -1,12 +1,11 @@
-import React, { memo, Component } from 'react'
+import React, { memo, Component, createRef } from 'react'
 import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
-import Link from '../elements/link'
+import LogoTitle from './logo-title'
+import Menu from './menu'
 import RunningString from './running-string'
-import logo from '../../img/logo.svg'
 
 const headerStyles = css`
   ${tw([
@@ -20,57 +19,6 @@ const headerStyles = css`
   ])};
 `
 
-const logoWrapperStyle = css`
-  ${tw([
-    'flex',
-    'flex-row',
-    'items-center',
-    'justify-center',
-    'overflow-hidden',
-    'w-full',
-  ])};
-  transition: margin 16ms;
-`
-
-const logoStyles = css`
-  ${tw(['bg-center', 'bg-contain', 'bg-no-repeat'])};
-  background-image: url(${logo});
-  height: 30px;
-  transform: rotateZ(90deg);
-  width: 60px;
-`
-
-const navStyles = css`
-  ${tw([
-    'flex',
-    'flex-row',
-    'justify-center',
-    'mt-q8',
-    'w-full',
-    'sm:justify-between',
-  ])};
-  transition: margin 16ms;
-`
-
-const Title = styled.span`
-  ${tw([
-    'inline-block',
-    'font-extrabold',
-    'font-montserrat',
-    'mx-auto',
-    'px-q12',
-    'pt-q8',
-    'select-none',
-    'text-white',
-    'text-mobile',
-    'hover:text-green',
-    'sm:pt-0',
-    'sm:text-heading5',
-  ])};
-  letter-spacing: 0.3em;
-  line-height: 1.45;
-`
-
 class Header extends Component {
   static propTypes = {
     location: PropTypes.shape({
@@ -80,6 +28,7 @@ class Header extends Component {
 
   constructor() {
     super()
+    this.headerRef = createRef()
     this.state = {
       location: null,
       screen: null,
@@ -93,18 +42,28 @@ class Header extends Component {
   componentDidMount() {
     if (window !== undefined) {
       window.addEventListener('scroll', this.handleScroll)
+      window.addEventListener('resize', this.handleResize)
     }
     this.handleLocation()
+    this.handleResize()
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.handleLocation()
     }
+    if (document !== undefined && this.headerRef.current) {
+      const mainContainer = document.getElementById('main-container')
+      const headerHeight = this.headerRef.current.getBoundingClientRect().height
+      if (mainContainer.style.marginTop !== headerHeight) {
+        mainContainer.style.cssText = `margin-top: ${headerHeight}px`
+      }
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
   }
 
   handleLocation = () => {
@@ -112,50 +71,39 @@ class Header extends Component {
   }
 
   handleScroll = e => {
-    const scroll = e.target
-      .getElementById('main-container')
-      .getBoundingClientRect().top
+    const mainContainer = e.target.getElementById('main-container')
+    const scroll = mainContainer.getBoundingClientRect().top
 
     if (scroll > -100) {
-      this.setState({ scroll })
+      this.setState({ scroll: scroll * 0.9 })
     } else {
       this.setState({ scroll: null })
     }
   }
 
+  handleResize = () => {
+    if (window !== undefined) {
+      this.setState({ screen: window.innerWidth <= 768 ? 'sm' : 'lg' })
+    }
+  }
+
   render() {
-    const { location, scroll, string, title } = this.state
-    const LinkOrSpan =
-      location && location === '/' ? Title : Title.withComponent(Link)
-    const minusScroll = num => `${num + scroll > 0 ? num + scroll : 0}px`
+    const { location, scroll, screen, string, title } = this.state
 
     return (
-      <header css={headerStyles}>
-        {scroll !== null && (
-          <div
-            css={css`
-              ${logoWrapperStyle};
-              height: ${location === '/' ? minusScroll(60) : 0};
-              margin-bottom: ${location === '/' ? minusScroll(16) : 0};
-              margin-top: ${location === '/' ? minusScroll(72) : 0};
-              transition: height ${location === '/' ? 400 : 16}ms ease-out;
-            `}
-          >
-            <div css={logoStyles} />
-          </div>
-        )}
-        <nav
-          css={css`
-            ${navStyles};
-            margin-bottom: ${scroll !== null && location === '/'
-              ? minusScroll(16)
-              : 0};
-          `}
-        >
-          <LinkOrSpan to="/">{title}</LinkOrSpan>
-        </nav>
-        <RunningString string={string} />
-      </header>
+      <>
+        {screen !== null ? (
+          <header css={headerStyles} ref={this.headerRef}>
+            {screen === 'lg' && (
+              <>
+                <LogoTitle location={location} scroll={scroll} title={title} />
+                <Menu location={location} />
+              </>
+            )}
+            <RunningString string={string} />
+          </header>
+        ) : null}
+      </>
     )
   }
 }

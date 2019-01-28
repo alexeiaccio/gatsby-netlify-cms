@@ -5,11 +5,10 @@ import { css } from '@emotion/core'
 import { ButtonOutlined } from '../components/Buttons'
 import { PreviewCard } from '../components/Cards'
 import { Column, Row } from '../components/Grid'
-import Layout from '../components/Layout'
 import { Heading1 } from '../components/Typography'
 import { uuid } from '../utils'
 
-export default ({ data, location }) => {
+export default ({ data }) => {
   const { edges: articles } = data.articles
 
   return (
