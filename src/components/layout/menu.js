@@ -45,41 +45,51 @@ function Menu({ index, pages, location }) {
 
   const handleClick = link => {
     if (document !== undefined && window !== undefined) {
-      const top = document.getElementById(link).offsetTop
-      window.scrollTo({ top })
+      const top = get(document.getElementById(link), 'offsetTop')
+      window.scrollTo({ top, behavior: 'smooth' })
+      setTimeout(() => {
+        const nextTop = get(document.getElementById(link), 'offsetTop')
+        window.scrollTo({ top: nextTop, behavior: 'smooth' })
+      }, 200)
     }
   }
 
   return (
     <nav css={navStyles}>
-      {index.data.categories.map(category => {
-        const link = translite(category.categorytitle.text)
-        const pageExist = pages.edges.some(
-          ({ node }) => node.path.replace(/\//g, '') === link
-        )
+      {[
+        { categorytitle: { text: 'Новое' } },
+        { categorytitle: { text: 'Афиша' } },
+      ]
+        .concat(index.data.categories)
+        .concat({ categorytitle: { text: 'О нас' } })
+        .map(category => {
+          const link = translite(category.categorytitle.text)
+          const pageExist = pages.edges.some(
+            ({ node }) => node.path.replace(/\//g, '') === link
+          )
 
-        return (
-          <Fragment key={uuid()}>
-            {location === '/' ? (
-              <LinkOrMove css={linkStyles} onClick={() => handleClick(link)}>
-                {category.categorytitle.text}
-              </LinkOrMove>
-            ) : pageExist ? (
-              <LinkOrMove css={linkStyles} to={link}>
-                {category.categorytitle.text}
-              </LinkOrMove>
-            ) : (
-              <ButtonOutlinedDisabled
-                css={css`
-                  ${tw(['flex-1', 'mb-q8', 'px-q4'])};
-                `}
-              >
-                {category.categorytitle.text}
-              </ButtonOutlinedDisabled>
-            )}
-          </Fragment>
-        )
-      })}
+          return (
+            <Fragment key={uuid()}>
+              {location === '/' ? (
+                <LinkOrMove css={linkStyles} onClick={() => handleClick(link)}>
+                  {category.categorytitle.text}
+                </LinkOrMove>
+              ) : pageExist ? (
+                <LinkOrMove css={linkStyles} to={link}>
+                  {category.categorytitle.text}
+                </LinkOrMove>
+              ) : (
+                <ButtonOutlinedDisabled
+                  css={css`
+                    ${tw(['flex-1', 'mb-q8', 'px-q4'])};
+                  `}
+                >
+                  {category.categorytitle.text}
+                </ButtonOutlinedDisabled>
+              )}
+            </Fragment>
+          )
+        })}
     </nav>
   )
 }

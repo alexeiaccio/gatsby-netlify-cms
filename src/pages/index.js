@@ -167,6 +167,7 @@ export default ({ data, location }) => {
         css={css`
           ${tw(['mb-q144'])};
         `}
+        id="o-nas"
       >
         <div
           to="/"

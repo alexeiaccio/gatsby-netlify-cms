@@ -57,10 +57,17 @@ const Title = styled.h1`
 `
 
 function LogoTitle({ location, scroll, title }) {
-  const LinkOrSpan =
-    location && location === '/' ? Title : Title.withComponent(Link)
   const minusScroll = num =>
     `${num + scroll < 0 ? 0 : num + scroll >= num ? num : num + scroll}px`
+
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 600)
+    }
+  }
 
   return (
     <>
@@ -85,7 +92,11 @@ function LogoTitle({ location, scroll, title }) {
             : 0};
         `}
       >
-        <LinkOrSpan to="/">{title}</LinkOrSpan>
+        {location === '/' ? (
+          <Title onClick={handleClick}>{title}</Title>
+        ) : (
+          <Link to="/">{title}</Link>
+        )}
       </nav>
     </>
   )
