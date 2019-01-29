@@ -80,11 +80,6 @@ class Header extends Component {
     } else {
       this.setState({ scroll: null })
     }
-
-    const headerHeight = this.headerRef.current.getBoundingClientRect().height
-    if (mainContainer.style.marginTop !== headerHeight) {
-      mainContainer.style.cssText = `margin-top: ${headerHeight}px`
-    }
   }
 
   handleResize = () => {
@@ -100,7 +95,7 @@ class Header extends Component {
       <>
         {screen !== null ? (
           <header css={headerStyles} ref={this.headerRef}>
-            <Banner />
+            <Banner scroll={scroll} />
             {screen === 'lg' && (
               <>
                 <LogoTitle location={location} scroll={scroll} title={title} />

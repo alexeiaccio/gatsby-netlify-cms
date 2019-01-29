@@ -1,4 +1,4 @@
-import React, { PureComponent, memo } from 'react'
+import React, { Component, memo, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import get from 'lodash/get'
@@ -10,17 +10,19 @@ import Link from '../elements/link'
 import { uuid } from '../../utils'
 
 const asideStyles = css`
-  ${tw(['bg-green', 'p-q12', 'w-full'])};
+  ${tw(['bg-green', 'block', 'p-q12', 'overflow-hidden', 'w-full'])};
   box-sizing: border-box;
+  will-change: height;
 `
 
 const wrapperStyles = css`
   ${tw([
     'flex',
     'flex-row',
-    'flex-no-wrap',
+    'flex-wrap',
     'items-center',
     'justify-between',
+    'md:flex-no-wrap',
   ])};
 `
 
@@ -28,18 +30,29 @@ const buttonStyles = css`
   ${tw(['ml-auto', 'mr-q12'])};
 `
 
-class Banner extends PureComponent {
+class Banner extends Component {
   static propTypes = {
     index: PropTypes.objectOf(PropTypes.object).isRequired,
+    scroll: PropTypes.number.isRequired,
   }
 
   constructor(props) {
     super(props)
+    this.asideRef = createRef()
     this.state = {
+      asideHeight: null,
       banners: props.index.data.body.filter(
         ({ primary }) => !primary.expiredate.includes('ago')
       ),
       closed: [],
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.asideHeight === null && this.asideRef.current) {
+      this.setState({
+        asideHeight: this.asideRef.current.getBoundingClientRect().height,
+      })
     }
   }
 
@@ -54,27 +67,41 @@ class Banner extends PureComponent {
       : ButtonOutlinedBlock.withComponent('a')
 
     return isDocument ? (
-      <LinkButton css={buttonStyles}
+      <LinkButton
+        css={buttonStyles}
         target={get(link, 'target')}
         to={get(link, 'document[0].fields.slug', '/')}
       >
         {text}
       </LinkButton>
     ) : (
-      <LinkButton css={buttonStyles} href={get(link, 'url')} target={get(link, 'target')}>
+      <LinkButton
+        css={buttonStyles}
+        href={get(link, 'url')}
+        target={get(link, 'target')}
+      >
         {text}
       </LinkButton>
     )
   }
 
   render() {
-    const { banners, closed } = this.state
+    const { asideHeight, banners, closed } = this.state
+    const { scroll } = this.props
     const bannersToShow = banners.filter(
       ({ id }) => !closed.some(x => x === id)
     )
+    const minusScroll = num =>
+      `${num + scroll < 0 ? 0 : num + scroll >= num ? num : num + scroll}px`
 
-    return bannersToShow.length ? (
-      <aside css={asideStyles}>
+    return scroll !== null && bannersToShow.length ? (
+      <aside
+        css={css`
+          ${asideStyles};
+          height: ${minusScroll(asideHeight)};
+        `}
+        ref={this.asideRef}
+      >
         {bannersToShow.slice(0, 1).map(({ id, primary }) => (
           <div css={wrapperStyles} key={uuid()}>
             <Content content={get(primary, 'bannertext.html')} />
@@ -89,7 +116,7 @@ class Banner extends PureComponent {
   }
 }
 
-function WithStaticQuery() {
+function WithStaticQuery(props) {
   return (
     <StaticQuery
       query={graphql`
@@ -119,7 +146,7 @@ function WithStaticQuery() {
           }
         }
       `}
-      render={({ index }) => <Banner index={index} />}
+      render={({ index }) => <Banner index={index} {...props} />}
     />
   )
 }

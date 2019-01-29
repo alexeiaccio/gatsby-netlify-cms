@@ -15,7 +15,7 @@ const logoWrapperStyle = css`
     'overflow-hidden',
     'w-full',
   ])};
-  transition: margin 16ms;
+  will-change: height, margin-bottom, margin-top;
 `
 
 const logoStyles = css`
@@ -35,6 +35,7 @@ const navStyles = css`
     'w-full',
     'sm:justify-between',
   ])};
+  will-change: margin-bottom;
 `
 
 const Title = styled.h1`
@@ -78,7 +79,6 @@ function LogoTitle({ location, scroll, title }) {
             height: ${location === '/' ? minusScroll(60) : 0};
             margin-bottom: ${location === '/' ? minusScroll(16) : 0};
             margin-top: ${location === '/' ? minusScroll(72) : 0};
-            transition: height ${location === '/' ? 400 : 0}ms ease-out;
           `}
         >
           <div css={logoStyles} />
