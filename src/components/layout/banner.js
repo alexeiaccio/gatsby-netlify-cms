@@ -1,0 +1,127 @@
+import React, { PureComponent, memo } from 'react'
+import PropTypes from 'prop-types'
+import { StaticQuery, graphql } from 'gatsby'
+import get from 'lodash/get'
+import { css } from '@emotion/core'
+
+import Content from '../elements/content'
+import { ButtonOutlinedBlock } from '../elements/buttons'
+import Link from '../elements/link'
+import { uuid } from '../../utils'
+
+const asideStyles = css`
+  ${tw(['bg-green', 'p-q12', 'w-full'])};
+  box-sizing: border-box;
+`
+
+const wrapperStyles = css`
+  ${tw([
+    'flex',
+    'flex-row',
+    'flex-no-wrap',
+    'items-center',
+    'justify-between',
+  ])};
+`
+
+const buttonStyles = css`
+  ${tw(['ml-auto', 'mr-q12'])};
+`
+
+class Banner extends PureComponent {
+  static propTypes = {
+    index: PropTypes.objectOf(PropTypes.object).isRequired,
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      banners: props.index.data.body.filter(
+        ({ primary }) => !primary.expiredate.includes('ago')
+      ),
+      closed: [],
+    }
+  }
+
+  handleClose = id => {
+    this.setState(({ closed }) => ({ closed: closed.concat(id) }))
+  }
+
+  renderButton(link, text) {
+    const isDocument = get(link, 'document')
+    const LinkButton = isDocument
+      ? ButtonOutlinedBlock.withComponent(Link)
+      : ButtonOutlinedBlock.withComponent('a')
+
+    return isDocument ? (
+      <LinkButton css={buttonStyles}
+        target={get(link, 'target')}
+        to={get(link, 'document[0].fields.slug', '/')}
+      >
+        {text}
+      </LinkButton>
+    ) : (
+      <LinkButton css={buttonStyles} href={get(link, 'url')} target={get(link, 'target')}>
+        {text}
+      </LinkButton>
+    )
+  }
+
+  render() {
+    const { banners, closed } = this.state
+    const bannersToShow = banners.filter(
+      ({ id }) => !closed.some(x => x === id)
+    )
+
+    return bannersToShow.length ? (
+      <aside css={asideStyles}>
+        {bannersToShow.slice(0, 1).map(({ id, primary }) => (
+          <div css={wrapperStyles} key={uuid()}>
+            <Content content={get(primary, 'bannertext.html')} />
+            {this.renderButton(primary.bannerlink, primary.bannerbutton)}
+            <ButtonOutlinedBlock onClick={() => this.handleClose(id)}>
+              ✕
+            </ButtonOutlinedBlock>
+          </div>
+        ))}
+      </aside>
+    ) : null
+  }
+}
+
+function WithStaticQuery() {
+  return (
+    <StaticQuery
+      query={graphql`
+        query BannerQuery {
+          index: prismicIndex {
+            data {
+              body {
+                id
+                primary {
+                  bannertext {
+                    html
+                  }
+                  bannerbutton
+                  bannerlink {
+                    document {
+                      fields {
+                        slug
+                      }
+                    }
+                    url
+                    target
+                  }
+                  expiredate(fromNow: true)
+                }
+              }
+            }
+          }
+        }
+      `}
+      render={({ index }) => <Banner index={index} />}
+    />
+  )
+}
+
+export default memo(WithStaticQuery)

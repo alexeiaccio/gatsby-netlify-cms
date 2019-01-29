@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
+import Banner from './banner'
 import LogoTitle from './logo-title'
 import Menu from './menu'
 import RunningString from './running-string'
@@ -99,6 +100,7 @@ class Header extends Component {
       <>
         {screen !== null ? (
           <header css={headerStyles} ref={this.headerRef}>
+            <Banner />
             {screen === 'lg' && (
               <>
                 <LogoTitle location={location} scroll={scroll} title={title} />
