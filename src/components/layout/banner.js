@@ -33,7 +33,11 @@ const buttonStyles = css`
 class Banner extends Component {
   static propTypes = {
     index: PropTypes.objectOf(PropTypes.object).isRequired,
-    scroll: PropTypes.number.isRequired,
+    scroll: PropTypes.number,
+  }
+
+  static defaultProps = {
+    scroll: null,
   }
 
   constructor(props) {
@@ -48,8 +52,8 @@ class Banner extends Component {
     }
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.asideHeight === null && this.asideRef.current) {
+  componentDidMount() {
+    if (this.asideRef.current && this.state.asideHeight === null) {
       this.setState({
         asideHeight: this.asideRef.current.getBoundingClientRect().height,
       })
@@ -87,7 +91,7 @@ class Banner extends Component {
 
   render() {
     const { asideHeight, banners, closed } = this.state
-    const { scroll } = this.props
+      const { scroll } = this.props
     const bannersToShow = banners.filter(
       ({ id }) => !closed.some(x => x === id)
     )

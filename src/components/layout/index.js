@@ -25,12 +25,12 @@ const containerStyles = css`
     'max-w-md',
     'mx-auto',
     'px-q12',
-    'sm:px-q24',
-    'md:px-q48',
-    'py-q72',
     'relative',
     'text-black',
+    'sm:px-q24',
+    'md:px-q48',
   ])};
+  will-change: padding-top;
 `
 
 class Layout extends PureComponent {

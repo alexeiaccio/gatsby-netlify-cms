@@ -37,15 +37,20 @@ export const ButtonOutlinedBlock = styled('button')`
 export const ButtonOutlinedDisabled = styled('button')`
   ${tw([
     'bg-black',
-    'inline-flex',
     'border',
     'border-green',
     'border-solid',
     'font-montserrat',
+    'inline-flex',
     'items-center',
     'justify-center',
+    'px-q24',
+    'py-q8',
     'text-green',
+    'text-xs',
+    'w-full',
     'uppercase',
+    'whitespace-no-wrap',
   ])};
-  ${tw(['px-q24', 'py-q8', 'text-xs', 'w-full', 'whitespace-no-wrap'])};
+  box-sizing: border-box;
 `

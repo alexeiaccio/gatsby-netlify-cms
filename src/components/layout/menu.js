@@ -1,4 +1,4 @@
-import React, { memo, Fragment } from 'react'
+import React, { memo, Fragment, Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
@@ -21,48 +21,91 @@ const navStyles = css`
     'justify-center',
     'max-w-md',
     'mx-auto',
+    'overflow-hidden',
     'py-q24',
   ])};
+  box-sizing: border-box;
+  will-change: height;
 `
 
 const linkStyles = css`
   ${tw([
-    'flex-auto',
-    'md:flex-1',
-    'mb-q8',
+    'flex-no-shrink',
+    'flex-grow',
     'px-q8',
-    'w-full',
     'hover:bg-green',
     'md:w-auto',
   ])};
 `
 
-function Menu({ index, pages, location }) {
-  const LinkOrMove =
-    location && location === '/'
-      ? ButtonOutlinedBlock
-      : ButtonOutlinedBlock.withComponent(Link)
+class Menu extends Component {
+  static propTypes = {
+    index: PropTypes.objectOf(PropTypes.any).isRequired,
+    location: PropTypes.string.isRequired,
+    pages: PropTypes.objectOf(PropTypes.any).isRequired,
+    scroll: PropTypes.number,
+  }
 
-  const handleClick = link => {
-    if (document !== undefined && window !== undefined) {
-      const top = get(document.getElementById(link), 'offsetTop')
-      window.scrollTo({ top, behavior: 'smooth' })
-      setTimeout(() => {
-        const nextTop = get(document.getElementById(link), 'offsetTop')
-        window.scrollTo({ top: nextTop, behavior: 'smooth' })
-      }, 200)
+  static defaultProps = {
+    scroll: null,
+  }
+
+  constructor() {
+    super()
+    this.navRef = createRef()
+    this.state = {
+      navHeight: null,
     }
   }
 
-  return (
-    <nav css={navStyles}>
-      {[
-        { categorytitle: { text: 'Новое' } },
-        { categorytitle: { text: 'Афиша' } },
-      ]
-        .concat(index.data.categories)
-        .concat({ categorytitle: { text: 'О нас' } })
-        .map(category => {
+  componentDidMount() {
+    if (this.state.navHeight === null && this.navRef.current) {
+      this.setState({
+        navHeight: this.navRef.current.getBoundingClientRect().height,
+      })
+    }
+  }
+
+  render() {
+    const { index, pages, location, scroll } = this.props
+    const { navHeight } = this.state
+    const LinkOrMove =
+      location && location === '/'
+        ? ButtonOutlinedBlock
+        : ButtonOutlinedBlock.withComponent(Link)
+
+    const handleClick = link => {
+      if (document !== undefined && window !== undefined) {
+        const top = get(document.getElementById(link), 'offsetTop')
+        window.scrollTo({ top, behavior: 'smooth' })
+        setTimeout(() => {
+          const nextTop = get(document.getElementById(link), 'offsetTop')
+          window.scrollTo({ top: nextTop, behavior: 'smooth' })
+        }, 200)
+      }
+    }
+
+    const minusScroll = num =>
+      `${num + scroll < 0 ? 0 : num + scroll >= num ? num : num + scroll}px`
+
+    if (scroll === null) return null
+
+    const firstCategory =
+      location === '/' ? [] : [{ categorytitle: { text: 'Новое' } }]
+    const preparedCategories = firstCategory
+      .concat({ categorytitle: { text: 'Афиша' } })
+      .concat(index.data.categories)
+      .concat({ categorytitle: { text: 'О нас' } })
+
+    return (
+      <nav
+        css={css`
+          ${navStyles};
+          height: ${minusScroll(navHeight)};
+        `}
+        ref={this.navRef}
+      >
+        {preparedCategories.map(category => {
           const link = translite(category.categorytitle.text)
           const pageExist = pages.edges.some(
             ({ node }) => node.path.replace(/\//g, '') === link
@@ -81,7 +124,7 @@ function Menu({ index, pages, location }) {
               ) : (
                 <ButtonOutlinedDisabled
                   css={css`
-                    ${tw(['flex-1', 'mb-q8', 'px-q4'])};
+                    ${tw(['flex-no-shrink', 'flex-grow', 'px-q8'])};
                   `}
                 >
                   {category.categorytitle.text}
@@ -90,14 +133,9 @@ function Menu({ index, pages, location }) {
             </Fragment>
           )
         })}
-    </nav>
-  )
-}
-
-Menu.propTypes = {
-  index: PropTypes.objectOf(PropTypes.any).isRequired,
-  location: PropTypes.string.isRequired,
-  pages: PropTypes.objectOf(PropTypes.any).isRequired,
+      </nav>
+    )
+  }
 }
 
 function WithStaticQuery(props) {

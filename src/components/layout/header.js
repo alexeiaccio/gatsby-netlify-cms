@@ -56,8 +56,8 @@ class Header extends Component {
     if (document !== undefined && this.headerRef.current) {
       const mainContainer = document.getElementById('main-container')
       const headerHeight = this.headerRef.current.getBoundingClientRect().height
-      if (mainContainer.style.marginTop !== headerHeight) {
-        mainContainer.style.cssText = `margin-top: ${headerHeight}px`
+      if (mainContainer.style.paddingTop !== headerHeight) {
+        mainContainer.style.cssText = `padding-top: ${headerHeight}px`
       }
     }
   }
@@ -76,9 +76,16 @@ class Header extends Component {
     const scroll = mainContainer.getBoundingClientRect().top
 
     if (scroll > -100) {
-      this.setState({ scroll: scroll * 0.9 })
+      this.setState({ scroll })
     } else {
       this.setState({ scroll: null })
+    }
+
+    if (this.headerRef.current) {
+    const headerHeight = this.headerRef.current.getBoundingClientRect().height
+      if (mainContainer.style.paddingTop !== headerHeight) {
+        mainContainer.style.cssText = `padding-top: ${headerHeight + 36}px`
+      }
     }
   }
 
@@ -99,7 +106,7 @@ class Header extends Component {
             {screen === 'lg' && (
               <>
                 <LogoTitle location={location} scroll={scroll} title={title} />
-                <Menu location={location} />
+                <Menu location={location} scroll={scroll} />
               </>
             )}
             <RunningString string={string} />

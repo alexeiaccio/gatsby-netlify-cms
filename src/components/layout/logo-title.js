@@ -40,6 +40,7 @@ const navStyles = css`
 
 const Title = styled.h1`
   ${tw([
+    'cursor-pointer',
     'inline-block',
     'font-extrabold',
     'font-montserrat',
@@ -56,6 +57,8 @@ const Title = styled.h1`
   letter-spacing: 0.3em;
   line-height: 1.45;
 `
+
+const TitleLink = Title.withComponent(Link)
 
 function LogoTitle({ location, scroll, title }) {
   const minusScroll = num =>
@@ -95,7 +98,7 @@ function LogoTitle({ location, scroll, title }) {
         {location === '/' ? (
           <Title onClick={handleClick}>{title}</Title>
         ) : (
-          <Link to="/">{title}</Link>
+          <TitleLink to="/">{title}</TitleLink>
         )}
       </nav>
     </>
