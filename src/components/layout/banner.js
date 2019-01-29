@@ -91,7 +91,7 @@ class Banner extends Component {
 
   render() {
     const { asideHeight, banners, closed } = this.state
-      const { scroll } = this.props
+    const { scroll } = this.props
     const bannersToShow = banners.filter(
       ({ id }) => !closed.some(x => x === id)
     )

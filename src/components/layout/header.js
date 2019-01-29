@@ -7,6 +7,7 @@ import Banner from './banner'
 import LogoTitle from './logo-title'
 import Menu from './menu'
 import RunningString from './running-string'
+import TopBlock from './top-block'
 
 const headerStyles = css`
   ${tw([
@@ -105,6 +106,7 @@ class Header extends Component {
             <Banner scroll={scroll} />
             {screen === 'lg' && (
               <>
+                <TopBlock scroll={scroll} />
                 <LogoTitle location={location} scroll={scroll} title={title} />
                 <Menu location={location} scroll={scroll} />
               </>
