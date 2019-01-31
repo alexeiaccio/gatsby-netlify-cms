@@ -8,6 +8,8 @@
     "@emotion/core": "^10.0.6",
     "@emotion/styled": "^10.0.6",
     "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.2.1",
+    "aws-amplify": "^1.1.19",
+    "aws-amplify-react": "^2.3.0",
     "babel-plugin-tailwind": "^0.1.10",
     "dotenv": "^6.2.0",
     "elasticlunr": "^0.9.5",

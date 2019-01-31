@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
 import { TransitionPortal } from 'gatsby-plugin-transition-link'
+import { API, graphqlOperation } from 'aws-amplify';
 
 import globalStyles from './global-styles'
 import Header from './header'
+import { listKrapivas } from '../../graphql/queries'
 
 const borderStyles = css`
   ${tw([
@@ -34,6 +36,12 @@ const containerStyles = css`
 `
 
 class Layout extends PureComponent {
+  async componentDidMount() {
+    const { data, errors } = await API.graphql(graphqlOperation(listKrapivas))
+
+      if (data) console.log(data.listKrapivas.items)
+      if (errors) console.error(errors)
+  }
   render() {
     return (
       <>
