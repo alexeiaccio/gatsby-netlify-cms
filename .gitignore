@@ -7,4 +7,3 @@ public/
 yarn-error.log
 .env*
 tailwind.custom.css
-src/aws-exports.js
