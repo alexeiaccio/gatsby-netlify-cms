@@ -15,7 +15,7 @@
         "name" : "Query",
         "description" : null,
         "fields" : [ {
-          "name" : "getKrapiva",
+          "name" : "getPage",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -46,20 +46,20 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "listKrapivas",
+          "name" : "listPages",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "TableKrapivaFilterInput",
+              "name" : "TablePageFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -84,7 +84,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "KrapivaConnection",
+            "name" : "PageConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -96,7 +96,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "Krapiva",
+        "name" : "Page",
         "description" : null,
         "fields" : [ {
           "name" : "id",
@@ -184,7 +184,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "KrapivaConnection",
+        "name" : "PageConnection",
         "description" : null,
         "fields" : [ {
           "name" : "items",
@@ -195,7 +195,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "OBJECT",
-              "name" : "Krapiva",
+              "name" : "Page",
               "ofType" : null
             }
           },
@@ -219,7 +219,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "TableKrapivaFilterInput",
+        "name" : "TablePageFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -567,7 +567,7 @@
         "name" : "Mutation",
         "description" : null,
         "fields" : [ {
-          "name" : "createKrapiva",
+          "name" : "createPage",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -577,7 +577,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "CreateKrapivaInput",
+                "name" : "CreatePageInput",
                 "ofType" : null
               }
             },
@@ -585,13 +585,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "updateKrapiva",
+          "name" : "updatePage",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -601,7 +601,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "UpdateKrapivaInput",
+                "name" : "UpdatePageInput",
                 "ofType" : null
               }
             },
@@ -609,13 +609,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "deleteKrapiva",
+          "name" : "deletePage",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -625,7 +625,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "DeleteKrapivaInput",
+                "name" : "DeletePageInput",
                 "ofType" : null
               }
             },
@@ -633,7 +633,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -645,7 +645,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "CreateKrapivaInput",
+        "name" : "CreatePageInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -698,7 +698,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "UpdateKrapivaInput",
+        "name" : "UpdatePageInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -751,7 +751,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "DeleteKrapivaInput",
+        "name" : "DeletePageInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -789,7 +789,7 @@
         "name" : "Subscription",
         "description" : null,
         "fields" : [ {
-          "name" : "onCreateKrapiva",
+          "name" : "onCreatePage",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -830,13 +830,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onUpdateKrapiva",
+          "name" : "onUpdatePage",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -877,13 +877,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onDeleteKrapiva",
+          "name" : "onDeletePage",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -924,7 +924,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "Krapiva",
+            "name" : "Page",
             "ofType" : null
           },
           "isDeprecated" : false,

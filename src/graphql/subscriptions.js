@@ -1,8 +1,8 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const onCreateKrapiva = `subscription OnCreateKrapiva($id: ID, $slug: String, $view: Int, $burn: Int) {
-  onCreateKrapiva(id: $id, slug: $slug, view: $view, burn: $burn) {
+export const onCreatePage = `subscription OnCreatePage($id: ID, $slug: String, $view: Int, $burn: Int) {
+  onCreatePage(id: $id, slug: $slug, view: $view, burn: $burn) {
     id
     slug
     view
@@ -10,8 +10,8 @@ export const onCreateKrapiva = `subscription OnCreateKrapiva($id: ID, $slug: Str
   }
 }
 `;
-export const onUpdateKrapiva = `subscription OnUpdateKrapiva($id: ID, $slug: String, $view: Int, $burn: Int) {
-  onUpdateKrapiva(id: $id, slug: $slug, view: $view, burn: $burn) {
+export const onUpdatePage = `subscription OnUpdatePage($id: ID, $slug: String, $view: Int, $burn: Int) {
+  onUpdatePage(id: $id, slug: $slug, view: $view, burn: $burn) {
     id
     slug
     view
@@ -19,8 +19,8 @@ export const onUpdateKrapiva = `subscription OnUpdateKrapiva($id: ID, $slug: Str
   }
 }
 `;
-export const onDeleteKrapiva = `subscription OnDeleteKrapiva($id: ID, $slug: String, $view: Int, $burn: Int) {
-  onDeleteKrapiva(id: $id, slug: $slug, view: $view, burn: $burn) {
+export const onDeletePage = `subscription OnDeletePage($id: ID, $slug: String, $view: Int, $burn: Int) {
+  onDeletePage(id: $id, slug: $slug, view: $view, burn: $burn) {
     id
     slug
     view

@@ -1,8 +1,8 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const createKrapiva = `mutation CreateKrapiva($input: CreateKrapivaInput!) {
-  createKrapiva(input: $input) {
+export const createPage = `mutation CreatePage($input: CreatePageInput!) {
+  createPage(input: $input) {
     id
     slug
     view
@@ -10,8 +10,8 @@ export const createKrapiva = `mutation CreateKrapiva($input: CreateKrapivaInput!
   }
 }
 `;
-export const updateKrapiva = `mutation UpdateKrapiva($input: UpdateKrapivaInput!) {
-  updateKrapiva(input: $input) {
+export const updatePage = `mutation UpdatePage($input: UpdatePageInput!) {
+  updatePage(input: $input) {
     id
     slug
     view
@@ -19,8 +19,8 @@ export const updateKrapiva = `mutation UpdateKrapiva($input: UpdateKrapivaInput!
   }
 }
 `;
-export const deleteKrapiva = `mutation DeleteKrapiva($input: DeleteKrapivaInput!) {
-  deleteKrapiva(input: $input) {
+export const deletePage = `mutation DeletePage($input: DeletePageInput!) {
+  deletePage(input: $input) {
     id
     slug
     view

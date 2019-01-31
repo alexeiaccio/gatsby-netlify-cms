@@ -6,7 +6,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 
 import globalStyles from './global-styles'
 import Header from './header'
-import { listKrapivas } from '../../graphql/queries'
+import { listPages } from '../../graphql/queries'
 
 const borderStyles = css`
   ${tw([
@@ -37,9 +37,9 @@ const containerStyles = css`
 
 class Layout extends PureComponent {
   async componentDidMount() {
-    const { data, errors } = await API.graphql(graphqlOperation(listKrapivas))
+    const { data, errors } = await API.graphql(graphqlOperation(listPages))
 
-      if (data) console.log(data.listKrapivas.items)
+      if (data) console.log(data.listPages.items)
       if (errors) console.error(errors)
   }
   render() {
