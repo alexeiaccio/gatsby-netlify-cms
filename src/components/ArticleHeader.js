@@ -5,11 +5,11 @@ import { css } from '@emotion/core'
 
 import { HTMLContent } from './Content'
 import { Img } from './Img'
-import { Views } from './Views'
+import Views from './elements/views'
 import { toLocalDate, uuid } from '../utils'
 import { translite } from '../utils/makePath'
 
-export const ArticleHeader = ({ article, date, location, tags }) => (
+export const ArticleHeader = ({ article, date, id, location, tags }) => (
   <div>
     <div
       css={css`
@@ -59,7 +59,7 @@ export const ArticleHeader = ({ article, date, location, tags }) => (
               ))
           )}
       </span>
-      <Views {...{ location }} />
+      <Views id={id} />
     </div>
     <figure
       css={css`
@@ -82,6 +82,7 @@ export const ArticleHeader = ({ article, date, location, tags }) => (
 
 export const articleHeaderQuery = graphql`
   fragment ArticleHeader on PrismicArticles {
+    id
     first_publication_date
     tags
     data {
