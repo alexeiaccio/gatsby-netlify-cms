@@ -3,12 +3,11 @@ import { css } from '@emotion/core'
 import PropTypes from 'prop-types'
 import { graphql, Link } from 'gatsby'
 
-import { ArticleHeader } from '../components/ArticleHeader'
+import ArticleHeader from '../components/blocks/article-header'
 import { ArticleBody } from '../components/ArticleBody'
 import { ButtonOutlined } from '../components/Buttons'
 import { Context } from '../components/Context'
 import { Heading1 } from '../components/Typography'
-import Layout from '../components/Layout'
 import { Burn } from '../components/Burn'
 
 const getContext = slug => ctx => {
@@ -31,10 +30,10 @@ const Article = ({ data, location }) => {
       >
         <h1 className={Heading1}>{article.title.text}</h1>
         <ArticleHeader
-          {...{ article }}
+          article={ article }
           date={data.article.first_publication_date}
-          {...{ location }}
-          {...{ tags }}
+          location={ location }
+          tags={ tags }
         />
         <ArticleBody {...{ article }} />
         <Burn {...{ location }} />

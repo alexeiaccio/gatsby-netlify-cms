@@ -4,7 +4,6 @@ import { css } from '@emotion/core'
 import { lifecycle } from 'recompose'
 import { words } from 'lodash'
 
-import Layout from '../components/Layout'
 import logo from '../img/logo.svg'
 import { Heading1 } from '../components/Typography'
 

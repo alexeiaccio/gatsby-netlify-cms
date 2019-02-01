@@ -3,13 +3,12 @@ import { Link, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import { get } from 'lodash/fp'
 
-import { ArticleHeader } from '../components/ArticleHeader'
+import ArticleHeader from '../components/blocks/article-header'
 import { ArticleBody } from '../components/ArticleBody'
 import { ButtonOutlined } from '../components/Buttons'
 import { Column, Row } from '../components/Grid'
 import { Heading1 } from '../components/Typography'
 import { HTMLContent } from '../components/Content'
-import Layout from '../components/Layout'
 import { PreviewCard } from '../components/Cards'
 import { uuid } from '../utils'
 
@@ -17,6 +16,7 @@ export default ({ data, location }) => {
   const { edges } = data.articles
   const index = data.index.data
   const article = edges[0].node.data
+  const tags = edges[0].node.tags
   const indexCategory = index.categories.filter(({ categorytitle }) =>
     get('[0].node.tags', edges).some(tag => tag === categorytitle.text)
   )
@@ -35,9 +35,10 @@ export default ({ data, location }) => {
           >
             <h1 className={Heading1}>{article.title.text}</h1>
             <ArticleHeader
-              {...{ article }}
+              article={article}
               date={edges[0].node.first_publication_date}
-              {...{ location }}
+              location={location}
+              tags={tags}
             />
             <ArticleBody {...{ article }} />
           </article>

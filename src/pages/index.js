@@ -3,7 +3,7 @@ import { Link, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { AboutBody } from '../components/AboutBody'
-import { ButtonOutlined, ButtonOutlinedBlock } from '../components/Buttons'
+import { ButtonOutlined } from '../components/Buttons'
 import { Placeholder, PreviewCard } from '../components/Cards'
 import { HTMLContent } from '../components/Content'
 import { Column, Row } from '../components/Grid'

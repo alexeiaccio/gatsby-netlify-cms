@@ -42,7 +42,7 @@ function Views({ burn, view }) {
         `}
         title={`${view} просмотр${view < 5 ? (view === 1 ? '' : 'a') : 'ов'}`}
       >
-        {view}
+        {view === null ? '...' : view}
       </span>
       <span
         css={css`
@@ -55,15 +55,20 @@ function Views({ burn, view }) {
         `}
         title={`${burn} раз${burn > 1 && burn < 5 ? 'a' : ''} прижгло`}
       >
-        {burn}
+        {burn === null ? '...' : burn}
       </span>
     </span>
   )
 }
 
 Views.propTypes = {
-  burn: PropTypes.number.isRequired,
-  view: PropTypes.number.isRequired,
+  burn: PropTypes.number,
+  view: PropTypes.number,
+}
+
+Views.defaultProps = {
+  burn: null,
+  view: null,
 }
 
 class WithQuery extends Component {
@@ -78,8 +83,8 @@ class WithQuery extends Component {
     this.handleLocation = debounce(this.handleLocation, 200)
     this.handleView = debounce(this.handleView, 10000)
     this.state = {
-      burn: 0,
-      view: 0,
+      burn: null,
+      view: null,
     }
   }
 
@@ -89,6 +94,7 @@ class WithQuery extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setState({ burn: null, view: null })
       this.handleView.cancel()
       this.handleLocation.cancel()
       this.handleLocation()
@@ -97,7 +103,7 @@ class WithQuery extends Component {
 
   async handleLocation() {
     const { location } = this.props
-    const slug = location.pathname
+    const slug = location.pathname.replace(/\/?$/g, '')
     const id = uuidv5(slug, uuidv5.URL)
     const { data } = await API.graphql(graphqlOperation(getPage, { id, slug }))
     const getPageResult = data.getPage
@@ -132,7 +138,7 @@ class WithQuery extends Component {
 
   async handleView() {
     const { location } = this.props
-    const slug = location.pathname
+    const slug = location.pathname.replace(/\/?$/g, '')
     const id = uuidv5(slug, uuidv5.URL)
     const { view } = this.state
     const input = {

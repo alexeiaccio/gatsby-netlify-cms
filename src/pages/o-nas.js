@@ -2,10 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import aboutImage from '../img/about-image.jpg'
 import { AboutBody } from '../components/AboutBody'
 import { Author } from '../components/Author'
-import Layout from '../components/Layout'
 import { Heading1, Heading2 } from '../components/Typography'
 import { uuid } from '../utils'
 
