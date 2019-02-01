@@ -34,7 +34,7 @@ const containerStyles = css`
 `
 
 class Layout extends PureComponent {
-  render() {
+  render() {    
     return (
       <>
         <Global styles={globalStyles} />

@@ -9,7 +9,7 @@ import Views from './elements/views'
 import { toLocalDate, uuid } from '../utils'
 import { translite } from '../utils/makePath'
 
-export const ArticleHeader = ({ article, date, id, location, tags }) => (
+export const ArticleHeader = ({ article, date, location, tags }) => (
   <div>
     <div
       css={css`
@@ -59,7 +59,7 @@ export const ArticleHeader = ({ article, date, id, location, tags }) => (
               ))
           )}
       </span>
-      <Views id={id} />
+      <Views />
     </div>
     <figure
       css={css`

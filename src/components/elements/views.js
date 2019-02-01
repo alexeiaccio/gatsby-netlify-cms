@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { API, graphqlOperation } from 'aws-amplify'
-import { Connect } from 'aws-amplify-react'
 import { Location } from '@reach/router'
 import get from 'lodash/get'
-import delay from 'lodash/delay'
+import debounce from 'lodash/debounce'
 
 import { createPage, updatePage } from '../../graphql/mutations'
-import { listPages } from '../../graphql/queries'
+import { getPage } from '../../graphql/queries'
+import { uuidv5 } from '../../utils'
 
 import burnBlack from '../../img/burn-black.svg'
 import eyeBlack from '../../img/eye-black.svg'
@@ -29,9 +29,45 @@ const iconStyles = css`
   ])};
 `
 
-class Views extends Component {
+function Views({ burn, view }) {
+  return (
+    <span>
+      <span
+        css={css`
+          ${tw(['ml-q8', 'pl-q24', 'relative'])};
+          &::before {
+            ${iconStyles};
+            background-image: url(${eyeBlack});
+          }
+        `}
+        title={`${view} просмотр${view < 5 ? (view === 1 ? '' : 'a') : 'ов'}`}
+      >
+        {view}
+      </span>
+      <span
+        css={css`
+          ${tw(['ml-q12', 'relative'])};
+          padding-left: 1.75rem;
+          &::before {
+            ${iconStyles};
+            background-image: url(${burnBlack});
+          }
+        `}
+        title={`${burn} раз${burn > 1 && burn < 5 ? 'a' : ''} прижгло`}
+      >
+        {burn}
+      </span>
+    </span>
+  )
+}
+
+Views.propTypes = {
+  burn: PropTypes.number.isRequired,
+  view: PropTypes.number.isRequired,
+}
+
+class WithQuery extends Component {
   static propTypes = {
-    data: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
@@ -39,11 +75,11 @@ class Views extends Component {
 
   constructor(props) {
     super(props)
+    this.handleLocation = debounce(this.handleLocation, 200)
+    this.handleView = debounce(this.handleView, 10000)
     this.state = {
-      burn: get(this.getCurrentPage(props), 'burn', 0),
-      id: get(this.getCurrentPage(props), 'id', null),
-      slug: get(this.getCurrentPage(props), 'slug', null),
-      view: get(this.getCurrentPage(props), 'view', 0),
+      burn: 0,
+      view: 0,
     }
   }
 
@@ -53,112 +89,71 @@ class Views extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.handleView.cancel()
+      this.handleLocation.cancel()
       this.handleLocation()
     }
   }
 
-  handleLocation = async () => {
+  async handleLocation() {
     const { location } = this.props
-    const currentPage = this.getCurrentPage(this.props)
+    const slug = location.pathname
+    const id = uuidv5(slug, uuidv5.URL)
+    const { data } = await API.graphql(graphqlOperation(getPage, { id, slug }))
+    const getPageResult = data.getPage
 
-    if (!currentPage) {
-      const input = {
-        id: Date.parse(new Date()).toString(),
-        slug: location.pathname,
-        view: 0,
-        burn: 0,
-      }
-      const { data } = await API.graphql(graphqlOperation(createPage, { input }))
-      const { burn, id, slug, view } = get(data, 'createPage')
-      this.setState({ burn, id, slug, view })
-    } else {
+    if (getPageResult) {
       const { burn: stateBurn, view: stateView } = this.state
-      const burn = get(currentPage, 'burn', 0)
-      const view = get(currentPage, 'view', 0)
+      const { burn, view } = getPageResult
       if (burn !== stateBurn || view !== stateView) {
         this.setState({ burn, view })
       }
-      this.timeout = null
-      this.timeout = delay(this.handleView, 10000)
+    } else {
+      const { data: createPageData } = await API.graphql(
+        graphqlOperation(createPage, {
+          input: {
+            id,
+            slug,
+            view: 0,
+            burn: 0,
+          },
+        })
+      )
+      const { burn, view } = await get(createPageData, 'createPage')
+      this.setState({ burn, view })
     }
+    await this.handleView()
   }
 
   componentWillUnmount() {
-    this.timeout = null
+    this.handleLocation.cancel()
+    this.handleView.cancel()
   }
 
-  handleView = async () => {
-    const { id, slug, view } = this.state
-    if (id && slug) {
-      const input = {
-        id,
-        slug,
-        view: view + 1,
-      }
-      const { data } = await API.graphql(graphqlOperation(updatePage, { input }))
-      this.setState({ view: get(data, 'updatePage.view') })
+  async handleView() {
+    const { location } = this.props
+    const slug = location.pathname
+    const id = uuidv5(slug, uuidv5.URL)
+    const { view } = this.state
+    const input = {
+      id,
+      slug,
+      view: view + 1,
     }
-  }
-
-  getCurrentPage = props => {
-    return get(props, 'data.listPages.items', []).find(
-      item => get(props, 'location.pathname') === get(item, 'slug')
-    )
+    const { data } = await API.graphql(graphqlOperation(updatePage, { input }))
+    this.setState({ view: get(data, 'updatePage.view') })
   }
 
   render() {
     const { burn, view } = this.state
-
-    return (
-      <span>
-        <span
-          css={css`
-            ${tw(['ml-q8', 'pl-q24', 'relative'])};
-            &::before {
-              ${iconStyles};
-              background-image: url(${eyeBlack});
-            }
-          `}
-          title={`${view} просмотр${view < 5 ? (view === 1 ? '' : 'a') : 'ов'}`}
-        >
-          {view}
-        </span>
-        <span
-          css={css`
-            ${tw(['ml-q12', 'relative'])};
-            padding-left: 1.75rem;
-            &::before {
-              ${iconStyles};
-              background-image: url(${burnBlack});
-            }
-          `}
-          title={`${burn} раз${burn > 1 && burn < 5 ? 'a' : ''} прижгло`}
-        >
-          {burn}
-        </span>
-      </span>
-    )
+    return <Views burn={burn} view={view} />
   }
 }
 
-function WithConnect() {
+function WithLocation() {
   return (
-    <Connect
-      query={graphqlOperation(listPages)}
-    >
-      {({ data, loading, error }) => {
-        if (error) return <span>{error}</span>
-        if (loading || !data) return <span>...</span>
-        return (
-          <Location>
-            {({ location }) => (
-              <Views data={data} location={location} />
-            )}
-          </Location>
-        )
-      }}
-    </Connect>
+    <Location>{({ location }) => <WithQuery location={location} />}</Location>
   )
 }
 
-export default WithConnect
+export default memo(WithLocation)

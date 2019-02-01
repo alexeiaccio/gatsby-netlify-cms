@@ -1,6 +1,7 @@
 import * as uuid from 'uuid/v1'
+import uuidv5 from 'uuid/v5'
 
-export { uuid }
+export { uuid, uuidv5 }
 
 const months = {
   January: 'января',
