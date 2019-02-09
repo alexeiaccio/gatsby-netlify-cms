@@ -71,7 +71,6 @@ class RunningString extends Component {
       <div
         css={css`
           ${tw([
-            'cursor-pointer',
             'font-semibold',
             'font-montserrat',
             'overflow-hidden',

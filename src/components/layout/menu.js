@@ -22,7 +22,7 @@ const navStyles = css`
     'max-w-md',
     'mx-auto',
     'overflow-hidden',
-    'py-q24',
+    'py-q12',
   ])};
   box-sizing: border-box;
   will-change: height;
@@ -43,32 +43,10 @@ class Menu extends Component {
     index: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.string.isRequired,
     pages: PropTypes.objectOf(PropTypes.any).isRequired,
-    scroll: PropTypes.number,
-  }
-
-  static defaultProps = {
-    scroll: null,
-  }
-
-  constructor() {
-    super()
-    this.navRef = createRef()
-    this.state = {
-      navHeight: null,
-    }
-  }
-
-  componentDidMount() {
-    if (this.state.navHeight === null && this.navRef.current) {
-      this.setState({
-        navHeight: this.navRef.current.getBoundingClientRect().height,
-      })
-    }
   }
 
   render() {
-    const { index, pages, location, scroll } = this.props
-    const { navHeight } = this.state
+    const { index, pages, location } = this.props
     const LinkOrMove =
       location && location === '/'
         ? ButtonOutlinedBlock
@@ -85,11 +63,6 @@ class Menu extends Component {
       }
     }
 
-    const minusScroll = num =>
-      `${num + scroll < 0 ? 0 : num + scroll >= num ? num : num + scroll}px`
-
-    if (scroll === null) return null
-
     const firstCategory =
       location === '/' ? [] : [{ categorytitle: { text: 'Новое' } }]
     const preparedCategories = firstCategory
@@ -98,13 +71,7 @@ class Menu extends Component {
       .concat({ categorytitle: { text: 'О нас' } })
 
     return (
-      <nav
-        css={css`
-          ${navStyles};
-          height: ${minusScroll(navHeight)};
-        `}
-        ref={this.navRef}
-      >
+      <nav css={navStyles}>
         {preparedCategories.map(category => {
           const link = translite(category.categorytitle.text)
           const pageExist = pages.edges.some(

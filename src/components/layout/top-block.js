@@ -1,16 +1,9 @@
-import React, { PureComponent, createRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 import get from 'lodash/get'
 import { css } from '@emotion/core'
 
 import { ButtonOutlinedBlock } from '../elements/buttons'
 import Link from '../elements/link'
-
-const divStyles = css`
-  ${tw(['p-q12', 'overflow-hidden', 'w-full'])};
-  box-sizing: border-box;
-  will-change: height;
-`
 
 const wrapperStyles = css`
   ${tw([
@@ -19,6 +12,9 @@ const wrapperStyles = css`
     'flex-wrap',
     'items-center',
     'justify-between',
+    'p-q12',
+    'select-none',
+    'text-xs',
     'md:flex-no-wrap',
   ])};
 `
@@ -39,7 +35,6 @@ const supportStyles = css`
     'py-q12',
     'rounded-lg',
     'text-black',
-    'text-md',
     'uppercase',
     'sm:my-0',
     'hover:bg-black',
@@ -54,30 +49,6 @@ const buttonStyles = css`
 `
 
 class TopBlock extends PureComponent {
-  static propTypes = {
-    scroll: PropTypes.number,
-  }
-
-  static defaultProps = {
-    scroll: null,
-  }
-
-  constructor() {
-    super()
-    this.topRef = createRef()
-    this.state = {
-      topHeight: null,
-    }
-  }
-
-  componentDidMount() {
-    if (this.topRef.current && this.state.topHeight === null) {
-      this.setState({
-        topHeight: this.topRef.current.getBoundingClientRect().height,
-      })
-    }
-  }
-
   handleSubscribe = e => {
     console.log(e)
   }
@@ -108,69 +79,56 @@ class TopBlock extends PureComponent {
   }
 
   render() {
-    const { topHeight } = this.state
-    const { scroll } = this.props
-    const minusScroll = num =>
-      `${num + scroll < 0 ? 0 : num + scroll >= num ? num : num + scroll}px`
-
-    return scroll !== null ? (
-      <div
-        css={css`
-          ${divStyles};
-          height: ${minusScroll(topHeight)};
-        `}
-        ref={this.topRef}
-      >
-        <div css={wrapperStyles}>
-          <div
-            css={css`
-              ${tw(['font-montserrat', 'font-semibold', 'mr-auto'])};
-              font-variant: small-caps;
-            `}
-          >
-            <a
-              href="mailto:krapiva@krapiva.org"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              MAIL
-            </a>
-            <span>{' · '}</span>
-            <a
-              href="https://www.facebook.com/krapivapiter"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              FB
-            </a>
-            <span>{' · '}</span>
-            <a
-              href="https://vk.com/krapiva_piter"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              VK
-            </a>
-          </div>
+    return (
+      <div css={wrapperStyles}>
+        <div
+          css={css`
+            ${tw(['font-montserrat', 'font-semibold', 'mr-auto'])};
+            font-variant: small-caps;
+          `}
+        >
           <a
-            css={supportStyles}
-            href="https://money.yandex.ru/to/410012396039377"
+            href="mailto:krapiva@krapiva.org"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Поддержать
+            MAIL
           </a>
-          <ButtonOutlinedBlock
-            css={css`
-              ${tw(['ml-auto'])};
-            `}
-            onClick={this.handleSubscribe}
+          <span>{' · '}</span>
+          <a
+            href="https://www.facebook.com/krapivapiter"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            Подписаться
-          </ButtonOutlinedBlock>
+            FB
+          </a>
+          <span>{' · '}</span>
+          <a
+            href="https://vk.com/krapiva_piter"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            VK
+          </a>
         </div>
+        <a
+          css={supportStyles}
+          href="https://money.yandex.ru/to/410012396039377"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Поддержать
+        </a>
+        <ButtonOutlinedBlock
+          css={css`
+            ${tw(['ml-auto'])};
+          `}
+          onClick={this.handleSubscribe}
+        >
+          Подписаться
+        </ButtonOutlinedBlock>
       </div>
-    ) : null
+    )
   }
 }
 

@@ -7,7 +7,7 @@ import get from 'lodash/get'
 import Content from '../elements/content'
 import Link from '../elements/link'
 import Img from '../elements/img'
-import Views from '../elements/views'
+// import Views from '../elements/views'
 import { toLocalDate, uuid } from '../../utils'
 import { translite } from '../../utils/makePath'
 
@@ -60,11 +60,11 @@ function ArticleHeader({ article, date, location, tags }) {
                 ))
             )}
         </span>
-        <Views />
+        {/* <Views /> */}
       </div>
       <figure
         css={css`
-          ${tw(['mx-0', 'my-q48'])};
+          ${tw(['mx-0', 'mb-q48', 'mt-q24'])};
         `}
       >
         {image && <Img src={image} />}

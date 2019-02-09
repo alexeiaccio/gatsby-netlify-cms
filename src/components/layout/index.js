@@ -13,7 +13,6 @@ const borderStyles = css`
     'border-black',
     'border-solid',
     'fixed',
-    'z-1000',
   ])};
 `
 
@@ -39,32 +38,32 @@ class Layout extends PureComponent {
       <>
         <Global styles={globalStyles} />
         <TransitionPortal level="top">
+          <div
+            css={css`
+              ${borderStyles}
+              ${tw(['pin-b', 'pin-l', 'pin-r'])};
+            `}
+          />
+          <div
+            css={css`
+              ${borderStyles}
+              ${tw(['pin-t', 'pin-l', 'pin-r'])};
+            `}
+          />
+          <div
+            css={css`
+              ${borderStyles}
+              ${tw(['pin-t', 'pin-b', 'pin-r'])};
+            `}
+          />
+          <div
+            css={css`
+              ${borderStyles}
+              ${tw(['pin-t', 'pin-l', 'pin-b'])};
+            `}
+          />
           <Header />
         </TransitionPortal>
-        <div
-          css={css`
-            ${borderStyles}
-            ${tw(['pin-b', 'pin-l', 'pin-r'])};
-          `}
-        />
-        <div
-          css={css`
-            ${borderStyles}
-            ${tw(['pin-t', 'pin-l', 'pin-r'])};
-          `}
-        />
-        <div
-          css={css`
-            ${borderStyles}
-            ${tw(['pin-t', 'pin-b', 'pin-r'])};
-          `}
-        />
-        <div
-          css={css`
-            ${borderStyles}
-            ${tw(['pin-t', 'pin-l', 'pin-b'])};
-          `}
-        />
         <main css={containerStyles} id="main-container">
           <div
             css={css`

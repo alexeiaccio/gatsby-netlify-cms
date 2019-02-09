@@ -9,12 +9,6 @@ import { ButtonOutlinedBlock } from '../elements/buttons'
 import Link from '../elements/link'
 import { uuid } from '../../utils'
 
-const asideStyles = css`
-  ${tw(['bg-green', 'block', 'p-q12', 'overflow-hidden', 'w-full'])};
-  box-sizing: border-box;
-  will-change: height;
-`
-
 const wrapperStyles = css`
   ${tw([
     'flex',
@@ -22,6 +16,8 @@ const wrapperStyles = css`
     'flex-wrap',
     'items-center',
     'justify-between',
+    'p-q12',
+    'select-none',
     'md:flex-no-wrap',
   ])};
 `
@@ -33,30 +29,17 @@ const buttonStyles = css`
 class Banner extends Component {
   static propTypes = {
     index: PropTypes.objectOf(PropTypes.object).isRequired,
-    scroll: PropTypes.number,
-  }
-
-  static defaultProps = {
-    scroll: null,
   }
 
   constructor(props) {
     super(props)
-    this.asideRef = createRef()
     this.state = {
-      asideHeight: null,
-      banners: props.index.data.body.filter(
+      banners:
+        props.index.data
+          .body /* .filter(
         ({ primary }) => !primary.expiredate.includes('ago')
-      ),
+      ) */,
       closed: [],
-    }
-  }
-
-  componentDidMount() {
-    if (this.asideRef.current && this.state.asideHeight === null) {
-      this.setState({
-        asideHeight: this.asideRef.current.getBoundingClientRect().height,
-      })
     }
   }
 
@@ -90,22 +73,13 @@ class Banner extends Component {
   }
 
   render() {
-    const { asideHeight, banners, closed } = this.state
-    const { scroll } = this.props
+    const { banners, closed } = this.state
     const bannersToShow = banners.filter(
       ({ id }) => !closed.some(x => x === id)
     )
-    const minusScroll = num =>
-      `${num + scroll < 0 ? 0 : num + scroll >= num ? num : num + scroll}px`
 
-    return scroll !== null && bannersToShow.length ? (
-      <aside
-        css={css`
-          ${asideStyles};
-          height: ${minusScroll(asideHeight)};
-        `}
-        ref={this.asideRef}
-      >
+    return (
+      <>
         {bannersToShow.slice(0, 1).map(({ id, primary }) => (
           <div css={wrapperStyles} key={uuid()}>
             <Content content={get(primary, 'bannertext.html')} />
@@ -115,8 +89,8 @@ class Banner extends Component {
             </ButtonOutlinedBlock>
           </div>
         ))}
-      </aside>
-    ) : null
+      </>
+    )
   }
 }
 
