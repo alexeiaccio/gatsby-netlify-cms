@@ -43,9 +43,6 @@ function Title({ location, scroll, title }) {
   const handleClick = () => {
     if (window !== undefined) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }, 600)
     }
   }
 

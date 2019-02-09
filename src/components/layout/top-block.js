@@ -4,7 +4,6 @@ import { css } from '@emotion/core'
 
 import { ButtonOutlinedBlock } from '../elements/buttons'
 import Link from '../elements/link'
-import Search from './search'
 
 const wrapperStyles = css`
   ${tw([
@@ -111,7 +110,6 @@ class TopBlock extends PureComponent {
         >
           Подписаться
         </ButtonOutlinedBlock>
-        <Search />
       </div>
     )
   }

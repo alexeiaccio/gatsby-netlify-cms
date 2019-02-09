@@ -1,4 +1,4 @@
-import React, { memo, Fragment, Component, createRef } from 'react'
+import React, { memo, Fragment, Component } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
@@ -54,12 +54,13 @@ class Menu extends Component {
 
     const handleClick = link => {
       if (document !== undefined && window !== undefined) {
-        const top = get(document.getElementById(link), 'offsetTop')
+        const headerHeight = get(
+          document.getElementById('main-container'),
+          'style.paddingTop'
+        )
+        const top =
+          get(document.getElementById(link), 'offsetTop') + parseInt(headerHeight)
         window.scrollTo({ top, behavior: 'smooth' })
-        setTimeout(() => {
-          const nextTop = get(document.getElementById(link), 'offsetTop')
-          window.scrollTo({ top: nextTop, behavior: 'smooth' })
-        }, 200)
       }
     }
 

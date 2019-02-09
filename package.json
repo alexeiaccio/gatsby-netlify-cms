@@ -31,8 +31,10 @@
     "gatsby-source-prismic": "^2.2.0",
     "gatsby-transformer-sharp": "^2.1.13",
     "gsap": "^2.0.2",
+    "libxmljs": "^0.19.5",
     "lodash": "^4.17.11",
     "lodash-webpack-plugin": "^0.11.5",
+    "node-gyp": "^3.8.0",
     "popmotion": "^8.6.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
@@ -44,6 +46,7 @@
     "styled-transition-group": "^1.0.0",
     "tailwindcss": "^0.7.3",
     "typograf": "^6.7.4",
+    "utf8": "^3.0.0",
     "uuid": "^3.3.2",
     "whatwg-fetch": "^2.0.4"
   },

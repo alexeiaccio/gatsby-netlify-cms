@@ -71,9 +71,6 @@ class Header extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.handleLocation()
-    }
     if (
       document !== undefined &&
       this.bannerRef.current &&
@@ -81,32 +78,32 @@ class Header extends Component {
       this.logoRef.current &&
       this.menuRef.current &&
       this.topBlockRef.current
-    ) {
-      const mainContainer = document.getElementById('main-container')
-      const bannerHeight = this.bannerRef.current.getBoundingClientRect().height
-      const logoHeight = this.logoRef.current.getBoundingClientRect().height
-      const menuHeight = this.menuRef.current.getBoundingClientRect().height
-      const topBlockHeight = this.topBlockRef.current.getBoundingClientRect()
+      ) {
+        const mainContainer = document.getElementById('main-container')
+        const bannerHeight = this.bannerRef.current.getBoundingClientRect().height
+        const logoHeight = this.logoRef.current.getBoundingClientRect().height
+        const menuHeight = this.menuRef.current.getBoundingClientRect().height
+        const topBlockHeight = this.topBlockRef.current.getBoundingClientRect()
         .height
-      const stickedHeight =
+        const stickedHeight =
         bannerHeight + logoHeight + menuHeight + topBlockHeight
-      const headerHeight = this.headerRef.current.getBoundingClientRect().height
-      const {
-        headerHeight: headerHeightState,
-        stickedHeight: stickedHeightState,
-      } = prevState
-
-      if (stickedHeightState === null || stickedHeightState !== stickedHeight) {
-        this.setState({ stickedHeight })
+        const headerHeight = this.headerRef.current.getBoundingClientRect().height
+        const {
+          headerHeight: headerHeightState,
+          stickedHeight: stickedHeightState,
+        } = prevState
+        
+        if (stickedHeightState === null || stickedHeightState !== stickedHeight) {
+          this.setState({ stickedHeight })
+        }
+        
+        if (headerHeightState === null) {
+          mainContainer.style.paddingTop = `${headerHeight}px`
+        }
+        if (headerHeightState !== headerHeight) {
+          this.setState({ headerHeight })
+        }
       }
-
-      if (headerHeightState === null) {
-        mainContainer.style.paddingTop = `${headerHeight}px`
-      }
-      if (headerHeightState !== headerHeight) {
-        this.setState({ headerHeight })
-      }
-    }
   }
 
   componentWillUnmount() {

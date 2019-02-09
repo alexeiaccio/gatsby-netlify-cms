@@ -2,6 +2,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const utf8 = require('utf8')
+
 const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
 
 module.exports = {
@@ -10,12 +12,6 @@ module.exports = {
     siteUrl: 'https://www.krapiva.org',
   },
   plugins: [
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-netlify-cache`,
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sharp',
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-offline`,
     {
       resolve: 'gatsby-plugin-transition-link',
       options: {
@@ -46,15 +42,21 @@ module.exports = {
               while ((result = regexp.exec(str))) {
                 arr.push(result[1])
               }
-              return arr.join(' ').replace(/\\n?/g, '')
+              return utf8.encode(arr.join(' ').replace(/\\n?/g, ''))
             },
-            tags: node => node.tags,
+            tags: node => utf8.encode(node.tags.join(':')),
             title: node => node.data.title.text,
             slug: node => node.fields.slug,
           },
         },
       },
     },
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-netlify-cache`,
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-offline`,
     // {
     //   resolve: `gatsby-plugin-nprogress`,
     //   options: {
