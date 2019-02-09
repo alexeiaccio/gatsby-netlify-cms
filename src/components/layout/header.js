@@ -102,9 +102,9 @@ class Header extends Component {
 
       if (headerHeightState === null) {
         mainContainer.style.paddingTop = `${headerHeight}px`
-        if (headerHeightState !== headerHeight) {
-          this.setState({ headerHeight })
-        }
+      }
+      if (headerHeightState !== headerHeight) {
+        this.setState({ headerHeight })
       }
     }
   }

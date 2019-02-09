@@ -6,10 +6,10 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 import { Location } from '@reach/router'
+import get from 'lodash/get'
 
-import { propPathOr, uuid } from '../../utils'
+import { uuid } from '../../utils'
 import Tags from '../elements/tags'
-import { outlinedStyles } from './outlined'
 
 const hovered = ({ theme }) => css`
   transition: background-color 200ms ease-in-out;
@@ -20,7 +20,6 @@ const hovered = ({ theme }) => css`
 
 const SearchIcon = styled.button`
   ${tw([
-    'absolute',
     'bg-white',
     'border-none',
     'cursor-pointer',
@@ -38,7 +37,6 @@ const SearchIcon = styled.button`
     'md:px-q24',
   ])};
   ${hovered};
-  ${outlinedStyles};
 `
 
 const PosedWrapper = posed.div({
@@ -124,7 +122,6 @@ const Results = styled(PosedResults)`
     'pin-r',
     'z-30',
   ])};
-  ${outlinedStyles};
   transform: translateY(100%);
 `
 
@@ -253,14 +250,14 @@ class Search extends Component {
                 'gim'
               )
               const matched = regex.exec(page.data)
-              const searched = propPathOr(null, [1], matched)
+              const searched = get(matched, [1], null)
               const matchedQuery = regexQuery.exec(searched)
-              const searchedQuery = propPathOr('', [1], matchedQuery)
-              const restQuery = propPathOr('', [2], matchedQuery)
+              const searchedQuery = get(matchedQuery, [1], '')
+              const restQuery = get(matchedQuery, [2], '')
 
               return (
                 <li css={liStyles} key={uuid()}>
-                  <Link css={linkStyles} to={`/${page.uid}`}>
+                  <Link css={linkStyles} to={`/${page.slug}`}>
                     <span css={searchedTitleStyles}>{page.title}</span>
                     <span>
                       :{' '}

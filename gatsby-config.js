@@ -50,7 +50,7 @@ module.exports = {
             },
             tags: node => node.tags,
             title: node => node.data.title.text,
-            uid: node => node.uid,
+            slug: node => node.fields.slug,
           },
         },
       },

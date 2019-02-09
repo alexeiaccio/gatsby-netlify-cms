@@ -5,7 +5,7 @@ import get from 'lodash/get'
 import { css } from '@emotion/core'
 
 import Content from '../elements/content'
-import { ButtonOutlinedBlock } from '../elements/buttons'
+import { ButtonOutlinedBlock, RoundedButtonTemplate } from '../elements/buttons'
 import Link from '../elements/link'
 import { uuid } from '../../utils'
 
@@ -19,6 +19,7 @@ const wrapperStyles = css`
     'p-q12',
     'select-none',
     'md:flex-no-wrap',
+    'md:px-q24',
   ])};
 `
 
@@ -34,11 +35,9 @@ class Banner extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      banners:
-        props.index.data
-          .body /* .filter(
+      banners: props.index.data.body.filter(
         ({ primary }) => !primary.expiredate.includes('ago')
-      ) */,
+      ),
       closed: [],
     }
   }
@@ -84,9 +83,12 @@ class Banner extends Component {
           <div css={wrapperStyles} key={uuid()}>
             <Content content={get(primary, 'bannertext.html')} />
             {this.renderButton(primary.bannerlink, primary.bannerbutton)}
-            <ButtonOutlinedBlock onClick={() => this.handleClose(id)}>
+            <button
+              css={RoundedButtonTemplate}
+              onClick={() => this.handleClose(id)}
+            >
               ✕
-            </ButtonOutlinedBlock>
+            </button>
           </div>
         ))}
       </>

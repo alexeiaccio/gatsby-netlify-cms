@@ -1,5 +1,6 @@
 import { css } from '@emotion/core'
 
+import { RoundedButtonTemplate } from '../elements/buttons'
 import logo from '../../img/logo.svg'
 
 export const bannerWrapperStyles = css`
@@ -21,24 +22,12 @@ export const headerStyles = css`
 `
 
 export const headerOpenerStyles = css`
+  ${RoundedButtonTemplate};
   ${tw([
     'absolute',
-    'bg-black',
-    'border',
-    'border-green',
-    'border-solid',
-    'cursor-pointer',
-    'font-montserrat',
-    'leading-none',
     'm-q12',
-    'outline-none',
-    'p-q8',
     'pin-r',
     'pin-t',
-    'rounded-sm',
-    'text-green',
-    'text-xxs',
-    'uppercase',
   ])};
 `
 

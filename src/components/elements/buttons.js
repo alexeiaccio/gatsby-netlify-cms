@@ -1,6 +1,24 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 
+export const RoundedButtonTemplate = css`
+  ${tw([
+    'bg-black',
+    'border',
+    'border-green',
+    'border-solid',
+    'cursor-pointer',
+    'font-montserrat',
+    'leading-none',
+    'outline-none',
+    'p-q8',
+    'rounded-sm',
+    'text-green',
+    'text-xxs',
+    'uppercase',
+  ])};
+`
+
 export const OutlinedTemplate = css`
   ${tw([
     'bg-white',

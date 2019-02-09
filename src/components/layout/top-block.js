@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 
 import { ButtonOutlinedBlock } from '../elements/buttons'
 import Link from '../elements/link'
+import Search from './search'
 
 const wrapperStyles = css`
   ${tw([
@@ -19,33 +20,17 @@ const wrapperStyles = css`
   ])};
 `
 
-const supportStyles = css`
+const buttonStyles = css`
   ${tw([
     'bg-green',
     'border-none',
-    'font-montserrat',
-    'font-medium',
-    'inline-flex',
-    'items-center',
-    'justify-center',
-    'mx-q4',
-    'my-q24',
-    'outline-none',
-    'px-q24',
-    'py-q12',
+    'ml-q8',
     'rounded-lg',
-    'text-black',
-    'uppercase',
-    'sm:my-0',
     'hover:bg-black',
     'hover:text-green',
     'md:hover:bg-white',
     'md:hover:text-black',
   ])};
-`
-
-const buttonStyles = css`
-  ${tw(['ml-auto', 'mr-q12'])};
 `
 
 class TopBlock extends PureComponent {
@@ -79,6 +64,7 @@ class TopBlock extends PureComponent {
   }
 
   render() {
+    const SupportButton =  ButtonOutlinedBlock.withComponent('a')
     return (
       <div css={wrapperStyles}>
         <div
@@ -111,22 +97,21 @@ class TopBlock extends PureComponent {
             VK
           </a>
         </div>
-        <a
-          css={supportStyles}
+        <SupportButton
+          css={buttonStyles}
           href="https://money.yandex.ru/to/410012396039377"
           rel="noopener noreferrer"
           target="_blank"
         >
           Поддержать
-        </a>
+        </SupportButton>
         <ButtonOutlinedBlock
-          css={css`
-            ${tw(['ml-auto'])};
-          `}
+          css={buttonStyles}
           onClick={this.handleSubscribe}
         >
           Подписаться
         </ButtonOutlinedBlock>
+        <Search />
       </div>
     )
   }
