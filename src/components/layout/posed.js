@@ -34,6 +34,18 @@ export const DraggableHeader = posed.header({
   },
 })
 
+export const HeaderOpener = posed.button({
+  opened: {
+    applyAtEnd: { display: 'none' },
+    opacity: 0,
+  },
+  sticked: {
+    applyAtStart: { display: 'block' },
+    delay: 600,
+    opacity: 1,
+  },
+})
+
 export const LogoWrapper = posed.div({
   opened: {
     applyAtStart: { height: '7rem' },

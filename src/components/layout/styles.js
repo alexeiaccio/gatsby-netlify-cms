@@ -8,21 +8,9 @@ export const bannerWrapperStyles = css`
 `
 
 export const headerWrapperStyles = css`
-  ${tw([
-    'fixed',
-    'pin-l',
-    'pin-r',
-    'pin-t',
-  ])};
+  ${tw(['fixed', 'pin-l', 'pin-r', 'pin-t'])};
   &::before {
-    ${tw([
-      'bg-black',
-      'fixed',
-      'h-q144',
-      'pin-l',
-      'pin-r',
-      'pin-t',
-    ])};
+    ${tw(['bg-black', 'fixed', 'h-q144', 'pin-l', 'pin-r', 'pin-t'])};
     content: '';
     transform: translateY(-9rem);
   }
@@ -30,6 +18,28 @@ export const headerWrapperStyles = css`
 
 export const headerStyles = css`
   ${tw(['bg-black'])};
+`
+
+export const headerOpenerStyles = css`
+  ${tw([
+    'absolute',
+    'bg-black',
+    'border',
+    'border-green',
+    'border-solid',
+    'cursor-pointer',
+    'font-montserrat',
+    'leading-none',
+    'm-q12',
+    'outline-none',
+    'p-q8',
+    'pin-r',
+    'pin-t',
+    'rounded-sm',
+    'text-green',
+    'text-xxs',
+    'uppercase',
+  ])};
 `
 
 export const logoWrapperStyle = css`

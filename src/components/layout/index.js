@@ -29,7 +29,6 @@ const containerStyles = css`
     'sm:px-q24',
     'md:px-q48',
   ])};
-  will-change: padding-top;
 `
 
 class Layout extends PureComponent {

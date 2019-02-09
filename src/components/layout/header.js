@@ -14,6 +14,7 @@ import TopBlock from './top-block'
 import {
   BannerWrapper,
   DraggableHeader,
+  HeaderOpener,
   LogoWrapper,
   MenuWrapper,
   StickyHeader,
@@ -23,6 +24,7 @@ import {
   bannerWrapperStyles,
   headerWrapperStyles,
   headerStyles,
+  headerOpenerStyles,
   logoWrapperStyle,
   logoStyles,
   menuWrapperStyle,
@@ -73,12 +75,14 @@ class Header extends Component {
       this.handleLocation()
     }
     if (
+      document !== undefined &&
       this.bannerRef.current &&
       this.headerRef.current &&
       this.logoRef.current &&
       this.menuRef.current &&
       this.topBlockRef.current
     ) {
+      const mainContainer = document.getElementById('main-container')
       const bannerHeight = this.bannerRef.current.getBoundingClientRect().height
       const logoHeight = this.logoRef.current.getBoundingClientRect().height
       const menuHeight = this.menuRef.current.getBoundingClientRect().height
@@ -96,8 +100,11 @@ class Header extends Component {
         this.setState({ stickedHeight })
       }
 
-      if (headerHeightState === null || headerHeightState !== headerHeight) {
-        this.setState({ headerHeight })
+      if (headerHeightState === null) {
+        mainContainer.style.paddingTop = `${headerHeight}px`
+        if (headerHeightState !== headerHeight) {
+          this.setState({ headerHeight })
+        }
       }
     }
   }
@@ -124,6 +131,10 @@ class Header extends Component {
       this.setState({ sticked: false })
     }
     this.setState({ clientY: null })
+  }
+
+  handleOpen = () => {
+    this.setState({ sticked: false })
   }
 
   handleLocation = () => {
@@ -227,6 +238,12 @@ class Header extends Component {
                     </MenuWrapper>
                   </>
                 )}
+                <HeaderOpener
+                  css={headerOpenerStyles}
+                  onClick={this.handleOpen}
+                >
+                  Открыть
+                </HeaderOpener>
                 <RunningString string={string} />
               </StickyHeader>
             </DraggableHeader>
