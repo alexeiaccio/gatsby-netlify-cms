@@ -27,30 +27,6 @@ module.exports = {
         htmlSerializer,
       },
     },
-    {
-      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
-      options: {
-        fields: [`title`, `data`, `tags`],
-        resolvers: {
-          PrismicArticles: {
-            data: node => {
-              const str = node.dataString
-              const regexp = new RegExp('(?:text":")(.+?)(?:",")', 'gi')
-              const arr = []
-              let result
-              // eslint-disable-next-line no-cond-assign
-              while ((result = regexp.exec(str))) {
-                arr.push(result[1])
-              }
-              return utf8.encode(arr.join(' ').replace(/\\n?/g, ''))
-            },
-            tags: node => utf8.encode(node.tags.join(':')),
-            title: node => node.data.title.text,
-            slug: node => node.fields.slug,
-          },
-        },
-      },
-    },
     `gatsby-plugin-emotion`,
     `gatsby-plugin-netlify-cache`,
     'gatsby-plugin-react-helmet',
