@@ -7,6 +7,7 @@ import get from 'lodash/get'
 import globalStyles from './global-styles'
 import Header from './header'
 import Seo from './seo'
+import Search from './search'
 
 const borderStyles = css`
   ${tw(['border-2', 'md:border-4', 'border-black', 'border-solid', 'fixed'])};
@@ -63,6 +64,7 @@ class Layout extends PureComponent {
           <Header />
         </TransitionPortal>
         <main css={containerStyles} id="main-container">
+          <Search />
           <div
             css={css`
               ${tw(['max-w-md', 'mx-auto', 'relative', 'w-full'])};
@@ -77,7 +79,7 @@ class Layout extends PureComponent {
 }
 
 Layout.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

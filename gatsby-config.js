@@ -7,8 +7,10 @@ const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
 // SEO configuration
 const siteTitle = '·К·Р·А·П·И·В·А·'
 const siteUrl = 'https://www.krapiva.org'
-const siteDescription = 'К.Р.А.П.И.В.А. — это онлайн-издание о современном искусстве в Санкт-Петербурге. Наша основная задача — восполнить ощутимые пробелы в критическом и теоретическом осмыслении современной местной культурной ситуации, а также локальных историй искусств.'
-const siteKeywords = 'Культура, Ревью, Аналитика, Петербург, Искусство, Вовлечённость, Активизм'
+const siteDescription =
+  'К.Р.А.П.И.В.А. — это онлайн-издание о современном искусстве в Санкт-Петербурге. Наша основная задача — восполнить ощутимые пробелы в критическом и теоретическом осмыслении современной местной культурной ситуации, а также локальных историй искусств.'
+const siteKeywords =
+  'Культура, Ревью, Аналитика, Петербург, Искусство, Вовлечённость, Активизм'
 const siteThemeColor = '#000000'
 
 // Accounts & API keys
@@ -51,6 +53,37 @@ module.exports = {
         accessToken: process.env.PRISMIC_TOKEN,
         linkResolver,
         htmlSerializer,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-lunr`,
+      options: {
+        languages: [{ name: 'ru' }, { name: 'en' }],
+        fields: [
+          { name: 'title', store: true },
+          { name: 'data', store: true },
+          { name: 'tags', store: true },
+          { name: 'slug', store: true },
+        ],
+        resolvers: {
+          PrismicArticles: {
+            data: node => {
+              const str = node.dataString
+              const regexp = new RegExp('(?:text":")(.+?)(?:",")', 'gi')
+              const arr = []
+              let result
+              // eslint-disable-next-line no-cond-assign
+              while ((result = regexp.exec(str))) {
+                arr.push(result[1])
+              }
+              return arr.join(' ').replace(/\\n?/g, '')
+            },
+            tags: node => node.tags.join(':'),
+            title: node => node.data.title.text,
+            slug: node => node.fields.slug,
+          },
+        },
+        filename: 'search_index.json',
       },
     },
     `gatsby-plugin-emotion`,
