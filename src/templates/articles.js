@@ -115,5 +115,22 @@ export const pageQuery = graphql`
         }
       }
     }
+    seo: prismicArticles(fields: { slug: { eq: $slug } }) {
+      data {
+        title {
+          text
+        }
+        image {
+          url
+          localFile {
+            childImageSharp {
+              fixed(width: 1200, height: 630) {
+                src
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `

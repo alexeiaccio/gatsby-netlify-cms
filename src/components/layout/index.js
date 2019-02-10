@@ -2,18 +2,14 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
 import { TransitionPortal } from 'gatsby-plugin-transition-link'
+import get from 'lodash/get'
 
 import globalStyles from './global-styles'
 import Header from './header'
+import Seo from './seo'
 
 const borderStyles = css`
-  ${tw([
-    'border-2',
-    'md:border-4',
-    'border-black',
-    'border-solid',
-    'fixed',
-  ])};
+  ${tw(['border-2', 'md:border-4', 'border-black', 'border-solid', 'fixed'])};
 `
 
 const containerStyles = css`
@@ -32,10 +28,14 @@ const containerStyles = css`
 `
 
 class Layout extends PureComponent {
-  render() {    
+  render() {
     return (
       <>
         <Global styles={globalStyles} />
+        <Seo
+          data={get(this.props, 'data.seo.data')}
+          pathname={get(this.props, 'location.pathname')}
+        />
         <TransitionPortal level="top">
           <div
             css={css`
@@ -57,7 +57,7 @@ class Layout extends PureComponent {
           />
           <div
             css={css`
-              ${borderStyles}
+              ${borderStyles};
               ${tw(['pin-t', 'pin-l', 'pin-b'])};
             `}
           />

@@ -1,15 +1,41 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-
-const utf8 = require('utf8')
-
+const path = require('path')
 const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
+
+// SEO configuration
+const siteTitle = '·К·Р·А·П·И·В·А·'
+const siteUrl = 'https://www.krapiva.org'
+const siteDescription = 'К.Р.А.П.И.В.А. — это онлайн-издание о современном искусстве в Санкт-Петербурге. Наша основная задача — восполнить ощутимые пробелы в критическом и теоретическом осмыслении современной местной культурной ситуации, а также локальных историй искусств.'
+const siteKeywords = 'Культура, Ревью, Аналитика, Петербург, Искусство, Вовлечённость, Активизм'
+const siteThemeColor = '#000000'
+
+// Accounts & API keys
+const twitter = ''
+const fbAppId = '2138336363160205'
+
+// Used internally
+const utilsTitleShort = 'Krapiva'
+const utilsIcon = 'static/images/icon.png'
+const utilsBackgroundColor = '#000000'
 
 module.exports = {
   siteMetadata: {
-    title: 'Krapiva',
-    siteUrl: 'https://www.krapiva.org',
+    // SEO
+    siteTitle,
+    siteUrl,
+    siteDescription,
+    siteKeywords,
+    siteThemeColor,
+    social: {
+      twitter,
+      fbAppId,
+    },
+    // Utils
+    utilsTitleShort,
+    utilsIcon: path.resolve(__dirname, utilsIcon),
+    utilsBackgroundColor,
   },
   plugins: [
     {
@@ -45,15 +71,15 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
     },
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `·К·Р·А·П·И·В·А·`,
-        short_name: `Krapiva`,
-        start_url: `/`,
-        background_color: `#000000`,
-        theme_color: `#0cf3ad`,
-        display: `minimal-ui`,
-        icon: `src/img/logo-192-192.png`,
+        name: siteTitle,
+        short_name: utilsTitleShort,
+        start_url: '/',
+        theme_color: siteThemeColor,
+        background_color: utilsBackgroundColor,
+        display: 'minimal-ui',
+        icon: utilsIcon, // This path is relative to the root of the site.
       },
     },
     {
