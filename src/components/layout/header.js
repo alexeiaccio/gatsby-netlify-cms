@@ -45,7 +45,8 @@ class Header extends Component {
     this.logoRef = createRef()
     this.menuRef = createRef()
     this.topBlockRef = createRef()
-    this.handleScrollOut = debounce(this.handleScrollOut, 300)
+    this.handleScrollOut = debounce(this.handleScrollOut, 400)
+    this.handleHeaderChange = debounce(this.handleHeaderChange, 400)
     this.state = {
       clientY: null,
       headerHeight: null,
@@ -71,6 +72,9 @@ class Header extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.handleLocation()
+    }
     if (
       document !== undefined &&
       this.bannerRef.current &&
@@ -78,32 +82,32 @@ class Header extends Component {
       this.logoRef.current &&
       this.menuRef.current &&
       this.topBlockRef.current
-      ) {
-        const mainContainer = document.getElementById('main-container')
-        const bannerHeight = this.bannerRef.current.getBoundingClientRect().height
-        const logoHeight = this.logoRef.current.getBoundingClientRect().height
-        const menuHeight = this.menuRef.current.getBoundingClientRect().height
-        const topBlockHeight = this.topBlockRef.current.getBoundingClientRect()
+    ) {
+      const mainContainer = document.getElementById('main-container')
+      const bannerHeight = this.bannerRef.current.getBoundingClientRect().height
+      const logoHeight = this.logoRef.current.getBoundingClientRect().height
+      const menuHeight = this.menuRef.current.getBoundingClientRect().height
+      const topBlockHeight = this.topBlockRef.current.getBoundingClientRect()
         .height
-        const stickedHeight =
+      const stickedHeight =
         bannerHeight + logoHeight + menuHeight + topBlockHeight
-        const headerHeight = this.headerRef.current.getBoundingClientRect().height
-        const {
-          headerHeight: headerHeightState,
-          stickedHeight: stickedHeightState,
-        } = prevState
-        
-        if (stickedHeightState === null || stickedHeightState !== stickedHeight) {
-          this.setState({ stickedHeight })
-        }
-        
-        if (headerHeightState === null) {
-          mainContainer.style.paddingTop = `${headerHeight}px`
-        }
-        if (headerHeightState !== headerHeight) {
-          this.setState({ headerHeight })
-        }
+      const headerHeight = this.headerRef.current.getBoundingClientRect().height
+      const {
+        headerHeight: headerHeightState,
+        stickedHeight: stickedHeightState,
+      } = prevState
+
+      if (stickedHeightState === null || stickedHeightState !== stickedHeight) {
+        this.setState({ stickedHeight })
       }
+
+      if (headerHeightState === null) {
+        mainContainer.style.paddingTop = `${headerHeight}px`
+      }
+      if (headerHeightState !== headerHeight) {
+        this.setState({ headerHeight })
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -135,7 +139,11 @@ class Header extends Component {
   }
 
   handleLocation = () => {
-    this.setState({ location: this.props.location.pathname })
+    const location = get(this.props, 'location.pathname')
+    this.setState({
+      location,
+      sticked: location !== '/',
+    })
   }
 
   handleScrollIn = e => {
@@ -151,10 +159,19 @@ class Header extends Component {
   handleScrollOut = e => {
     const mainContainer = e.target.getElementById('main-container')
     const scroll = mainContainer.getBoundingClientRect().top
-    const { sticked } = this.state
+    const { location, sticked } = this.state
 
-    if (scroll >= -40 && sticked) {
-      this.setState({ sticked: false })
+    if (scroll >= -40 && sticked && location === '/') {
+      this.setState({ sticked: false }, this.handleHeaderChange)
+    }
+  }
+
+  handleHeaderChange = () => {
+    if (document !== undefined && this.headerRef.current) {
+      const mainContainer = document.getElementById('main-container')
+      const headerHeight = this.headerRef.current.getBoundingClientRect()
+        .height
+      mainContainer.style.paddingTop = `${headerHeight}px`
     }
   }
 
@@ -237,6 +254,7 @@ class Header extends Component {
                 )}
                 <HeaderOpener
                   css={headerOpenerStyles}
+                  pose={sticked ? 'sticked' : 'opened'}
                   onClick={this.handleOpen}
                 >
                   Открыть
