@@ -3,11 +3,11 @@ import { spring, transform } from 'popmotion'
 
 const { pipe, clamp, interpolate } = transform
 
-export const BannerWrapper = posed.div({
+export const HeightWrapper = posed.div({
   opened: {
     height: 'auto',
   },
-  sticked: {
+  closed: {
     height: 0,
   },
   passive: {
@@ -65,15 +65,15 @@ export const LogoWrapper = posed.div({
   },
 })
 
-export const MenuWrapper = posed.div({
+export const LogoMobileWrapper = posed.div({
   opened: {
-    height: 'auto',
+    applyAtStart: { height: '7rem' },
   },
   sticked: {
-    height: 0,
+    applyAtEnd: { height: '3.8rem' },
   },
   passive: {
-    scaleY: [
+    scale: [
       'y',
       pipe(
         interpolate([-200, 0], [0, 1]),
@@ -95,24 +95,5 @@ export const StickyHeader = posed.div({
   opened: {
     applyAtStart: { height: 'auto' },
     y: 0,
-  },
-})
-
-export const TopBlockWrapper = posed.div({
-  opened: {
-    height: 'auto',
-  },
-  sticked: {
-    height: 0,
-  },
-  passive: {
-    scaleY: [
-      'y',
-      pipe(
-        interpolate([-200, 0], [0, 1]),
-        clamp(0, 1)
-      ),
-      true,
-    ],
   },
 })

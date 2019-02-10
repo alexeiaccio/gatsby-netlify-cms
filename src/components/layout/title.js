@@ -39,13 +39,7 @@ const Heading = styled.h1`
 
 const HeadingLink = Heading.withComponent(Link)
 
-function Title({ location, scroll, title }) {
-  const handleClick = () => {
-    if (window !== undefined) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }
-
+function Title({ handleClick, location, title }) {
   return (
     <nav css={navStyles}>
       {location === '/' ? (
@@ -58,8 +52,13 @@ function Title({ location, scroll, title }) {
 }
 
 Title.propTypes = {
+  handleClick: PropTypes.func,
   location: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+}
+
+Title.defaultProps = {
+  handleClick: null,
 }
 
 export default memo(Title)

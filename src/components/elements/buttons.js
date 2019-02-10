@@ -13,6 +13,7 @@ export const RoundedButtonTemplate = css`
     'outline-none',
     'p-q8',
     'rounded-sm',
+    'select-none',
     'text-green',
     'text-xxs',
     'uppercase',

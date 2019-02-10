@@ -12,13 +12,12 @@ import Menu from './menu'
 import RunningString from './running-string'
 import TopBlock from './top-block'
 import {
-  BannerWrapper,
+  HeightWrapper,
   DraggableHeader,
   HeaderOpener,
   LogoWrapper,
-  MenuWrapper,
+  LogoMobileWrapper,
   StickyHeader,
-  TopBlockWrapper,
 } from './posed'
 import {
   bannerWrapperStyles,
@@ -169,8 +168,7 @@ class Header extends Component {
   handleHeaderChange = () => {
     if (document !== undefined && this.headerRef.current) {
       const mainContainer = document.getElementById('main-container')
-      const headerHeight = this.headerRef.current.getBoundingClientRect()
-        .height
+      const headerHeight = this.headerRef.current.getBoundingClientRect().height
       mainContainer.style.paddingTop = `${headerHeight}px`
     }
   }
@@ -178,6 +176,12 @@ class Header extends Component {
   handleResize = () => {
     if (window !== undefined) {
       this.setState({ screen: window.innerWidth <= 768 ? 'sm' : 'lg' })
+    }
+  }
+
+  handleScrollToTop = () => {
+    if (window !== undefined) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
@@ -194,6 +198,8 @@ class Header extends Component {
     } = this.state
     const valuesMap = { y: this.y }
 
+    console.log(headerHeight - stickedHeight)
+    
     return (
       <>
         {screen !== null ? (
@@ -215,46 +221,73 @@ class Header extends Component {
                 ref={this.headerRef}
                 stickedHeight={stickedHeight}
               >
+                <HeightWrapper
+                  css={bannerWrapperStyles}
+                  parentValues={valuesMap}
+                  pose={sticked ? 'closed' : 'opened'}
+                  ref={this.bannerRef}
+                >
+                  <Banner />
+                </HeightWrapper>
+                <HeightWrapper
+                  css={topBlockWrapperStyles}
+                  parentValues={valuesMap}
+                  pose={sticked ? 'closed' : 'opened'}
+                  ref={this.topBlockRef}
+                >
+                  <TopBlock />
+                </HeightWrapper>
                 {screen === 'lg' && (
-                  <>
-                    <BannerWrapper
-                      css={bannerWrapperStyles}
-                      parentValues={valuesMap}
-                      pose={sticked ? 'sticked' : 'opened'}
-                      ref={this.bannerRef}
-                    >
-                      <Banner />
-                    </BannerWrapper>
-                    <TopBlockWrapper
-                      css={topBlockWrapperStyles}
-                      parentValues={valuesMap}
-                      pose={sticked ? 'sticked' : 'opened'}
-                      ref={this.topBlockRef}
-                    >
-                      <TopBlock />
-                    </TopBlockWrapper>
-                    <LogoWrapper
-                      css={logoWrapperStyle}
-                      parentValues={valuesMap}
-                      pose={sticked ? 'sticked' : 'opened'}
-                      ref={this.logoRef}
-                    >
-                      <div css={logoStyles} />
-                    </LogoWrapper>
-                    <Title location={location} title={title} />
-                    <MenuWrapper
-                      css={menuWrapperStyle}
-                      parentValues={valuesMap}
-                      pose={sticked ? 'sticked' : 'opened'}
-                      ref={this.menuRef}
-                    >
-                      <Menu location={location} />
-                    </MenuWrapper>
-                  </>
+                  <LogoWrapper
+                    css={logoWrapperStyle}
+                    parentValues={valuesMap}
+                    pose={sticked ? 'sticked' : 'opened'}
+                    ref={this.logoRef}
+                  >
+                    <div css={logoStyles} />
+                  </LogoWrapper>
                 )}
+                {screen === 'sm' && (
+                  <LogoMobileWrapper
+                    css={logoWrapperStyle}
+                    parentValues={valuesMap}
+                    pose={sticked ? 'sticked' : 'opened'}
+                    ref={this.logoRef}
+                  >
+                    <div css={logoStyles} />
+                  </LogoMobileWrapper>
+                )}
+                {screen === 'lg' && (
+                  <Title
+                    handleClick={this.handleScrollToTop}
+                    location={location}
+                    title={title}
+                  />
+                )}
+                {screen === 'sm' && (
+                  <HeightWrapper
+                    css={css`
+                      ${tw(['overflow-hidden'])};
+                    `}
+                    pose={sticked ? 'closed' : 'opened'}
+                  >
+                    <Title
+                      location={location}
+                      title={title}
+                    />
+                  </HeightWrapper>
+                )}
+                <HeightWrapper
+                  css={menuWrapperStyle}
+                  parentValues={valuesMap}
+                  pose={sticked ? 'closed' : 'opened'}
+                  ref={this.menuRef}
+                >
+                  <Menu location={location} />
+                </HeightWrapper>
                 <HeaderOpener
                   css={headerOpenerStyles}
-                  pose={sticked ? 'sticked' : 'opened'}
+                  pose={sticked ? 'closed' : 'opened'}
                   onClick={this.handleOpen}
                 >
                   Открыть

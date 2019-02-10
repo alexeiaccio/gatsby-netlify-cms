@@ -17,14 +17,13 @@ const containerStyles = css`
     'flex',
     'flex-col',
     'items-center',
-    'max-w-md',
-    'mx-auto',
     'px-q12',
     'relative',
     'text-black',
     'sm:px-q24',
     'md:px-q48',
   ])};
+  box-sizing: border-box;
 `
 
 class Layout extends PureComponent {
@@ -66,7 +65,7 @@ class Layout extends PureComponent {
         <main css={containerStyles} id="main-container">
           <div
             css={css`
-              ${tw(['w-full'])};
+              ${tw(['max-w-md', 'mx-auto', 'relative', 'w-full'])};
             `}
           >
             {this.props.children}
