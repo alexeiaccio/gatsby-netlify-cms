@@ -30,6 +30,7 @@ const buttonStyles = css`
 class Banner extends Component {
   static propTypes = {
     index: PropTypes.objectOf(PropTypes.object).isRequired,
+    onClose: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -43,7 +44,10 @@ class Banner extends Component {
   }
 
   handleClose = id => {
-    this.setState(({ closed }) => ({ closed: closed.concat(id) }))
+    this.setState(({ closed }) => ({ closed: closed.concat(id) }), () => {
+      const { banners, closed } = this.state
+      closed.lenght === banners.lenght && this.props.onClose()
+    })
   }
 
   renderButton(link, text) {

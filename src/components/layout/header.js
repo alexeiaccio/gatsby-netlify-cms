@@ -45,7 +45,7 @@ class Header extends Component {
     this.menuRef = createRef()
     this.topBlockRef = createRef()
     this.handleScrollOut = debounce(this.handleScrollOut, 400)
-    this.handleHeaderChange = debounce(this.handleHeaderChange, 400)
+    this.handleHeaderChange = debounce(this.handleHeaderChange, 600)
     this.state = {
       clientY: null,
       headerHeight: null,
@@ -67,30 +67,33 @@ class Header extends Component {
       window.addEventListener('resize', this.handleResize)
     }
     this.handleLocation()
+    this.handleHeaderChange()
     this.handleResize()
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.handleLocation()
+      this.handleHeaderChange()
     }
-    if (
-      document !== undefined &&
-      this.bannerRef.current &&
-      this.headerRef.current &&
-      this.logoRef.current &&
-      this.menuRef.current &&
-      this.topBlockRef.current
-    ) {
-      const mainContainer = document.getElementById('main-container')
-      const bannerHeight = this.bannerRef.current.getBoundingClientRect().height
-      const logoHeight = this.logoRef.current.getBoundingClientRect().height
-      const menuHeight = this.menuRef.current.getBoundingClientRect().height
-      const topBlockHeight = this.topBlockRef.current.getBoundingClientRect()
-        .height
+    if (document !== undefined) {
+      const bannerHeight = this.bannerRef.current
+        ? this.bannerRef.current.getBoundingClientRect().height
+        : 0
+      const logoHeight = this.logoRef.current
+        ? this.logoRef.current.getBoundingClientRect().height
+        : 0
+      const menuHeight = this.menuRef.current
+        ? this.menuRef.current.getBoundingClientRect().height
+        : 0
+      const topBlockHeight = this.topBlockRef.current
+        ? this.topBlockRef.current.getBoundingClientRect().height
+        : 0
       const stickedHeight =
         bannerHeight + logoHeight + menuHeight + topBlockHeight
-      const headerHeight = this.headerRef.current.getBoundingClientRect().height
+      const headerHeight = this.headerRef.current
+        ? this.headerRef.current.getBoundingClientRect().height
+        : 0
       const {
         headerHeight: headerHeightState,
         stickedHeight: stickedHeightState,
@@ -100,9 +103,6 @@ class Header extends Component {
         this.setState({ stickedHeight })
       }
 
-      if (headerHeightState === null) {
-        mainContainer.style.paddingTop = `${headerHeight}px`
-      }
       if (headerHeightState !== headerHeight) {
         this.setState({ headerHeight })
       }
@@ -188,7 +188,6 @@ class Header extends Component {
   render() {
     const {
       clientY,
-      headerHeight,
       location,
       screen,
       sticked,
@@ -198,8 +197,6 @@ class Header extends Component {
     } = this.state
     const valuesMap = { y: this.y }
 
-    console.log(headerHeight - stickedHeight)
-    
     return (
       <>
         {screen !== null ? (
@@ -209,14 +206,12 @@ class Header extends Component {
                 ${headerWrapperStyles};
                 cursor: ${clientY ? 'grabbing' : 'grab'};
               `}
-              initialPose={'opened'}
               onDragEnd={this.handleDragEnd}
               onDragStart={this.handleDragStart}
               values={valuesMap}
             >
               <StickyHeader
                 css={headerStyles}
-                headerHeight={headerHeight}
                 pose={sticked ? 'sticked' : 'opened'}
                 ref={this.headerRef}
                 stickedHeight={stickedHeight}
@@ -227,16 +222,18 @@ class Header extends Component {
                   pose={sticked ? 'closed' : 'opened'}
                   ref={this.bannerRef}
                 >
-                  <Banner />
+                  <Banner onClose={this.handleHeaderChange} />
                 </HeightWrapper>
-                <HeightWrapper
-                  css={topBlockWrapperStyles}
-                  parentValues={valuesMap}
-                  pose={sticked ? 'closed' : 'opened'}
-                  ref={this.topBlockRef}
-                >
-                  <TopBlock />
-                </HeightWrapper>
+                {screen === 'lg' && (
+                  <HeightWrapper
+                    css={topBlockWrapperStyles}
+                    parentValues={valuesMap}
+                    pose={sticked ? 'closed' : 'opened'}
+                    ref={this.topBlockRef}
+                  >
+                    <TopBlock />
+                  </HeightWrapper>
+                )}
                 {screen === 'lg' && (
                   <LogoWrapper
                     css={logoWrapperStyle}
@@ -250,6 +247,7 @@ class Header extends Component {
                 {screen === 'sm' && (
                   <LogoMobileWrapper
                     css={logoWrapperStyle}
+                    onClick={this.handleScrollToTop}
                     parentValues={valuesMap}
                     pose={sticked ? 'sticked' : 'opened'}
                     ref={this.logoRef}
@@ -271,10 +269,7 @@ class Header extends Component {
                     `}
                     pose={sticked ? 'closed' : 'opened'}
                   >
-                    <Title
-                      location={location}
-                      title={title}
-                    />
+                    <Title location={location} title={title} />
                   </HeightWrapper>
                 )}
                 <HeightWrapper
@@ -285,6 +280,16 @@ class Header extends Component {
                 >
                   <Menu location={location} />
                 </HeightWrapper>
+                {screen === 'sm' && (
+                  <HeightWrapper
+                    css={topBlockWrapperStyles}
+                    parentValues={valuesMap}
+                    pose={sticked ? 'closed' : 'opened'}
+                    ref={this.topBlockRef}
+                  >
+                    <TopBlock />
+                  </HeightWrapper>
+                )}
                 <HeaderOpener
                   css={headerOpenerStyles}
                   pose={sticked ? 'closed' : 'opened'}

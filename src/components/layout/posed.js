@@ -67,10 +67,16 @@ export const LogoWrapper = posed.div({
 
 export const LogoMobileWrapper = posed.div({
   opened: {
-    applyAtStart: { height: '7rem' },
+    applyAtStart: {
+      height: '7rem',
+      marginBottom: 0,
+    },
   },
   sticked: {
-    applyAtEnd: { height: '3.8rem' },
+    applyAtEnd: {
+      height: '3.8rem',
+      marginBottom: '-1.05rem',
+    },
   },
   passive: {
     scale: [
@@ -87,7 +93,7 @@ export const LogoMobileWrapper = posed.div({
 export const StickyHeader = posed.div({
   sticked: {
     applyAtEnd: {
-      height: ({ headerHeight, stickedHeight }) => headerHeight - stickedHeight,
+      height: 'auto',
       y: 0,
     },
     y: ({ stickedHeight }) => -stickedHeight,
