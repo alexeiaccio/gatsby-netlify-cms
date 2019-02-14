@@ -100,11 +100,11 @@ class Header extends Component {
       } = prevState
 
       if (stickedHeightState === null || stickedHeightState !== stickedHeight) {
-        this.setState({ stickedHeight })
+        this.handleStickedHeightState(stickedHeight)
       }
 
       if (headerHeightState !== headerHeight) {
-        this.setState({ headerHeight })
+        this.handleHeaderHeightState(headerHeight)
       }
     }
   }
@@ -114,6 +114,15 @@ class Header extends Component {
     window.removeEventListener('scroll', this.handleScrollOut)
     window.removeEventListener('resize', this.handleResize)
     this.handleScrollOut.cancel()
+    this.handleHeaderChange.cancel()
+  }
+
+  handleHeaderHeightState = headerHeight => {
+    this.setState({ headerHeight })
+  }
+
+  handleStickedHeightState = stickedHeight => {
+    this.setState({ stickedHeight })
   }
 
   handleDragStart = e => {

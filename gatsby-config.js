@@ -2,6 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const path = require('path')
+const get = require('lodash/get')
 const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
 
 // SEO configuration
@@ -60,13 +61,20 @@ module.exports = {
       options: {
         languages: [{ name: 'ru' }, { name: 'en' }],
         fields: [
-          { name: 'title', store: true },
+          { name: 'authors', store: true, attributes: { boost: 20 } },
           { name: 'data', store: true },
-          { name: 'tags', store: true },
+          { name: 'tags', store: true, attributes: { boost: 10 } },
+          { name: 'title', store: true, attributes: { boost: 30 } },
           { name: 'slug', store: true },
         ],
         resolvers: {
           PrismicArticles: {
+            authors: node =>
+              get(node, 'data.authors', [])
+                .map(({ author }) =>
+                  get(author, 'document', []).map(({ data }) => data.name)
+                )
+                .join(':'),
             data: node => {
               const str = node.dataString
               const regexp = new RegExp('(?:text":")(.+?)(?:",")', 'gi')
@@ -92,14 +100,6 @@ module.exports = {
     'gatsby-plugin-sharp',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-offline`,
-    // {
-    //   resolve: `gatsby-plugin-nprogress`,
-    //   options: {
-    //     color: `#0cf3ad`,
-    //     parent: '#nprogress-container',
-    //     showSpinner: false,
-    //   },
-    // },
     {
       resolve: `gatsby-plugin-sitemap`,
     },

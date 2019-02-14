@@ -25,6 +25,8 @@ export default class Search extends Component {
   search = event => {
     const query = event.target.value
     const results = this.getSearchResults(query)
+    console.log(results)
+    
     this.setState({
       results,
       query,
