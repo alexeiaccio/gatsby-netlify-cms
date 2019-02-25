@@ -18,9 +18,8 @@ export const Views = compose(
     },
     fetch(props) {
       fetch(
-        `${process.env.SLS ||
-          'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}get`
-      )
+        'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/get'
+      , { mode: 'no-cors'})
         .then(res => res.json())
         .then(json => json.values)
         .then(arr =>

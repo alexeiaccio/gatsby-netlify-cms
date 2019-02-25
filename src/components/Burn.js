@@ -21,19 +21,17 @@ export class Burn extends Component {
 
   async burn() {
     fetch(
-      `${process.env.SLS ||
-        'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}counter?path=${this.props.location.pathname.replace(
+      `${'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}counter?path=${this.props.location.pathname.replace(
         /\/$/,
         ''
       )}/&view=0&burned=1`
-    )
+    , { mode: 'no-cors'})
       .then(res => console.log('parsing done', res))
       .catch(error => console.log('parsing failed', error))
 
     const get = await fetch(
-      `${process.env.SLS ||
-        'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}get`
-    )
+      `${'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}get`
+    , { mode: 'no-cors'})
       .then(res => res.json())
       .then(json => json.values)
       .then(arr =>

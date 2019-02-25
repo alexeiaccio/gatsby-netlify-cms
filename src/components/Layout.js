@@ -30,12 +30,11 @@ const enhance = compose(
   lifecycle({
     fetch(props) {
       fetch(
-        `${process.env.SLS ||
-          'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}counter?path=${props.location.pathname.replace(
+        `${'https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/'}counter?path=${props.location.pathname.replace(
           /\/$/,
           ''
         )}/&view=1&burned=0`
-      )
+      , { mode: 'no-cors'})
         .then(res => console.log('parsing failed', res))
         .catch(error => console.log('parsing failed', error))
     },
