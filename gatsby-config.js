@@ -2,8 +2,36 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const path = require('path')
-const get = require('lodash/get')
+const { get, keys } = require('lodash')
 const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
+
+const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
+const makeApiResolver = (repositoryName, accessToken) => ({
+  resolve: 'gatsby-source-prismic',
+  options: {
+    repositoryName,
+    accessToken,
+    linkResolver,
+    htmlSerializer,
+    lang: '*',
+    shouldNormalizeImage: () => true,
+    schemas: {
+      about: require('./src/schemas/about.json'),
+      articles: require('./src/schemas/articles.json'),
+      authors: require('./src/schemas/authors.json'),
+      index: require('./src/schemas/index.json'),
+      reference: require('./src/schemas/reference.json'),
+    },
+  },
+})
+const apisResolvers = []
+
+if (apis) {
+  keys(apis)
+  .forEach(key => apisResolvers.push(makeApiResolver(key, apis[key])))
+} else {
+  apisResolvers.push(makeApiResolver(process.env.PRISMIC_API, process.env.PRISMIC_TOKEN))
+}
 
 // SEO configuration
 const siteTitle = '·К·Р·А·П·И·В·А·'
@@ -47,15 +75,7 @@ module.exports = {
         layout: require.resolve(`./src/components/layout/index.js`),
       },
     },
-    {
-      resolve: 'gatsby-source-prismic',
-      options: {
-        repositoryName: process.env.PRISMIC_API,
-        accessToken: process.env.PRISMIC_TOKEN,
-        linkResolver,
-        htmlSerializer,
-      },
-    },
+    ...apisResolvers,
     {
       resolve: `gatsby-plugin-lunr`,
       options: {
@@ -66,6 +86,7 @@ module.exports = {
           { name: 'tags', store: true, attributes: { boost: 10 } },
           { name: 'title', store: true, attributes: { boost: 30 } },
           { name: 'slug', store: true },
+          { name: 'api', store: true },
         ],
         resolvers: {
           PrismicArticles: {
@@ -89,6 +110,11 @@ module.exports = {
             tags: node => node.tags.join(':'),
             title: node => node.data.title.text,
             slug: node => node.fields.slug,
+            api: node => {
+              const hrefRegexp = new RegExp('^(?:https?\:\/\/)(.+)(?:\.cdn)', 'g')
+              const res = hrefRegexp.exec(node.href)
+              return res[1]
+            },
           },
         },
         filename: 'search_index.json',

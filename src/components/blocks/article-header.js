@@ -97,14 +97,18 @@ export default memo(ArticleHeader)
 export const articleHeaderQuery = graphql`
   fragment ArticleHeader on PrismicArticles {
     id
+    href
     first_publication_date
     tags
     data {
       authors {
         author {
           document {
-            data {
-              name
+            __typename
+            ... on PrismicAuthors {
+              data {
+                name
+              }
             }
           }
         }

@@ -542,29 +542,35 @@ export const articleBodyQuery = graphql`
           items {
             articlelink {
               document {
-                first_publication_date
-                fields {
-                  slug
-                }
-                data {
-                  title {
-                    text
+                __typename
+                ... on PrismicArticles {
+                  first_publication_date
+                  fields {
+                    slug
                   }
-                  authors {
-                    author {
-                      document {
-                        data {
-                          name
+                  data {
+                    title {
+                      text
+                    }
+                    authors {
+                      author {
+                        document {
+                          __typename
+                          ... on PrismicAuthors {
+                            data {
+                              name
+                            }
+                          }
                         }
                       }
                     }
-                  }
-                  image {
-                    url
-                    localFile {
-                      childImageSharp {
-                        fluid(maxWidth: 640, quality: 80) {
-                          ...GatsbyImageSharpFluid_tracedSVG
+                    image {
+                      url
+                      localFile {
+                        childImageSharp {
+                          fluid(maxWidth: 640, quality: 80) {
+                            ...GatsbyImageSharpFluid_tracedSVG
+                          }
                         }
                       }
                     }

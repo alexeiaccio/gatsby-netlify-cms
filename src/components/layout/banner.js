@@ -116,8 +116,11 @@ function WithStaticQuery(props) {
                   bannerbutton
                   bannerlink {
                     document {
-                      fields {
-                        slug
+                      __typename
+                      ... on PrismicArticles {
+                        fields {
+                          slug
+                        }
                       }
                     }
                     url

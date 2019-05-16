@@ -1,4 +1,8 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 const path = require('path')
+const get = require('lodash/get')
 const { makePath, translite, getCategories } = require('./src/utils/makePath')
 
 exports.createPages = async ({ actions, graphql }) => {
@@ -60,14 +64,14 @@ exports.createPages = async ({ actions, graphql }) => {
     }    
   `)
 
-  const { edges: articles } = pages.data.articles
-  const { edges: authors } = pages.data.authors
+  const articles = get(pages, 'data.articles.edges')
+  const authors = get(pages, 'data.authors.edges')
   
   const categories = getCategories(articles)
 
-  pageMaker('articles', articles)
-  pageMaker('authors', authors)
-  categoriesMaker(categories)
+  !process.env.APIS && articles && pageMaker('articles', articles)
+  authors && pageMaker('authors', authors)
+  categories && categoriesMaker(categories)
 }
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -83,7 +87,7 @@ exports.onCreateNode = ({ node, actions }) => {
     createNodeField({
       node,
       name: `tags`,
-      value: tags.map(tag => translite(tag)),
+      value: tags ? tags.map(tag => translite(tag)) : [],
     })
   }
   if (node && node.internal.type === `PrismicAuthors`) {

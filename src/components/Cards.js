@@ -1,6 +1,6 @@
+import Link from './elements/link'
 import React from 'react'
 import { css } from '@emotion/core'
-import { Link } from 'gatsby'
 
 import { Img, ImgHolder } from './Img'
 import { Heading6 } from './Typography'
@@ -18,13 +18,15 @@ export const Dummy = () => (
 export const PreviewCard = ({ article, location }) => (
   <Link
     css={css`
-      ${tw(['text-black', 'hover:text-black', 'w-full'])};
+      ${tw(['block', 'text-black', 'hover:text-black', 'w-full'])};
       &:hover h4 {
         ${tw(['text-green'])};
       }
     `}
+    api={article.href}
+    location={location}
     title={article.data.title.text}
-    to={article.fields.slug}
+    to={article.fields.slug || ''}
   >
     {article.data.image && <Img src={article.data.image} />}
     <div

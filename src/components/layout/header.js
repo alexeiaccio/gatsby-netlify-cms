@@ -1,4 +1,4 @@
-import React, { memo, Component, createRef } from 'react'
+import React, { memo, Component, createRef, createContext } from 'react'
 import PropTypes from 'prop-types'
 import { Location } from '@reach/router'
 import { value } from 'popmotion'
@@ -29,6 +29,8 @@ import {
   menuWrapperStyle,
   topBlockWrapperStyles,
 } from './styles'
+
+export const HeaderContext = createContext()
 
 class Header extends Component {
   static propTypes = {
@@ -240,7 +242,9 @@ class Header extends Component {
                     pose={sticked ? 'closed' : 'opened'}
                     ref={this.topBlockRef}
                   >
-                    <TopBlock />
+                    <HeaderContext.Provider value={sticked}>
+                      <TopBlock />
+                    </HeaderContext.Provider>
                   </HeightWrapper>
                 )}
                 {screen === 'lg' && (

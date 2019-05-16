@@ -1,0 +1,302 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "authors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "author": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["authors"],
+              "label": "Author",
+              "placeholder": "Author"
+            }
+          }
+        },
+        "label": "Authors"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 1920,
+          "height": 1200
+        },
+        "thumbnails": [],
+        "label": "Image"
+      }
+    },
+    "caption": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, strong, em, hyperlink",
+        "allowTargetBlank": true,
+        "label": "Caption",
+        "placeholder": "Image Caption"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "choices": {
+          "text": {
+            "type": "Slice",
+            "fieldset": "Text",
+            "description": "Rich Text Section",
+            "icon": "text_fields",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, embed, list-item, o-list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "text",
+                  "placeholder": "Your content here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "quote": {
+            "type": "Slice",
+            "fieldset": "Quote",
+            "description": "A quote with resource",
+            "icon": "message",
+            "non-repeat": {
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "strong, em",
+                  "label": "Quote",
+                  "placeholder": "Quote"
+                }
+              },
+              "cite": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Cite",
+                  "placeholder": "Cite"
+                }
+              }
+            },
+            "repeat": {},
+            "display": "list"
+          },
+          "youtube": {
+            "type": "Slice",
+            "fieldset": "Youtube",
+            "description": "Youtube Video",
+            "icon": "local_movies",
+            "display": "list",
+            "non-repeat": {
+              "youtubeid": {
+                "type": "Embed",
+                "config": {
+                  "label": "YoutubeID",
+                  "placeholder": "Youtube Video ID"
+                }
+              },
+              "videoresource": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "VideoResource",
+                  "placeholder": "Video Resource"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "cut": {
+            "type": "Slice",
+            "fieldset": "Cut",
+            "description": "Made excerpt",
+            "icon": "content_cut",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {}
+          },
+          "image": {
+            "type": "Slice",
+            "fieldset": "Image",
+            "description": "Image with caption",
+            "icon": "image",
+            "display": "list",
+            "non-repeat": {
+              "imageimage": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "ImageImage"
+                }
+              },
+              "imagecaption": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "ImageCaption",
+                  "placeholder": "Caption"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "lead": {
+            "type": "Slice",
+            "fieldset": "Lead",
+            "description": "Lead",
+            "icon": "format_color_text",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Text",
+                  "placeholder": "Text"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "list_of_articles": {
+            "type": "Slice",
+            "fieldset": "List of Articles",
+            "description": "Articles list",
+            "icon": "view_list",
+            "non-repeat": {},
+            "repeat": {
+              "articlelink": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": ["articles"],
+                  "label": "ArticleLink",
+                  "placeholder": "Select Article"
+                }
+              }
+            },
+            "display": "list"
+          },
+          "medialink": {
+            "type": "Slice",
+            "fieldset": "MediaLink",
+            "description": "Attach the media",
+            "icon": "attach_file",
+            "display": "list",
+            "non-repeat": {
+              "mediacover": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "MediaCover"
+                }
+              },
+              "mediacaption": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, heading3, strong, em, hyperlink, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "MediaCaption",
+                  "placeholder": "Caption"
+                }
+              },
+              "medialink": {
+                "type": "Link",
+                "config": {
+                  "allowTargetBlank": true,
+                  "label": "MediaLink",
+                  "placeholder": "Link to Media"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "slider": {
+            "type": "Slice",
+            "fieldset": "Image Slider",
+            "description": "Image Slider with a caption for each image",
+            "icon": "photo_library",
+            "non-repeat": {},
+            "repeat": {
+              "slidercaptions": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "SliderCaptions",
+                  "placeholder": "Images captions"
+                }
+              },
+              "sliderimage": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": null,
+                    "height": null
+                  },
+                  "thumbnails": [],
+                  "label": "SliderImage"
+                }
+              }
+            },
+            "display": "list"
+          },
+          "reference": {
+            "type": "Slice",
+            "fieldset": "Reference",
+            "description": "Reference",
+            "icon": "textsms",
+            "display": "list",
+            "non-repeat": {
+              "referenceanchor": {
+                "type": "Text",
+                "config": {
+                  "label": "ReferenceAnchor",
+                  "placeholder": "Anchor (digit or text)"
+                }
+              },
+              "referencetext": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink, image, list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "ReferenceText",
+                  "placeholder": "Text here"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "references_list": {
+            "type": "Slice",
+            "fieldset": "References List",
+            "description": "Place the List of all References in Article",
+            "icon": "format_list_numbered",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {}
+          }
+        }
+      }
+    }
+  }
+}

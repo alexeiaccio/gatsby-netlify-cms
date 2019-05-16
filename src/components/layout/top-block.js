@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 
 import { ButtonOutlinedBlock } from '../elements/buttons'
 import Link from '../elements/link'
+import Search from './search'
 
 const wrapperStyles = css`
   ${tw([
@@ -16,6 +17,7 @@ const wrapperStyles = css`
     'select-none',
     'text-xs',
     'md:flex-no-wrap',
+    'md:px-q24',
   ])};
 `
 
@@ -30,6 +32,9 @@ const buttonStyles = css`
     'md:hover:bg-white',
     'md:hover:text-black',
   ])};
+`
+const searchWrapperStyles = css`
+  ${tw(['ml-auto', 'relative'])};
 `
 
 class TopBlock extends PureComponent {
@@ -110,6 +115,9 @@ class TopBlock extends PureComponent {
         >
           Подписаться
         </ButtonOutlinedBlock>
+        <div css={searchWrapperStyles}>
+          <Search />
+        </div>
       </div>
     )
   }
