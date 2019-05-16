@@ -7,9 +7,10 @@ function Link({ api, children, location, ...props }) {
   if (!props.to) {
     return null
   }
-  if (get(location, 'host') !== api) {
+  const host = get(location, 'host', 'www')
+  if (host !== api) {
     return (
-      <a href={`https://${location.host}.krapiva.org/${props.to}`} {...props}>
+      <a href={`https://${host}.krapiva.org/${props.to}`} {...props}>
         {children}
       </a>
     )
