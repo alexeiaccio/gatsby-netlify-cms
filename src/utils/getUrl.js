@@ -12,4 +12,4 @@ function getURL(href) {
   }
 }
 
-exports.getURL = getURL
+export default getURL
