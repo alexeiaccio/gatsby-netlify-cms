@@ -1,17 +1,18 @@
 import AniLink from 'gatsby-plugin-transition-link/AniLink'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { get } from 'lodash'
 
 function Link({ api, children, location, ...props }) {
-  if (location.host !== api) {
+  if (!props.to) {
+    return null
+  }
+  if (get(location, 'host') !== api) {
     return (
       <a href={`https://${location.host}.krapiva.org/${props.to}`} {...props}>
         {children}
       </a>
     )
-  }
-  if (!props.to) {
-    return null
   }
 
   return (
