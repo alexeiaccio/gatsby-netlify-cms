@@ -10,11 +10,11 @@ function Link({ api, children, location, ...props }) {
 
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.krapiva/
   const href = get(location, 'href', '')
-  const host = get(regExp.exec('https://dev-www.krapiva.org/o-nas/'), '1', 'dev-www')
+  const host = get(regExp.exec(href), '1', 'dev-www')
   
   if (host !== api && !href.includes('localhost')) {
     return (
-      <a href={`https://${host}.krapiva.org${props.to}`} {...props}>
+      <a href={`https://${host}.krapiva.org/${props.to}`} {...props}>
         {children}
       </a>
     )
