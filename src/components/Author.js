@@ -1,9 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { Link } from 'gatsby'
 
 import { HTMLContent } from './Content'
 import { Img } from './Img'
+import Link from './elements/link'
 import { RichTextSmall } from './RichText'
 import { Heading6 } from './Typography'
 import { uuid } from '../utils'

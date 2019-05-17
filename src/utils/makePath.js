@@ -143,8 +143,8 @@ const getDate = date => {
   return `${match[3]}-${match[2]}-${match[1]}`
 }
 
-const trslt = library => (str = '') =>
-  str.search(/[0-9]/) &&
+const trslt = library => str =>
+  str && str.search(/[0-9]/) &&
   str
     .split('')
     .map(char => library[char])
