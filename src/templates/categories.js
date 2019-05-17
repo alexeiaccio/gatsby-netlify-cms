@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import { get } from 'lodash/fp'
 
@@ -9,6 +9,7 @@ import { ButtonOutlined } from '../components/Buttons'
 import { Column, Row } from '../components/Grid'
 import { Heading1 } from '../components/Typography'
 import { HTMLContent } from '../components/Content'
+import Link from '../components/elements/link'
 import { PreviewCard } from '../components/Cards'
 import { uuid } from '../utils'
 
@@ -71,15 +72,17 @@ export default ({ data, location }) => {
         <Row id="articles">
           {articles.map(({ node: article }) => (
             <Column key={uuid()}>
-              <PreviewCard {...{ article }} key={uuid()} />
+              <PreviewCard {...{ article }} key={uuid()} {...{ location }} />
             </Column>
           ))}
         </Row>
         <Link
+          api={article.href}
           css={css`
             ${tw(['block', 'mt-q48', 'mx-auto', 'text-center'])};
           `}
-          to={'/'}
+          location={location}
+          to="/"
         >
           <span
             css={css`

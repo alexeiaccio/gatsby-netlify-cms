@@ -41,14 +41,17 @@ const linkStyles = css`
 class Menu extends Component {
   static propTypes = {
     index: PropTypes.objectOf(PropTypes.any).isRequired,
-    location: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
     pages: PropTypes.objectOf(PropTypes.any).isRequired,
   }
 
   render() {
     const { index, pages, location } = this.props
+    const pathname = get(location, 'pathname')
     const LinkOrMove =
-      location && location === '/'
+      pathname && pathname === '/'
         ? ButtonOutlinedBlock
         : ButtonOutlinedBlock.withComponent(Link)
 
@@ -59,13 +62,14 @@ class Menu extends Component {
           'style.paddingTop'
         )
         const top =
-          get(document.getElementById(link), 'offsetTop') + parseInt(headerHeight)
+          get(document.getElementById(link), 'offsetTop') +
+          parseInt(headerHeight)
         window.scrollTo({ top, behavior: 'smooth' })
       }
     }
 
     const firstCategory =
-      location === '/' ? [] : [{ categorytitle: { text: 'Новое' } }]
+      pathname === '/' ? [] : [{ categorytitle: { text: 'Новое' } }]
     const preparedCategories = firstCategory
       .concat({ categorytitle: { text: 'Афиша' } })
       .concat(index.data.categories)
@@ -81,12 +85,17 @@ class Menu extends Component {
 
           return (
             <Fragment key={uuid()}>
-              {location === '/' ? (
+              {pathname === '/' ? (
                 <LinkOrMove css={linkStyles} onClick={() => handleClick(link)}>
                   {category.categorytitle.text}
                 </LinkOrMove>
               ) : pageExist ? (
-                <LinkOrMove css={linkStyles} to={link}>
+                <LinkOrMove
+                  api={index.href}
+                  css={linkStyles}
+                  location={location}
+                  to={link}
+                >
                   {category.categorytitle.text}
                 </LinkOrMove>
               ) : (
@@ -112,6 +121,7 @@ function WithStaticQuery(props) {
       query={graphql`
         query MenuQuery {
           index: prismicIndex {
+            href
             data {
               categories {
                 categorytitle {

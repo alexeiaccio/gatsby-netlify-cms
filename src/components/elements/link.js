@@ -9,17 +9,12 @@ function Link({ api, children, location, ...props }) {
   }
 
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\./
-  const origin = get(location, 'origin', '')
-  const host = get(regExp.exec(host), '1', 'www')
-  
-  if (host !== api) {
-    const path = origin.includes('localhost') ?
-      `${origin}/${props.to}`
-      :
-      `https://${host}.krapiva.org/${props.to}`
+  const href = get(location, 'href', '')
+  const host = get(regExp.exec(href), '1', 'www')
 
+  if (host !== api && !href.includes('localhost')) {
     return (
-      <a href={path} {...props}>
+      <a href={`https://${host}.krapiva.org/${props.to}`} {...props}>
         {children}
       </a>
     )
@@ -37,7 +32,7 @@ Link.propTypes = {
   css: PropTypes.any,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   location: PropTypes.shape({
-    origin: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
   }),
   to: PropTypes.string,
 }

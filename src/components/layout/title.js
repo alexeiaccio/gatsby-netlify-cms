@@ -1,7 +1,9 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
+import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
+import get from 'lodash/get'
 
 import Link from '../elements/link'
 
@@ -39,13 +41,15 @@ const Heading = styled.h1`
 
 const HeadingLink = Heading.withComponent(Link)
 
-function Title({ handleClick, location, title }) {
+function Title({ handleClick, index, location, title }) {
   return (
     <nav css={navStyles}>
-      {location === '/' ? (
+      {get(location, 'pathname') === '/' ? (
         <Heading onClick={handleClick}>{title}</Heading>
       ) : (
-        <HeadingLink to="/">{title}</HeadingLink>
+        <HeadingLink api={index.href} location={location} to="/">
+          {title}
+        </HeadingLink>
       )}
     </nav>
   )
@@ -53,7 +57,9 @@ function Title({ handleClick, location, title }) {
 
 Title.propTypes = {
   handleClick: PropTypes.func,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   title: PropTypes.string.isRequired,
 }
 
@@ -61,4 +67,19 @@ Title.defaultProps = {
   handleClick: null,
 }
 
-export default memo(Title)
+function WithStaticQuery(props) {
+  return (
+    <StaticQuery
+      query={graphql`
+        query TitleQuery {
+          index: prismicIndex {
+            href
+          }
+        }
+      `}
+      render={({ index }) => <Title index={index} {...props} />}
+    />
+  )
+}
+
+export default memo(WithStaticQuery)

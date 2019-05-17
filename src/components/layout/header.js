@@ -51,7 +51,7 @@ class Header extends Component {
     this.state = {
       clientY: null,
       headerHeight: null,
-      location: null,
+      pathname: null,
       screen: null,
       sticked: false,
       stickedHeight: null,
@@ -149,10 +149,10 @@ class Header extends Component {
   }
 
   handleLocation = () => {
-    const location = get(this.props, 'location.pathname')
+    const pathname = get(this.props, 'location.pathname')
     this.setState({
-      location,
-      sticked: location !== '/',
+      pathname,
+      sticked: pathname !== '/',
     })
   }
 
@@ -169,9 +169,9 @@ class Header extends Component {
   handleScrollOut = e => {
     const mainContainer = e.target.getElementById('main-container')
     const scroll = mainContainer.getBoundingClientRect().top
-    const { location, sticked } = this.state
+    const { pathname, sticked } = this.state
 
-    if (scroll >= -40 && sticked && location === '/') {
+    if (scroll >= -40 && sticked && pathname === '/') {
       this.setState({ sticked: false }, this.handleHeaderChange)
     }
   }
@@ -199,13 +199,13 @@ class Header extends Component {
   render() {
     const {
       clientY,
-      location,
       screen,
       sticked,
       stickedHeight,
       string,
       title,
     } = this.state
+    const { location } = this.props
     const valuesMap = { y: this.y }
 
     return (
