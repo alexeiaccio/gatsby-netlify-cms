@@ -1,0 +1,37 @@
+{
+  "config": {
+    "title": "Theme",
+    "description": "My awesome app using docz",
+    "menu": [],
+    "version": "0.0.1",
+    "repository": null,
+    "native": false,
+    "themeConfig": {
+      "mode": "dark"
+    },
+    "separator": "-"
+  },
+  "entries": [
+    {
+      "key": "docs/layout.mdx",
+      "value": {
+        "name": "Hello world",
+        "route": "/",
+        "id": "a3f95bb4207050defa460a65d9f3339c",
+        "filepath": "docs/layout.mdx",
+        "fullpath": "/Users/alexeiaccio/Github/krapiva-org/packages/theme/docs/layout.mdx",
+        "link": "",
+        "slug": "docs-layout",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "hello-world",
+            "depth": 1,
+            "value": "Hello world"
+          }
+        ]
+      }
+    }
+  ],
+  "props": []
+}

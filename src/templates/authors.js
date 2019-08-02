@@ -17,16 +17,6 @@ export default ({ data, location }) => {
   const author = data.author.data
   const from = get(location, 'state.from', '/')
 
-  const getArticles = thatAuthor =>
-    articles
-      .filter(({ node: { data } }) =>
-        data.authors.some(
-          ({ author }) =>
-            get(author, 'document[0].data.name') === thatAuthor.name
-        )
-      )
-      .filter(({ node }) => node.tags.some(tag => tag !== 'Архив'))
-
   return (
     <>
       <section>
@@ -74,7 +64,7 @@ export default ({ data, location }) => {
             content={author.statement.html}
           />
         )}
-        {author && getArticles(author).length > 0 && (
+        {author && articles.length > 0 && (
           <h2
             css={css`
               ${Heading2};
@@ -86,7 +76,7 @@ export default ({ data, location }) => {
         )}
         <Row>
           {author &&
-            getArticles(author).map(({ node: article }) => (
+            articles.map(({ node: article }) => (
               <Column key={uuid()}>
                 <PreviewCard {...{ article }} key={uuid()} />
               </Column>
@@ -136,6 +126,7 @@ export const pageQuery = graphql`
       }
     }
     articles: allPrismicArticles(
+      filter: {data: {authors: {elemMatch: {author: {slug: {eq: $slug}}}}}}
       sort: { order: DESC, fields: [first_publication_date] }
     ) {
       edges {

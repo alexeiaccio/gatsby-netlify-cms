@@ -1,0 +1,21 @@
+{
+  "name": "@krapiva-org/main",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "develop": "gatsby develop",
+    "clean": "gatsby clean",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@krapiva-org/theme": "*",
+    "dotenv": "^8.0.0",
+    "gatsby": "^2.13.50",
+    "gatsby-plugin-alias-imports": "^1.0.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  }
+}

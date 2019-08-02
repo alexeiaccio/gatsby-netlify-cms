@@ -1,0 +1,23 @@
+{
+  "name": "@krapiva-org/theme",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "develop": "gatsby develop",
+    "clean": "gatsby clean",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "docz": "^2.0.0-rc.1",
+    "gatsby": "^2.13.50",
+    "gatsby-theme-docz": "^2.0.0-rc.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "theme-ui": "^0.2.25",
+    "typescript": "^3.5.3"
+  }
+}

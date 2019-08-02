@@ -54,7 +54,9 @@
     "whatwg-fetch": "^2.0.4"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "prismic",
+    "media"
   ],
   "license": "MIT",
   "main": "n/a",
@@ -88,5 +90,9 @@
     "postcss-cli": "^6.1.1",
     "prettier": "^1.16.0",
     "rimraf": "^2.6.3"
-  }
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
 }
