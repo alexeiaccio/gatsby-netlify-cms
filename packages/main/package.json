@@ -17,6 +17,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@types/react": "^16.8.24",
     "typescript": "^3.5.3"
   }
 }
