@@ -1,3 +1,4 @@
+import theme from './src/theme'
 import Layout from './src/components/layout/index'
 
-export { Layout }
+export { theme, Layout }

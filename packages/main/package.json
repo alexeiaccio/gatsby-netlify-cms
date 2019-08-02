@@ -9,15 +9,21 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.14",
+    "@emotion/styled": "^10.0.14",
     "@krapiva-org/theme": "*",
     "dotenv": "^8.0.0",
     "gatsby": "^2.13.50",
-    "gatsby-plugin-alias-imports": "^1.0.5",
+    "gatsby-plugin-emotion": "^4.1.2",
+    "gatsby-plugin-theme-ui": "^0.2.25",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "theme-ui": "^0.2.25"
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.14",
     "@types/react": "^16.8.24",
+    "babel-preset-gatsby": "^0.2.8",
     "typescript": "^3.5.3"
   }
 }

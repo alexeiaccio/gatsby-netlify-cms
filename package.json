@@ -11,7 +11,15 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "yarn workspace @krapiva-org/main build"
+    "clean:theme": "yarn workspace @krapiva-org/theme clean",
+    "clean:main": "yarn workspace @krapiva-org/main clean",
+    "clean:pages": "yarn workspace @krapiva-org/pages clean",
+    "develop:theme": "yarn workspace @krapiva-org/theme develop",
+    "develop:main": "yarn workspace @krapiva-org/main develop",
+    "develop:pages": "yarn workspace @krapiva-org/pages develop",
+    "build:theme": "yarn workspace @krapiva-org/theme build",
+    "build:main": "yarn workspace @krapiva-org/main build",
+    "build:pages": "yarn workspace @krapiva-org/pages build"
   },
   "private": true,
   "workspaces": [

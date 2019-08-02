@@ -33,5 +33,17 @@
       }
     }
   ],
-  "props": []
+  "props": [
+    {
+      "key": "src/components/layout/index.js",
+      "value": [
+        {
+          "description": "@param {{ children: JSX.Element }} Nodes\n@returns JSX.Element",
+          "displayName": "Layout",
+          "methods": [],
+          "actualName": "Layout"
+        }
+      ]
+    }
+  ]
 }

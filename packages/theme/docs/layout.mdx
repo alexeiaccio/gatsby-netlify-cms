@@ -3,10 +3,13 @@ name: Hello world
 route: /
 ---
 
+import Index from '../src/index'
 import Layout from '../src/components/layout/index'
 
 # Hello world
 
-<Layout>
-  Hello, I'm a mdx file!
-</Layout>
+<Index>
+  <Layout>
+    Hello, I'm a mdx file!
+  </Layout>
+</Index>

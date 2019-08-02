@@ -7,15 +7,5 @@ module.exports = {
     title: 'Krapiva',
     prismicApi: process.env.PRISMIC_API,
   },
-  // plugins: [
-  //   {
-  //     resolve: `gatsby-plugin-alias-imports`,
-  //     options: {
-  //       alias: {
-  //         '@src': './src',
-  //       },
-  //       extensions: ['js'],
-  //     },
-  //   },
-  // ],
+  plugins: ['gatsby-plugin-theme-ui']
 }
