@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "type-check": "tsc --noEmit"
