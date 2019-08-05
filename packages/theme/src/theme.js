@@ -1,27 +1,41 @@
+const heading = {
+  color: 'text',
+  fontFamily: 'heading',
+  lineHeight: '1.2',
+  fontWeight: 'heading',
+}
+
 export default {
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   colors: {
     text: '#000',
     background: '#fff',
-    primary: '#07c',
+    primary: '#0cf3ad',
     modes: {
       dark: {
         text: '#fff',
         background: '#000',
         primary: '#0cf',
-      }
-    }
+      },
+    },
+    grays: [
+      '#fafcfc',
+      '#edefef',
+      '#dae4e9',
+      '#9babb4',
+      '#70818a',
+      '#596a73',
+      '#364349',
+    ],
   },
   fonts: {
-    body: 'system-ui, sans-serif',
-    heading: 'Georgia, serif',
-    monospace: 'Menlo, monospace',
+    body: 'Cormorant, serif',
+    heading: 'Montserrat, sans-serif',
   },
-  fontSizes: [
-    12, 14, 16, 20, 24, 32, 48, 64
-  ],
+  fontSizes: ['0.75rem', '1rem', '1.25rem', '1.5rem', '1.75rem', '2rem'],
   fontWeights: {
-    body: 400,
-    heading: 700,
+    body: 500,
+    heading: 800,
     bold: 700,
   },
   lineHeights: {
@@ -34,23 +48,57 @@ export default {
   },
   styles: {
     Layout: {
-      color: "gray.2",
-      fontFamily: "body",
+      color: 'text',
+      fontFamily: 'heading',
       fontSize: 1,
-      lineHeight: "body",
     },
     Header: {
-      backgroundColor: "primary",
-      fontFamily: "heading",
-      color: "background",
-      fontWeight: "bold",
-      margin: "0 auto",
-      maxWidth: "max",
+      backgroundColor: 'primary',
+      fontFamily: 'heading',
+      color: 'background',
+      fontWeight: 'bold',
+      margin: '0 auto',
+      maxWidth: 'max',
       padding: 3,
-      width: "default",
+      width: '100%',
       a: {
-        color: "inherit",
+        color: 'inherit',
       },
+    },
+    h1: {
+      ...heading,
+      fontSize: 1,
+      fontWeight: 'body',
+      color: 'grays.3',
+    },
+    h2: {
+      ...heading,
+      fontSize: 4,
+    },
+    h3: {
+      ...heading,
+      fontSize: 3,
+    },
+    h4: {
+      ...heading,
+      fontSize: 2,
+    },
+    h5: {
+      ...heading,
+      fontSize: 1,
+    },
+    h6: {
+      ...heading,
+      fontSize: 0,
+    },
+    p: {
+      color: 'text',
+      fontFamily: 'body',
+      fontWeight: 'body',
+      lineHeight: 'body',
+    },
+    a: {
+      color: 'primary',
     },
   },
 }

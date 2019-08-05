@@ -1,11 +1,11 @@
 import React from 'react'
-import { css } from '@emotion/core'
-import styled from '@emotion/styled'
+import { Global } from '@emotion/core'
 import { Header } from 'theme-ui'
 
-const H1 = styled.h1`
-  color: blue;
-`
+import '../../fonts/cormorant/stylesheet.css'
+import '../../fonts/montserrat/stylesheet.css'
+
+import globalStyles from './global'
 
 /**
  *
@@ -14,11 +14,9 @@ const H1 = styled.h1`
  */
 
 function Layout({ children }) {
-  // console.log(tw);
   return (
     <>
-      <h1 css={css`color: red;`}>Hello!</h1>
-      <H1>Poop!</H1>
+      <Global styles={globalStyles} />
       <Header>Woop!</Header>
       {children}
     </>

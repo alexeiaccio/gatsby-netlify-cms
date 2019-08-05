@@ -15,8 +15,9 @@
     {
       "key": "docs/layout.mdx",
       "value": {
-        "name": "Hello world",
+        "name": "Layout",
         "route": "/",
+        "fullpage": true,
         "id": "a3f95bb4207050defa460a65d9f3339c",
         "filepath": "docs/layout.mdx",
         "fullpath": "/Users/alexeiaccio/Github/krapiva-org/packages/theme/docs/layout.mdx",
@@ -25,9 +26,9 @@
         "menu": "",
         "headings": [
           {
-            "slug": "hello-world",
+            "slug": "layout",
             "depth": 1,
-            "value": "Hello world"
+            "value": "Layout"
           }
         ]
       }
@@ -35,10 +36,10 @@
   ],
   "props": [
     {
-      "key": "src/components/layout/index.js",
+      "key": "src/gatsby-theme-docz/src/components/Layout/index.js",
       "value": [
         {
-          "description": "@param {{ children: JSX.Element }} Nodes\n@returns JSX.Element",
+          "description": "@param {{ children: JSX.Element }} Node",
           "displayName": "Layout",
           "methods": [],
           "actualName": "Layout"
