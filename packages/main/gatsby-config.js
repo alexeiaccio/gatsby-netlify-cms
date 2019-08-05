@@ -7,5 +7,12 @@ module.exports = {
     title: 'Krapiva',
     prismicApi: process.env.PRISMIC_API,
   },
-  plugins: ['gatsby-plugin-theme-ui']
+  plugins: [
+    {
+      resolve: `gatsby-theme-tailwindcss`,
+      options: {
+        postCssPlugins: [require('autoprefixer')],
+      },
+    },
+  ]
 }

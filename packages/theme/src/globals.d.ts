@@ -1,6 +1,4 @@
 declare module 'gatsby'
 declare module '@emotion/core'
 declare module '@emotion/styled'
-declare module 'theme-ui'
-declare module 'gatsby-theme-docz/src/theme'
-declare module 'gatsby-theme-docz/src/components/Layout'
+declare module 'tailwind.macro'

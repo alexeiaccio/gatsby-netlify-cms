@@ -1,7 +1,12 @@
 module.exports = {
   plugins: [
     'gatsby-theme-docz',
-    'gatsby-plugin-theme-ui',
-    'gatsby-plugin-emotion'
+    'gatsby-plugin-emotion',
+    {
+      resolve: `gatsby-theme-tailwindcss`,
+      options: {
+        postCssPlugins: [require('autoprefixer')],
+      },
+    },
   ],
 }

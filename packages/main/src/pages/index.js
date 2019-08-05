@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 import { Layout as ThemeLayout, Header } from 'theme-ui'
 import { Layout } from '@krapiva-org/theme'
 
+import '@krapiva-org/theme/src/utils/globals.css'
+
 /**
  *
  * @param {{ data: any }} data

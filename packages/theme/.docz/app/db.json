@@ -36,10 +36,10 @@
   ],
   "props": [
     {
-      "key": "src/gatsby-theme-docz/src/components/Layout/index.js",
+      "key": "src/components/layout/index.js",
       "value": [
         {
-          "description": "@param {{ children: JSX.Element }} Node",
+          "description": "@param {{ children: JSX.Element }} Nodes\n@returns { JSX.Element }",
           "displayName": "Layout",
           "methods": [],
           "actualName": "Layout"
