@@ -3,6 +3,11 @@ import { css, jsx } from '@emotion/core'
 import PropTypes from 'prop-types'
 import tw from 'tailwind.macro'
 
+/**
+ * 
+ * @param {{ angle?: number, fill?: string, height?: number, stroke?: string, width?: number }} props 
+ */
+
 function Logo({ angle = 90, fill = '#0cf3ad', height = 60, stroke, width }) {
   return (
     <div
