@@ -5,4 +5,8 @@ declare module 'react' {
      css?:string;
      cx?:string;
  }    
+  interface SVGProps<T> extends React.DOMAttributes<T> {
+     css?:string;
+     cx?:string;
+ }    
 }
