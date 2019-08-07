@@ -3,12 +3,16 @@ name: Logo
 route: /logo
 ---
 
-import { Props } from 'docz'
+import { Playground, Props } from 'docz'
 
-import Logo from '../src/components/logo/index'
+import { Logo } from '../src/components/logo'
 
 # Logo
 
+<Logo width={100} />
+
 <Props of={Logo} />
 
-<Logo width={100} />
+<Playground>
+  <Logo width={100} angle={45} />
+</Playground>

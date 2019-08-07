@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Global, css } from '@emotion/core'
 import styled from "@emotion/styled"
 import tw from 'tailwind.macro'
@@ -15,13 +15,11 @@ const Box = styled.h1`
   width: 400px;
 `
 
-/**
- * @param {{ children: JSX.Element }} Nodes
- * @returns { JSX.Element }
- */
+interface LayoutProps {
+  children: JSX.Element
+}
 
-function Layout({ children }) {
-  // console.log(tw)
+export function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <div
       css={css`
@@ -34,5 +32,3 @@ function Layout({ children }) {
     </div>
   )
 }
-
-export default Layout

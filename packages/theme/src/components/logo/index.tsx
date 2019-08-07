@@ -1,14 +1,23 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import PropTypes from 'prop-types'
 import tw from 'tailwind.macro'
 
-/**
- * 
- * @param {{ angle?: number, fill?: string, height?: number, stroke?: string, width?: number }} props 
- */
 
-function Logo({ angle = 90, fill = '#0cf3ad', height = 60, stroke, width }) {
+interface LogoProps {
+  angle?: number
+  fill?: string
+  height?: number
+  stroke?: string
+  width?: number
+}
+
+export function Logo({
+  angle = 90,
+  fill = '#0cf3ad',
+  height = 60,
+  stroke,
+  width
+}: LogoProps): JSX.Element {
   return (
     <div
       css={css`
@@ -34,13 +43,3 @@ function Logo({ angle = 90, fill = '#0cf3ad', height = 60, stroke, width }) {
     </div>
   )
 }
-
-Logo.propTypes = {
-  angle: PropTypes.number,
-  fill: PropTypes.string,
-  height: PropTypes.number,
-  stroke: PropTypes.string,
-  width: PropTypes.number,
-}
-
-export default Logo
