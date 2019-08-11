@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { Global, css } from '@emotion/core'
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
 
 import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
 import '../../utils/globals.css'
+
+import { Borders } from './styles'
 
 import globalStyles from './global'
 
@@ -23,10 +25,11 @@ export function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <div
       css={css`
-        ${tw`text-red-800`};
+        ${tw`relative font-serif w-full h-full`};
       `}
     >
       <Global styles={globalStyles} />
+      <Borders />
       <Box>Woop!</Box>
       {children}
     </div>
