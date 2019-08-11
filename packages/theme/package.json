@@ -12,7 +12,8 @@
     "gatsby": "^2.13.50",
     "gatsby-theme-tailwindcss": "^1.0.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "gatsby-plugin-typescript": "^2.1.2"
   },
   "devDependencies": {
     "@types/react": "^16.8.24",

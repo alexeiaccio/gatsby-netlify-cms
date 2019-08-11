@@ -15,6 +15,7 @@
     "dotenv": "^8.0.0",
     "gatsby": "^2.13.50",
     "gatsby-plugin-emotion": "^4.1.2",
+    "gatsby-plugin-typescript": "^2.1.2",
     "gatsby-theme-tailwindcss": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
