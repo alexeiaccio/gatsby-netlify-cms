@@ -8,10 +8,17 @@ import { Wrapper } from './wrapper'
 
 export function Header() {
   const headerRef = React.useRef(null)
-  const headerHeight = `${headerRef.current ? headerRef.current.getBoundingClientRect().height : 0}px`;
+  const [headerHeight, setHeaderHeight] = React.useState('0px');
   const [ref, inView] = useInView({
-    rootMargin: headerHeight
+    rootMargin: headerHeight,
+    threshold: 1,
   })
+
+  React.useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(`${headerRef.current.getBoundingClientRect().height}px`);
+    }
+  }, [inView])
 
   return (
     <React.Fragment>
