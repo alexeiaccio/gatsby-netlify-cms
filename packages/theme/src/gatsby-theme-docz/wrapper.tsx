@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Global } from '@emotion/core'
 
 import '../fonts/cormorant/stylesheet.css'
@@ -7,11 +7,11 @@ import '../utils/globals.css'
 
 import globalStyles from '../components/layout/global'
 
-/** 
- * @param {{ children: JSX.Element }} props
- */
+interface Props {
+  children: JSX.Element
+}
 
-export default ({ children }) => (
+export default ({ children }: Props) => (
   <React.Fragment>
     <Global styles={globalStyles} />
     {children}
