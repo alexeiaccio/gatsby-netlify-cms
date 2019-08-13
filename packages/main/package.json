@@ -18,7 +18,9 @@
     "gatsby-plugin-typescript": "^2.1.2",
     "gatsby-theme-tailwindcss": "^1.0.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-intersection-observer": "^8.24.1",
+    "react-use": "^10.5.0"
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.14",

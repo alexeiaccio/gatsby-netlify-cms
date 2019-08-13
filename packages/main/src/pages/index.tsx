@@ -1,23 +1,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Layout as ThemeLayout, Header } from 'theme-ui'
 import { Layout } from '@krapiva-org/theme'
 
 import '@krapiva-org/theme/src/utils/globals.css'
 
-/**
- *
- * @param {{ data: any }} data
- */
-
-function IndexPage({ data }) {
+function IndexPage({ data }: any) {
   console.log(data)
   return (
-    <ThemeLayout>
-      <Layout>
-        <Header>{data.site.siteMetadata.title}</Header>
-      </Layout>
-    </ThemeLayout>
+    <Layout>
+      <h1>{data.site.siteMetadata.title}</h1>
+      <div style={{ height: '2000px' }} />
+    </Layout>
   )
 }
 

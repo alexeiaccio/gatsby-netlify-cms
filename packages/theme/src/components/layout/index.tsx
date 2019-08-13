@@ -7,8 +7,9 @@ import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
 import '../../utils/globals.css'
 
-import { Borders } from './styles'
+import { Header } from '../header/index'
 
+import { Borders } from './styles'
 import globalStyles from './global'
 
 
@@ -30,6 +31,7 @@ export function Layout({ children }: LayoutProps): JSX.Element {
     >
       <Global styles={globalStyles} />
       <Borders />
+      <Header />
       <Box>Woop!</Box>
       {children}
     </div>
