@@ -52,7 +52,7 @@ export function Header(props: HeaderProps) {
         css={css`
           ${tw`
             text-green-500 text-xs
-            font-sans font-medium 
+            font-sans
             overflow-hidden
             w-full
           `};

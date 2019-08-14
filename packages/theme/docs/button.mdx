@@ -1,0 +1,22 @@
+---
+name: Button
+route: /button
+---
+
+import { Playground, Props } from 'docz'
+
+import { Button } from '../src/components/button'
+
+# Button
+
+<div className="theme">
+  <Button>Button</Button>
+</div>
+
+<Props of={Button} />
+
+<Playground>
+  <div className="theme">
+    <Button color="black" size={0.5} rounded={0.25}>Black text button</Button>
+  </div>
+</Playground>

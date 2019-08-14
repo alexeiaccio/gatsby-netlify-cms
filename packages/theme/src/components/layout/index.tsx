@@ -26,7 +26,7 @@ export function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <div
       css={css`
-        ${tw`relative font-serif w-full h-full`};
+        ${tw`relative w-full h-full`};
       `}
     >
       <Global styles={globalStyles} />
