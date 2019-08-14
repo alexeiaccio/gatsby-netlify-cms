@@ -4,11 +4,13 @@ route: /header
 fullpage: true
 ---
 
-import { Header } from '../src/components/header/index'
+import { Header } from '../src/components/header/header'
 
 # Header
 
-<div style={{ position: 'relative', height: '800px', overflow: 'scroll' }}>
-  <Header />
-  <div style={{ height: '2000px' }} />
+<div className="theme">
+  <Header sticked={false} />
+  <br />
+  <h2>Sticked</h2>
+  <Header sticked />
 </div>

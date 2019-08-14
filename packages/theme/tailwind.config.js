@@ -64,8 +64,8 @@ module.exports = {
         200: '#c6f6d5',
         300: '#9ae6b4',
         400: '#68d391',
-        500: '#48bb78',
-        600: '#38a169',
+        500: '#0cf3ad',
+        600: '#08a676',
         700: '#2f855a',
         800: '#276749',
         900: '#22543d',
@@ -232,6 +232,7 @@ module.exports = {
       serif: ['Cormorant', 'serif'],
     },
     fontSize: {
+      xxs: '0.625rem',
       xs: '0.75rem',
       sm: '0.875rem',
       base: '1rem',

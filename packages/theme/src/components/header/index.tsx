@@ -1,32 +1,30 @@
 import * as React from 'react'
-import { css } from '@emotion/core'
-import tw from 'tailwind.macro'
 import { useInView } from 'react-intersection-observer'
 
-import { Logo } from '../logo/index'
+import { Dummy } from './dummy'
+import { Header } from './header'
 import { Wrapper } from './wrapper'
 
-export function Header() {
+export function WrappedHeader() {
   const headerRef = React.useRef(null)
-  const [headerHeight, setHeaderHeight] = React.useState('0px');
+  const [headerHeight, setHeaderHeight] = React.useState(0);
   const [ref, inView] = useInView({
-    rootMargin: headerHeight,
+    rootMargin: `${headerHeight}px`,
     threshold: 1,
   })
 
   React.useEffect(() => {
     if (headerRef.current) {
-      setHeaderHeight(`${headerRef.current.getBoundingClientRect().height}px`);
+      setHeaderHeight(headerRef.current.getBoundingClientRect().height);
     }
   }, [inView])
 
   return (
     <React.Fragment>
-      <Wrapper ref={headerRef} inView={inView}>
-        <Logo height={inView ? 100 : 50}/>
-        {inView && <div>·К·Р·А·П·И·В·А·</div>}
+      <Wrapper ref={headerRef} sticked={!inView}>
+        <Header sticked={!inView} />
       </Wrapper>
-      <div css={css`${tw`relative`}; height: ${headerHeight};`} ref={ref} />
+      <Dummy height={headerHeight} ref={ref}/>
     </React.Fragment>
   )
 }

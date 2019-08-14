@@ -4,7 +4,8 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: 'Krapiva',
+    title: '·К·Р·А·П·И·В·А·',
+    motto: '· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм ',
     prismicApi: process.env.PRISMIC_API,
   },
   plugins: [

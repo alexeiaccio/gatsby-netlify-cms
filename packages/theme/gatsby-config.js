@@ -1,4 +1,8 @@
 module.exports = {
+  siteMetadata: {
+    title: '·К·Р·А·П·И·В·А·',
+    motto: '· культура · ревью · аналитика · петербург · искусство · вовлеченность · активизм ',
+  },
   plugins: [
     'gatsby-theme-docz',
     'gatsby-plugin-emotion',
