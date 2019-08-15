@@ -5,18 +5,19 @@ import { useWindowSize, useInterval } from 'react-use'
 
 interface RunnerProps {
   string: string
+  update: boolean
 }
 
-export function Runner(props: RunnerProps) {
+function RunnerString(props: RunnerProps) {
   const stringRef = React.useRef(null)
   let i = React.useRef(0).current
   const [baseString] = React.useState(props.string.split(''))
   const [string, setString] = React.useState(baseString.join(''))
   const { width, height } = useWindowSize()
 
-  const getString = () => {
-    if (stringRef.current) {
-      const stringTag = stringRef.current
+  const getString = (): string => {
+    const stringTag = stringRef.current
+    if (stringTag) {
       const stringWidth = stringTag.getBoundingClientRect().width
       const parentWidth = stringTag.parentNode.getBoundingClientRect().width
       if (stringWidth < parentWidth) {
@@ -31,11 +32,11 @@ export function Runner(props: RunnerProps) {
 
   React.useEffect(() => {
     setString(getString())
-  }, [stringRef.current, width, height])
+  }, [props.update, stringRef.current, width, height])
 
   const keyframe = () => {
-    if (stringRef.current) {
-      const stringTag = stringRef.current
+    const stringTag = stringRef.current
+    if (stringTag) {
       const newStringInnerText = stringTag.innerText
         .split('')
         .slice(1)
@@ -49,5 +50,16 @@ export function Runner(props: RunnerProps) {
     keyframe()
   }, 400);
 
-  return <span css={css`${tw`whitespace-no-wrap`};`} ref={stringRef}>{string}</span>
+  return React.useMemo(() => {
+    return (
+      <span
+        css={css`${tw`whitespace-no-wrap`};`}
+        ref={stringRef}
+      >
+        {string}
+      </span>
+    )
+  }, [props.update, string])
 }
+
+export const Runner = React.memo(RunnerString)

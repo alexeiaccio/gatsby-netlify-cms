@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 
 import { outlinedTemplate } from './styles'
 
-const StyledButton = styled('button')`
+export const StyledButton = styled('button')`
   ${outlinedTemplate};
   background-color: ${props => props.inverted ? props.color : '#fff'};
   border-radius: ${props => props.rounded}rem;
@@ -29,6 +29,8 @@ const StyledButton = styled('button')`
   ${props => props.styles};
 `
 
+const noop = () => {};
+
 export interface ButtonStyles {
   color?: string
   disabled?: boolean
@@ -39,6 +41,7 @@ export interface ButtonStyles {
 
 interface ButtonProps extends ButtonStyles {
   children: JSX.Element | string
+  onClick?: (props: any) => any; 
   styles?: string
 }
 
@@ -46,18 +49,20 @@ export function Button({
   children,
   color = '#0cf3ad',
   disabled = false,
-  styles,
+  onClick = noop,
   inverted = false,
   rounded = 0,
+  styles,
   size = 0.75,
 }: ButtonProps): JSX.Element {
   return (
     <StyledButton
       color={color}
       disabled={disabled}
-      styles={styles}
+      onClick={onClick}
       inverted={inverted}
       rounded={rounded}
+      styles={styles}
       size={size}
     >
       {children}

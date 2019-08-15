@@ -1,12 +1,15 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
+import { Link } from 'gatsby'
+import { navigate } from '@reach/router'
 
-import { Button, ButtonStyles } from '../button/index'
+import { StyledButton, ButtonStyles } from '../button/index'
 
 import { itemStyles, navStyles, buttonStyles } from './styles'
 
 interface Item {
   link: string | null
+  target?: string
   text: string
 }
 
@@ -26,16 +29,30 @@ export function Nav({
 }: NavProps) {
   return (
     <div css={navStyles}>
-      {items.map(item => {
+      {items.map(({ link, text, target }) => {
+        const internal = link && /^\/(?!\/)/.test(link)
+        const anchor = link && /^\#/.test(link)
+        let Button = StyledButton
+        if (internal) {
+          Button = StyledButton.withComponent(Link)
+        } else if (!anchor) {
+          Button = StyledButton.withComponent('a')
+        }
+
         return (
           <div css={itemStyles}>
             <Button
               key={uuid()}
-              disabled={!item.link}
+              disabled={!link}
+              href={!internal && !anchor && link}
+              onClick={() => anchor && link && navigate(link)}
+              rel={!internal && !anchor && 'noopener noreferrer'}
               styles={buttonStyles}
+              target={!internal && !anchor && (target || '_self')}
+              to={internal && link}
               {...styles}
             >
-              {item.text}
+              {text}
             </Button>
           </div>
         )

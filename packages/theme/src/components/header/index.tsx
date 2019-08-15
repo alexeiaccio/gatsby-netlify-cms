@@ -14,7 +14,7 @@ export function WrappedHeader() {
   })
 
   React.useEffect(() => {
-    if (headerRef.current) {
+    if (headerRef && headerRef.current) {
       setHeaderHeight(headerRef.current.getBoundingClientRect().height);
     }
   }, [inView])
@@ -22,7 +22,7 @@ export function WrappedHeader() {
   return (
     <React.Fragment>
       <Wrapper ref={headerRef} sticked={!inView}>
-        <Header sticked={!inView} />
+        <Header sticked={!inView} />        
       </Wrapper>
       <Dummy height={headerHeight} ref={ref}/>
     </React.Fragment>
