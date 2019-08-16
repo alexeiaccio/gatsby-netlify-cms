@@ -25,7 +25,7 @@ function RunnerString(props: RunnerProps) {
       push(baseString[tick % baseString.length])
       setTick(tick + 1)
     }
-  }, 20)
+  }, 64)
 
   React.useEffect(() => {
     const stringTag = stringRef.current
@@ -41,7 +41,6 @@ function RunnerString(props: RunnerProps) {
   }, [string])
 
   React.useEffect(() => {
-    set([' '])
     setDone(false)
   }, [props.update, stringRef.current, width])
 

@@ -18,11 +18,15 @@ const Box = styled.h1`
   width: 400px;
 `
 
+export const MetaContext = React.createContext<any>(null)
+
 interface LayoutProps {
   children: JSX.Element
+  location?: any
+  meta?: any
 }
 
-export function Layout({ children }: LayoutProps): JSX.Element {
+export function Layout({ children, location, meta }: LayoutProps): JSX.Element {
   return (
     <div
       css={css`
@@ -31,7 +35,9 @@ export function Layout({ children }: LayoutProps): JSX.Element {
     >
       <Global styles={globalStyles} />
       <Borders />
-      <WrappedHeader />
+      <MetaContext.Provider value={{ location, meta }}>
+        <WrappedHeader />
+      </MetaContext.Provider>
       <Box>Woop!</Box>
       {children}
     </div>

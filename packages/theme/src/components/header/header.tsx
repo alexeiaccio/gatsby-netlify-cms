@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { useScrolling, useToggle, useThrottle } from 'react-use'
 import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
@@ -7,6 +6,7 @@ import tw from 'tailwind.macro'
 import { Logo } from '../logo/index'
 import { Nav } from '../nav/index'
 import { items } from '../../../docs/__mocks__/nav'
+import { MetaContext } from '../layout/index'
 
 import { Runner } from './runner'
 import { headerStyles, navStyles, runnerStyles, titleStyles } from './styles'
@@ -19,16 +19,7 @@ export function Header(props: HeaderProps) {
   const [sticked, toggle] = useToggle(props.sticked)
   const scrollRef = React.useRef(document || null);
   const scrolling = useScrolling(scrollRef);
-  const data = useStaticQuery(graphql`
-    query HeaderQuery {
-      site {
-        siteMetadata {
-          title
-          motto
-        }
-      }
-    }
-  `)
+  const { meta } = React.useContext(MetaContext)
 
   const handleClick = () => {
     if (sticked) { toggle(false) }
@@ -37,6 +28,10 @@ export function Header(props: HeaderProps) {
   useThrottle(() => {
     if (scrolling && props.sticked && !sticked) { toggle(true) }
   }, 400, [scrolling])
+
+  React.useEffect(() => {
+    toggle(props.sticked)
+  }, [props.sticked])
 
   return (
     <div
@@ -55,7 +50,7 @@ export function Header(props: HeaderProps) {
               ${!sticked && tw`pt-2`};
             `}
           >
-            {data.site.siteMetadata.title}
+            {meta.title}
           </div>
           <div css={navStyles}>
             <Nav items={items} />
@@ -69,7 +64,7 @@ export function Header(props: HeaderProps) {
         `}
       >
         <Runner
-          string={data.site.siteMetadata.motto}
+          string={meta.motto}
           update={sticked}
         />
       </div>

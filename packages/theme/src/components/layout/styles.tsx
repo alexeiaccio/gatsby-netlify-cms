@@ -10,11 +10,15 @@ export function Border({ side }: BorderProps) {
   return (
     <div
       css={css`
-        ${tw`border-2 md:border-4 border-black border-solid absolute inset-0`}
-        ${side === 'right' && tw`left-auto`}
-        ${side === 'left' && tw`right-auto`}
-        ${side === 'top' && tw`bottom-auto`}
-        ${side === 'bottom' && tw`top-auto`}
+        ${tw`
+          border-2 md:border-4 border-black border-solid 
+          fixed inset-0
+          z-10
+        `};
+        ${side === 'right' && tw`left-auto`};
+        ${side === 'left' && tw`right-auto`};
+        ${side === 'top' && tw`bottom-auto`};
+        ${side === 'bottom' && tw`top-auto`};
       `}
     />
   )

@@ -7,12 +7,12 @@ interface WrapperProps {
   children: JSX.Element
 }
 
-export const Wrapper = React.forwardRef((props: WrapperProps, ref) => {
+export const Wrapper = React.forwardRef((props: WrapperProps, ref: any) => {
   return (
     <div
       css={css`
         ${tw`
-          absolute
+          fixed
           inset-0 bottom-auto
           z-50
         `};

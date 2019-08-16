@@ -1,0 +1,40 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "authors": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "author": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["authors"],
+              "label": "Author",
+              "placeholder": "Author"
+            }
+          }
+        },
+        "label": "Authors"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 1920,
+          "height": 1200
+        },
+        "thumbnails": [],
+        "label": "Image"
+      }
+    }
+  }
+}

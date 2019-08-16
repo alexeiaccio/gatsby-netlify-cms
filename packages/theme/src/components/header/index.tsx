@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
+import { useDebounce } from 'react-use'
 
 import { Dummy } from './dummy'
 import { Header } from './header'
@@ -9,22 +10,24 @@ export function WrappedHeader() {
   const headerRef = React.useRef(null)
   const [headerHeight, setHeaderHeight] = React.useState(0);
   const [ref, inView] = useInView({
-    rootMargin: `${headerHeight}px`,
     threshold: 1,
   })
 
-  React.useEffect(() => {
+  useDebounce(() => {
     if (headerRef && headerRef.current) {
-      setHeaderHeight(headerRef.current.getBoundingClientRect().height);
+      const newHeaderHeight = headerRef.current.getBoundingClientRect().height;
+      if (newHeaderHeight > headerHeight) {
+        setHeaderHeight(newHeaderHeight)
+      }
     }
-  }, [inView])
+  }, 200, [inView])
 
   return (
     <React.Fragment>
       <Wrapper ref={headerRef} sticked={!inView}>
-        <Header sticked={!inView} />        
+        <Header sticked={!inView} />
       </Wrapper>
-      <Dummy height={headerHeight} ref={ref}/>
+      <Dummy height={headerHeight} ref={ref} />
     </React.Fragment>
   )
 }
