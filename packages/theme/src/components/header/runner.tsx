@@ -8,15 +8,16 @@ import {
 } from 'react-use'
 
 interface RunnerProps {
-  string: string
+  string?: string
   update: boolean
 }
 
-function RunnerString(props: RunnerProps) {
+function RunnerString({ string = ' Poop', update }: RunnerProps) {
+  if (!string) { return null; }
   const stringRef = React.useRef(null)
   const [done, setDone] = useBoolean(false)
-  const [baseString] = React.useState(props.string.split(''))
-  const [string, { set, push }] = useList([' '])
+  const [baseString] = React.useState(string.split(''))
+  const [runner, { set, push }] = useList([' '])
   const { width } = useWindowSize()
   const [tick, setTick] = React.useState(0)
 
@@ -38,14 +39,14 @@ function RunnerString(props: RunnerProps) {
         setDone(true)
       }
     }
-  }, [string])
+  }, [runner])
 
   React.useEffect(() => {
     setDone(false)
-  }, [props.update, stringRef.current, width])
+  }, [update, stringRef.current, width])
 
   const keyframe = () => {
-    set(string.slice(1))
+    set(runner.slice(1))
     push(baseString[tick % baseString.length])
     setTick(tick + 1)
   }
@@ -59,10 +60,10 @@ function RunnerString(props: RunnerProps) {
   return React.useMemo(() => {
     return (
       <span ref={stringRef}>
-        {string.join('')}
+        {runner.join('')}
       </span>
     )
-  }, [props.update, string])
+  }, [update, runner])
 }
 
 export const Runner = React.memo(RunnerString)

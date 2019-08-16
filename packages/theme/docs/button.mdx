@@ -3,7 +3,7 @@ name: Button
 route: /button
 ---
 
-import { Playground, Props } from 'docz'
+import { Playground } from 'docz'
 
 import { Button } from '../src/components/button'
 
@@ -13,10 +13,8 @@ import { Button } from '../src/components/button'
   <Button color="black">Button</Button>
 </div>
 
-<Props of={Button} />
-
 <Playground>
-  <div className="theme">
+  <div className="theme" style={{ padding: '15px' }}>
     <Button size={0.5} rounded={0.25} inverted>Black text button</Button>
   </div>
 </Playground>

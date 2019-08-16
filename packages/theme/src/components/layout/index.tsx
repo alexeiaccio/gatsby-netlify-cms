@@ -26,7 +26,7 @@ interface LayoutProps {
   meta?: any
 }
 
-export function Layout({ children, location, meta }: LayoutProps): JSX.Element {
+function LayoutComponent({ children, location, meta }: LayoutProps): JSX.Element {
   return (
     <div
       css={css`
@@ -43,3 +43,5 @@ export function Layout({ children, location, meta }: LayoutProps): JSX.Element {
     </div>
   )
 }
+
+export const Layout = React.memo(LayoutComponent)
