@@ -1,30 +1,58 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { Layout } from '@krapiva-org/theme'
+import { graphql } from 'gatsby'
+import { Layout, IndexBody } from '@krapiva-org/theme'
 
 import '@krapiva-org/theme/src/utils/globals.css'
 
-function IndexPage({ location }: any) {
-  const { site } = useStaticQuery(graphql`
-    query IndexQuery {
-      site {
-        siteMetadata {
-          title
-          motto
-        }
-      }
-    }
-  `)
-
+function IndexPage({ data, location }: any) {
   return (
     <Layout
       location={location}
-      meta={site.siteMetadata}
+      meta={data.site.siteMetadata}
     >
-      <h1>{site.siteMetadata.title}</h1>
-      <div style={{ height: '2000px' }} />
+      <IndexBody
+        articles={data.allPrismicArticles.nodes}
+        location={location}
+      />
     </Layout>
   )
 }
+
+export const PageQuery = graphql`
+  query IndexQuery {
+    site {
+      siteMetadata {
+        title
+        motto
+      }
+    }
+    allPrismicArticles(sort: {order: DESC, fields: first_publication_date}, limit: 100) {
+      nodes {
+        first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
+        tags
+        data {
+          title {
+            text
+          }
+          image {
+            url
+          }
+          authors {
+            author {
+              document {
+                ... on PrismicAuthors {
+                  data {
+                    name
+                  }
+                }
+              }
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

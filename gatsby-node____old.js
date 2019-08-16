@@ -69,7 +69,7 @@ exports.createPages = async ({ actions, graphql }) => {
   
   const categories = getCategories(articles)
 
-  !process.env.APIS && articles && pageMaker('articles', articles)
+  // !process.env.APIS && articles && pageMaker('articles', articles)
   authors && pageMaker('authors', authors)
   categories && categoriesMaker(categories)
 }

@@ -1,0 +1,14 @@
+{
+  "name": "@krapiva-org/utils",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {},
+  "peerDependencies": {
+    "gatsby": "^2.13.50"
+  },
+  "devDependencies": {
+    "gatsby": "^2.13.50",
+    "lodash": "^4.17.15",
+    "uuid": "^3.3.2"
+  }
+}

@@ -27,6 +27,7 @@ interface LayoutProps {
 }
 
 function LayoutComponent({ children, location, meta }: LayoutProps): JSX.Element {
+
   return (
     <div
       css={css`
