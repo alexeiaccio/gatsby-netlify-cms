@@ -3,7 +3,7 @@ import * as uuid from 'uuid/v1'
 import { Link } from 'gatsby'
 import { navigate } from '@reach/router'
 
-import { StyledButton, ButtonStyles } from '../button/index'
+import { Button, ButtonStyles } from '../button/index'
 
 import { itemStyles, navStyles, buttonStyles } from './styles'
 
@@ -27,28 +27,30 @@ export function Nav({
     size: 0.75,
   }
 }: NavProps) {
+  if (!items) { return null }
+
   return (
     <div css={navStyles}>
       {items.map(({ link, text, target }) => {
         const internal = link && /^\/(?!\/)/.test(link)
         const anchor = link && /^\#/.test(link)
-        let Button = StyledButton
+        let component: JSX.Element | string | null = null
         if (internal) {
-          Button = StyledButton.withComponent(Link)
+          component = Link
         } else if (!anchor) {
-          Button = StyledButton.withComponent('a')
+          component = 'a'
         }
 
         return (
-          <div css={itemStyles}>
+          <div css={itemStyles} key={uuid()}>
             <Button
-              key={uuid()}
+              component={component}
               disabled={!link}
               href={!internal && !anchor && link}
               onClick={() => anchor && link && navigate(link)}
               rel={!internal && !anchor && 'noopener noreferrer'}
               styles={buttonStyles}
-              target={!internal && !anchor && (target || '_self')}
+              target={!internal && !anchor && (target ? target : '_self')}
               to={internal && link}
               {...styles}
             >

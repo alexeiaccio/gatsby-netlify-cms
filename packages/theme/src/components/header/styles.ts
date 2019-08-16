@@ -20,6 +20,7 @@ export const runnerStyles = css`
     font-sans
     overflow-hidden
     w-full
+    whitespace-no-wrap
   `};
 `
 

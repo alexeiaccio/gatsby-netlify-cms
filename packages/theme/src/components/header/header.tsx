@@ -33,7 +33,7 @@ export function Header(props: HeaderProps) {
   const handleClick = () => {
     if (sticked) { toggle(false) }
   }
-  
+
   useThrottle(() => {
     if (scrolling && props.sticked && !sticked) { toggle(true) }
   }, 400, [scrolling])
@@ -68,7 +68,10 @@ export function Header(props: HeaderProps) {
           ${sticked && tw`text-xxs`};
         `}
       >
-        <Runner string={data.site.siteMetadata.motto} update={sticked} />
+        <Runner
+          string={data.site.siteMetadata.motto}
+          update={sticked}
+        />
       </div>
     </div>
   )

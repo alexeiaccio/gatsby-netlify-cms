@@ -1,7 +1,11 @@
 import * as React from 'react'
-import { css } from '@emotion/core'
-import tw from 'tailwind.macro'
-import { useWindowSize, useInterval } from 'react-use'
+import {
+  useBoolean,
+  useInterval,
+  useList,
+  useRafLoop,
+  useWindowSize,
+} from 'react-use'
 
 interface RunnerProps {
   string: string
@@ -10,53 +14,53 @@ interface RunnerProps {
 
 function RunnerString(props: RunnerProps) {
   const stringRef = React.useRef(null)
-  let i = React.useRef(0).current
+  const [done, setDone] = useBoolean(false)
   const [baseString] = React.useState(props.string.split(''))
-  const [string, setString] = React.useState(baseString.join(''))
-  const { width, height } = useWindowSize()
+  const [string, { set, push }] = useList([' '])
+  const { width } = useWindowSize()
+  const [tick, setTick] = React.useState(0)
 
-  const getString = (): string => {
+  useInterval(() => {
+    if (!done) {
+      push(baseString[tick % baseString.length])
+      setTick(tick + 1)
+    }
+  }, 20)
+
+  React.useEffect(() => {
     const stringTag = stringRef.current
     if (stringTag) {
       const stringWidth = stringTag.getBoundingClientRect().width
       const parentWidth = stringTag.parentNode.getBoundingClientRect().width
-      if (stringWidth < parentWidth) {
-        stringTag.innerText += baseString[
-          i % baseString.length
-        ]
-        i += 1
-        getString()
+
+      if (stringWidth >= parentWidth) {
+        stop()
+        setDone(true)
       }
     }
-  }
+  }, [string])
 
   React.useEffect(() => {
-    setString(getString())
-  }, [props.update, stringRef.current, width, height])
+    set([' '])
+    setDone(false)
+  }, [props.update, stringRef.current, width])
 
   const keyframe = () => {
-    const stringTag = stringRef.current
-    if (stringTag) {
-      const newStringInnerText = stringTag.innerText
-        .split('')
-        .slice(1)
-        .concat(baseString[i % baseString.length])
-      stringTag.innerText = newStringInnerText.join('')
-      i += 1
-    }
+    set(string.slice(1))
+    push(baseString[tick % baseString.length])
+    setTick(tick + 1)
   }
 
   useInterval(() => {
-    keyframe()
-  }, 400);
+    if (done) {
+      keyframe()
+    }
+  }, 500);
 
   return React.useMemo(() => {
     return (
-      <span
-        css={css`${tw`whitespace-no-wrap`};`}
-        ref={stringRef}
-      >
-        {string}
+      <span ref={stringRef}>
+        {string.join('')}
       </span>
     )
   }, [props.update, string])
