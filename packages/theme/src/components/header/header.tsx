@@ -16,8 +16,12 @@ interface HeaderProps {
 }
 
 export function Header(props: HeaderProps) {
+  let rootNode: any = null
+  if (typeof document !== 'undefined') {
+    rootNode = document
+  }
+  const scrollRef = React.useRef(rootNode);
   const [sticked, toggle] = useToggle(props.sticked)
-  const scrollRef = React.useRef(document || null);
   const scrolling = useScrolling(scrollRef);
   const { meta } = React.useContext(MetaContext)
 
