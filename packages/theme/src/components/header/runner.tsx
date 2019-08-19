@@ -3,7 +3,6 @@ import {
   useBoolean,
   useInterval,
   useList,
-  useRafLoop,
   useWindowSize,
 } from 'react-use'
 
@@ -17,16 +16,19 @@ function RunnerString({ string = ' Poop', update }: RunnerProps) {
   const stringRef = React.useRef(null)
   const [done, setDone] = useBoolean(false)
   const [baseString] = React.useState(string.split(''))
-  const [runner, { set, push }] = useList([' '])
+  const [runner, { set, push }] = useList([baseString[0]])
   const { width } = useWindowSize()
   const [tick, setTick] = React.useState(0)
 
   useInterval(() => {
-    if (!done) {
-      push(baseString[tick % baseString.length])
+    const currentTick = tick % baseString.length
+    const prevTick = (tick - 1) % baseString.length
+
+    if (!done && (baseString[prevTick === -1 ? 0 : prevTick] === runner[runner.length - 1])) {
+      push(baseString[currentTick])
       setTick(tick + 1)
     }
-  }, 64)
+  }, 16)
 
   React.useEffect(() => {
     const stringTag = stringRef.current
