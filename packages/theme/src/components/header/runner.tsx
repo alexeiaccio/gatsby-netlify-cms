@@ -20,36 +20,35 @@ function RunnerString({ string = ' Poop', update }: RunnerProps) {
   const { width } = useWindowSize()
   const [tick, setTick] = React.useState(0)
 
-  useInterval(() => {
-    const currentTick = tick % baseString.length
-    const prevTick = (tick - 1) % baseString.length
-
-    if (!done && (baseString[prevTick === -1 ? 0 : prevTick] === runner[runner.length - 1])) {
-      push(baseString[currentTick])
-      setTick(tick + 1)
-    }
-  }, 16)
-
   React.useEffect(() => {
+    if (!done) {
+      const currentTick = tick % baseString.length
+      const prevTick = (tick - 1) % baseString.length
+  
+      if ((baseString[prevTick === -1 ? 0 : prevTick] === runner[runner.length - 1])) {
+        push(baseString[currentTick])
+        setTick(tick + 1)
+      }
+    }
+    
     const stringTag = stringRef.current
     if (stringTag) {
       const stringWidth = stringTag.getBoundingClientRect().width
       const parentWidth = stringTag.parentNode.getBoundingClientRect().width
 
       if (stringWidth >= parentWidth) {
-        stop()
         setDone(true)
       }
     }
-  }, [runner])
+  }, [done, tick, runner])
 
   React.useEffect(() => {
     setDone(false)
   }, [update, stringRef.current, width])
 
   const keyframe = () => {
-    set(runner.slice(1))
-    push(baseString[tick % baseString.length])
+    const next = runner.slice(1)
+    set(next.concat([baseString[tick % baseString.length]]))
     setTick(tick + 1)
   }
 

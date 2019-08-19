@@ -7,3 +7,8 @@ export default css`
     font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 `
+
+/* 
+  calc([size-min]em + ([size-max] - [size-min]) * ((100vw - [start]em) / ([start] - [stop])))
+  calc(2.25em + (2.75) * ((100vw - 25em) / (50)))
+*/
