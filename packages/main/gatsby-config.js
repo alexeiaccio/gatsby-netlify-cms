@@ -5,7 +5,7 @@ const { keys } = require('lodash')
 
 const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
 const makeApiResolver = (repositoryName, accessToken) => ({
-  resolve: 'gatsby-source-prismic',
+  resolve: `gatsby-source-prismic`,
   options: {
     repositoryName,
     accessToken,
@@ -39,6 +39,8 @@ module.exports = {
   },
   plugins: [
     ...apisResolvers,
+    'gatsby-plugin-sharp',
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-theme-tailwindcss`,
       options: {
