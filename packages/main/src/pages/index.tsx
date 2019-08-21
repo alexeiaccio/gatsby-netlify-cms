@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { Layout, IndexBody } from '@krapiva-org/theme'
 
-import '@krapiva-org/theme/src/utils/globals.css'
+// import '@krapiva-org/theme/src/utils/globals.css'
 
 function IndexPage({ data, location }: any) {
   return (
@@ -22,8 +22,36 @@ export const PageQuery = graphql`
   query IndexQuery {
     site {
       siteMetadata {
-        title
-        motto
+        siteTitle
+        siteMotto
+      }
+    }
+    prismicIndex {
+      data {
+        title {
+          text
+        }
+        body {
+          primary {
+            expiredate(difference: "days")
+            bannerbutton
+            bannertext {
+              html
+            }
+            bannerlink {
+              url
+              target
+            }
+          }
+        }
+        categories {
+          categorytitle {
+            text
+          }
+          categorydescription {
+            html
+          }
+        }
       }
     }
     allPrismicArticles(sort: {order: DESC, fields: first_publication_date}, limit: 100) {

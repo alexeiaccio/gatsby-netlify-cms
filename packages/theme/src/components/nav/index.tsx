@@ -14,7 +14,7 @@ interface Item {
 }
 
 interface NavProps {
-  items: Item[]
+  items?: Item[]
   styles?: ButtonStyles
 }
 

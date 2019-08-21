@@ -24,9 +24,10 @@ interface LayoutProps {
   children: JSX.Element
   location?: any
   meta?: any
+  index?: any
 }
 
-function LayoutComponent({ children, location, meta }: LayoutProps): JSX.Element {
+function LayoutComponent({ children, location, meta, index }: LayoutProps): JSX.Element {
 
   return (
     <div
@@ -36,7 +37,7 @@ function LayoutComponent({ children, location, meta }: LayoutProps): JSX.Element
     >
       <Global styles={globalStyles} />
       <Borders />
-      <MetaContext.Provider value={{ location, meta }}>
+      <MetaContext.Provider value={{ location, meta, index }}>
         <WrappedHeader />
       </MetaContext.Provider>
       <Box>Woop!</Box>
