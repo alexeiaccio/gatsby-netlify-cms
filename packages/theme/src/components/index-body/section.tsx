@@ -4,6 +4,7 @@ import * as uuid from 'uuid/v1'
 import { Card } from '../card/index'
 import { HTML } from '../html/index'
 import { Row, Col } from '../row/index'
+import { TextContainer } from '../main/index'
 import { sectionStyles, rowStyles } from './styles'
 
 interface SectionProps {
@@ -17,14 +18,22 @@ interface SectionProps {
 }
 
 export function IndexSection({ data }: SectionProps) {
+  const items = data.articles
+
+  if ((items.length % 2) !== 0) {
+    items.push({})
+  }
+
   return (
     <section css={sectionStyles}>
-      <h2 id={data.id}>{data.title}</h2>
-      {data.description && (
-        <HTML>{data.description}</HTML>
-      )}
+      <TextContainer>
+        <h2 id={data.id}>{data.title}</h2>
+        {data.description && (
+          <HTML>{data.description}</HTML>
+        )}
+      </TextContainer>
       <Row gap={1} css={rowStyles}>
-        {data.articles.map(item => (
+        {items.map(item => (
           <Col
             key={uuid()}
             gap={1}

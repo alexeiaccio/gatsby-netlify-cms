@@ -77,6 +77,51 @@
               }
             },
             "repeat": {}
+          },
+          "highlight": {
+            "type": "Slice",
+            "fieldset": "Highlight",
+            "description": "Highlight",
+            "icon": "ac_unit",
+            "display": "list",
+            "non-repeat": {
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "BannerText",
+                  "placeholder": "Text"
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "allowTargetBlank": true,
+                  "label": "Link",
+                  "placeholder": "Link"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": 1920,
+                    "height": 1200
+                  },
+                  "thumbnails": [],
+                  "label": "Image"
+                }
+              },
+              "expiredate": {
+                "type": "Timestamp",
+                "config": {
+                  "label": "ExpireDate",
+                  "placeholder": "Expire Date"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

@@ -12,8 +12,17 @@ const headingStyles = css`
 export const Main = styled.main`
   ${tw`
     font-serif font-medium
+    mx-auto mb-10
+    px-4 sm:px-8
+    w-full max-w-2xl
+  `};
+`
+
+export const TextContainer = styled.div`
+  ${tw`
     mx-auto
     w-full max-w-lg
+    text-justify
   `};
 
   & h1 {

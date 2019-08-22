@@ -5,22 +5,27 @@ const { keys } = require('lodash')
 const { config } = require('@krapiva-org/utils')
 
 const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
-const makeApiResolver = (repositoryName, accessToken) => ({
-  resolve: `gatsby-source-prismic`,
-  options: {
-    repositoryName,
-    accessToken,
-    linkResolver: ({ node, key, value }) => doc => `${doc}`,
-    // linkResolver,
-    // htmlSerializer,
-    lang: '*',
-    shouldNormalizeImage: () => true,
-    schemas: {
-      articles: require('./assets/schemas/articles.json'),
-      authors: require('./assets/schemas/authors.json'),
+const makeApiResolver = (repositoryName, accessToken) => {
+  if (!repositoryName || !accessToken) { return }
+
+  return {
+    resolve: `gatsby-source-prismic`,
+    options: {
+      repositoryName,
+      accessToken,
+      linkResolver: ({ node, key, value }) => doc => `${doc}`,
+      // linkResolver,
+      // htmlSerializer,
+      lang: '*',
+      shouldNormalizeImage: () => true,
+      schemas: {
+        articles: require('./assets/schemas/articles.json'),
+        authors: require('./assets/schemas/authors.json'),
+      },
     },
-  },
-})
+  }
+}
+
 const apisResolvers = []
 
 if (apis) {

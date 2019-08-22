@@ -4,7 +4,7 @@ import tw from 'tailwind.macro'
 export const Row = styled.div`
   ${tw`
     flex flex-row flex-wrap
-    items-center justify-center
+    items-start justify-center
   `};
   box-sizing: border-box;
 
@@ -18,7 +18,7 @@ export const Row = styled.div`
 export const Col = styled.div`
   ${tw`
     flex
-    items-center justify-center
+    items-start justify-center
     w-full
   `};
   flex-grow: 1;

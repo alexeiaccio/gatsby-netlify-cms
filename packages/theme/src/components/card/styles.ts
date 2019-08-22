@@ -11,8 +11,9 @@ export const imageWrapperStyles = css`
     overflow-hidden
     relative
     w-full
+    rounded-sm
   `};
-  padding-bottom: ${(2 / 3) * 100}%;
+  padding-bottom: ${(1200 / 1920) * 100}%;
 `
 
 export const imageStyles = css`

@@ -2,9 +2,9 @@ import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
 export const sectionStyles = css`
-  ${tw`px-4`};
+  ${tw``};
 `
 
 export const rowStyles = css`
-  ${tw`mt-4`};
+  ${tw`mt-8`};
 `

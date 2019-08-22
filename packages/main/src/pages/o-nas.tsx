@@ -29,25 +29,50 @@ export const PageQuery = graphql`
         title {
           text
         }
-        body {
-          primary {
-            expiredate(difference: "days")
-            bannerbutton
-            bannertext {
-              html
-            }
-            bannerlink {
-              url
-              target
-            }
-          }
-        }
         categories {
           categorytitle {
             text
           }
           categorydescription {
             html
+          }
+        }
+        body {
+          __typename
+          ... on PrismicIndexBodyBanner {
+            primary {
+              bannerbutton
+              expiredate(difference: "days")
+              bannertext {
+                html
+              }
+              bannerlink {
+                url
+                target
+              }
+            }
+          }
+          ... on PrismicIndexBodyHighlight {
+            primary {
+              image {
+                url
+                    localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 640, quality: 80) {
+                      ...GatsbyImageSharpFluid_tracedSVG
+                    }
+                  }
+                }
+              }
+              text {
+                html
+              }
+              link {
+                url
+                target
+              }
+              expiredate(difference: "days")
+            }
           }
         }
       }
