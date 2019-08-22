@@ -22,11 +22,11 @@ export function Header(props: HeaderProps) {
   if (typeof document !== 'undefined') {
     rootNode = document
   }
-  const scrollRef = React.useRef(rootNode);
+  const scrollRef = React.useRef(rootNode)
   const [sticked, toggle] = useToggle(props.sticked)
-  const scrolling = useScrolling(scrollRef);
+  const scrolling = useScrolling(scrollRef)
   const { meta, index } = React.useContext(MetaContext)
-  const items = get(index, 'data.categories', [])
+  const items = get(index, 'categories', [])
     .map(item => item ? ({ text: item.categorytitle.text, link: translite(item.categorytitle.text) }) : null)
 
   const handleClick = () => {

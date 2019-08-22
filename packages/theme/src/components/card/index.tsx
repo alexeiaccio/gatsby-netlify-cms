@@ -2,12 +2,11 @@ import * as React from 'react'
 import { get } from 'lodash'
 
 import { ArticleHeader } from '../../typings/article'
-import { Img, ImgProps } from '../img/index'
+import { Img } from '../img/index'
 import { cardStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface CardProps {
   data: ArticleHeader
-  image: ImgProps
 }
 
 export function Card({ data }: CardProps) {

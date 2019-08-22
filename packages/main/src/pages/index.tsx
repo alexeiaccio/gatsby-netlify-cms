@@ -9,10 +9,10 @@ function IndexPage({ data, location }: any) {
     <Layout
       location={location}
       meta={data.site.siteMetadata}
+      index={data.prismicIndex.data}
     >
       <IndexBody
         articles={data.allPrismicArticles.nodes}
-        location={location}
       />
     </Layout>
   )

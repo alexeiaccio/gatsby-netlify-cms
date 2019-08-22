@@ -1,22 +1,15 @@
 import * as React from 'react'
 import { Global, css } from '@emotion/core'
-import styled from '@emotion/styled'
-import tw from 'tailwind.macro'
 
 import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
 import '../../utils/globals.css'
 
 import { WrappedHeader } from '../header/index'
+import { Main } from '../main/index'
 
 import { Borders } from './styles'
 import globalStyles from './global'
-
-
-const Box = styled.h1`
-  ${tw`text-blue-800`}
-  width: 400px;
-`
 
 export const MetaContext = React.createContext<any>(null)
 
@@ -30,19 +23,16 @@ interface LayoutProps {
 function LayoutComponent({ children, location, meta, index }: LayoutProps): JSX.Element {
 
   return (
-    <div
-      css={css`
-        ${tw`relative w-full h-full`};
-      `}
-    >
+    <React.Fragment>
       <Global styles={globalStyles} />
       <Borders />
       <MetaContext.Provider value={{ location, meta, index }}>
         <WrappedHeader />
+        <Main>
+          {children}
+        </Main>
       </MetaContext.Provider>
-      <Box>Woop!</Box>
-      {children}
-    </div>
+    </React.Fragment>
   )
 }
 
