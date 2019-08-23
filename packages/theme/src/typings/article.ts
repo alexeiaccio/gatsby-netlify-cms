@@ -1,3 +1,4 @@
+import { Author } from './author'
 import { Image } from './image'
 
 export interface ArticleHeader {
@@ -9,12 +10,11 @@ export interface ArticleHeader {
   href: string
   data: {
     title: { text: string }
-    image: ImgProps
+    image: Image
     authors: [
       {
         author: {
-          document: [{ data: { name: string } }]
-          slug: string
+          document: Author[]
         }
       }
     ]

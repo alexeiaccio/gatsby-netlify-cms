@@ -53,10 +53,10 @@ export function Card({ data }: CardProps) {
         ))}
         {date && <span> {date} ·</span>}
         {authors && authors.map(({ author }) => author &&
-          author.document.map(({ data }) => (
+          author.document.map(({ data, fields }) => (
             <React.Fragment key={uuid()}>
               <span> </span>
-              <Link to={get(author, 'slug')}>
+              <Link to={`/${get(fields, 'slug')}`}>
                 {data.name}
               </Link>
               <span> ·</span>

@@ -8,3 +8,11 @@ export const sectionStyles = css`
 export const rowStyles = css`
   ${tw`mt-8`};
 `
+
+export const buttonStyles = css`
+  ${tw`
+    mt-2
+    text-center
+    w-full
+  `};
+`

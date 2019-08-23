@@ -41,7 +41,7 @@ export const TextContainer = styled.div`
   & h2 {
     ${headingStyles};
     ${tw`
-      text-2xl
+      text-3xl
       mt-10 mb-3
     `};
   }

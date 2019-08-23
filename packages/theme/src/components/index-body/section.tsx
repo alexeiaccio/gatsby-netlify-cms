@@ -1,11 +1,13 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
+import { Link } from 'gatsby'
 
+import { Button } from '../button/index'
 import { Card } from '../card/index'
 import { HTML } from '../html/index'
 import { Row, Col } from '../row/index'
 import { TextContainer } from '../main/index'
-import { sectionStyles, rowStyles } from './styles'
+import { buttonStyles, sectionStyles, rowStyles } from './styles'
 
 interface SectionProps {
   key: string
@@ -18,7 +20,7 @@ interface SectionProps {
 }
 
 export function IndexSection({ data }: SectionProps) {
-  const items = data.articles.slice(0, 4)
+  const items = data.articles.slice(0, 6)
 
   if ((items.length % 2) !== 0) {
     items.push({})
@@ -47,6 +49,21 @@ export function IndexSection({ data }: SectionProps) {
           </Col>
         ))}
       </Row>
+      {(data.articles.length > 1) && (
+        <div css={buttonStyles}>
+          <Button
+            color="#08a676"
+            component={Link}
+            inverted
+            rounded={0.25}
+            to={`/${data.id}`}
+          >
+            <span>
+              {data.title} →
+            </span>
+          </Button>
+        </div>
+      )}
     </section>
   )
 }
