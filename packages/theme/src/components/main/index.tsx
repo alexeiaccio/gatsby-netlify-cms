@@ -12,8 +12,8 @@ const headingStyles = css`
 export const Main = styled.main`
   ${tw`
     font-serif font-medium
-    mx-auto mb-10
-    px-4 sm:px-8
+    mx-auto 
+    pb-10 px-4 sm:px-8
     w-full max-w-2xl
   `};
 

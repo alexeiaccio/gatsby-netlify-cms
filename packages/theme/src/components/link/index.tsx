@@ -9,7 +9,7 @@ import { MetaContext } from '../layout/index'
 interface LinkProps {
   api?: string
   css?: any
-  children: JSX.Element
+  children?: JSX.Element
   key?: any
   to?: string
 }

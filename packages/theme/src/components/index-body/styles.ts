@@ -5,6 +5,10 @@ export const sectionStyles = css`
   ${tw``};
 `
 
+export const leadStyles = css`
+  ${tw`font-semibold text-lg`};
+`
+
 export const rowStyles = css`
   ${tw`mt-8`};
 `

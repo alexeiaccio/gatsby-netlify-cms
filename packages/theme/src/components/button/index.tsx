@@ -19,11 +19,11 @@ export interface ButtonStyles {
 }
 
 interface ButtonProps extends ButtonStyles {
-  children: JSX.Element | string
+  children?: JSX.Element | string
   component?: JSX.Element | string | null
   onClick?: (() => any) | undefined
   styles?: string
-  to?: string
+  to?: string | null
   href?: string
   rel?: string
   target?: string

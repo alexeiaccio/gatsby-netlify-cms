@@ -3,7 +3,10 @@ import * as uuid from 'uuid/v1'
 import { Link } from 'gatsby'
 import { navigate } from '@reach/router'
 
+import { MENU } from '@krapiva-org/utils/defaults/menu'
+
 import { Button, ButtonStyles } from '../button/index'
+import { MetaContext } from '../layout/index'
 
 import { itemStyles, navStyles, buttonStyles } from './styles'
 
@@ -19,7 +22,7 @@ interface NavProps {
 }
 
 export function Nav({
-  items,
+  items = [],
   styles = {
     color: '#0cf3ad',
     inverted: true,
@@ -27,11 +30,19 @@ export function Nav({
     size: 0.75,
   }
 }: NavProps) {
-  if (!items) { return null }
+  let menuItems = [...MENU.before, ...items, ...MENU.after]
+  const { location } = React.useContext(MetaContext)
+
+  if (location.pathname === '/') {
+    menuItems = menuItems.map(item => ({
+      ...item,
+      link: item.link && `#${item.link}`
+    }))
+  }
 
   return (
     <div css={navStyles}>
-      {items.map(({ link, text, target }) => {
+      {menuItems.map(({ link, text, target }) => {
         const internal = link && /^\/(?!\/)/.test(link)
         const anchor = link && /^\#/.test(link)
         let component: JSX.Element | string | null = null

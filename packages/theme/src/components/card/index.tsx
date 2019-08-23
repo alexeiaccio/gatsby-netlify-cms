@@ -2,8 +2,6 @@ import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
 
-import { translite } from '@krapiva-org/utils/src/make-path'
-
 import { ArticleHeader } from '../../typings/article'
 import { Img } from '../img/index'
 import { Link } from '../link/index'
@@ -25,45 +23,39 @@ export function Card({ data }: CardProps) {
   const api = get(regExp.exec(href), '1', 'krapiva-dev')
 
   return (
-    <div css={cardStyles}>
-      <Link
-        css={imageWrapperStyles}
-        api={api}
-        to={get(data, 'fields.slug')}
-      >
-        <div css={imageStyles}>
-          <Img src={image} />
+    <Link
+      css={cardStyles}
+      api={api}
+      to={get(data, 'fields.slug')}
+    >
+      <React.Fragment>
+        <div css={imageWrapperStyles}>
+          <div css={imageStyles}>
+            <Img src={image} />
+          </div>
         </div>
-      </Link>
-      <Link
-        api={api}
-        to={get(data, 'fields.slug')}
-      >
         <h3 css={titleStyles}>{title}</h3>
-      </Link>
-      <div css={descriptionStyles}>
-        {tags && tags.map(tag => (
-          <React.Fragment key={uuid()}>
-            <span> </span>
-            <Link to={translite(tag)}>
-              {tag}
-            </Link>
-            <span> ·</span>
-          </React.Fragment>
-        ))}
-        {date && <span> {date} ·</span>}
-        {authors && authors.map(({ author }) => author &&
-          author.document.map(({ data, fields }) => (
+        <div css={descriptionStyles}>
+          {tags && tags.map(tag => (
             <React.Fragment key={uuid()}>
               <span> </span>
-              <Link to={`/${get(fields, 'slug')}`}>
-                {data.name}
-              </Link>
+              {tag}
               <span> ·</span>
             </React.Fragment>
-          ))
-        )}
-      </div>
-    </div>
+          ))}
+          {date && <span> {date} ·</span>}
+          {authors && authors.map(({ author }) => author &&
+            author.document.map(({ data, fields }) => (
+              <React.Fragment key={uuid()}>
+                <span> </span>
+                {data.name}
+                <span> ·</span>
+              </React.Fragment>
+            ))
+          )}
+        </div>
+      </React.Fragment>
+    </Link>
+
   )
 }

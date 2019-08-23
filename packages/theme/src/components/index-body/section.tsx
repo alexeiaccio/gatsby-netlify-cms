@@ -1,13 +1,16 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
+import { get } from 'lodash'
 import { Link } from 'gatsby'
+import { css } from '@emotion/core'
 
 import { Button } from '../button/index'
 import { Card } from '../card/index'
+import { Img } from '../img/index'
 import { HTML } from '../html/index'
 import { Row, Col } from '../row/index'
 import { TextContainer } from '../main/index'
-import { buttonStyles, sectionStyles, rowStyles } from './styles'
+import { buttonStyles, leadStyles, sectionStyles, rowStyles } from './styles'
 
 interface SectionProps {
   key: string
@@ -16,6 +19,7 @@ interface SectionProps {
     description: string
     title: string
     articles: any[]
+    about?: any
   }
 }
 
@@ -37,18 +41,42 @@ export function IndexSection({ data }: SectionProps) {
         {data.description && (
           <HTML>{data.description}</HTML>
         )}
+        {data.about && (
+          <div css={leadStyles}>
+            <HTML>{get(data, 'about.body.0.primary.text.html', '')}</HTML>
+          </div>
+        )}
       </TextContainer>
-      <Row gap={1} css={rowStyles}>
-        {items.map(item => (
-          <Col
-            key={uuid()}
-            gap={1}
-            cols={2}
+      {data.about ? (
+        <div css={rowStyles}>
+          <Img src={get(data, 'about.body.1.primary.imageimage')} />
+        <div css={css`${buttonStyles};${rowStyles}`}>
+          <Button
+            color="#08a676"
+            component={Link}
+            inverted
+            rounded={0.25}
+            to={`/o-nas`}
           >
-            <Card data={item} />
-          </Col>
-        ))}
-      </Row>
+            <span>
+              {data.title} →
+            </span>
+          </Button>
+        </div>
+        </div>
+      ) : (
+        <Row gap={1} css={rowStyles}>
+          {items.map(item => (
+            <Col
+              key={uuid()}
+              gap={1}
+              cols={2}
+            >
+              <Card data={item} />
+            </Col>
+          ))}
+        </Row>
+      )}
       {(data.articles.length > 1) && (
         <div css={buttonStyles}>
           <Button

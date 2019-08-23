@@ -1,26 +1,23 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Layout, IndexBody } from '@krapiva-org/theme'
+import { Layout } from '@krapiva-org/theme'
 
 // import '@krapiva-org/theme/src/utils/globals.css'
 
-function IndexPage({ data, location }: any) {
+function NovoePage({ data, location }: any) {
   return (
     <Layout
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
     >
-      <IndexBody
-        articles={data.allPrismicArticles.nodes}
-        about={data.prismicAbout.data}
-      />
+    Poop
     </Layout>
   )
 }
 
 export const PageQuery = graphql`
-  query IndexQuery {
+  query NovoeQuery {
     site {
       siteMetadata {
         siteTitle
@@ -80,7 +77,7 @@ export const PageQuery = graphql`
         }
       }
     }
-    allPrismicArticles(sort: {order: DESC, fields: first_publication_date}, limit: 16) {
+    allPrismicArticles(sort: {order: DESC, fields: first_publication_date}, limit: 100) {
       nodes {
         fields {
           slug
@@ -119,31 +116,7 @@ export const PageQuery = graphql`
         }
       }
     }
-    prismicAbout {
-      data {
-        body {
-          __typename
-          ... on PrismicAboutBodyLead {
-            primary {
-              text {
-                html
-              }
-            }
-          }
-          ... on PrismicAboutBodyImage {
-            primary {
-              imageimage {
-                url
-              }
-              imagecaption {
-                html
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `
 
-export default IndexPage
+export default NovoePage

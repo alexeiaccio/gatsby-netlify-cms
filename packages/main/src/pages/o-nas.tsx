@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { graphql } from 'gatsby'
-import { Layout, IndexBody } from '@krapiva-org/theme'
+import { Layout } from '@krapiva-org/theme'
 
 function AboutPage({ data, location }) {
   console.log(data)
@@ -9,7 +9,7 @@ function AboutPage({ data, location }) {
     <Layout
       location={location}
       meta={data.site.siteMetadata}
-      index={data.prismicIndex}
+      index={data.prismicIndex.data}
     >
       <h1>{data.prismicAbout.data.title.text}</h1>
     </Layout>
@@ -56,7 +56,7 @@ export const PageQuery = graphql`
             primary {
               image {
                 url
-                    localFile {
+                localFile {
                   childImageSharp {
                     fluid(maxWidth: 640, quality: 80) {
                       ...GatsbyImageSharpFluid_tracedSVG
@@ -79,6 +79,9 @@ export const PageQuery = graphql`
     }
     prismicAbout {
       data {
+        title {
+          text
+        }
         body {
           __typename
           ... on PrismicAboutBodyLead {
@@ -108,9 +111,6 @@ export const PageQuery = graphql`
           ... on PrismicAboutBodyCut {
             id
           }
-        }
-        title {
-          text
         }
       }
     }

@@ -27,7 +27,7 @@ export function Img({ src, ...props }: ImgProps) {
   }
 
   if (url) {
-    return <Image src={url} {...props} alt loading="lazy" />
+    return <Image src={url} {...props} alt="" loading="lazy" />
   }
 
   return <ImgHolder {...props} />
