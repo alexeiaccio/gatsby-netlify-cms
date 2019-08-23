@@ -23,11 +23,11 @@ export function Link({ api, children, to, ...props }: LinkProps) {
 
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.krapiva/
   const href = get(location, 'href', '')
-  const host = get(regExp.exec(href), '1', 'www')
+  const host = get(regExp.exec(href), '1')
 
-  if (host !== api && !href.includes('localhost')) {
+  if ((host !== 'www') && (host !== api) && !href.includes('localhost')) {
     return (
-      <a href={`https://${APIS[api]}.krapiva.org/${to}`} {...props}>
+      <a href={`https://${get(APIS, api, 'www')}.krapiva.org/${to}`} {...props}>
         {children}
       </a>
     )
