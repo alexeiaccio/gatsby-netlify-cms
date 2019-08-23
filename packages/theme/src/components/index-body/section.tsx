@@ -18,7 +18,7 @@ interface SectionProps {
 }
 
 export function IndexSection({ data }: SectionProps) {
-  const items = data.articles
+  const items = data.articles.slice(0, 4)
 
   if ((items.length % 2) !== 0) {
     items.push({})
