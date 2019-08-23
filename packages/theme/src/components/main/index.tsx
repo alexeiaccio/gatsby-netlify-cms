@@ -16,6 +16,12 @@ export const Main = styled.main`
     px-4 sm:px-8
     w-full max-w-2xl
   `};
+
+  & a {
+    ${tw`
+      hover:text-green-600
+    `};
+  }
 `
 
 export const TextContainer = styled.div`
@@ -29,14 +35,21 @@ export const TextContainer = styled.div`
     ${headingStyles};
     ${tw`
       text-4xl
-      mt-10 mb-4
+      mt-12 mb-4
     `};
   }
   & h2 {
     ${headingStyles};
     ${tw`
       text-2xl
-      mt-8 mb-3
+      mt-10 mb-3
+    `};
+  }
+  & h3 {
+    ${headingStyles};
+    ${tw`
+      text-xl
+      mt-8 mb-2
     `};
   }
 `

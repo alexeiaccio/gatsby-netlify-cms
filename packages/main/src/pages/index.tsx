@@ -81,8 +81,12 @@ export const PageQuery = graphql`
     }
     allPrismicArticles(sort: {order: DESC, fields: first_publication_date}, limit: 100) {
       nodes {
+        fields {
+          slug
+        }
         first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
         tags
+        href
         data {
           title {
             text

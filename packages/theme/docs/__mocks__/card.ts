@@ -2,6 +2,9 @@ export const data = [
   {
     first_publication_date: '14 мая 2019',
     tags: ['Аналитика', 'Июнь 2019'],
+    fields: {
+      slug: 'two-14-05-2019',
+    },
     data: {
       title: {
         text: 'Two',
@@ -55,6 +58,9 @@ export const data = [
   {
     first_publication_date: '24 января 2019',
     tags: ['Архив'],
+    fields: {
+      slug: 'two-14-05-2019',
+    },
     data: {
       title: {
         text: 'Бла',
@@ -81,6 +87,9 @@ export const data = [
   {
     first_publication_date: '20 ноября 2018',
     tags: ['Январь 2018', 'Ревью'],
+    fields: {
+      slug: 'two-14-05-2019',
+    },
     data: {
       title: {
         text: 'Test reference',

@@ -23,6 +23,7 @@ export const Col = styled.div`
   `};
   flex-grow: 1;
   flex-shrink: 0;
+  margin-bottom: ${props => ((props.gap || 1) * 2)}rem;
 
   @media (min-width: 640px) {
     width: ${props => 100 / (props.cols || 2)}%;

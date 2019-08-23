@@ -21,5 +21,15 @@ export const imageStyles = css`
 `
 
 export const titleStyles = css`
-  ${tw``};
+  ${tw`
+    font-sans font-bold
+    text-xl
+    mt-2
+  `};
+`
+
+export const descriptionStyles = css`
+  ${tw`
+    text-xs md:text-sm
+  `};
 `

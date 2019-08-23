@@ -23,6 +23,10 @@ export function IndexSection({ data }: SectionProps) {
   if ((items.length % 2) !== 0) {
     items.push({})
   }
+  if (items.length === 0) {
+    items.push({})
+    items.push({})
+  }
 
   return (
     <section css={sectionStyles}>

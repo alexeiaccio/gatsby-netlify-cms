@@ -1,6 +1,6 @@
 const lodash = require('lodash/fp')
 
-const { get, flatMap, flowRight, uniq, filter, words } = lodash
+const { get, flatMap, flowRight, uniq, words } = lodash
 
 const cyrillicToLatin = {
   0: '0',
@@ -166,7 +166,7 @@ const translite = fromCyrillicToLatin
 
 const getCategories = flowRight(
   flatMap(translite),
-  filter(tag => tag.search(/\d/) === -1),
+  // filter(tag => tag.search(/\d/) === -1),
   uniq,
   flatMap(get(['node', 'tags']))
 )
