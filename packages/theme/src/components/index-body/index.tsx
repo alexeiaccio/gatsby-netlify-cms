@@ -2,8 +2,7 @@ import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
 
-import { translite } from '@krapiva-org/utils/src/make-path'
-import { MENU } from '@krapiva-org/utils/defaults/menu'
+import { translite, MENU } from '@krapiva-org/utils'
 
 import { MetaContext } from '../layout/index'
 import { IndexSection } from './section'

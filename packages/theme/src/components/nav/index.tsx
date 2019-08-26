@@ -3,7 +3,7 @@ import * as uuid from 'uuid/v1'
 import { Link } from 'gatsby'
 import { navigate } from '@reach/router'
 
-import { MENU } from '@krapiva-org/utils/defaults/menu'
+import { MENU } from '@krapiva-org/utils'
 
 import { Button, ButtonStyles } from '../button/index'
 import { MetaContext } from '../layout/index'
@@ -59,7 +59,7 @@ export function Nav({
               disabled={!link}
               href={!internal && !anchor && link}
               onClick={() => anchor && link && navigate(link)}
-              rel={!internal && !anchor && 'noopener noreferrer'}
+              rel={!(internal || anchor) ? 'noopener noreferrer' : undefined}
               styles={buttonStyles}
               target={!internal && !anchor && (target ? target : '_self')}
               to={internal && link}

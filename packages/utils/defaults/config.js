@@ -16,7 +16,7 @@ const utilsTitleShort = 'KRAPIVA'
 const utilsIcon = 'static/images/icon.png'
 const utilsBackgroundColor = '#000000'
 
-module.exports = config = {
+exports.CONFIG = {
   siteTitle,
   siteMotto,
   siteUrl,
