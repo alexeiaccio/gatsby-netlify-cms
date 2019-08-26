@@ -7,23 +7,26 @@ import tw from 'tailwind.macro'
 import { translite } from '@krapiva-org/utils/src/make-path'
 
 import { Logo } from '../logo/index'
-import { Nav } from '../nav/index'
 import { MetaContext } from '../layout/index'
 
+import { HeaderNav } from './nav'
 import { Runner } from './runner'
-import { headerStyles, navStyles, runnerStyles, titleStyles } from './styles'
+import { headerStyles, runnerStyles, titleStyles } from './styles'
 
 interface HeaderProps {
   sticked: boolean
 }
 
 export function Header(props: HeaderProps) {
+  const {
+    sticked: propsSticked = false,
+  } = props
   let rootNode: any = null
   if (typeof document !== 'undefined') {
     rootNode = document
   }
   const scrollRef = React.useRef(rootNode)
-  const [sticked, toggle] = useToggle(props.sticked)
+  const [sticked, toggle] = useToggle(propsSticked)
   const scrolling = useScrolling(scrollRef)
   const { meta, index } = React.useContext(MetaContext)
   const items = get(index, 'categories', [])
@@ -34,12 +37,12 @@ export function Header(props: HeaderProps) {
   }
 
   useThrottle(() => {
-    if (scrolling && props.sticked && !sticked) { toggle(true) }
+    if (scrolling && propsSticked && !sticked) { toggle(true) }
   }, 400, [scrolling])
 
   React.useEffect(() => {
-    toggle(props.sticked)
-  }, [props.sticked])
+    toggle(propsSticked)
+  }, [propsSticked])
 
   return (
     <div
@@ -60,11 +63,9 @@ export function Header(props: HeaderProps) {
           >
             {meta.siteTitle}
           </div>
-          <div css={navStyles}>
-            <Nav items={items} />
-          </div>
         </React.Fragment>
       )}
+      <HeaderNav items={items} sticked={sticked} />
       <div
         css={css`
           ${runnerStyles};

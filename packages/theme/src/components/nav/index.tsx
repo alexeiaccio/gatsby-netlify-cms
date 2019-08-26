@@ -41,7 +41,7 @@ export function Nav({
   }
 
   return (
-    <div css={navStyles}>
+    <ul css={navStyles}>
       {menuItems.map(({ link, text, target }) => {
         const internal = link && /^\/(?!\/)/.test(link)
         const anchor = link && /^\#/.test(link)
@@ -53,7 +53,7 @@ export function Nav({
         }
 
         return (
-          <div css={itemStyles} key={uuid()}>
+          <li css={itemStyles} key={uuid()}>
             <Button
               component={component}
               disabled={!link}
@@ -67,9 +67,9 @@ export function Nav({
             >
               {text}
             </Button>
-          </div>
+          </li>
         )
       })}
-    </div>
+    </ul>
   )
 }

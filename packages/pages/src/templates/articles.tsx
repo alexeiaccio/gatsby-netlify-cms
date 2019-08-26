@@ -1,16 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Layout } from '@krapiva-org/theme'
+import { Layout, ArticleBody } from '@krapiva-org/theme'
 
 function ArticlesPage({ data, location }: any) {
-  console.log(data.prismicArticles)
   return (
     <Layout
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
     >
-      Poop
+      <ArticleBody data={data.prismicArticles} />
     </Layout>
   )
 }
