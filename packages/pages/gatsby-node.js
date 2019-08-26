@@ -1,33 +1,21 @@
 const path = require('path')
 const get = require('lodash/get')
-const { makePath, translite, getCategories } = require('@krapiva-org/utils')
+const { makePath, translite } = require('@krapiva-org/utils')
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const authorMaker = (data) => {
+  const articlesMaker = (data) => {
     data.map(({ node }) => {
       const { fields } = node
       const { slug, tags } = fields
       createPage({
-        component: path.resolve(`src/templates/author.tsx`),
+        component: path.resolve(`src/templates/articles.tsx`),
         context: {
           slug: slug,
           tags: tags,
         },
         path: slug,
-      })
-    })
-  }
-
-  const categoriesMaker = (data) => {
-    data.map(category => {
-      createPage({
-        component: path.resolve(`src/templates/category.tsx`),
-        context: {
-          slug: category,
-        },
-        path: category,
       })
     })
   }
@@ -46,28 +34,12 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
       }
-      authors: allPrismicAuthors {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            data {
-              name
-            }
-          }
-        }
-      }
     }    
   `)
 
   const articles = get(pages, 'data.articles.edges')
-  const authors = get(pages, 'data.authors.edges')
-  
-  const categories = getCategories(articles)
 
-  authors && authorMaker(authors)
-  categories && categoriesMaker(categories)
+  articles && articlesMaker(articles)
 }
 
 exports.onCreateNode = ({ node, actions }) => {
