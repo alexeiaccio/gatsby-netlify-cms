@@ -77,7 +77,7 @@ export function IndexSection({ data }: SectionProps) {
           ))}
         </Row>
       )}
-      {(data.articles.length > 1) && (
+      {(data.articles.length > 6) && (
         <div css={buttonStyles}>
           <Button
             color="#08a676"

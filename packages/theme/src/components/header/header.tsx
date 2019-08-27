@@ -49,11 +49,11 @@ export function Header(props: HeaderProps) {
     <div
       css={css`
         ${headerStyles};
-        ${sticked ? tw`cursor-pointer` : tw`pt-8`};
+        ${(sticked && !opened) ? tw`cursor-pointer` : tw`pt-8`};
       `}
       onClick={handleClick}
     >
-      <Logo height={sticked ? 50 : 100} />
+      <Logo height={(sticked && !opened) ? 50 : 100} />
       {(!sticked || opened) && (
         <div
           css={css`
