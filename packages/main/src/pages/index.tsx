@@ -80,7 +80,11 @@ export const PageQuery = graphql`
         }
       }
     }
-    allPrismicArticles(sort: {order: DESC, fields: first_publication_date}, limit: 16) {
+    allPrismicArticles(
+      filter: {fields: {tags: {nin: ["afisha", "arhiv"]}}},
+      sort: {order: DESC, fields: first_publication_date},
+      limit: 16
+    ) {
       nodes {
         fields {
           slug

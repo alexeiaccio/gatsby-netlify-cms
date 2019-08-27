@@ -27,17 +27,18 @@ export function Header(props: HeaderProps) {
   }
   const scrollRef = React.useRef(rootNode)
   const [sticked, toggle] = useToggle(propsSticked)
+  const [opened, open] = useToggle(false)
   const scrolling = useScrolling(scrollRef)
   const { meta, index } = React.useContext(MetaContext)
   const items = get(index, 'categories', [])
     .map(item => item ? ({ text: item.categorytitle.text, link: translite(item.categorytitle.text) }) : null)
 
   const handleClick = () => {
-    if (sticked) { toggle(false) }
+    if (sticked) { open(true) }
   }
 
   useThrottle(() => {
-    if (scrolling && propsSticked && !sticked) { toggle(true) }
+    if (scrolling && propsSticked) { open(false) }
   }, 400, [scrolling])
 
   React.useEffect(() => {
@@ -53,19 +54,21 @@ export function Header(props: HeaderProps) {
       onClick={handleClick}
     >
       <Logo height={sticked ? 50 : 100} />
-      {!sticked && (
-        <React.Fragment>
-          <div
-            css={css`
-              ${titleStyles};
-              ${!sticked && tw`pt-2`};
-            `}
-          >
-            {meta.siteTitle}
-          </div>
-        </React.Fragment>
+      {(!sticked || opened) && (
+        <div
+          css={css`
+            ${titleStyles};
+            ${!sticked && tw`pt-2`};
+          `}
+        >
+          {meta.siteTitle}
+        </div>
       )}
-      <HeaderNav items={items} sticked={sticked} />
+      <HeaderNav
+        items={items}
+        opened={opened}
+        sticked={sticked}
+      />
       <div
         css={css`
           ${runnerStyles};
