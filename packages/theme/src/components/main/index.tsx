@@ -19,6 +19,7 @@ export const Main = styled.main`
 
   & a {
     ${tw`
+      text-green-600
       hover:text-green-600
     `};
   }
@@ -29,12 +30,13 @@ export const TextContainer = styled.div`
     mx-auto
     w-full max-w-lg
     text-justify
+    subpixel-antialiased
   `};
 
   & h1 {
     ${headingStyles};
     ${tw`
-      text-4xl
+      text-5xl
       mt-12 mb-4
     `};
   }

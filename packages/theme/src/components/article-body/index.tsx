@@ -1,61 +1,22 @@
 import * as React from 'react'
-import { get } from 'lodash'
-import * as uuid from 'uuid/v1'
+import { pick, assign } from 'lodash'
 
-import { ArticleHeader } from '../../typings/article'
-import { Img } from '../img/index'
-import { Link } from '../link/index'
+import { ArticleHeader as HeaderProps, ArticleBody as ArticleProps } from '../../typings/article'
 
-import { cardStyles, descriptionStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
+import { ArticleHeader } from './header'
 
 interface ArticleBodyProps {
-  data: ArticleHeader
+  data: HeaderProps | ArticleProps
 }
 
 export function ArticleBody({ data }: ArticleBodyProps) {
-  const title = get(data, 'data.title.text', '')
-  const image = get(data, 'data.image')
-  const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
-  const date = get(data, 'first_publication_date')
-  const authors = get(data, 'data.authors')
-  const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.cdn.prismic/
-  const href = get(data, 'href', '')
-  const api = get(regExp.exec(href), '1', 'krapiva-dev')
+  const headerKeys = pick(data, ['href', 'tags', 'first_publication_date'])
+  const headerData = pick(data.data, ['image', 'title', 'authors'])
+  const header = assign(headerKeys, { data: headerData })
 
   return (
-    <Link
-      css={cardStyles}
-      api={api}
-      to={get(data, 'fields.slug')}
-    >
-      <React.Fragment>
-        <div css={imageWrapperStyles}>
-          <div css={imageStyles}>
-            <Img src={image} />
-          </div>
-        </div>
-        <h3 css={titleStyles}>{title}</h3>
-        <div css={descriptionStyles}>
-          {tags && tags.map(tag => (
-            <React.Fragment key={uuid()}>
-              <span> </span>
-              {tag}
-              <span> ·</span>
-            </React.Fragment>
-          ))}
-          {date && <span> {date} ·</span>}
-          {authors && authors.map(({ author }) => author &&
-            author.document.map(({ data, fields }) => (
-              <React.Fragment key={uuid()}>
-                <span> </span>
-                {data.name}
-                <span> ·</span>
-              </React.Fragment>
-            ))
-          )}
-        </div>
-      </React.Fragment>
-    </Link>
-
+    <article>
+      <ArticleHeader data={header} />
+    </article>
   )
 }

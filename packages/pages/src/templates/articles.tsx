@@ -110,6 +110,153 @@ export const PageQuery = graphql`
             }
           }
         }
+        body {
+          __typename
+          ... on PrismicArticlesBodyText {
+            primary {
+              text {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyQuote {
+            primary {
+              quote {
+                html
+              }
+              cite {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyCut {
+            id
+          }
+          ... on PrismicArticlesBodyLead {
+            primary {
+              text {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyImage {
+            primary {
+              imageimage {
+                url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 640, quality: 80) {
+                      ...GatsbyImageSharpFluid_tracedSVG
+                    }
+                  }
+                }
+              }
+              imagecaption {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyListOfArticles {
+            items {
+              articlelink {
+                document {
+                  __typename
+                  ... on PrismicArticles {
+                    first_publication_date
+                    fields {
+                      slug
+                    }
+                    data {
+                      title {
+                        text
+                      }
+                      authors {
+                        author {
+                          document {
+                            __typename
+                            ... on PrismicAuthors {
+                              data {
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      image {
+                        url
+                        localFile {
+                          childImageSharp {
+                            fluid(maxWidth: 640, quality: 80) {
+                              ...GatsbyImageSharpFluid_tracedSVG
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ... on PrismicArticlesBodyMedialink {
+            primary {
+              mediacover {
+                url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 640, quality: 80) {
+                      ...GatsbyImageSharpFluid_tracedSVG
+                    }
+                  }
+                }
+              }
+              mediacaption {
+                html
+              }
+              medialink {
+                url
+              }
+            }
+          }
+          ... on PrismicArticlesBodySlider {
+            items {
+              sliderimage {
+                url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 640, quality: 80) {
+                      ...GatsbyImageSharpFluid_tracedSVG
+                    }
+                  }
+                }
+              }
+              slidercaptions {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyYoutube {
+            primary {
+              youtubeid {
+                html
+              }
+              videoresource {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyReference {
+            primary {
+              referenceanchor
+              referencetext {
+                html
+              }
+            }
+          }
+          ... on PrismicArticlesBodyReferencesList {
+            id
+          }
+        }
       }
     }
   }

@@ -34,7 +34,7 @@ export function Header(props: HeaderProps) {
     .map(item => item ? ({ text: item.categorytitle.text, link: translite(item.categorytitle.text) }) : null)
 
   const handleClick = () => {
-    if (sticked) { open(true) }
+    if (sticked) { open(!opened) }
   }
 
   useThrottle(() => {

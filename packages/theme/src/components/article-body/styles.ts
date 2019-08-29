@@ -1,17 +1,12 @@
 import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
-export const cardStyles = css`
-  ${tw`w-full`};
-`
-
 export const imageWrapperStyles = css`
   ${tw`
     flex
     overflow-hidden
     relative
     w-full
-    rounded-sm
   `};
   padding-bottom: ${(1200 / 1920) * 100}%;
 `
@@ -30,6 +25,7 @@ export const titleStyles = css`
 
 export const descriptionStyles = css`
   ${tw`
+    mb-8
     text-xs md:text-sm
     text-black
   `};
