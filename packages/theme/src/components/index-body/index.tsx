@@ -5,6 +5,7 @@ import * as uuid from 'uuid/v1'
 import { translite, MENU } from '@krapiva-org/utils'
 
 import { MetaContext } from '../layout/index'
+import { Container, Wrapper } from '../main/index'
 import { IndexSection } from './section'
 
 interface IndexBodyProps {
@@ -38,13 +39,15 @@ export function IndexBody({ articles, about }: IndexBodyProps) {
   const sections = [...before, ...items, ...after];
 
   return (
-    <React.Fragment>
-      {sections.map(item => (
-        <IndexSection
-          key={uuid()}
-          data={item}
-        />
-      ))}
-    </React.Fragment>
+    <Wrapper>
+      <Container>
+        {sections.map(item => (
+          <IndexSection
+            key={uuid()}
+            data={item}
+          />
+        ))}
+      </Container>
+    </Wrapper>
   )
 }
