@@ -5,11 +5,12 @@ import * as uuid from 'uuid/v1'
 import { translite } from '@krapiva-org/utils'
 
 import { ArticleHeader as ArticleHeaderShape } from '../../typings/article'
+import { HTML } from '../html/index'
 import { Img } from '../img/index'
 import { Link } from '../link/index'
 import { TextContainer } from '../main/index'
 
-import { descriptionStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
+import { headerStyles, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface ArticleHeaderProps {
   data: ArticleHeaderShape
@@ -18,6 +19,7 @@ interface ArticleHeaderProps {
 export function ArticleHeader({ data }: ArticleHeaderProps) {
   const title = get(data, 'data.title.text', '')
   const image = get(data, 'data.image')
+  const caption = get(data, 'data.caption')
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')
@@ -26,7 +28,7 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
   const api = get(regExp.exec(href), '1', 'krapiva-dev')
 
   return (
-    <React.Fragment>
+    <div css={headerStyles}>
       <TextContainer>
         <h1 css={titleStyles}>{title}</h1>
         <div css={descriptionStyles}>
@@ -62,10 +64,13 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
         </div>
       </TextContainer>
       <div css={imageWrapperStyles}>
-        <div css={imageStyles}>
-          <Img src={image} />
-        </div>
+        <Img src={image} />
+        {caption && (
+          <div css={captionStyles}>
+            <HTML>{caption.html}</HTML>
+          </div>
+        )}
       </div>
-    </React.Fragment>
+    </div>
   )
 }

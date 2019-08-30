@@ -6,6 +6,10 @@ export default css`
     ${tw`font-serif`};
     font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
+
+  body {
+    ${tw`bg-black`};
+  }
 `
 
 /* 

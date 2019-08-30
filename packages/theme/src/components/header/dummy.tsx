@@ -9,7 +9,7 @@ interface WrapperProps {
 export const Dummy = React.forwardRef((props: WrapperProps, ref) => {
   return (
     <div
-      css={css`${tw`relative`}; 
+      css={css`${tw`relative bg-black`}; 
     height: ${props.height}px;`}
       ref={ref}
     />

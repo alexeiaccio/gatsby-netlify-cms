@@ -87,6 +87,7 @@ export const PageQuery = graphql`
           text
         }
         image {
+          alt
           url
           localFile {
             childImageSharp {
@@ -95,6 +96,9 @@ export const PageQuery = graphql`
               }
             }
           }
+        }
+        caption {
+          html
         }
         authors {
           author {

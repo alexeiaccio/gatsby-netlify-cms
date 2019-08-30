@@ -1,18 +1,39 @@
 import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
-export const imageWrapperStyles = css`
+export const headerStyles = css`
   ${tw`
-    flex
-    overflow-hidden
-    relative
+    flex flex-col
+    items-center justify-start
+    bg-black
+    text-white
     w-full
   `};
-  padding-bottom: ${(1200 / 1920) * 100}%;
 `
 
-export const imageStyles = css`
-  ${tw`absolute inset-0 object-center object-cover`};
+export const imageWrapperStyles = css`
+  ${tw`
+    relative
+    w-full max-w-2xl
+    overflow-hidden
+  `};
+`
+
+export const captionStyles = css`
+  ${tw`
+    absolute inset-0 top-auto
+    py-2 px-4
+    text-xs md:text-sm
+  `};
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(10%);
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 `
 
 export const titleStyles = css`
@@ -27,6 +48,12 @@ export const descriptionStyles = css`
   ${tw`
     mb-8
     text-xs md:text-sm
-    text-black
   `};
+
+  & a {
+    ${tw`
+      text-green-500
+      hover:text-green-500
+    `};
+  }
 `
