@@ -8,6 +8,7 @@ function ArticlesPage({ data, location }: any) {
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
+      blackHeader
     >
       <ArticleBody data={data.prismicArticles} />
     </Layout>

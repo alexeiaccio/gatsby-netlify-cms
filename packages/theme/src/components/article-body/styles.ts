@@ -13,7 +13,6 @@ export const headerStyles = css`
 
 export const imageWrapperStyles = css`
   ${tw`
-    relative
     w-full max-w-2xl
     overflow-hidden
   `};
@@ -21,19 +20,9 @@ export const imageWrapperStyles = css`
 
 export const captionStyles = css`
   ${tw`
-    absolute inset-0 top-auto
-    py-2 px-4
+    py-2
     text-xs md:text-sm
   `};
-  background-color: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  transform: translateY(10%);
-  transition: all 200ms ease-in-out;
-
-  &:hover {
-    opacity: 1;
-    transform: translateY(0%);
-  }
 `
 
 export const titleStyles = css`

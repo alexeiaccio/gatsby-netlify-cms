@@ -18,15 +18,16 @@ interface LayoutProps {
   location?: any
   meta?: any
   index?: any
+  blackHeader?: boolean
 }
 
-function LayoutComponent({ children, location, meta, index }: LayoutProps): JSX.Element {
+function LayoutComponent({ children, location, meta, index, blackHeader }: LayoutProps): JSX.Element {
 
   return (
     <React.Fragment>
       <Global styles={globalStyles} />
       <Borders />
-      <MetaContext.Provider value={{ location, meta, index }}>
+      <MetaContext.Provider value={{ location, meta, index, blackHeader }}>
         <WrappedHeader />
         <Main>
           {children}
