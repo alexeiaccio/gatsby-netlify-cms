@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 interface HTMLProps {
-  children: string
+  children: string | any
 }
 
 export const HTML = ({ children }: HTMLProps) => (

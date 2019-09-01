@@ -15035,6 +15035,11 @@ typescript@3.5.3, typescript@^3.5.3:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
   integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
 
+typograf@^6.8.2:
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/typograf/-/typograf-6.8.2.tgz#897ff386d8e011fe8c5ba241dfb47f451fc1c6b9"
+  integrity sha512-57efVHrgBK4/3WnJnReTIQ+9Hll+4cZ4MQtn98mz7sciVAbk5tT2c0c5Y1SbpUZQ4JcA/6ZTFTRRWlEs9bruQw==
+
 typography-breakpoint-constants@^0.16.19:
   version "0.16.19"
   resolved "https://registry.yarnpkg.com/typography-breakpoint-constants/-/typography-breakpoint-constants-0.16.19.tgz#e0e89147749562cbb46ce76c47ff0f73372765e7"

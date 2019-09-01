@@ -1,18 +1,19 @@
 import * as React from 'react'
-import { pick, assign } from 'lodash'
+import { assign } from 'lodash'
 
-import { ArticleHeader as HeaderProps, ArticleBody as ArticleProps } from '../../typings/article'
+import { Article } from '../../typings/article'
 import { Container, Wrapper } from '../main/index'
 
 import { ArticleHeader } from './header'
+import { ArticleBodyContent } from './body'
 
 interface ArticleBodyProps {
-  data: HeaderProps | ArticleProps
+  data: Article
 }
 
 export function ArticleBody({ data }: ArticleBodyProps) {
-  const headerKeys = pick(data, ['href', 'tags', 'first_publication_date'])
-  const headerData = pick(data.data, ['image', 'caption', 'title', 'authors'])
+  const {data: bodyData, ...headerKeys} = data
+  const {body, ...headerData} = bodyData
   const header = assign(headerKeys, { data: headerData })
 
   return (
@@ -20,7 +21,7 @@ export function ArticleBody({ data }: ArticleBodyProps) {
       <ArticleHeader data={header} />
       <Wrapper>
         <Container>
-          Pooop
+          <ArticleBodyContent body={body} />
         </Container>
       </Wrapper>
     </article>

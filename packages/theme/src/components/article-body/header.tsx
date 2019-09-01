@@ -4,7 +4,7 @@ import * as uuid from 'uuid/v1'
 
 import { translite } from '@krapiva-org/utils'
 
-import { ArticleHeader as ArticleHeaderShape } from '../../typings/article'
+import { Article } from '../../typings/article'
 import { HTML } from '../html/index'
 import { Img } from '../img/index'
 import { Link } from '../link/index'
@@ -13,7 +13,7 @@ import { TextContainer } from '../main/index'
 import { headerStyles, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface ArticleHeaderProps {
-  data: ArticleHeaderShape
+  data: Article
 }
 
 export function ArticleHeader({ data }: ArticleHeaderProps) {

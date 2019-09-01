@@ -6,6 +6,7 @@ const headingStyles = css`
   ${tw`
     font-sans
     font-bold
+    leading-tight
   `};
 `
 
@@ -42,7 +43,6 @@ export const TextContainer = styled.div`
   ${tw`
     mx-auto
     w-full max-w-lg
-    text-justify
     subpixel-antialiased
   `};
 
@@ -65,6 +65,12 @@ export const TextContainer = styled.div`
     ${tw`
       text-xl
       pt-8 pb-2
+    `};
+  }
+  & p {
+    ${tw`
+      pb-4
+      text-justify
     `};
   }
 `

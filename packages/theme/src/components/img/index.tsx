@@ -4,13 +4,17 @@ import { get } from 'lodash'
 import GatsbyImage from 'gatsby-image'
 import tw from 'tailwind.macro'
 
-import { Image as ImgProps } from '../../typings/image'
+import { Image as ImageProps } from '../../typings/image'
 
 import { ImgHolder } from './holder'
 
 const Image = styled('img')`
   ${tw`w-full`};
 `
+
+interface ImgProps {
+  src: ImageProps
+}
 
 export function Img({ src, ...props }: ImgProps) {
   const imageSharp = get(src, 'localFile.childImageSharp')
@@ -27,7 +31,7 @@ export function Img({ src, ...props }: ImgProps) {
   }
 
   if (url) {
-    return <Image src={url} {...props} alt="" loading="lazy" />
+    return <Image src={url} {...props} alt={get(src, 'alt', '')} loading="lazy" />
   }
 
   return <ImgHolder {...props} />

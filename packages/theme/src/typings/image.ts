@@ -7,7 +7,7 @@ interface LocalImg {
 }
 
 export interface Image {
-  src?: string | null
+  src?: string | null | undefined
   localFile?: {
     childImageSharp: {
       fluid: LocalImg | null,

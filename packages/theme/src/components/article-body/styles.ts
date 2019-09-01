@@ -20,7 +20,8 @@ export const imageWrapperStyles = css`
 
 export const captionStyles = css`
   ${tw`
-    py-2
+    py-2 mx-auto
+    w-full max-w-lg
     text-xs md:text-sm
   `};
 `
