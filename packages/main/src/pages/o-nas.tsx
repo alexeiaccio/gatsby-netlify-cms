@@ -1,6 +1,6 @@
 import * as React from 'react'
-
 import { graphql } from 'gatsby'
+
 import { Layout } from '@krapiva-org/theme'
 
 function AboutPage({ data, location }) {

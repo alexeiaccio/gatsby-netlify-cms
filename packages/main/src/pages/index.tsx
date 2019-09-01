@@ -1,8 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Layout, IndexBody } from '@krapiva-org/theme'
 
-// import '@krapiva-org/theme/src/utils/globals.css'
+import { Layout, IndexBody } from '@krapiva-org/theme'
 
 function IndexPage({ data, location }: any) {
   return (

@@ -1,8 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Layout } from '@krapiva-org/theme'
 
-// import '@krapiva-org/theme/src/utils/globals.css'
+import { Layout, NovoeBody } from '@krapiva-org/theme'
 
 function NovoePage({ data, location }: any) {
   return (
@@ -11,7 +10,9 @@ function NovoePage({ data, location }: any) {
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
     >
-    Poop
+    <NovoeBody
+      articles={data.allPrismicArticles.nodes}
+    />
     </Layout>
   )
 }
@@ -81,7 +82,7 @@ export const PageQuery = graphql`
     allPrismicArticles(
       filter: {fields: {tags: {nin: ["afisha", "arhiv"]}}},
       sort: {order: DESC, fields: first_publication_date},
-      limit: 100
+      limit: 24
     ) {
       nodes {
         fields {
