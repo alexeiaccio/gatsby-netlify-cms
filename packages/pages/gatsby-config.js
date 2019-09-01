@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const { CONFIG, SCHEMAS } = require('@krapiva-org/utils')
+const { CONFIG, SCHEMAS, htmlSerializer, linkResolver } = require('@krapiva-org/utils')
 const { about, authors, articles, index } = SCHEMAS
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
       options: {
         repositoryName: process.env.META_API,
         accessToken: process.env.META_TOKEN,
-        linkResolver: ({ node, key, value }) => doc => `${doc}`,
+        linkResolver,
         schemas: {
           about,
           index,
@@ -25,7 +25,15 @@ module.exports = {
       options: {
         repositoryName: process.env.PRISMIC_API,
         accessToken: process.env.PRISMIC_TOKEN,
-        linkResolver: ({ node, key, value }) => doc => `${doc}`,
+        linkResolver,
+        htmlSerializer,
+        shouldNormalizeImage: ({ node }) => {
+          if (process.env.PRISMIC_API === 'krapiva-org' && node.type === 'articles') {
+            return false
+          }
+          return true
+          console.log( node.type )
+        },
         schemas: {
           authors,
           articles,

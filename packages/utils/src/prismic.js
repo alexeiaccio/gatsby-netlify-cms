@@ -1,5 +1,4 @@
 const PrismicDOM = require('prismic-dom')
-const get = require('lodash/get')
 const tp = require('./tp')
 
 exports.linkResolver = () => doc => doc.slug
