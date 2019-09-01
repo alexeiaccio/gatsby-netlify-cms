@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const { CONFIG, SCHEMAS, htmlSerializer, linkResolver } = require('@krapiva-org/utils')
+const { CONFIG, SCHEMAS, htmlSerializer, linkResolver, plugins } = require('@krapiva-org/utils')
 const { about, authors, articles, index } = SCHEMAS
 
 module.exports = {
@@ -32,7 +32,6 @@ module.exports = {
             return false
           }
           return true
-          console.log( node.type )
         },
         schemas: {
           authors,
@@ -40,21 +39,6 @@ module.exports = {
         },
       },
     },
-    'gatsby-plugin-sharp',
-    `gatsby-transformer-sharp`,
-    {
-      resolve: `gatsby-theme-tailwindcss`,
-      options: {
-        postCssPlugins: [require('autoprefixer')],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-typescript`,
-      options: {
-        isTSX: true, // defaults to false
-        jsxPragma: `jsx`, // defaults to "React"
-        allExtensions: true, // defaults to false
-      },
-    },
+    ...plugins,
   ],
 }

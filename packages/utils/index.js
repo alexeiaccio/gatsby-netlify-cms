@@ -1,5 +1,6 @@
 const { CONFIG } = require('./defaults/config')
 const { APIS } = require('./defaults/apis')
+const { plugins } = require('./defaults/gatsby')
 const { MENU } = require('./defaults/menu')
 const { SCHEMAS } = require('./schemas/index')
 const { getCategories, makePath, translite } = require('./src/make-path')
@@ -10,6 +11,8 @@ module.exports = {
   CONFIG,
   MENU,
   SCHEMAS,
+
+  plugins,
 
   getCategories,
   makePath,

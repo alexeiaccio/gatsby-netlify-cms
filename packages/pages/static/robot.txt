@@ -1,0 +1,7 @@
+User-agent: Yandex
+Allow: /
+sitemap: https://www.krapiva.org/sitemap.xml
+
+User-agent: *
+Allow: /
+sitemap: https://www.krapiva.org/sitemap.xml
