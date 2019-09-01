@@ -10,9 +10,8 @@ export function BodySlider({ items }: any) {
   if (!items) { return null }
 
   const [current, setCurrent] = React.useState(0)
-
   const caption = get(items, [current, 'slidercaptions', 'html'])
-  console.log(caption)
+
   return (
     <figure css={figureStyles}>
       <div css={slideStyles}>
