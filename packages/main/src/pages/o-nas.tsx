@@ -22,6 +22,7 @@ export const PageQuery = graphql`
       siteMetadata {
         siteTitle
         siteMotto
+        siteUrl
       }
     }
     prismicIndex {

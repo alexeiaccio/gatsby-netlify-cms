@@ -30,13 +30,6 @@ export const Container = styled.div`
     pb-10 px-4 sm:px-8
     max-w-2xl
   `};
-
-  & a {
-    ${tw`
-      text-green-600
-      hover:text-green-600
-    `};
-  }
 `
 
 export const TextContainer = styled.div`
@@ -71,6 +64,12 @@ export const TextContainer = styled.div`
     ${tw`
       pb-4
       text-justify
+    `};
+  }
+  & a {
+    ${tw`
+      text-green-600
+      hover:text-green-600
     `};
   }
 `

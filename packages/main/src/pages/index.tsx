@@ -25,6 +25,7 @@ export const PageQuery = graphql`
       siteMetadata {
         siteTitle
         siteMotto
+        siteUrl
       }
     }
     prismicIndex {
@@ -81,9 +82,9 @@ export const PageQuery = graphql`
       }
     }
     allPrismicArticles(
-      filter: {fields: {tags: {nin: ["afisha", "arhiv"]}}},
+      filter: {fields: {tags: {nin: ["afisha"]}}},
       sort: {order: DESC, fields: first_publication_date},
-      limit: 16
+      limit: 100
     ) {
       nodes {
         fields {

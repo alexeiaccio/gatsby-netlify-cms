@@ -55,14 +55,15 @@ export function Header(props: HeaderProps) {
     >
       <Logo height={(sticked && !opened) ? 50 : 100} />
       {(!sticked || opened) && (
-        <div
+        <a
           css={css`
             ${titleStyles};
             ${!sticked && tw`pt-2`};
           `}
+          href={get(meta, 'siteUrl', '/')}
         >
           {meta.siteTitle}
-        </div>
+        </a>
       )}
       <HeaderNav
         items={items}
