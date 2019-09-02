@@ -1,3 +1,4 @@
+export { AboutBody } from './src/components/about-body/index'
 export { ArticleBody } from './src/components/article-body/index'
 export { IndexBody } from './src/components/index-body/index'
 export { Layout } from './src/components/layout/index'

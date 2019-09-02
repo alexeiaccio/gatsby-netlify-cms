@@ -4,7 +4,7 @@ import tw from 'tailwind.macro'
 export const Row = styled.div`
   ${tw`
     flex flex-row flex-wrap
-    items-start justify-center
+    items-start justify-between
   `};
   box-sizing: border-box;
 
@@ -26,7 +26,7 @@ export const Col = styled.div`
   margin-bottom: ${props => ((props.gap || 1) * 2)}rem;
 
   @media (min-width: 640px) {
-    width: ${props => 100 / (props.cols || 2)}%;
+    max-width: ${props => 100 / (props.cols || 2)}%;
     padding: 0 ${props => (props.gap || 0) / 2}rem;
   }
 `

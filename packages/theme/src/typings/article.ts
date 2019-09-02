@@ -3,7 +3,7 @@ import { Image } from './image'
 
 interface Item {
   articlelink?: {
-    document: ArticleHeader[]
+    document: Article[]
   }
   sliderimage?: Image
   slidercaptions?: {

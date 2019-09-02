@@ -1,4 +1,4 @@
-import * as React from './react'
+import * as React from 'react'
 
 import { Img } from '../img/index'
 import { SpanHTML } from '../html/index'

@@ -1,4 +1,4 @@
-import * as React from './react'
+import * as React from 'react'
 
 import { HTML } from '../html/index'
 import { TextContainer } from '../main/index'

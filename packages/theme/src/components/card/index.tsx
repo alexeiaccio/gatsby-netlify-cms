@@ -2,14 +2,14 @@ import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
 
-import { ArticleHeader } from '../../typings/article'
+import { Article } from '../../typings/article'
 import { Img } from '../img/index'
 import { Link } from '../link/index'
 
 import { cardStyles, descriptionStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface CardProps {
-  data: ArticleHeader
+  data: Article
 }
 
 export function Card({ data }: CardProps) {
@@ -56,6 +56,5 @@ export function Card({ data }: CardProps) {
         </div>
       </React.Fragment>
     </Link>
-
   )
 }

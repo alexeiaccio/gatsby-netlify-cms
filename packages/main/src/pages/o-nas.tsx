@@ -1,17 +1,19 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 
-import { Layout } from '@krapiva-org/theme'
+import { Layout, AboutBody } from '@krapiva-org/theme'
 
 function AboutPage({ data, location }) {
-  console.log(data)
   return (
     <Layout
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
     >
-      <h1>{data.prismicAbout.data.title.text}</h1>
+      <AboutBody
+        about={data.prismicAbout.data}
+        authors={data.allPrismicAuthors.nodes}
+      />
     </Layout>
   )
 }
@@ -103,6 +105,13 @@ export const PageQuery = graphql`
             primary {
               imageimage {
                 url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 1280, quality: 80) {
+                      ...GatsbyImageSharpFluid_tracedSVG
+                    }
+                  }
+                }
               }
               imagecaption {
                 html
@@ -112,6 +121,30 @@ export const PageQuery = graphql`
           ... on PrismicAboutBodyCut {
             id
           }
+        }
+      }
+    }
+    allPrismicAuthors {
+      nodes {
+        data {
+          avatar {
+            url
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 640, quality: 80) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+          name
+          type
+          statement {
+            html
+          }
+        }
+        fields {
+          slug
         }
       }
     }
