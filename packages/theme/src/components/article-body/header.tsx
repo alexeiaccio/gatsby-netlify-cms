@@ -34,7 +34,6 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
         <div css={descriptionStyles}>
           {tags && tags.map(tag => (
             <Link
-              api={api}
               key={uuid()}
               to={translite(tag)}
             >
@@ -49,7 +48,6 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
           {authors && authors.map(({ author }) => author &&
             author.document.map(({ data, fields }) => (
               <Link
-                api={api}
                 key={uuid()}
                 to={fields.slug}
               >
