@@ -5,6 +5,7 @@ import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
 import '../../utils/globals.css'
 
+import { Footer } from '../footer/index'
 import { WrappedHeader } from '../header/index'
 import { Main } from '../main/index'
 
@@ -32,6 +33,7 @@ function LayoutComponent({ children, location, meta, index, blackHeader }: Layou
         <Main>
           {children}
         </Main>
+        <Footer />
       </MetaContext.Provider>
     </React.Fragment>
   )

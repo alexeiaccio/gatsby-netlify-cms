@@ -42,14 +42,14 @@ export const TextContainer = styled.div`
   & h1 {
     ${headingStyles};
     ${tw`
-      text-5xl
+      text-3xl sm:text-5xl
       pt-12 pb-4
     `};
   }
   & h2 {
     ${headingStyles};
     ${tw`
-      text-3xl
+      text-2xl sm:text-3xl
       pt-10 pb-3
     `};
   }

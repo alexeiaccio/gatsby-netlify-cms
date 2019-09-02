@@ -8,6 +8,7 @@ export const headerStyles = css`
     bg-black
     text-white
     w-full
+    px-4 sm:px-8
   `};
 `
 
