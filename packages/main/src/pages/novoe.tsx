@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { Layout, NovoeBody } from '@krapiva-org/theme'
+import { Layout, CategoryBody } from '@krapiva-org/theme'
 
 function NovoePage({ data, location }: any) {
   return (
@@ -10,7 +10,8 @@ function NovoePage({ data, location }: any) {
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
     >
-    <NovoeBody
+    <CategoryBody
+      title="Новые статьи"
       articles={data.allPrismicArticles.nodes}
     />
     </Layout>

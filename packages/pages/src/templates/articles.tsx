@@ -93,7 +93,7 @@ export const PageQuery = graphql`
           url
           localFile {
             childImageSharp {
-              fluid(maxWidth: 640, quality: 80) {
+              fluid(maxWidth: 1280, quality: 80) {
                 ...GatsbyImageSharpFluid_tracedSVG
               }
             }
@@ -151,7 +151,7 @@ export const PageQuery = graphql`
                 url
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 640, quality: 80) {
+                    fluid(maxWidth: 1280, quality: 80) {
                       ...GatsbyImageSharpFluid_tracedSVG
                     }
                   }
@@ -230,7 +230,7 @@ export const PageQuery = graphql`
                 url
                 localFile {
                   childImageSharp {
-                    fluid(maxWidth: 640, quality: 80) {
+                    fluid(maxWidth: 1280, quality: 80) {
                       ...GatsbyImageSharpFluid_tracedSVG
                     }
                   }
