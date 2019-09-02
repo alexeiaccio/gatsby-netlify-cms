@@ -76,10 +76,7 @@ export function Header(props: HeaderProps) {
           ${sticked && tw`text-xxs`};
         `}
       >
-        <Runner
-          string={meta.siteMotto}
-          update={sticked}
-        />
+        <Runner string={meta.siteMotto} />
       </div>
     </div>
   )

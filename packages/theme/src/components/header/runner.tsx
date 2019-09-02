@@ -1,70 +1,80 @@
-import * as React from 'react'
-import {
-  useBoolean,
-  useInterval,
-  useList,
-  useWindowSize,
-} from 'react-use'
+import React from 'react'
 
 interface RunnerProps {
-  string?: string
-  update: boolean
+  string: string
 }
 
-function RunnerString({ string = ' Poop', update }: RunnerProps) {
-  if (!string) { return null; }
-  const stringRef = React.useRef(null)
-  const [done, setDone] = useBoolean(false)
-  const [baseString] = React.useState(string.split(''))
-  const [runner, { set, push }] = useList([baseString[0]])
-  const { width } = useWindowSize()
-  const [tick, setTick] = React.useState(0)
+interface RunnerState {
+  baseString: string[]
+  string: string | null
+}
 
-  React.useEffect(() => {
-    if (!done) {
-      const currentTick = tick % baseString.length
-      const prevTick = (tick - 1) % baseString.length
-  
-      if ((baseString[prevTick === -1 ? 0 : prevTick] === runner[runner.length - 1])) {
-        push(baseString[currentTick])
-        setTick(tick + 1)
-      }
+export class Runner extends React.Component<RunnerProps, RunnerState> {
+  i: number
+  stringRef: any
+  interval?: any
+  state: RunnerState
+  setState: any
+
+  constructor(props) {
+    super(props)
+    this.i = 0
+    this.state = {
+      baseString: props.string.split(''),
+      string: null,
     }
-    
-    const stringTag = stringRef.current
-    if (stringTag) {
-      const stringWidth = stringTag.getBoundingClientRect().width
-      const parentWidth = stringTag.parentNode.getBoundingClientRect().width
-
-      if (stringWidth >= parentWidth) {
-        setDone(true)
-      }
-    }
-  }, [done, tick, runner])
-
-  React.useEffect(() => {
-    setDone(false)
-  }, [update, stringRef.current, width])
-
-  const keyframe = () => {
-    const next = runner.slice(1)
-    set(next.concat([baseString[tick % baseString.length]]))
-    setTick(tick + 1)
+    this.stringRef = React.createRef()
   }
 
-  useInterval(() => {
-    if (done) {
-      keyframe()
+  componentDidMount() {
+    this.setState({ string: this.state.baseString.join('') })
+    if (window !== undefined) {
+      window.addEventListener('resize', this.getString)
     }
-  }, 500);
+    this.interval = setInterval(this.keyframe, 400)
+  }
 
-  return React.useMemo(() => {
+  componentDidUpdate(_, prevState) {
+    if (this.state !== prevState) {
+      this.getString()
+    }
+  }
+
+  componentWillUnmount() {
+    if (window !== undefined) {
+      window.removeEventListener('resize', this.getString)
+    }
+    clearInterval(this.interval)
+  }
+
+  keyframe = () => {
+    const stringTag = this.stringRef.current
+    const newStringInnerText = stringTag.innerText
+      .split('')
+      .slice(1)
+      .concat(this.state.baseString[this.i % this.state.baseString.length])
+    stringTag.innerText = newStringInnerText.join('')
+    this.i += 1
+  }
+
+  getString = () => {
+    const stringTag = this.stringRef.current
+    const stringWidth = stringTag.getBoundingClientRect().width
+    const parentWidth = stringTag.parentNode.getBoundingClientRect().width
+    if (stringWidth < parentWidth) {
+      stringTag.innerText += this.state.baseString[
+        this.i % this.state.baseString.length
+      ]
+      this.i += 1
+      this.getString()
+    }
+  }
+
+  render() {
     return (
-      <span ref={stringRef}>
-        {runner.join('')}
+      <span ref={this.stringRef}>
+        {this.state.string}
       </span>
     )
-  }, [update, runner])
+  }
 }
-
-export const Runner = React.memo(RunnerString)

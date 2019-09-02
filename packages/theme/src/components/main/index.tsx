@@ -62,9 +62,13 @@ export const TextContainer = styled.div`
   }
   & p {
     ${tw`
-      pb-4
       text-justify
     `};
+    &:not(:last-of-type) {
+      ${tw`
+        pb-4
+    `};
+    }
   }
   & a {
     ${tw`
