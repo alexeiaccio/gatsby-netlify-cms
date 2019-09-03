@@ -12,6 +12,7 @@ interface LinkProps {
   children?: JSX.Element
   key?: any
   to?: string
+  target?: string
 }
 
 export function Link({ api, children, to, ...props }: LinkProps) {
@@ -25,7 +26,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   const href = get(location, 'href', '')
   const host = get(regExp.exec(href), '1', '')
 
-  if ((host !== 'www') && (host !== api) && !href.includes('localhost')) {
+  if ((host !== api) && !href.includes('localhost')) {
     return (
       <a href={`https://${get(APIS, api, 'www')}.krapiva.org/${to}`} {...props}>
         {children}
