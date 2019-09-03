@@ -1,5 +1,6 @@
 const path = require('path')
 const get = require('lodash/get')
+const compact = require('lodash/compact')
 const { makePath, translite, getCategories } = require('@krapiva-org/utils')
 
 exports.createPages = async ({ actions, graphql }) => {
@@ -12,8 +13,8 @@ exports.createPages = async ({ actions, graphql }) => {
       createPage({
         component: path.resolve(`src/templates/author.tsx`),
         context: {
-          slug: slug,
-          tags: tags,
+          slug,
+          tags,
         },
         path: slug,
       })
@@ -43,6 +44,11 @@ exports.createPages = async ({ actions, graphql }) => {
               slug
             }
             tags
+            data {
+              title {
+                text
+              }
+            }
           }
         }
       }
@@ -75,6 +81,7 @@ exports.onCreateNode = ({ node, actions }) => {
 
   if (node && node.internal.type === `PrismicArticles`) {
     const { data, first_publication_date, tags } = node
+    const authors = get(data, 'authors', [])
     createNodeField({
       node,
       name: `slug`,

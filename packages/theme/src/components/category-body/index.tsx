@@ -11,7 +11,7 @@ import { sectionStyles, rowStyles } from './styles'
 
 interface CategoryBodyProps {
   articles: Article[]
-  title: string
+  title?: string
 }
 
 export function CategoryBody({ articles, title }: CategoryBodyProps) {
@@ -19,9 +19,11 @@ export function CategoryBody({ articles, title }: CategoryBodyProps) {
     <Wrapper>
       <Container>
         <section css={sectionStyles}>
-          <TextContainer>
-            <h1>{title}</h1>
-          </TextContainer>
+          {title && (
+            <TextContainer>
+              <h1>{title}</h1>
+            </TextContainer>
+          )}
           <Row gap={1} css={rowStyles}>
             {articles.map(item => (
               <Col

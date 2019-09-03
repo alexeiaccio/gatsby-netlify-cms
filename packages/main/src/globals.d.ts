@@ -1,3 +1,5 @@
+declare module 'react'
 declare module 'gatsby'
+declare module 'lodash'
 declare module '@krapiva-org/theme'
-declare module 'theme-ui'
+declare module '@krapiva-org/utils'
