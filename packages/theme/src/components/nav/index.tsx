@@ -26,6 +26,7 @@ export function Nav({
   styles = {
     color: '#0cf3ad',
     inverted: true,
+    contrast: true,
     rounded: 0,
     size: 0.75,
   }

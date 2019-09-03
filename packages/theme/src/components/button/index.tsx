@@ -13,6 +13,7 @@ const noop = () => { };
 export interface ButtonStyles {
   color?: string
   disabled?: boolean
+  contrast?: boolean
   inverted?: boolean
   rounded?: number
   size?: number
@@ -34,6 +35,7 @@ export function Button({
   children,
   color = '#0cf3ad',
   disabled = false,
+  contrast = false,
   inverted = false,
   onClick = noop,
   rounded = 0,
@@ -67,12 +69,14 @@ export function Button({
         padding: ${size * 0.5}rem ${size}rem;
         /* disabled */
         background-color: ${disabled && inverted && '#a0aec0'};
+        color: ${contrast && inverted && '#000'};
         border-color: ${disabled && '#a0aec0'};
         color: ${disabled && !inverted && '#a0aec0'};
         cursor: ${disabled && 'not-allowed'};
         /* hover */
         &:hover {
           background-color: ${inverted ? '#fff' : color};
+          background-color: ${contrast && inverted && '#000'};
           color: ${inverted ? color : '#fff'};
           /* disabled */
           background-color: ${disabled && !inverted && '#a0aec0'};

@@ -12,7 +12,7 @@ interface HeaderNavProps {
   sticked: boolean
 }
 
-export function HeaderNav({ items, sticked, opened }) {
+export function HeaderNav({ items, sticked, opened }: HeaderNavProps) {
   const { location } = React.useContext(MetaContext)
   const [visible, setVisible] = React.useState(location.pathname === '/')
 
