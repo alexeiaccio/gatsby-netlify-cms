@@ -9,12 +9,11 @@ exports.createPages = async ({ actions, graphql }) => {
   const authorMaker = (data) => {
     data.map(({ node }) => {
       const { fields } = node
-      const { slug, tags } = fields
+      const { slug } = fields
       createPage({
         component: path.resolve(`src/templates/author.tsx`),
         context: {
           slug,
-          tags,
         },
         path: slug,
       })
@@ -35,23 +34,6 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const pages = await graphql(`
     {
-      articles: allPrismicArticles(
-        limit: 2000,
-      ) {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            tags
-            data {
-              title {
-                text
-              }
-            }
-          }
-        }
-      }
       authors: allPrismicAuthors {
         edges {
           node {
@@ -60,6 +42,30 @@ exports.createPages = async ({ actions, graphql }) => {
             }
             data {
               name
+            }
+          }
+        }
+      }
+      articles: allPrismicArticles(
+        limit: 2000,
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+              tags
+              authors
+            }
+            tags
+            data {
+              title {
+                text
+              }
+              authors {
+                author {
+                  slug
+                }
+              }
             }
           }
         }
@@ -79,9 +85,18 @@ exports.createPages = async ({ actions, graphql }) => {
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
 
+  if (node && node.internal.type === `PrismicAuthors`) {
+    const { data } = node
+    createNodeField({
+      node,
+      name: `slug`,
+      value: translite(decodeURI(data.name)),
+    })
+  }
   if (node && node.internal.type === `PrismicArticles`) {
     const { data, first_publication_date, tags } = node
     const authors = get(data, 'authors', [])
+
     createNodeField({
       node,
       name: `slug`,
@@ -92,13 +107,13 @@ exports.onCreateNode = ({ node, actions }) => {
       name: `tags`,
       value: tags ? tags.map(tag => translite(tag)) : [],
     })
-  }
-  if (node && node.internal.type === `PrismicAuthors`) {
-    const { data } = node
     createNodeField({
       node,
-      name: `slug`,
-      value: translite(data.name),
+      name: `authors`,
+      value: compact(authors.map(author => {
+        const name = get(author, 'author.slug')
+        return name? translite(decodeURI(name)) : null
+      })) || [],
     })
   }
 }

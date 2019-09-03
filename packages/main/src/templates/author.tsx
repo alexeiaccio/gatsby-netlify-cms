@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { get } from 'lodash'
 
 import { Layout, AuthorBody } from '@krapiva-org/theme'
+import { translite } from '@krapiva-org/utils'
 
 function AuthorPage({ data, location }) {
   return (
@@ -113,7 +114,7 @@ export const PagetQuery = graphql`
       }
     }
     allPrismicArticles(
-      filter: {data: {authors: {elemMatch: {author: {slug: {eq: $slug}}}}}}
+      filter: {fields: {authors: {eq: $slug}}},
       sort: {fields: first_publication_date, order: DESC}
     ) {
       nodes {
