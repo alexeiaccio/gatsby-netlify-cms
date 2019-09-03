@@ -6,7 +6,6 @@ import { AboutBody } from '../../typings/about'
 
 import { BodyImage } from '../slices/image'
 import { BodyLead } from '../slices/lead'
-import { BodySlider } from '../slices/slider'
 import { BodyText } from '../slices/text'
 
 export function AboutBodyContent({ body }: AboutBody) {

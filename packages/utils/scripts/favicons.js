@@ -3,13 +3,13 @@ const path = require('path');
 const fs = require('fs');
 
 const {
-  siteMetadata: {
+  CONFIG: {
     utilsTitleShort,
     utilsIcon,
     utilsBackgroundColor,
     siteThemeColor
   }
-} = require('../gatsby-config');
+} = require('../defaults/config');
 
 const dir = path.resolve(__dirname, '../public/icons/');
 if (!fs.existsSync(dir)) {

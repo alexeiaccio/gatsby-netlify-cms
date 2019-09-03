@@ -5,13 +5,15 @@ import { get } from 'lodash'
 import { Layout, AuthorBody } from '@krapiva-org/theme'
 
 function AuthorPage({ data, location }) {
-  const name = get(data.prismicAuthors, 'data.name')
-
   return (
     <Layout
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
+      seo={{
+        title: get(data.prismicAuthors, 'data.name'),
+        image: get(data.prismicAuthors, 'data.avatar'),
+      }}
     >
       <AuthorBody
         author={data.prismicAuthors}
@@ -28,6 +30,11 @@ export const PagetQuery = graphql`
         siteTitle
         siteMotto
         siteUrl
+        siteDescription
+        siteKeywords
+        siteThemeColor
+        twitter
+        fbAppId
       }
     }
     prismicIndex {

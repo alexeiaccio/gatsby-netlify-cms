@@ -8,6 +8,7 @@ import '../../utils/globals.css'
 import { Footer } from '../footer/index'
 import { WrappedHeader } from '../header/index'
 import { Main } from '../main/index'
+import { SEO } from '../seo/index'
 
 import { Borders } from './styles'
 import globalStyles from './global'
@@ -19,14 +20,16 @@ interface LayoutProps {
   location?: any
   meta?: any
   index?: any
+  seo?: any
   blackHeader?: boolean
 }
 
-function LayoutComponent({ children, location, meta, index, blackHeader }: LayoutProps): JSX.Element {
+function LayoutComponent({ children, location, meta, index, seo, blackHeader }: LayoutProps): JSX.Element {
 
   return (
     <React.Fragment>
       <Global styles={globalStyles} />
+      <SEO meta={meta} location={location} data={seo} />
       <Borders />
       <MetaContext.Provider value={{ location, meta, index, blackHeader }}>
         <WrappedHeader />

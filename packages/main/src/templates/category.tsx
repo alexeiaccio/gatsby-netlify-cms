@@ -17,6 +17,10 @@ function CategoryPage({ data, location, pageContext}) {
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
+      seo={{
+        title: title,
+        image: get(node, 'data.image'),
+      }}
     >
     <CategoryBody
       title={title || ''}
@@ -33,6 +37,11 @@ export const PagetQuery = graphql`
         siteTitle
         siteMotto
         siteUrl
+        siteDescription
+        siteKeywords
+        siteThemeColor
+        twitter
+        fbAppId
       }
     }
     prismicIndex {

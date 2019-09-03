@@ -25,6 +25,11 @@ export const PageQuery = graphql`
         siteTitle
         siteMotto
         siteUrl
+        siteDescription
+        siteKeywords
+        siteThemeColor
+        twitter
+        fbAppId
       }
     }
     prismicIndex {

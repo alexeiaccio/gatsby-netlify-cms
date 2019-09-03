@@ -1,5 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { get } from 'lodash'
+
 import { Layout, ArticleBody } from '@krapiva-org/theme'
 
 function ArticlesPage({ data, location }: any) {
@@ -8,6 +10,10 @@ function ArticlesPage({ data, location }: any) {
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
+      seo={{
+        title: get(data.prismicArticles, 'data.title.text'),
+        image: get(data.prismicArticles, 'data.image'),
+      }}
       blackHeader
     >
       <ArticleBody data={data.prismicArticles} />
@@ -22,6 +28,11 @@ export const PageQuery = graphql`
         siteTitle
         siteMotto
         siteUrl
+        siteDescription
+        siteKeywords
+        siteThemeColor
+        twitter
+        fbAppId
       }
     }
     prismicIndex {

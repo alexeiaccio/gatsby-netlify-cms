@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { get } from 'lodash'
 
 import { Layout, CategoryBody } from '@krapiva-org/theme'
 
@@ -9,6 +10,10 @@ function NovoePage({ data, location }: any) {
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
+      seo={{
+        title: "Новые статьи",
+        image: get(data.allPrismicArticles.nodes, '0.data.image'),
+      }}
     >
     <CategoryBody
       title="Новые статьи"
@@ -25,6 +30,11 @@ export const PageQuery = graphql`
         siteTitle
         siteMotto
         siteUrl
+        siteDescription
+        siteKeywords
+        siteThemeColor
+        twitter
+        fbAppId
       }
     }
     prismicIndex {
