@@ -19,7 +19,7 @@ export interface ButtonStyles {
   size?: number
 }
 
-interface ButtonProps extends ButtonStyles {
+export interface ButtonProps extends ButtonStyles {
   children?: JSX.Element | JSX.Element[]
   component?: JSX.Element | string | null
   onClick?: (() => any) | undefined
@@ -41,10 +41,7 @@ export function Button({
   rounded = 0,
   styles,
   size = 0.75,
-  to,
-  href,
-  rel,
-  target,
+  ...args
 }: ButtonProps): JSX.Element {
   let props = {}
   let ButtonComponent = StyledButton
@@ -52,11 +49,7 @@ export function Button({
     ButtonComponent = StyledButton.withComponent(component)
   }
 
-  if (to) { props = { ...props, to } }
-  if (href) { props = { ...props, href } }
-  if (rel) { props = { ...props, rel } }
   if (styles) { props = { ...props, styles } }
-  if (target) { props = { ...props, target } }
 
   return (
     <ButtonComponent
@@ -86,6 +79,7 @@ export function Button({
       `}
       onClick={onClick}
       {...props}
+      {...args}
     >
       {children}
     </ButtonComponent>

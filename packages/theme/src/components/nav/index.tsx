@@ -5,7 +5,8 @@ import { navigate } from '@reach/router'
 
 import { MENU } from '@krapiva-org/utils'
 
-import { Button, ButtonStyles } from '../button/index'
+import { LinkButton } from '../button/link'
+import { ButtonStyles } from '../button/index'
 import { MetaContext } from '../layout/index'
 
 import { itemStyles, navStyles, buttonStyles } from './styles'
@@ -55,7 +56,7 @@ export function Nav({
 
         return (
           <li css={itemStyles} key={uuid()}>
-            <Button
+            <LinkButton
               component={component}
               disabled={!link}
               href={!internal && !anchor && link}
@@ -67,7 +68,7 @@ export function Nav({
               {...styles}
             >
               {text}
-            </Button>
+            </LinkButton>
           </li>
         )
       })}

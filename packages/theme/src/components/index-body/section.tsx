@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { Button } from '../button/index'
+import { LinkButton } from '../button/link'
 import { Card } from '../card/index'
 import { Img } from '../img/index'
 import { HTML } from '../html/index'
@@ -51,7 +51,7 @@ export function IndexSection({ data }: SectionProps) {
         <div css={rowStyles}>
           <Img src={get(data, 'about.body.1.primary.imageimage')} />
         <div css={css`${buttonStyles};${rowStyles}`}>
-          <Button
+          <LinkButton
             color="#08a676"
             component={Link}
             inverted
@@ -61,7 +61,7 @@ export function IndexSection({ data }: SectionProps) {
             <span>
               {data.title} →
             </span>
-          </Button>
+          </LinkButton>
         </div>
         </div>
       ) : (
@@ -79,7 +79,7 @@ export function IndexSection({ data }: SectionProps) {
       )}
       {(data.articles.length > 6) && (
         <div css={buttonStyles}>
-          <Button
+          <LinkButton
             color="#08a676"
             component={Link}
             inverted
@@ -89,7 +89,7 @@ export function IndexSection({ data }: SectionProps) {
             <span>
               {data.title} →
             </span>
-          </Button>
+          </LinkButton>
         </div>
       )}
     </section>
