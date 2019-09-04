@@ -65,6 +65,19 @@ export const leadStyles = css`
 
 export const textStyles = css`
   ${tw`
+    relative
     pt-8
   `};
+
+  & .reference {
+    ${tw`
+      font-sans
+      bg-green-200 hover:bg-green-600
+      outline-none focus:outline-none
+      rounded-sm
+      text-xxs
+      hover:text-white
+    `};
+    padding: 0.05rem 0.35rem;
+  }
 `

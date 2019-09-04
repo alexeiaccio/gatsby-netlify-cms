@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
-import { get } from 'lodash'
+import { get, filter, keyBy } from 'lodash'
+import {createMemo} from 'react-use'
 
 import { ArticleBody } from '../../typings/article'
 
@@ -12,9 +13,15 @@ import { BodyText } from '../slices/text'
 export function ArticleBodyContent({ body }: ArticleBody) {
   if (!body) { return null }
 
+  const useReferences = createMemo(() => keyBy(
+    filter(body, ['__typename', 'PrismicArticlesBodyReference']),
+    'primary.referenceanchor'
+  ))
+  const references = useReferences()
+
   return (
     <React.Fragment>
-      {body.map(({__typename, primary, items}) => (
+      {body.map(({ __typename, primary, items }) => (
         <React.Fragment key={uuid()}>
           {__typename === 'PrismicArticlesBodyImage' && (
             <BodyImage
@@ -29,7 +36,10 @@ export function ArticleBodyContent({ body }: ArticleBody) {
             <BodySlider items={items} />
           )}
           {__typename === 'PrismicArticlesBodyText' && (
-            <BodyText text={get(primary, 'text.html')} />
+            <BodyText
+              text={get(primary, 'text.html')}
+              references={references}
+            />
           )}
         </React.Fragment>
       ))}

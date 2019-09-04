@@ -36,8 +36,7 @@ exports.htmlSerializer = () => (type, element, content, children) => {
         : ''
       
       if (element.data.type === 'reference') {
-        return ``
-        // return `<span class="reference" data-type="reference" data-href=${content}>${content}</span>`
+        return `<button class="reference" data-type="reference" data-href=${content}>${content}</button>`
       } else  if (element.data.link_type === 'Document') {
         return `<a class="link" ${target} href="/${
           element.data.slug
