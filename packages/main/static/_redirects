@@ -1,0 +1,28 @@
+# Changed pathways
+/zhurnal-krapiva-nulevoi-nomer-14-09-2018 https://pervaya.krapiva.org/zhurnal-krapiva-nulevoi-14-09-2018
+/zhurnal-krapiva-pervii-nomer-07-10-2018 https://pervaya.krapiva.org/zhurnal-krapiva-pervii-07-10-2018
+/s-chego-nachinaetsya-rodina-10-10-2018 https://pervaya.krapiva.org/s-chego-nachinaetsya-10-10-2018
+/mariya-baturina-zaschita-luzhina-09-10-2018 https://pervaya.krapiva.org/mariya-baturina-zaschita-09-10-2018
+/opit-novoi-russkoi-karti-24-09-2018 https://pervaya.krapiva.org/opit-novoi-russkoi-24-09-2018
+/aleksandra-gart-drugoe-mesto-fftn-sentyabrya-25-09-2018 https://pervaya.krapiva.org/aleksandra-gart-drugoe-25-09-2018
+/velikaya-prekrasnaya-rossiya-v-okruzhenii-dobrih-sosedei-o-vistavke-vasi-lozhkina-v-artmuze-21-10-2018 https://pervaya.krapiva.org/velikaya-prekrasnaya-rossiya-21-10-2018
+/zhurnal-krapiva-ustanovochnaya-diskussiya-nulevoi-nomer-02-09-2018 https://pervaya.krapiva.org/zhurnal-krapiva-ustanovochnaya-02-09-2018
+/-gnusnie-duhovnie-urodi-beseda-s-kompozitorom-alekseem-sisoevim-15-10-2018 https://pervaya.krapiva.org/gnusnie-duhovnie-urodi-15-10-2018
+/-reviziya-mesta-i-soobschestva-podvodnii-kontinent-30-09-2018 https://pervaya.krapiva.org/reviziya-mesta-i-30-09-2018
+/-marksnash-18-10-2018 https://pervaya.krapiva.org/marksnash-18-10-2018
+/zhurnal-krapiva-nulevoi-14-09-2018 https://pervaya.krapiva.org/zhurnal-k-r-14-09-2018
+/zhurnal-krapiva-nulevoi-nomer-14-09-2018 https://pervaya.krapiva.org/zhurnal-k-r-14-09-2018
+/zhurnal-krapiva-pervii-07-10-2018 https://pervaya.krapiva.org/zhurnal-k-r-07-10-2018
+/zhurnal-krapiva-pervii-nomer-07-10-2018 https://pervaya.krapiva.org/zhurnal-k-r-09-11-2018
+/new /novoe
+/reviews /revyu
+/analitics /analitika
+/discussions /diskussii
+/practice /praktiki-pisma
+/archive /arhiv
+/persons /intervyu
+/documents /dokumenti
+
+# Redirect default Netlify subdomain to primary domain
+https://krapiva-production.netlify.com/* https://www.krapiva.org/:splat 301!
+https://dev-www-krapiva.netlify.com/* https://dev-main.krapiva.org/:splat 301!

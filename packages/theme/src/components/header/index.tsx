@@ -22,10 +22,12 @@ export function WrappedHeader() {
     }
   }, 200, [inView])
 
+  const sticked = headerRef.current ? !inView : false
+
   return (
     <React.Fragment>
-      <Wrapper ref={headerRef} sticked={!inView}>
-        <Header sticked={!inView} />
+      <Wrapper ref={headerRef} sticked={sticked}>
+        <Header sticked={sticked} />
       </Wrapper>
       <Dummy height={headerHeight} ref={ref} />
     </React.Fragment>

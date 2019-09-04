@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { navigate } from 'gatsby'
-import { words } from 'lodash'
+import { words, get } from 'lodash'
 
 const REDIRECTS = {
   'bubnezh-o': 'https://pervaya.krapiva.org/bubnezh-o-lokal-noi-02-09-2018',
@@ -15,13 +15,18 @@ const REDIRECTS = {
 function WrongPath({ location }) {
   React.useEffect(() => {
     if (window !== undefined) {
-      const match = words(location.pathname.replace(/\//g, ''))
+      const pathname = location.pathname.replace(/\//g, '')
+      const regex = /\w{3}-?\w{0,3}-?\w{0,3}-?\d{2}-\d{2}-\d{4}/
+      const articlePathname = regex.exec(pathname)
+      const match = words(pathname)
         .slice(0, 2)
         .join('-')
 
-      REDIRECTS[match] ? 
+      REDIRECTS[match] ?
         window.location.replace(REDIRECTS[match])
-        : navigate('/')
+        : get(articlePathname, '0') ?
+          window.location.replace(`https://pervaya.krapiva.org/${get(articlePathname, '0', '')}`)
+          : navigate('/')
     }
   }, [])
 

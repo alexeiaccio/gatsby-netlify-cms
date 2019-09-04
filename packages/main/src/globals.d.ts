@@ -1,4 +1,4 @@
-declare module 'react'
+// declare module 'react'
 declare module 'gatsby'
 declare module 'lodash'
 declare module '@krapiva-org/theme'

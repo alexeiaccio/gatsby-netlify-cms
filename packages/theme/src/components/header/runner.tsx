@@ -2,6 +2,7 @@ import React from 'react'
 
 interface RunnerProps {
   string: string
+  update: boolean
 }
 
 interface RunnerState {
@@ -34,8 +35,11 @@ export class Runner extends React.Component<RunnerProps, RunnerState> {
     this.interval = setInterval(this.keyframe, 400)
   }
 
-  componentDidUpdate(_, prevState) {
-    if (this.state !== prevState) {
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      (this.state !== prevState) ||
+      (this.props.update !== prevProps.update)
+    ) {
       this.getString()
     }
   }

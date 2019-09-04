@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { get } from 'lodash'
 import tw from 'tailwind.macro'
 
-import { translite } from '@krapiva-org/utils/src/make-path'
+import { translite } from '@krapiva-org/utils'
 
 import { Logo } from '../logo/index'
 import { MetaContext } from '../layout/index'
@@ -76,7 +76,10 @@ export function Header(props: HeaderProps) {
           ${sticked && tw`text-xxs`};
         `}
       >
-        <Runner string={meta.siteMotto} />
+        <Runner
+          string={meta.siteMotto}
+          update={sticked || opened} 
+        />
       </div>
     </div>
   )
