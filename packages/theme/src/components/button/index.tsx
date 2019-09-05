@@ -20,7 +20,7 @@ export interface ButtonStyles {
 }
 
 export interface ButtonProps extends ButtonStyles {
-  children?: JSX.Element | JSX.Element[]
+  children?: JSX.Element | JSX.Element[] | string
   component?: JSX.Element | string | null
   onClick?: (() => any) | undefined
   styles?: string
@@ -28,6 +28,7 @@ export interface ButtonProps extends ButtonStyles {
   href?: string
   rel?: string
   target?: string
+  css?: any
 }
 
 export function Button({
@@ -54,10 +55,10 @@ export function Button({
   return (
     <ButtonComponent
       css={css`
-        background-color: ${inverted ? color : '#fff'};
+        background-color: ${inverted ? color : '#fff'} !important;
         border-radius: ${rounded}rem;
         border-color: ${color};
-        color: ${inverted ? '#fff' : color};
+        color: ${inverted ? '#fff' : color} !important;
         font-size: ${size}rem;
         padding: ${size * 0.5}rem ${size}rem;
         /* disabled */
@@ -68,9 +69,9 @@ export function Button({
         cursor: ${disabled && 'not-allowed'};
         /* hover */
         &:hover {
-          background-color: ${inverted ? '#fff' : color};
-          background-color: ${contrast && inverted && '#000'};
-          color: ${inverted ? color : '#fff'};
+          background-color: ${inverted ? '#fff' : color} !important;
+          background-color: ${contrast && inverted && '#000'} !important;
+          color: ${inverted ? color : '#fff'} !important;
           /* disabled */
           background-color: ${disabled && !inverted && '#a0aec0'};
           color: ${disabled && inverted && '#a0aec0'};

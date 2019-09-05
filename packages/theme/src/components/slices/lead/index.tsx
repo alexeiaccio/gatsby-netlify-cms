@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { HTML } from '../html/index'
-import { TextContainer } from '../main/index'
+import { HTML } from '../../html/index'
+import { TextContainer } from '../../main/index'
 
 import { leadStyles } from './styles'
 

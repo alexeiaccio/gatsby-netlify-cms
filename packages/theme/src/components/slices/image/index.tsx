@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { Img } from '../img/index'
-import { SpanHTML } from '../html/index'
-import { Image } from '../../typings/image'
+import { Img } from '../../img/index'
+import { SpanHTML } from '../../html/index'
+import { Image } from '../../../typings/image'
 
 import {figureStyles, captionStyles} from './styles'
 

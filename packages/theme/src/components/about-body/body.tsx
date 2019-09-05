@@ -4,9 +4,9 @@ import { get } from 'lodash'
 
 import { AboutBody } from '../../typings/about'
 
-import { BodyImage } from '../slices/image'
-import { BodyLead } from '../slices/lead'
-import { BodyText } from '../slices/text'
+import { BodyImage } from '../slices/image/index'
+import { BodyLead } from '../slices/lead/index'
+import { BodyText } from '../slices/text/index'
 
 export function AboutBodyContent({ body }: AboutBody) {
   if (!body) { return null }

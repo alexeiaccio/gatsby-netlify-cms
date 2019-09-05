@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { get } from 'lodash'
 import { useClickAway } from 'react-use'
 
-import { HTML } from '../html/index'
+import { HTML } from '../../html/index'
 
 import { refStyles, numStyles } from './styles'
 

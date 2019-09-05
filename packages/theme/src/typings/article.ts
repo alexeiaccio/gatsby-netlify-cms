@@ -12,7 +12,7 @@ interface Item {
   }
 }
 
-interface ArticleSlice {
+export interface ArticleSlice {
   __typename: 'PrismicArticlesBodyLead' 
     | 'PrismicArticlesBodyText'
     | 'PrismicArticlesBodyCut' 
@@ -49,15 +49,14 @@ interface ArticleSlice {
       html?: string
       text?: string
     }
-    mediacover?: {
-      url: string
-    }
+    mediacover?: Image
     mediacaption?: {
       html?: string
       text?: string
     }
     medialink?: {
-      url: string
+      url?: string
+      size?: string
     }
   }
   items?: Item[]

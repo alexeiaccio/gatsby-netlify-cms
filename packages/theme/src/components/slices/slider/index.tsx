@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { get } from 'lodash'
 
-import { Img } from '../img/index'
-import { SpanHTML } from '../html/index'
+import { Img } from '../../img/index'
+import { SpanHTML } from '../../html/index'
+import { figureStyles, captionStyles } from '../image/styles'
 
-import { figureStyles, slideStyles, prevStyles, nextStyles, captionStyles } from './styles'
+import { slideStyles, prevStyles, nextStyles } from './styles'
 
 export function BodySlider({ items }: any) {
   if (!items) { return null }

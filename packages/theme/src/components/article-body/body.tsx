@@ -5,10 +5,11 @@ import {createMemo} from 'react-use'
 
 import { ArticleBody } from '../../typings/article'
 
-import { BodyImage } from '../slices/image'
-import { BodyLead } from '../slices/lead'
-import { BodySlider } from '../slices/slider'
-import { BodyText } from '../slices/text'
+import { BodyImage } from '../slices/image/index'
+import { BodyLead } from '../slices/lead/index'
+import { MediaLink } from '../slices/media-link/index'
+import { BodySlider } from '../slices/slider/index'
+import { BodyText } from '../slices/text/index'
 
 export function ArticleBodyContent({ body }: ArticleBody) {
   if (!body) { return null }
@@ -31,6 +32,9 @@ export function ArticleBodyContent({ body }: ArticleBody) {
           )}
           {__typename === 'PrismicArticlesBodyLead' && (
             <BodyLead text={get(primary, 'text.html')} />
+          )}
+          {__typename === 'PrismicArticlesBodyMedialink' && (
+            <MediaLink primary={primary} />
           )}
           {__typename === 'PrismicArticlesBodySlider' && (
             <BodySlider items={items} />

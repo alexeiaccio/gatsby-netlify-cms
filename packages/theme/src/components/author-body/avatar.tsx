@@ -6,7 +6,7 @@ import { Img } from '../img/index'
 import { HTML } from '../html/index'
 import { TextContainer } from '../main/index'
 
-import { wrapperStyles, descriptionStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
+import { wrapperStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface CardProps {
   author: Author
