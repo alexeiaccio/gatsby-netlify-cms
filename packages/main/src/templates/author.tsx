@@ -114,7 +114,7 @@ export const PagetQuery = graphql`
       }
     }
     allPrismicArticles(
-      filter: {fields: {authors: {eq: $slug}}},
+      filter: {fields: {authors: {eq: $slug}, tags: {nin: ["arhiv"]}}},
       sort: {fields: first_publication_date, order: DESC}
     ) {
       nodes {

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
-import { Link } from 'gatsby'
 import { navigate } from '@reach/router'
 
 import { MENU } from '@krapiva-org/utils'
 
+import { Link } from '../link/index'
 import { LinkButton } from '../button/link'
 import { ButtonStyles } from '../button/index'
 import { MetaContext } from '../layout/index'
