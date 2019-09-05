@@ -47,6 +47,7 @@ exports.createPages = async ({ actions, graphql }) => {
         }
       }
       articles: allPrismicArticles(
+        filter: {tags: {nin: ["Афиша"]}},
         limit: 2000,
       ) {
         edges {
