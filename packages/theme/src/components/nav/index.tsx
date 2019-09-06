@@ -60,7 +60,7 @@ export function Nav({
               component={component}
               disabled={!link}
               href={!internal && !anchor && link}
-              onClick={() => anchor && link && navigate(link)}
+              onClick={() => anchor && link && navigate(link, { replace: true })}
               rel={!(internal || anchor) ? 'noopener noreferrer' : undefined}
               styles={buttonStyles}
               target={!internal && !anchor && (target ? target : '_self')}

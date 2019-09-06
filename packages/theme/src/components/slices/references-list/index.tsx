@@ -34,7 +34,7 @@ export function ReferencesList({ references }: ReferencesListProps) {
           >
             <button
               css={buttonStyles}
-              onClick={() => navigate(`#reference-${anchor}`)}
+              onClick={() => navigate(`#reference-${anchor}`, { replace: true })}
             >
               {anchor}
             </button>
