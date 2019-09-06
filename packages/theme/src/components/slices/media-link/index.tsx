@@ -9,11 +9,11 @@ import { LinkButton } from '../../button/link'
 import { Row, Col } from '../../row/index'
 import { HTML } from '../../html/index'
 import { Img } from '../../img/index'
-import { TextContainer } from '../../main/index'
+import { DescriptionContainer } from '../../main/index'
 
 import { AudioTrack } from './audio'
 import { VideoPlayer } from './video'
-import { imageStyles, imageWrapperStyles, imgStyles, buttonStyles } from './styles'
+import { imageStyles, imageWrapperStyles, imgStyles, buttonStyles, sizeStyles } from './styles'
 
 interface MediaLinkProps {
   primary?: {
@@ -56,7 +56,7 @@ export function MediaLink({ primary }: MediaLinkProps) {
     <Row gap={1}>
       <Col
         key={uuid()}
-        gap={1}
+        gap={0.5}
         cols={isVideoFile ? 1 : 2}
       >
         {isVideoFile && <VideoPlayer url={url} />}
@@ -74,10 +74,10 @@ export function MediaLink({ primary }: MediaLinkProps) {
       </Col>
       <Col
         key={uuid()}
-        gap={1}
+        gap={0.5}
         cols={isVideoFile ? 1 : 2}
       >
-        <TextContainer>
+        <DescriptionContainer>
           <HTML>
             {caption}
           </HTML>
@@ -89,10 +89,11 @@ export function MediaLink({ primary }: MediaLinkProps) {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Скачать PDF ↓
+              <span>Скачать PDF ↓</span>
+              {size && <span css={sizeStyles}>{size}</span>}
             </LinkButton>
           )}
-        </TextContainer>
+        </DescriptionContainer>
       </Col>
     </Row >
   )

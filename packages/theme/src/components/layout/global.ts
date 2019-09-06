@@ -10,6 +10,10 @@ export default css`
   body {
     ${tw`bg-black`};
   }
+
+  a {
+    ${tw`break-words`};
+  }
 `
 
 /* 

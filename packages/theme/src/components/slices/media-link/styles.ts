@@ -37,3 +37,9 @@ export const buttonStyles = css`
     mt-4
   `};
 `
+
+export const sizeStyles = css`
+  ${tw`
+    text-xxs
+  `};
+`

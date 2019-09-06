@@ -13,6 +13,16 @@ export function WrappedHeader() {
     threshold: 1,
   })
 
+  async function loadPolyfills() {
+    if (window !== undefined && typeof window.IntersectionObserver === 'undefined') {
+      await import('intersection-observer')
+    }
+  }
+
+  React.useEffect(() => {
+    loadPolyfills();
+  }, [])
+
   useDebounce(() => {
     if (headerRef && headerRef.current) {
       const newHeaderHeight = headerRef.current.getBoundingClientRect().height;

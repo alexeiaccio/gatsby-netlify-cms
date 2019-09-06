@@ -4,10 +4,10 @@ import { get } from 'lodash'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { LinkButton } from '../button/link'
+import { BodyImage } from '../slices/image/index'
 import { Card } from '../card/index'
-import { Img } from '../img/index'
 import { HTML } from '../html/index'
+import { LinkButton } from '../button/link'
 import { Row, Col } from '../row/index'
 import { TextContainer } from '../main/index'
 import { buttonStyles, leadStyles, sectionStyles, rowStyles } from './styles'
@@ -49,34 +49,37 @@ export function IndexSection({ data }: SectionProps) {
       </TextContainer>
       {data.about ? (
         <div css={rowStyles}>
-          <Img src={get(data, 'about.body.1.primary.imageimage')} />
-        <div css={css`${buttonStyles};${rowStyles}`}>
-          <LinkButton
-            color="#08a676"
-            component={Link}
-            inverted
-            rounded={0.25}
-            to={`/o-nas`}
-          >
-            <span>
-              {data.title} →
+          <BodyImage
+            image={get(data, 'about.body.1.primary.imageimage')}
+            caption={get(data, 'about.body.1.primary.imagecaption.html')}
+          />
+          <div css={css`${buttonStyles};${rowStyles}`}>
+            <LinkButton
+              color="#08a676"
+              component={Link}
+              inverted
+              rounded={0.25}
+              to={`/o-nas`}
+            >
+              <span>
+                {data.title} →
             </span>
-          </LinkButton>
-        </div>
+            </LinkButton>
+          </div>
         </div>
       ) : (
-        <Row gap={1} css={rowStyles}>
-          {items.map(item => (
-            <Col
-              key={uuid()}
-              gap={1}
-              cols={2}
-            >
-              <Card data={item} />
-            </Col>
-          ))}
-        </Row>
-      )}
+          <Row gap={1} css={rowStyles}>
+            {items.map(item => (
+              <Col
+                key={uuid()}
+                gap={1}
+                cols={2}
+              >
+                <Card data={item} />
+              </Col>
+            ))}
+          </Row>
+        )}
       {(data.articles.length > 6) && (
         <div css={buttonStyles}>
           <LinkButton

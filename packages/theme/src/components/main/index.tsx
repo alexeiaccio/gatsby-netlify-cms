@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   ${tw`
     mx-auto 
-    pb-10 px-4 sm:px-8
+    pb-12 px-4 sm:px-8
     max-w-2xl
   `};
 `
@@ -67,6 +67,57 @@ export const TextContainer = styled.div`
     &:not(:last-of-type) {
       ${tw`
         pb-4
+    `};
+    }
+  }
+  & a {
+    ${tw`
+      text-green-600
+      hover:text-green-600
+    `};
+  }
+`
+
+export const descriptionDefaults = css`
+  ${tw`
+    mx-auto
+    w-full max-w-lg
+    subpixel-antialiased
+    text-xs sm:text-sm
+  `};
+`
+
+export const DescriptionContainer = styled.div`
+  ${descriptionDefaults};
+
+  & h1 {
+    ${headingStyles};
+    ${tw`
+      text-2xl sm:text-3xl
+      pt-10 pb-3
+    `};
+  }
+  & h2 {
+    ${headingStyles};
+    ${tw`
+      text-xl sm:text-2xl
+      pt-8 pb-2
+    `};
+  }
+  & h3 {
+    ${headingStyles};
+    ${tw`
+      text-lg
+      pt-6 pb-1
+    `};
+  }
+  & p {
+    ${tw`
+      text-justify
+    `};
+    &:not(:last-of-type) {
+      ${tw`
+        pb-3
     `};
     }
   }

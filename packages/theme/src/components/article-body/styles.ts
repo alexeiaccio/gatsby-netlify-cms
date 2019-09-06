@@ -1,6 +1,8 @@
 import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
+import { descriptionDefaults } from '../main/index'
+
 export const headerStyles = css`
   ${tw`
     flex flex-col
@@ -20,10 +22,9 @@ export const imageWrapperStyles = css`
 `
 
 export const captionStyles = css`
+  ${descriptionDefaults};
   ${tw`
-    py-2 mx-auto
-    w-full max-w-lg
-    text-xs md:text-sm
+    py-2
   `};
 `
 

@@ -11,7 +11,7 @@ export const headerStyles = css`
 `
 
 export const navStyles = css`
-  ${tw`max-w-lg my-4`};
+  ${tw`max-w-2xl my-4`};
 `
 
 export const runnerStyles = css`
