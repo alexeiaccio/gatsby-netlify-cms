@@ -22,6 +22,7 @@ export interface ArticleSlice {
     | 'PrismicArticlesBodyListOfArticles'
     | 'PrismicArticlesBodySlider'
     | 'PrismicArticlesBodyMedialink'
+    | 'PrismicArticlesBodyReferencesList'
   id?: string
   primary?: {
     text?: {

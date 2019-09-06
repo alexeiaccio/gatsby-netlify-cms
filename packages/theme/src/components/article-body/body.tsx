@@ -10,17 +10,16 @@ import { BodyImage } from '../slices/image/index'
 import { BodyLead } from '../slices/lead/index'
 import { MediaLink } from '../slices/media-link/index'
 import { BodyQuote } from '../slices/quote/index'
+import { ReferencesList } from '../slices/references-list/index'
 import { BodySlider } from '../slices/slider/index'
 import { BodyText } from '../slices/text/index'
 import { Youtube } from '../slices/youtube/index'
 
 export function ArticleBodyContent({ body }: ArticleBody) {
   if (!body) { return null }
-
-  const useReferences = createMemo(() => keyBy(
-    filter(body, ['__typename', 'PrismicArticlesBodyReference']),
-    'primary.referenceanchor'
-  ))
+ 
+  const referencesArray = filter(body, ['__typename', 'PrismicArticlesBodyReference']);
+  const useReferences = createMemo(() => keyBy(referencesArray, 'primary.referenceanchor'))
   const references = useReferences()
 
   return (
@@ -47,6 +46,9 @@ export function ArticleBodyContent({ body }: ArticleBody) {
               quote={get(primary, 'quote.html')}
               cite={get(primary, 'cite.html')}
             />
+          )}
+          {__typename === 'PrismicArticlesBodyReferencesList' && (
+            <ReferencesList references={referencesArray} />
           )}
           {__typename === 'PrismicArticlesBodySlider' && (
             <BodySlider items={items} />

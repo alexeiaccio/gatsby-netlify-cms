@@ -34,6 +34,7 @@ export function BodyText({ text, references = {} }: BodyTextProps) {
     if (refNodes.length) {
       for (let node of refNodes) {
         node.addEventListener('click', handleToggle)
+        node.id = `reference-${node.textContent}`
       }
     }
   }

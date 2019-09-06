@@ -12,6 +12,7 @@ interface ArticlesListProps {
 }
 
 export function ArticlesList({ articles }: ArticlesListProps) {
+  if (!articles) { return null }
   return (
     <Row gap={1} css={rowStyles}>
       {articles.map(item => (
