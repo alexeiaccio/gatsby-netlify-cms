@@ -13,7 +13,8 @@ import { SEO } from '../seo/index'
 import { Borders } from './styles'
 import globalStyles from './global'
 
-export const MetaContext = React.createContext<any>(null)
+export const MetaContext = React.createContext<any>({})
+export const StateContext = React.createContext<any>({})
 
 interface LayoutProps {
   children: JSX.Element
@@ -24,7 +25,11 @@ interface LayoutProps {
   blackHeader?: boolean
 }
 
-function LayoutComponent({ children, location, meta, index, seo, blackHeader }: LayoutProps): JSX.Element {
+function LayoutComponent({
+  children, location, meta,
+  index, seo, blackHeader
+}: LayoutProps): JSX.Element {
+  const [views, setViews] = React.useState(null)
 
   return (
     <React.Fragment>
@@ -32,11 +37,13 @@ function LayoutComponent({ children, location, meta, index, seo, blackHeader }: 
       <SEO meta={meta} location={location} data={seo} />
       <Borders />
       <MetaContext.Provider value={{ location, meta, index, blackHeader }}>
-        <WrappedHeader />
-        <Main>
-          {children}
-        </Main>
-        <Footer />
+        <StateContext.Provider value={{ views, setViews }}>
+          <WrappedHeader />
+          <Main>
+            {children}
+          </Main>
+          <Footer />
+        </StateContext.Provider>
       </MetaContext.Provider>
     </React.Fragment>
   )

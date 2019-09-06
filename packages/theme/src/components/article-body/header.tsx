@@ -10,6 +10,8 @@ import { Img } from '../img/index'
 import { Link } from '../link/index'
 import { TextContainer } from '../main/index'
 
+import { Views } from './views'
+import { useGetViews } from './use-get-views'
 import { headerStyles, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface ArticleHeaderProps {
@@ -23,9 +25,8 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')
-  const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.cdn.prismic/
-  const href = get(data, 'href', '')
-  const api = get(regExp.exec(href), '1', 'krapiva-dev')
+
+  useGetViews()
 
   return (
     <div css={headerStyles}>
@@ -59,6 +60,7 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
               </Link>
             ))
           )}
+          <Views />
         </div>
       </TextContainer>
       <div css={imageWrapperStyles}>

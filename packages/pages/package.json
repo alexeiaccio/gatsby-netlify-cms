@@ -13,6 +13,8 @@
     "@emotion/styled": "^10.0.14",
     "@krapiva-org/theme": "*",
     "@krapiva-org/utils": "*",
+    "@types/axios": "^0.14.0",
+    "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "gatsby": "^2.13.65",
     "gatsby-image": "^2.2.8",

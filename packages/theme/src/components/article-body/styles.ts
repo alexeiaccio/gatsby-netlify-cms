@@ -2,6 +2,8 @@ import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
 import { descriptionDefaults } from '../main/index'
+import * as eye from './eye.svg'
+import * as burn from './burn.svg'
 
 export const headerStyles = css`
   ${tw`
@@ -47,5 +49,37 @@ export const descriptionStyles = css`
       text-green-500
       hover:text-green-500
     `};
+  }
+`
+
+const iconStyles = css`
+  ${tw`ml-1 pl-6 relative`};
+
+  &::before {
+    content: '';
+    ${tw`
+    absolute inset-0
+    block
+    bg-contain
+    bg-center
+    bg-no-repeat
+    h-full w-6
+  `};
+  }
+`
+
+export const viewsStyles = css`
+  ${iconStyles};
+
+  &::before {
+    background-image: url(${eye});
+  }
+`
+
+export const burnsStyles = css`
+  ${iconStyles};
+
+  &::before {
+    background-image: url(${burn});
   }
 `
