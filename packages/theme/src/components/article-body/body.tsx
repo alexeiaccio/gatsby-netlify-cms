@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
 import { get, filter, keyBy, map } from 'lodash'
-import {createMemo} from 'react-use'
+import { createMemo } from 'react-use'
 
 import { ArticleBody } from '../../typings/article'
 
@@ -9,6 +9,7 @@ import { ArticlesList } from '../slices/articles-list/index'
 import { BodyImage } from '../slices/image/index'
 import { BodyLead } from '../slices/lead/index'
 import { MediaLink } from '../slices/media-link/index'
+import { BodyQuote } from '../slices/quote/index'
 import { BodySlider } from '../slices/slider/index'
 import { BodyText } from '../slices/text/index'
 import { Youtube } from '../slices/youtube/index'
@@ -40,6 +41,12 @@ export function ArticleBodyContent({ body }: ArticleBody) {
           )}
           {__typename === 'PrismicArticlesBodyMedialink' && (
             <MediaLink primary={primary} />
+          )}
+          {__typename === 'PrismicArticlesBodyQuote' && (
+            <BodyQuote
+              quote={get(primary, 'quote.html')}
+              cite={get(primary, 'cite.html')}
+            />
           )}
           {__typename === 'PrismicArticlesBodySlider' && (
             <BodySlider items={items} />
