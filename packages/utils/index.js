@@ -5,6 +5,7 @@ const { MENU } = require('./defaults/menu')
 const { SCHEMAS } = require('./schemas/index')
 const { getCategories, makePath, translite } = require('./src/make-path')
 const { htmlSerializer, linkResolver } = require('./src/prismic')
+const { bytesToSize } = require('./src/bytes')
 
 module.exports = {
   APIS,
@@ -20,4 +21,6 @@ module.exports = {
 
   htmlSerializer,
   linkResolver,
+
+  bytesToSize,
 }

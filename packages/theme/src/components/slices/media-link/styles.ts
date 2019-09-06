@@ -35,11 +35,13 @@ export const videoStyle = css`
 export const buttonStyles = css`
   ${tw`
     mt-4
+    items-baseline
   `};
 `
 
 export const sizeStyles = css`
   ${tw`
     text-xxs
+    text-green-400
   `};
 `

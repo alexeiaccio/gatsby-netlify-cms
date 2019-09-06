@@ -179,10 +179,11 @@ export const PageQuery = graphql`
                 document {
                   __typename
                   ... on PrismicArticles {
-                    first_publication_date
+                    first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
                     fields {
                       slug
                     }
+                    tags
                     data {
                       title {
                         text

@@ -3,6 +3,8 @@ import { get } from 'lodash'
 import styled from '@emotion/styled'
 import * as uuid from 'uuid/v1'
 
+import { bytesToSize } from '@krapiva-org/utils'
+
 import { Image } from '../../../typings/image'
 
 import { LinkButton } from '../../button/link'
@@ -56,7 +58,7 @@ export function MediaLink({ primary }: MediaLinkProps) {
     <Row gap={1}>
       <Col
         key={uuid()}
-        gap={0.5}
+        gaps={[1, 0.5]}
         cols={isVideoFile ? 1 : 2}
       >
         {isVideoFile && <VideoPlayer url={url} />}
@@ -74,7 +76,7 @@ export function MediaLink({ primary }: MediaLinkProps) {
       </Col>
       <Col
         key={uuid()}
-        gap={0.5}
+        gaps={[1, 0.5]}
         cols={isVideoFile ? 1 : 2}
       >
         <DescriptionContainer>
@@ -89,8 +91,12 @@ export function MediaLink({ primary }: MediaLinkProps) {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <span>Скачать PDF ↓</span>
-              {size && <span css={sizeStyles}>{size}</span>}
+              <span>Скачать PDF </span>
+              {size && (
+                <span css={sizeStyles}>
+                  {bytesToSize(size)}
+                </span>
+              )}
             </LinkButton>
           )}
         </DescriptionContainer>

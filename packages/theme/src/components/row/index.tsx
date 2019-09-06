@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
+import { get } from 'lodash'
 
 export const Row = styled.div`
   ${tw`
@@ -23,10 +24,10 @@ export const Col = styled.div`
   `};
   flex-grow: 1;
   flex-shrink: 0;
-  margin-bottom: ${props => ((props.gap || 1) * 2)}rem;
+  margin-bottom: ${props => ((get(props, 'gap', get(props, 'gaps.1')) || 1) * 2)}rem;
 
   @media (min-width: 640px) {
     max-width: ${props => 100 / (props.cols || 2)}%;
-    padding: 0 ${props => (props.gap || 0) / 2}rem;
+    padding: 0 ${props => (get(props, 'gap', get(props, 'gaps.0')) || 0) / 2}rem;
   }
 `
