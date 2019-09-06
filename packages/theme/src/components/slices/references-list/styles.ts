@@ -1,6 +1,8 @@
 import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
+import { smallButton } from '../../button/styles'
+
 export const rowStyles = css`
   ${tw`
     border-b
@@ -17,13 +19,5 @@ export const refStyles = css`
 `
 
 export const buttonStyles = css`
-  ${tw`
-    font-sans
-    bg-green-200 hover:bg-green-600
-    outline-none focus:outline-none
-    rounded-sm
-    text-xxs
-    hover:text-white
-  `};
-  padding: 0.05rem 0.35rem;
+  ${smallButton};
 `
