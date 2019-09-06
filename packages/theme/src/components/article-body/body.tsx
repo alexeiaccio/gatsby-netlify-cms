@@ -11,6 +11,7 @@ import { BodyLead } from '../slices/lead/index'
 import { MediaLink } from '../slices/media-link/index'
 import { BodySlider } from '../slices/slider/index'
 import { BodyText } from '../slices/text/index'
+import { Youtube } from '../slices/youtube/index'
 
 export function ArticleBodyContent({ body }: ArticleBody) {
   if (!body) { return null }
@@ -48,6 +49,9 @@ export function ArticleBodyContent({ body }: ArticleBody) {
               text={get(primary, 'text.html')}
               references={references}
             />
+          )}
+          {__typename === 'PrismicArticlesBodyYoutube' && (
+            <Youtube primary={primary} />
           )}
         </React.Fragment>
       ))}

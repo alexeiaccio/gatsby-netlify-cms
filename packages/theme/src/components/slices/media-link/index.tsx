@@ -58,7 +58,7 @@ export function MediaLink({ primary }: MediaLinkProps) {
     <Row gap={1}>
       <Col
         key={uuid()}
-        gaps={[1, 0.5]}
+        gaps={[1, 0.25]}
         cols={isVideoFile ? 1 : 2}
       >
         {isVideoFile && <VideoPlayer url={url} />}
@@ -76,7 +76,7 @@ export function MediaLink({ primary }: MediaLinkProps) {
       </Col>
       <Col
         key={uuid()}
-        gaps={[1, 0.5]}
+        gap={1}
         cols={isVideoFile ? 1 : 2}
       >
         <DescriptionContainer>
