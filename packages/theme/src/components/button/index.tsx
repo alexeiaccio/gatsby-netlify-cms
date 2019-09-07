@@ -55,23 +55,25 @@ export function Button({
   return (
     <ButtonComponent
       css={css`
-        background-color: ${inverted ? color : '#fff'} !important;
+        background-color: ${inverted ? color : '#fff  !important'};
+        background-color: ${contrast && !inverted && '#000  !important'};
         border-radius: ${rounded}rem;
         border-color: ${color};
-        color: ${inverted ? '#fff' : color} !important;
+        color: ${inverted ? '#fff' : `${color}  !important`};
+        color: ${contrast && inverted && '#000 !important'};
         font-size: ${size}rem;
         padding: ${size * 0.5}rem ${size}rem;
         /* disabled */
         background-color: ${disabled && inverted && '#a0aec0'};
-        color: ${contrast && inverted && '#000'};
         border-color: ${disabled && '#a0aec0'};
         color: ${disabled && !inverted && '#a0aec0'};
         cursor: ${disabled && 'not-allowed'};
         /* hover */
         &:hover {
-          background-color: ${inverted ? '#fff' : color} !important;
-          background-color: ${contrast && inverted && '#000'} !important;
-          color: ${inverted ? color : '#fff'} !important;
+          background-color: ${inverted ? '#fff' : `${color}  !important`};
+          background-color: ${contrast && inverted && '#000  !important'};
+          color: ${inverted ? color : '#fff !important'};
+          color: ${contrast && !inverted && '#000 !important'};
           /* disabled */
           background-color: ${disabled && !inverted && '#a0aec0'};
           color: ${disabled && inverted && '#a0aec0'};

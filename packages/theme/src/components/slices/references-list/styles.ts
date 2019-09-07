@@ -1,6 +1,7 @@
 import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
+import { descriptionStyles } from '../../main/index'
 import { smallButton } from '../../button/styles'
 
 export const rowStyles = css`
@@ -12,6 +13,7 @@ export const rowStyles = css`
     pt-6
     pb-2
   `};
+  ${descriptionStyles};
 `
 
 export const refStyles = css`

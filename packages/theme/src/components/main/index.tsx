@@ -87,8 +87,10 @@ export const descriptionDefaults = css`
   `};
 `
 
-export const DescriptionContainer = styled.div`
-  ${descriptionDefaults};
+export const descriptionStyles = css`
+  ${tw`
+    text-xs sm:text-sm
+  `};
 
   & h1 {
     ${headingStyles};
@@ -127,4 +129,9 @@ export const DescriptionContainer = styled.div`
       hover:text-green-600
     `};
   }
+`
+
+export const DescriptionContainer = styled.div`
+  ${descriptionDefaults};
+  ${descriptionStyles};
 `

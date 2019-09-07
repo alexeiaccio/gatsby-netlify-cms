@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
-import { useDebounce } from 'react-use'
 
 import { Dummy } from './dummy'
 import { Header } from './header'
@@ -23,14 +22,14 @@ export function WrappedHeader() {
     loadPolyfills();
   }, [])
 
-  useDebounce(() => {
+  React.useEffect(() => {
     if (headerRef && headerRef.current) {
       const newHeaderHeight = headerRef.current.getBoundingClientRect().height;
       if (newHeaderHeight > headerHeight) {
         setHeaderHeight(newHeaderHeight)
       }
     }
-  }, 200, [inView])
+  }, [inView])
 
   const sticked = headerRef.current ? !inView : false
 

@@ -30,3 +30,12 @@ export const titleStyles = css`
     font-sans font-semibold tracking-wide
   `};
 `
+
+export const openerStyles = css`
+  ${tw`
+    absolute
+  `};
+  right: 0.8rem;
+  top: 0.65rem;
+  font-variant: small-caps;
+`

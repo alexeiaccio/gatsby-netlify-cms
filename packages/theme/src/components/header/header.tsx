@@ -10,6 +10,7 @@ import { Logo } from '../logo/index'
 import { MetaContext } from '../layout/index'
 
 import { HeaderNav } from './nav'
+import { Opener } from './opener'
 import { Runner } from './runner'
 import { headerStyles, runnerStyles, titleStyles } from './styles'
 
@@ -33,9 +34,7 @@ export function Header(props: HeaderProps) {
   const items = get(index, 'categories', [])
     .map(item => item ? ({ text: item.categorytitle.text, link: translite(item.categorytitle.text) }) : null)
 
-  const handleClick = () => {
-    if (sticked) { open(!opened) }
-  }
+  const handleClick = () => open()
 
   useThrottle(() => {
     if (scrolling && propsSticked) { open(false) }
@@ -51,7 +50,6 @@ export function Header(props: HeaderProps) {
         ${headerStyles};
         ${(sticked && !opened) ? tw`cursor-pointer` : tw`pt-8`};
       `}
-      onClick={handleClick}
     >
       <Logo height={(sticked && !opened) ? 50 : 100} />
       {(!sticked || opened) && (
@@ -67,6 +65,11 @@ export function Header(props: HeaderProps) {
       )}
       <HeaderNav
         items={items}
+        opened={opened}
+        sticked={sticked}
+      />
+      <Opener
+        onClick={handleClick}
         opened={opened}
         sticked={sticked}
       />
