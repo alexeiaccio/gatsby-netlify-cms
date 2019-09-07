@@ -12,7 +12,7 @@ export const Wrapper = React.forwardRef((props: WrapperProps, ref: any) => {
     <div
       css={css`
         ${tw`
-          fixed
+          absolute
           inset-0 bottom-auto
           z-50
         `};
