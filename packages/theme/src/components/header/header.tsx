@@ -10,8 +10,10 @@ import { Logo } from '../logo/index'
 import { MetaContext } from '../layout/index'
 
 import { HeaderNav } from './nav'
+import { Menu } from './menu'
 import { Opener } from './opener'
 import { Runner } from './runner'
+import { Subcribtion } from './subscription'
 import { headerStyles, runnerStyles, titleStyles } from './styles'
 
 interface HeaderProps {
@@ -29,6 +31,7 @@ export function Header(props: HeaderProps) {
   const scrollRef = React.useRef(rootNode)
   const [sticked, toggle] = useToggle(propsSticked)
   const [opened, open] = useToggle(false)
+  const [openedForm, toggleForm] = useToggle(false)
   const scrolling = useScrolling(scrollRef)
   const { meta, index } = React.useContext(MetaContext)
   const items = get(index, 'categories', [])
@@ -68,11 +71,14 @@ export function Header(props: HeaderProps) {
         opened={opened}
         sticked={sticked}
       />
-      <Opener
-        onClick={handleClick}
-        opened={opened}
-        sticked={sticked}
-      />
+      <Menu opened={!sticked || opened} toggleForm={toggleForm} />
+      {!openedForm && (
+        <Opener
+          onClick={handleClick}
+          opened={opened}
+          sticked={sticked}
+        />
+      )}
       <div
         css={css`
           ${runnerStyles};
@@ -84,6 +90,7 @@ export function Header(props: HeaderProps) {
           update={sticked || opened} 
         />
       </div>
+      <Subcribtion opened={openedForm} onClose={toggleForm} />
     </div>
   )
 }

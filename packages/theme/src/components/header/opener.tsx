@@ -28,6 +28,8 @@ export function Opener({ onClick, sticked, opened }: OpenerProps) {
     size: 0.5,
   }
 
+  if (!sticked && location.pathname === '/') { return null }
+
   return (
     <Button
       css={openerStyles}

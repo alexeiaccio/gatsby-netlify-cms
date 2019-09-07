@@ -26,6 +26,13 @@ exports.plugins = [
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-sharp',
   `gatsby-transformer-sharp`,
+  {
+    resolve: 'gatsby-plugin-mailchimp',
+    options: {
+      endpoint:
+        'https://krapiva.us19.list-manage.com/subscribe/post?u=4076a0aa3adcc8abda830e362&amp;id=9c438f0938',
+    },
+  },
   `gatsby-plugin-remove-serviceworker`,
   // `gatsby-plugin-offline`,
   {

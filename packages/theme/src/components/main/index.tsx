@@ -2,7 +2,7 @@ import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
 
-const headingStyles = css`
+export const headingStyles = css`
   ${tw`
     font-sans
     font-bold
