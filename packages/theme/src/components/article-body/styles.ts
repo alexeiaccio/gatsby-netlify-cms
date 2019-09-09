@@ -90,3 +90,10 @@ export const footerStyles = css`
     font-sans
   `}
 `
+
+export const discussStyles = css`
+  ${tw`
+    mt-8
+    text-center
+  `}
+`
