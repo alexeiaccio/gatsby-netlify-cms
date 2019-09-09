@@ -11,7 +11,7 @@ import { footerStyles } from './styles'
 
 export function ArticleFooter() {
   const { location } = React.useContext(MetaContext)
-  const origin = get(location, 'origin', 'https://www.krapiva.org')
+  const origin = get(location, 'origin', get(document, 'location.origin'))
   const pathname = get(location, 'pathname', '//').replace(/\/$/, '')
   const [ref, inView] = useInView({
     threshold: 0,
