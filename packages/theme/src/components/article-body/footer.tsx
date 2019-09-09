@@ -11,7 +11,8 @@ import { footerStyles } from './styles'
 
 export function ArticleFooter() {
   const { location } = React.useContext(MetaContext)
-  const href = get(location, 'href', '//').replace(/\/$/, '')
+  const origin = get(location, 'origin', 'https://www.krapiva.org')
+  const pathname = get(location, 'pathname', '//').replace(/\/$/, '')
   const [ref, inView] = useInView({
     threshold: 0,
   })
@@ -26,14 +27,14 @@ export function ArticleFooter() {
           <span>{' · '}</span>
           <a
             css={linkStyles}
-            href={`https://vk.com/search?c%5Bper_page%5D=40&c%5Bq%5D=${href}&c%5Bsection%5D=statuses`}
+            href={`https://vk.com/search?c%5Bper_page%5D=40&c%5Bq%5D=${origin}${pathname}&c%5Bsection%5D=statuses`}
             rel="noopener noreferrer"
             target="_blank"
           >VK</a>
           <span>{' · '}</span>
           <a
             css={linkStyles}
-            href={`https://www.facebook.com/search/posts/?q=${href}&epa=SERP_TAB`}
+            href={`https://www.facebook.com/search/posts/?q=${origin}${pathname}&epa=SERP_TAB`}
             rel="noopener noreferrer"
             target="_blank"
           >FB</a>

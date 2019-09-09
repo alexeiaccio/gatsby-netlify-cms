@@ -18,7 +18,7 @@ export function useUpdateViews(update: boolean) {
 
   useUpdateEffect(() => {
     if (update && !done) {
-      axios.get(`${process.env.SLS_API}/counter?path=${pathname}/&view=1&burned=0`)
+      axios.get(`https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/counter?path=${pathname}/&view=1&burned=0`)
       .then(function () {
         setDone(true)
         setViews({
