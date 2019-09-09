@@ -233,7 +233,6 @@ export const PageQuery = graphql`
               }
               medialink {
                 url
-                size
               }
             }
           }

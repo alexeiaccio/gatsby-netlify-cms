@@ -8,7 +8,8 @@ import { viewsStyles, burnsStyles } from './styles'
 export function Views() {
   const { location } = React.useContext(MetaContext)
   const { views } = React.useContext(StateContext)
-  const page = get(views, location.pathname)
+  const page = get(views, location.pathname.replace(/\/+$/, ''))
+
   if (!page) { return null }
 
   return (

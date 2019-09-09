@@ -83,3 +83,10 @@ export const burnsStyles = css`
     background-image: url(${burn});
   }
 `
+
+export const footerStyles = css`
+  ${tw`
+    py-8
+    font-sans
+  `}
+`

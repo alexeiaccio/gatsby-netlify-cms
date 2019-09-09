@@ -6,24 +6,30 @@ import { Container, Wrapper } from '../main/index'
 
 import { ArticleHeader } from './header'
 import { ArticleBodyContent } from './body'
+import { ArticleFooter } from './footer'
 
 interface ArticleBodyProps {
   data: Article
 }
 
 export function ArticleBody({ data }: ArticleBodyProps) {
-  const {data: bodyData, ...headerKeys} = data
-  const {body, ...headerData} = bodyData
+  const { data: bodyData, ...headerKeys } = data
+  const { body, ...headerData } = bodyData
   const header = assign(headerKeys, { data: headerData })
 
   return (
-    <article>
-      <ArticleHeader data={header} />
+    <React.Fragment>
+      <article>
+        <ArticleHeader data={header} />
+        <Wrapper>
+          <Container>
+            <ArticleBodyContent body={body} />
+          </Container>
+        </Wrapper>
+      </article>
       <Wrapper>
-        <Container>
-          <ArticleBodyContent body={body} />
-        </Container>
+        <ArticleFooter />
       </Wrapper>
-    </article>
+    </React.Fragment>
   )
 }
