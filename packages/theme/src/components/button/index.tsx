@@ -73,7 +73,7 @@ export function Button({
         &:hover {
           background-color: ${inverted ? '#fff' : `${color}  !important`};
           background-color: ${contrast && inverted && '#000  !important'};
-          color: ${inverted && contrast ? `${color}  !important` : '#fff !important'};
+          color: ${inverted ? `${color}  !important` : '#fff !important'};
           color: ${contrast && !inverted && '#000 !important'};
           /* disabled */
           background-color: ${disabled && !inverted && '#a0aec0'};

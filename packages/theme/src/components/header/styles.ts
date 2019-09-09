@@ -5,6 +5,7 @@ import { headingStyles } from '../main/index'
 
 export const headerStyles = css`
   ${tw`
+    relative
     flex flex-col items-center
     bg-black
     select-none

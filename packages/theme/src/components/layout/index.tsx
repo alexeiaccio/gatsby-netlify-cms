@@ -9,6 +9,9 @@ import { Footer } from '../footer/index'
 import { WrappedHeader } from '../header/index'
 import { Main } from '../main/index'
 import { SEO } from '../seo/index'
+import { Index } from '../typings/index'
+import { Meta } from '../typings/meta'
+import { Seo } from '../typings/seo'
 
 import { Borders } from './styles'
 import globalStyles from './global'
@@ -19,9 +22,9 @@ export const StateContext = React.createContext<any>({})
 interface LayoutProps {
   children: JSX.Element
   location?: any
-  meta?: any
-  index?: any
-  seo?: any
+  meta?: Meta
+  index?: Index
+  seo?: Seo
   blackHeader?: boolean
 }
 

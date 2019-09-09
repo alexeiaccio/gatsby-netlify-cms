@@ -4,7 +4,7 @@ import tw from 'tailwind.macro'
 
 interface WrapperProps {
   sticked: boolean
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 export const Wrapper = React.forwardRef((props: WrapperProps, ref: any) => {

@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer'
 
 import { Dummy } from './dummy'
 import { Header } from './header'
+import { HeaderBunners } from './bunners'
 import { Wrapper } from './wrapper'
 
 export function WrappedHeader() {
@@ -36,6 +37,7 @@ export function WrappedHeader() {
   return (
     <React.Fragment>
       <Wrapper ref={headerRef} sticked={sticked}>
+        <HeaderBunners sticked={sticked} />
         <Header sticked={sticked} />
       </Wrapper>
       <Dummy height={headerHeight} ref={ref} />
