@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { get } from 'lodash'
 import { useInView } from 'react-intersection-observer'
 
 import { Container } from '../main/index'
@@ -10,7 +11,7 @@ import { footerStyles } from './styles'
 
 export function ArticleFooter() {
   const { location } = React.useContext(MetaContext)
-  const href = location.href.replace(/\/+$/, '')
+  const href = get(location, 'href', '//').replace(/\/$/, '')
   const [ref, inView] = useInView({
     threshold: 0,
   })

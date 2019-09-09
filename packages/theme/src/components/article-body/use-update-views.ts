@@ -8,7 +8,7 @@ import { MetaContext, StateContext } from '../layout/index'
 export function useUpdateViews(update: boolean) {
   const { views, setViews } = React.useContext(StateContext)
   const { location } = React.useContext(MetaContext)
-  const pathname = location.pathname.replace(/\/+$/, '')
+  const pathname = get(location, 'pathname', '//').replace(/\/$/, '')
   const [done, setDone] = React.useState(false)
   const defaultViews = {
     path: pathname,
