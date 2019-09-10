@@ -26,14 +26,6 @@ export function Menu({ opened, toggleForm }: MenuProps) {
         </a>
         <a
           css={linkStyles}
-          href="mailto:krapiva@krapiva.org"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          MAIL
-        </a>
-        <a
-          css={linkStyles}
           href="https://www.facebook.com/krapivapiter"
           rel="noopener noreferrer"
           target="_blank"

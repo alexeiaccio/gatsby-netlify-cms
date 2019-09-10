@@ -19,10 +19,11 @@ interface BunnerProps {
       target: string
     }
   }
+  atFooter?: boolean
   onClick: () => void
 }
 
-export function Bunner({ bunner, onClick }: BunnerProps) {
+export function Bunner({ bunner, onClick, atFooter }: BunnerProps) {
   if (!bunner) { return null }
 
   return (
@@ -39,15 +40,17 @@ export function Bunner({ bunner, onClick }: BunnerProps) {
         >
           {get(bunner, 'bannerbutton', 'Перейти')}
         </LinkButton>
-        <Button
-          inverted
-          color="#08a676"
-          css={closeStyles}
-          rounded={0.25}
-          onClick={onClick}
-        >
-          ✕
-        </Button>
+        {!atFooter && (
+          <Button
+            inverted
+            color="#08a676"
+            css={closeStyles}
+            rounded={0.25}
+            onClick={onClick}
+          >
+            ✕
+          </Button>
+        )}
       </div>
     </div>
   )

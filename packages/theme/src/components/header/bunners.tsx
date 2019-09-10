@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { get, filter } from 'lodash'
-import { useLocalStorage } from 'react-use'
+import { useSessionStorage } from 'react-use'
 
 import { Bunner } from '../bunner/index'
 import { MetaContext } from '../layout/index'
@@ -17,7 +17,7 @@ export function HeaderBunners({ sticked }: HeaderBunnersProps) {
     (get(x, '__typename') === 'PrismicIndexBodyBanner') &&
     (get(x, 'primary.expiredate') <= 0)
   ))
-  const [current, setCurrent] = useLocalStorage('bunner', 0)
+  const [current, setCurrent] = useSessionStorage('bunner', 0)
 
   React.useEffect(() => {
     return () => {
@@ -30,11 +30,9 @@ export function HeaderBunners({ sticked }: HeaderBunnersProps) {
   }
 
   return (
-    <div>
-      <Bunner
-        bunner={get(bunners, [current, 'primary'])}
-        onClick={handleClick}
-      />
-    </div>
+    <Bunner
+      bunner={get(bunners, [current, 'primary'])}
+      onClick={handleClick}
+    />
   )
 }
