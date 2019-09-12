@@ -14,6 +14,8 @@ interface ArticleBodyProps {
 }
 
 export function ArticleBody({ data, onIndex = false }: ArticleBodyProps) {
+  if (!data) { return null }
+
   const { data: bodyData, ...headerKeys } = data
   const { body, ...headerData } = bodyData
   const header = assign(headerKeys, { data: headerData })
