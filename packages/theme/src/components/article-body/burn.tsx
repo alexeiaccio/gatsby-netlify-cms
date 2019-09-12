@@ -17,19 +17,21 @@ export function FooterBurn() {
   }
 
   const handleBurn = () => {
-    axios.get(`${meta.clientApi}/counter?path=${pathname}/&view=0&burned=1`)
-      .then(function () {
-        setViews({
-          ...views,
-          [pathname]: {
-            ...get(views, [pathname], defaultViews),
-            burns: get(views, [pathname, 'burns'], 0) + 1,
-          },
+    if (meta.clientApi) {
+      axios.get(`${meta.clientApi}/counter?path=${pathname}/&view=0&burned=1`)
+        .then(function () {
+          setViews({
+            ...views,
+            [pathname]: {
+              ...get(views, [pathname], defaultViews),
+              burns: get(views, [pathname, 'burns'], 0) + 1,
+            },
+          })
         })
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
   }
 
   return (

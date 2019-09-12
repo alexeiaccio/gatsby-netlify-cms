@@ -17,7 +17,7 @@ export function useUpdateViews(update: boolean) {
   }
 
   useUpdateEffect(() => {
-    if (update && !done[pathname]) {
+    if (update && !done[pathname] && meta.clientApi) {
       axios
         .get(`${meta.clientApi}/counter?path=${pathname}/&view=1&burned=0`)
         .then(function() {
