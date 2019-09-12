@@ -39,10 +39,10 @@ if (apis) {
 module.exports = {
   siteMetadata: {
     ...CONFIG,
-    clientApi: process.env.SLS_API,
+    clientApi: process.env.SLS_API || '',
     origin: null,
-    special: process.env.SPECIAL,
-    dev: process.env.DEV,
+    special: process.env.SPECIAL || null,
+    dev: process.env.DEV || false,
   },
   plugins: [
     {

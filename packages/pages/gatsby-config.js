@@ -8,10 +8,10 @@ const { about, authors, articles, index } = SCHEMAS
 module.exports = {
   siteMetadata: {
     ...CONFIG,
-    clientApi: process.env.SLS_API,
+    clientApi: process.env.SLS_API || '',
     origin: APIS[process.env.PRISMIC_API] || null,
-    special: process.env.SPECIAL,
-    dev: process.env.DEV,
+    special: process.env.SPECIAL || null,
+    dev: process.env.DEV || false,
   },
   plugins: [
     {
