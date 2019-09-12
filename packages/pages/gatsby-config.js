@@ -34,7 +34,7 @@ module.exports = {
         linkResolver,
         htmlSerializer,
         shouldNormalizeImage: ({ node }) => {
-          if (process.env.PRISMIC_API === 'krapiva-org' && node.type === 'articles') {
+          if (node.type === 'articles') {
             return false
           }
           return true
