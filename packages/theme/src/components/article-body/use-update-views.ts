@@ -1,15 +1,15 @@
 import * as React from 'react'
 import * as axios from 'axios'
 import { get } from 'lodash'
-import { useUpdateEffect } from 'react-use'
+import { useUpdateEffect, useSessionStorage } from 'react-use'
 
 import { MetaContext, StateContext } from '../layout/index'
 
 export function useUpdateViews(update: boolean) {
   const { views, setViews } = React.useContext(StateContext)
-  const { location } = React.useContext(MetaContext)
+  const { location, meta } = React.useContext(MetaContext)
   const pathname = get(location, 'pathname', '//').replace(/\/$/, '')
-  const [done, setDone] = React.useState(false)
+  const [done, setDone] = useSessionStorage('viewed', {})
   const defaultViews = {
     path: pathname,
     views: 0,
@@ -17,28 +17,35 @@ export function useUpdateViews(update: boolean) {
   }
 
   useUpdateEffect(() => {
-    if (update && !done) {
-      axios.get(`https://ndfukiacve.execute-api.us-east-1.amazonaws.com/dev/counter?path=${pathname}/&view=1&burned=0`)
-      .then(function () {
-        setDone(true)
-        setViews({
-          ...views,
-          [pathname]: {
-            ...get(views, [pathname], defaultViews),
-            views: get(views, [pathname, 'views'], 0) + 1,
-          },
+    if (update && !done[pathname]) {
+      axios
+        .get(`${meta.clientApi}/counter?path=${pathname}/&view=1&burned=0`)
+        .then(function() {
+          setDone({
+            ...done,
+            [pathname]: true,
+          })
+          setViews({
+            ...views,
+            [pathname]: {
+              ...get(views, [pathname], defaultViews),
+              views: get(views, [pathname, 'views'], 0) + 1,
+            },
+          })
         })
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+        .catch(function(error) {
+          console.log(error)
+        })
     }
   }, [update])
 
   useUpdateEffect(() => {
     return () => {
-      if (done) {
-        setDone(false)
+      if (done[pathname] === undefined) {
+        setDone({
+          ...done,
+          [pathname]: false,
+        })
       }
     }
   }, [pathname])

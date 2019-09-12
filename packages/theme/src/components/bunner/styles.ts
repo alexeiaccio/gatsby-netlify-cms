@@ -9,6 +9,7 @@ export const bunnerStyles = css`
     select-none
     w-full
     py-2 px-4
+    font-sans
   `};
 `
 

@@ -13,11 +13,11 @@ interface HeaderNavProps {
 }
 
 export function HeaderNav({ items, sticked, opened }: HeaderNavProps) {
-  const { location } = React.useContext(MetaContext)
-  const [visible, setVisible] = React.useState(location.pathname === '/')
+  const { location, pagesIndex } = React.useContext(MetaContext)
+  const [visible, setVisible] = React.useState(!pagesIndex && location.pathname === '/')
 
   useUpdateEffect(() => {
-    setVisible((!sticked && location.pathname === '/') || opened)
+    setVisible((!sticked && !pagesIndex && location.pathname === '/') || opened)
   }, [sticked, opened])
 
   if (!visible) { return null; }

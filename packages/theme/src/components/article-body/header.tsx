@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
+import { css } from '@emotion/core'
 
 import { translite } from '@krapiva-org/utils'
 
@@ -12,13 +13,14 @@ import { TextContainer } from '../main/index'
 
 import { Views } from './views'
 import { useGetViews } from './use-get-views'
-import { headerStyles, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
+import { headerStyles, onIndexStyles, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface ArticleHeaderProps {
   data: Article
+  onIndex?: boolean
 }
 
-export function ArticleHeader({ data }: ArticleHeaderProps) {
+export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
   const title = get(data, 'data.title.text', '')
   const image = get(data, 'data.image')
   const caption = get(data, 'data.caption')
@@ -29,7 +31,10 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
   useGetViews()
 
   return (
-    <div css={headerStyles}>
+    <div css={css`
+      ${headerStyles};
+      ${onIndex && onIndexStyles};
+    `}>
       <TextContainer>
         <h1 css={titleStyles}>{title}</h1>
         <div css={descriptionStyles}>
@@ -60,7 +65,7 @@ export function ArticleHeader({ data }: ArticleHeaderProps) {
               </Link>
             ))
           )}
-          <Views />
+          <Views onIndex={onIndex} />
         </div>
       </TextContainer>
       <div css={imageWrapperStyles}>

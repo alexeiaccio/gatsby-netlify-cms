@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const { keys } = require('lodash')
-const { CONFIG, SCHEMAS } = require('@krapiva-org/utils')
+const { APIS, CONFIG, SCHEMAS, linkResolver } = require('@krapiva-org/utils')
 const { about, authors, index } = SCHEMAS
 
 const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
@@ -14,8 +14,7 @@ const makeApiResolver = (repositoryName, accessToken) => {
     options: {
       repositoryName,
       accessToken,
-      linkResolver: ({ node, key, value }) => doc => `${doc}`,
-      // linkResolver,
+      linkResolver,
       // htmlSerializer,
       lang: '*',
       shouldNormalizeImage: () => true,
@@ -38,14 +37,20 @@ if (apis) {
 }
 
 module.exports = {
-  siteMetadata: { ...CONFIG },
+  siteMetadata: {
+    ...CONFIG,
+    clientApi: process.env.SLS_API,
+    origin: null,
+    special: process.env.SPECIAL,
+    dev: process.env.DEV,
+  },
   plugins: [
     {
       resolve: `gatsby-source-prismic`,
       options: {
         repositoryName: process.env.META_API,
         accessToken: process.env.META_TOKEN,
-        linkResolver: ({ node, key, value }) => doc => `${doc}`,
+        linkResolver,
         schemas: {
           about,
           index,

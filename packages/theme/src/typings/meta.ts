@@ -7,4 +7,8 @@ export interface Meta {
   siteThemeColor: string
   twitter: string
   fbAppId: string
+  clientApi: string
+  origin: string
+  special: string
+  dev: boolean
 }

@@ -35,6 +35,10 @@ export const PageQuery = graphql`
         siteThemeColor
         twitter
         fbAppId
+        clientApi
+        origin
+        special
+        dev
       }
     }
     prismicIndex {

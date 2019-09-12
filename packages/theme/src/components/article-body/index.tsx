@@ -10,9 +10,10 @@ import { ArticleFooter } from './footer'
 
 interface ArticleBodyProps {
   data: Article
+  onIndex?: boolean
 }
 
-export function ArticleBody({ data }: ArticleBodyProps) {
+export function ArticleBody({ data, onIndex = false }: ArticleBodyProps) {
   const { data: bodyData, ...headerKeys } = data
   const { body, ...headerData } = bodyData
   const header = assign(headerKeys, { data: headerData })
@@ -20,7 +21,10 @@ export function ArticleBody({ data }: ArticleBodyProps) {
   return (
     <React.Fragment>
       <article>
-        <ArticleHeader data={header} />
+        <ArticleHeader
+          data={header}
+          onIndex={onIndex}
+        />
         <Wrapper>
           <Container>
             <ArticleBodyContent body={body} />
@@ -28,7 +32,7 @@ export function ArticleBody({ data }: ArticleBodyProps) {
         </Wrapper>
       </article>
       <Wrapper>
-        <ArticleFooter />
+        <ArticleFooter onIndex={onIndex} />
       </Wrapper>
     </React.Fragment>
   )

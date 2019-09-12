@@ -8,12 +8,16 @@ import { useUpdateViews } from './use-update-views'
 import { FooterDiscuss } from './discuss'
 import { footerStyles } from './styles'
 
-export function ArticleFooter() {
+export function ArticleFooter({ onIndex }) {
   const [ref, inView] = useInView({
     threshold: 0,
   })
 
   useUpdateViews(inView)
+
+  if (onIndex) {
+    return <aside ref={ref} />
+  }
 
   return (
     <aside css={footerStyles} ref={ref}>

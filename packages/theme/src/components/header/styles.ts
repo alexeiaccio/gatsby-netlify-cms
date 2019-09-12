@@ -33,8 +33,10 @@ export const runnerStyles = css`
 
 export const titleStyles = css`
   ${tw`
+    flex flex-col items-center
+    font-sans font-semibold
+    tracking-wide
     text-white text-xl
-    font-sans font-semibold tracking-wide
   `};
 `
 

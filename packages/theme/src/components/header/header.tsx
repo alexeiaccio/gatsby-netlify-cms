@@ -7,6 +7,7 @@ import tw from 'tailwind.macro'
 import { translite } from '@krapiva-org/utils'
 
 import { Logo } from '../logo/index'
+import { Link } from '../link/index'
 import { MetaContext } from '../layout/index'
 
 import { HeaderNav } from './nav'
@@ -54,24 +55,32 @@ export function Header(props: HeaderProps) {
         ${(sticked && !opened) ? tw`cursor-pointer` : tw`pt-8`};
       `}
     >
-      <Logo height={(sticked && !opened) ? 50 : 100} />
-      {(!sticked || opened) && (
-        <a
-          css={css`
-            ${titleStyles};
-            ${!sticked && tw`pt-2`};
-          `}
-          href={get(meta, 'siteUrl', '/')}
-        >
-          {meta.siteTitle}
-        </a>
-      )}
+      <Link
+        css={titleStyles}
+        to={meta.special ? '/' : get(meta, 'siteUrl', '/')}
+      >
+        <React.Fragment>
+          <Logo height={(sticked && !opened) ? 50 : 100} />
+          {(!sticked || opened) && (
+            <h1
+              css={css`
+                ${!sticked && tw`pt-2`};
+              `}
+            >
+              {meta.special || meta.siteTitle}
+            </h1>
+          )}
+        </React.Fragment>
+      </Link>
       <HeaderNav
         items={items}
         opened={opened}
         sticked={sticked}
       />
-      <Menu opened={!sticked || opened} toggleForm={toggleForm} />
+      <Menu
+        opened={!sticked || opened}
+        toggleForm={toggleForm}
+      />
       {!openedForm && (
         <Opener
           onClick={handleClick}
@@ -87,7 +96,7 @@ export function Header(props: HeaderProps) {
       >
         <Runner
           string={meta.siteMotto}
-          update={sticked || opened} 
+          update={sticked || opened}
         />
       </div>
       <Subcribtion opened={openedForm} onClose={toggleForm} />

@@ -32,10 +32,14 @@ export function Nav({
     size: 0.75,
   }
 }: NavProps) {
-  let menuItems = [...MENU.before, ...items, ...MENU.after]
-  const { location } = React.useContext(MetaContext)
+  const { location, pagesIndex, meta } = React.useContext(MetaContext)
+  const toMainSite = pagesIndex ? [{
+    text: meta.siteTitle,
+    link: meta.siteUrl,
+  }] : []
+  let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
-  if (location.pathname === '/') {
+  if (!pagesIndex && location.pathname === '/') {
     menuItems = menuItems.map(item => ({
       ...item,
       link: item.link && `#${item.link}`

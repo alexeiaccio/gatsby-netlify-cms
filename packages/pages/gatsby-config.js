@@ -2,11 +2,17 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const { CONFIG, SCHEMAS, htmlSerializer, linkResolver, plugins } = require('@krapiva-org/utils')
+const { APIS, CONFIG, SCHEMAS, htmlSerializer, linkResolver, plugins } = require('@krapiva-org/utils')
 const { about, authors, articles, index } = SCHEMAS
 
 module.exports = {
-  siteMetadata: { ...CONFIG },
+  siteMetadata: {
+    ...CONFIG,
+    clientApi: process.env.SLS_API,
+    origin: APIS[process.env.PRISMIC_API] || null,
+    special: process.env.SPECIAL,
+    dev: process.env.DEV,
+  },
   plugins: [
     {
       resolve: `gatsby-source-prismic`,

@@ -4,7 +4,13 @@ import { get } from 'lodash'
 
 import { Layout, ArticleBody } from '@krapiva-org/theme'
 
-function ArticlesPage({ data, location }: any) {
+function IndexPage({ data, location }: any) {
+  React.useEffect(() => {
+    if (window !== undefined && !data.site.siteMetadata.special) {
+      window.location.replace('https://www.krapiva.org')
+    }
+  }, [])
+
   return (
     <Layout
       location={location}
@@ -14,15 +20,15 @@ function ArticlesPage({ data, location }: any) {
         title: get(data.prismicArticles, 'data.title.text'),
         image: get(data.prismicArticles, 'data.image'),
       }}
-      blackHeader
+      pagesIndex
     >
-      <ArticleBody data={data.prismicArticles} />
+      <ArticleBody data={data.prismicArticles} onIndex />
     </Layout>
   )
 }
 
 export const PageQuery = graphql`
-  query ArticlesQuery($slug: String!) {
+  query IndexQuery {
     site {
       siteMetadata {
         siteTitle
@@ -92,7 +98,7 @@ export const PageQuery = graphql`
         }
       }
     }
-    prismicArticles(fields: { slug: { eq: $slug } }) {
+    prismicArticles(fields: {tags: {in: ["arhiv", "specnomer"]}}) {
       fields {
         slug
       }
@@ -284,4 +290,4 @@ export const PageQuery = graphql`
   }
 `
 
-export default ArticlesPage
+export default IndexPage

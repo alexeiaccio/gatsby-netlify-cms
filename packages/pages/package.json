@@ -5,6 +5,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "co-develop": "gatsby develop --port 8001",
     "clean": "gatsby clean",
     "type-check": "tsc --noEmit"
   },

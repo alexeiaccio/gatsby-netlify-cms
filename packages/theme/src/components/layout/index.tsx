@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Global, css } from '@emotion/core'
+import { Global } from '@emotion/core'
+import { useSessionStorage } from 'react-use'
 
 import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
@@ -16,8 +17,16 @@ import { Seo } from '../typings/seo'
 import { Borders } from './styles'
 import globalStyles from './global'
 
-export const MetaContext = React.createContext<any>({})
-export const StateContext = React.createContext<any>({})
+export const MetaContext = React.createContext<any>({
+  location: {},
+  meta: {},
+  index: {},
+  blackHeader: false,
+})
+export const StateContext = React.createContext<any>({
+  views: {},
+  setViews: () => { }
+})
 
 interface LayoutProps {
   children: JSX.Element
@@ -26,20 +35,21 @@ interface LayoutProps {
   index?: Index
   seo?: Seo
   blackHeader?: boolean
+  pagesIndex?: boolean
 }
 
 function LayoutComponent({
   children, location, meta,
-  index, seo, blackHeader
+  index, seo, blackHeader, pagesIndex
 }: LayoutProps): JSX.Element {
-  const [views, setViews] = React.useState(null)
+  const [views, setViews] = useSessionStorage('views', null)
 
   return (
     <React.Fragment>
       <Global styles={globalStyles} />
       <SEO meta={meta} location={location} data={seo} />
       <Borders />
-      <MetaContext.Provider value={{ location, meta, index, blackHeader }}>
+      <MetaContext.Provider value={{ location, meta, index, blackHeader, pagesIndex }}>
         <StateContext.Provider value={{ views, setViews }}>
           <WrappedHeader />
           <Main>

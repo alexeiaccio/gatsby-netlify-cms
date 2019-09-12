@@ -13,11 +13,11 @@ interface OpenerProps {
 }
 
 export function Opener({ onClick, sticked, opened }: OpenerProps) {
-  const { location } = React.useContext(MetaContext)
-  const [isOpen, setIsOpen] = React.useState(location.pathname === '/')
+  const { location, pagesIndex } = React.useContext(MetaContext)
+  const [isOpen, setIsOpen] = React.useState(!pagesIndex && location.pathname === '/')
 
   useUpdateEffect(() => {
-    setIsOpen((!sticked && location.pathname === '/') || opened)
+    setIsOpen((!sticked && !pagesIndex && location.pathname === '/') || opened)
   }, [sticked, opened])
 
   const styles = {
@@ -28,7 +28,7 @@ export function Opener({ onClick, sticked, opened }: OpenerProps) {
     size: 0.5,
   }
 
-  if (!sticked && location.pathname === '/') { return null }
+  if (!sticked && !pagesIndex && location.pathname === '/') { return null }
 
   return (
     <Button
