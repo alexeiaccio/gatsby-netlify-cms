@@ -34,6 +34,14 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     )
   }
 
+  if (!api && host !== 'www') {
+    return (
+      <a href={`https://www.krapiva.org/${to}`} {...props}>
+        {children}
+      </a>
+    )
+  }
+
   return (
     <GatsbyLink to={`/${to}`} {...props}>
       {children}
