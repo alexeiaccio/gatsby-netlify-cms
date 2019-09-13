@@ -57,6 +57,7 @@ export function Header(props: HeaderProps) {
     >
       <Link
         css={titleStyles}
+        api={meta.special && 'special'}
         to={meta.special ? '/' : get(meta, 'siteUrl', '/')}
       >
         <React.Fragment>
