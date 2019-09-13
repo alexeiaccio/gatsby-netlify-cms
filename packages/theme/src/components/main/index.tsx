@@ -22,13 +22,6 @@ export const Wrapper = styled.div`
     bg-white text-black
     w-full
   `};
-
-  & a {
-    ${tw`
-      text-green-600
-      hover:text-green-600
-    `};
-  }
 `
 
 export const Container = styled.div`
@@ -75,6 +68,12 @@ export const TextContainer = styled.div`
       ${tw`
         pb-4
     `};
+    }
+    & a {
+      ${tw`
+        text-green-600
+        hover:text-green-600
+      `};
     }
   }
 `
