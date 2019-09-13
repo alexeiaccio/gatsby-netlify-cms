@@ -20,7 +20,7 @@ export function Card({ data }: CardProps) {
   const authors = get(data, 'data.authors')
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.cdn.prismic/
   const href = get(data, 'href', '')
-  const api = get(regExp.exec(href), '1', 'krapiva-dev')
+  const api = get(regExp.exec(href), '1')
 
   return (
     <Link
