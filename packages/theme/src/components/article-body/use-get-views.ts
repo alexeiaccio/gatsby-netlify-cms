@@ -5,7 +5,7 @@ import {
   split, flowRight, drop, parseInt,
 } from 'lodash/fp'
 
-import { StateContext } from '../layout/index'
+import { MetaContext, StateContext } from '../layout/index'
 
 const parseCSV = flowRight(
   keyBy('path'),
@@ -22,6 +22,7 @@ const parseCSV = flowRight(
 )
 
 export function useGetViews() {
+  const { meta } = React.useContext(MetaContext)
   const { views,  setViews } = React.useContext(StateContext)
 
   const getViews = () => {

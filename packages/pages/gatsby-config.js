@@ -9,7 +9,7 @@ module.exports = {
   siteMetadata: {
     ...CONFIG,
     clientApi: process.env.SLS_API || false,
-    origin: APIS[process.env.PRISMIC_API] || false,
+    origin: process.env.PRISMIC_API,
     special: process.env.SPECIAL || false,
     dev: process.env.DEV || false,
   },
