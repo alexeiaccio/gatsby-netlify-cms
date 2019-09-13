@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import { Link as GatsbyLink } from 'gatsby'
+import { useLocation } from 'react-use'
 
 import { APIS } from '@krapiva-org/utils/defaults/apis'
 
-import { MetaContext } from '../layout/index'
 
 interface LinkProps {
   api?: string
@@ -20,7 +20,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     return <span {...props}>{children}</span>
   }
 
-  const { location } = React.useContext(MetaContext)
+  const location = useLocation()
 
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.krapiva/
   const href = get(location, 'href', '')

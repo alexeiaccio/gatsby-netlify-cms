@@ -6,13 +6,15 @@ import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
 import '../../utils/globals.css'
 
+import '../../utils/polifil.js'
+
 import { Footer } from '../footer/index'
 import { WrappedHeader } from '../header/index'
 import { Main } from '../main/index'
 import { SEO } from '../seo/index'
-import { Index } from '../typings/index'
-import { Meta } from '../typings/meta'
-import { Seo } from '../typings/seo'
+import { Index } from '../../typings/index'
+import { Meta } from '../../typings/meta'
+import { Seo } from '../../typings/seo'
 
 import { Borders } from './styles'
 import globalStyles from './global'

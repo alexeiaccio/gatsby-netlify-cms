@@ -194,6 +194,7 @@ export const PageQuery = graphql`
                       slug
                     }
                     tags
+                    href
                     data {
                       title {
                         text
