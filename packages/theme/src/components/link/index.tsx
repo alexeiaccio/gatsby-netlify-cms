@@ -26,15 +26,23 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   const href = get(location, 'href', '')
   const host = get(regExp.exec(href), '1', '')
 
-  if (api && (host !== api) && !href.includes('localhost')) {
-    return (
-      <a href={`https://${get(APIS, api, 'www')}.krapiva.org/${to}`} {...props}>
-        {children}
-      </a>
-    )
+  if (api) {
+    if ((host !== api) && !href.includes('localhost')) {
+      return (
+        <a href={`https://${get(APIS, api, 'www')}.krapiva.org/${to}`} {...props}>
+          {children}
+        </a>
+      )
+    } else {
+      return (
+        <GatsbyLink to={`/${to}`} {...props}>
+          {children}
+        </GatsbyLink>
+      )
+    }
   }
 
-  if (!api && host !== 'www') {
+  if (!api && (host !== 'www')) {
     return (
       <a href={`https://www.krapiva.org/${to}`} {...props}>
         {children}

@@ -13,7 +13,7 @@ import { TextContainer } from '../main/index'
 
 import { Views } from './views'
 import { useGetViews } from './use-get-views'
-import { headerStyles, onIndexStyles, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
+import { Header, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface ArticleHeaderProps {
   data: Article
@@ -31,10 +31,10 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
   useGetViews()
 
   return (
-    <div css={css`
-      ${headerStyles};
-      ${onIndex && onIndexStyles};
-    `}>
+    <Header
+      onIndex={onIndex}
+      image={image}
+    >
       <TextContainer>
         <h1 css={titleStyles}>{title}</h1>
         <div css={descriptionStyles}>
@@ -76,6 +76,6 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
           </div>
         )}
       </div>
-    </div>
+    </Header>
   )
 }

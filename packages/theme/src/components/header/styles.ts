@@ -13,6 +13,15 @@ export const headerStyles = css`
   `};
 `
 
+export const fadeStyles = css`
+  ${tw`
+    fixed inset-0
+    bg-black
+  `};
+  opacity: 0.7;
+  z-index: -1;
+`
+
 export const navStyles = css`
   ${tw`
     max-w-2xl 

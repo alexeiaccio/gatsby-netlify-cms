@@ -15,7 +15,7 @@ import { Menu } from './menu'
 import { Opener } from './opener'
 import { Runner } from './runner'
 import { Subcribtion } from './subscription'
-import { headerStyles, runnerStyles, titleStyles } from './styles'
+import { headerStyles, runnerStyles, titleStyles, fadeStyles } from './styles'
 
 interface HeaderProps {
   sticked: boolean
@@ -49,58 +49,65 @@ export function Header(props: HeaderProps) {
   }, [propsSticked])
 
   return (
-    <div
-      css={css`
+    <React.Fragment>
+      <div
+        css={fadeStyles}
+        hidden={!opened}
+        onClick={() => open(false)}
+      />
+      <div
+        css={css`
         ${headerStyles};
         ${(sticked && !opened) ? tw`cursor-pointer` : tw`pt-8`};
       `}
-    >
-      <Link
-        css={titleStyles}
-        api={meta.special && 'special'}
-        to={meta.special ? '/' : get(meta, 'siteUrl', '/')}
       >
-        <React.Fragment>
-          <Logo height={(sticked && !opened) ? 50 : 100} />
-          {(!sticked || opened) && (
-            <h1
-              css={css`
+        <Link
+          css={titleStyles}
+          api={meta.special && meta.origin}
+          to={meta.special ? '/' : get(meta, 'siteUrl', '/')}
+        >
+          <React.Fragment>
+            <Logo height={(sticked && !opened) ? 50 : 100} />
+            {(!sticked || opened) && (
+              <h1
+                css={css`
                 ${!sticked && tw`pt-2`};
               `}
-            >
-              {meta.special || meta.siteTitle}
-            </h1>
-          )}
-        </React.Fragment>
-      </Link>
-      <HeaderNav
-        items={items}
-        opened={opened}
-        sticked={sticked}
-      />
-      <Menu
-        opened={!sticked || opened}
-        toggleForm={toggleForm}
-      />
-      {!openedForm && (
-        <Opener
-          onClick={handleClick}
+              >
+                {meta.special || meta.siteTitle}
+              </h1>
+            )}
+          </React.Fragment>
+        </Link>
+        <HeaderNav
+          items={items}
           opened={opened}
           sticked={sticked}
         />
-      )}
-      <div
-        css={css`
+        <Menu
+          opened={!sticked || opened}
+          toggleForm={toggleForm}
+        />
+        {!openedForm && (
+          <Opener
+            onClick={handleClick}
+            opened={opened}
+            sticked={sticked}
+          />
+        )}
+        <div
+          css={css`
           ${runnerStyles};
           ${sticked && tw`text-xxs`};
         `}
-      >
-        <Runner
-          string={meta.siteMotto}
-          update={sticked || opened}
-        />
+        >
+          <Runner
+            string={meta.siteMotto}
+            update={sticked || opened}
+          />
+        </div>
+        <Subcribtion opened={openedForm} onClose={toggleForm} />
       </div>
-      <Subcribtion opened={openedForm} onClose={toggleForm} />
-    </div>
+    </React.Fragment>
   )
 }

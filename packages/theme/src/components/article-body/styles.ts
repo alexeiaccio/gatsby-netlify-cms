@@ -1,25 +1,14 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
+import { get } from 'lodash'
 
 import { descriptionDefaults } from '../main/index'
 
-export const headerStyles = css`
-  ${tw`
-    flex flex-col
-    items-center justify-start
-    w-full
-    px-4 sm:px-8
-    bg-black
-    text-white
-  `};
-
-  & a {
-    ${tw`
-      text-green-500
-      hover:text-green-500
-    `};
-  }
+const backStyles = props => css`
+  background-image: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.99) 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0.99) 100%),
+      url(${get(props.image, 'localFile.childImageSharp.fluid.src', get(props.image, 'url'))});
 `
 
 export const onIndexStyles =  css`
@@ -32,6 +21,27 @@ export const onIndexStyles =  css`
     ${tw`
       text-green-600
       hover:text-green-600
+    `};
+  }
+`
+
+export const Header = styled.div`
+  ${tw`
+    flex flex-col
+    items-center justify-start
+    w-full
+    px-4 sm:px-8
+    bg-black
+    text-white
+    bg-cover
+  `};
+  ${props => !props.onIndex && backStyles};
+  ${props => props.onIndex && onIndexStyles};
+
+  & a {
+    ${tw`
+      text-green-500
+      hover:text-green-500
     `};
   }
 `
