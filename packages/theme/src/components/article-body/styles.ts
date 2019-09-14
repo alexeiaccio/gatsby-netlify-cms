@@ -8,7 +8,14 @@ import { descriptionDefaults } from '../main/index'
 const backStyles = props => css`
   background-image: 
     linear-gradient(to bottom, rgba(0, 0, 0, 0.99) 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0.99) 100%),
-      url(${get(props.image, 'localFile.childImageSharp.fluid.src', get(props.image, 'url'))});
+    url(${get(props.image, 'localFile.childImageSharp.fluid.src', get(props.image, 'url'))});
+  
+  & a {
+    ${tw`
+      text-green-500
+      hover:text-green-500
+    `};
+  }
 `
 
 export const onIndexStyles =  css`
@@ -37,13 +44,6 @@ export const Header = styled.div`
   `};
   ${props => !props.onIndex && backStyles};
   ${props => props.onIndex && onIndexStyles};
-
-  & a {
-    ${tw`
-      text-green-500
-      hover:text-green-500
-    `};
-  }
 `
 
 export const imageWrapperStyles = css`
