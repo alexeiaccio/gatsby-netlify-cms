@@ -15,7 +15,7 @@ interface IndexBodyProps {
 
 export function IndexBody({ articles, about }: IndexBodyProps) {
   const { index } = React.useContext(MetaContext)
-  const getArticles = title => articles.filter(article => article.tags.some(tag => tag === title))
+  const getArticles = title => articles.filter(article => article.tags.some(tag => (tag === title)))
   const items = get(index, 'categories', [])
     .map(item => item ? ({
       id: translite(item.categorytitle.text),
@@ -27,7 +27,9 @@ export function IndexBody({ articles, about }: IndexBodyProps) {
     id: item.link,
     description: null,
     title: item.text,
-    articles: articles.slice(0, 7),
+    articles: articles
+      .filter(article => article.tags.some(tag => (tag !== 'Архив')))
+      .slice(0, 7),
   }))
   const after = MENU.after.map(item => ({
     id: item.link,

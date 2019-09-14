@@ -58,13 +58,13 @@ export function Header(props: HeaderProps) {
       <div
         css={css`
         ${headerStyles};
-        ${(sticked && !opened) ? tw`cursor-pointer` : tw`pt-8`};
+        ${(!sticked || opened) && tw`pt-8`};
       `}
       >
         <Link
           css={titleStyles}
           api={meta.special && meta.origin}
-          to={meta.special ? '/' : get(meta, 'siteUrl', '/')}
+          to="/"
         >
           <React.Fragment>
             <Logo height={(sticked && !opened) ? 50 : 100} />

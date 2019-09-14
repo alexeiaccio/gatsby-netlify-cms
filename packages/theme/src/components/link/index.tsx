@@ -42,7 +42,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     }
   }
 
-  if (!api && (host !== 'www')) {
+  if (!api && (host !== 'www') && !href.includes('localhost')) {
     return (
       <a href={`https://www.krapiva.org/${to}`} {...props}>
         {children}
