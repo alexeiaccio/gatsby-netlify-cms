@@ -62,7 +62,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     )
   }
 
-  if (!api || (host === api) || href.includes('localhost')) {
+  if ((!api && (host === api)) || href.includes('localhost')) {
     return (
       <GatsbyLink to={`/${to}`} {...props}>
         {children}
