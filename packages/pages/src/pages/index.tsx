@@ -7,7 +7,11 @@ import { Layout, ArticleBody } from '@krapiva-org/theme'
 function IndexPage({ data, location }: any) {
   React.useEffect(() => {
     if (window !== undefined && !data.site.siteMetadata.special) {
-      window.location.replace('https://www.krapiva.org')
+      if (location.href.includes('localhost:8001')) {
+        window.location.replace('http://localhost:8002/')
+      } else {
+        window.location.replace(`https://${data.site.siteMetadata.dev ? 'dev-main' : 'www'}.krapiva.org`)
+      }
     }
   }, [])
 

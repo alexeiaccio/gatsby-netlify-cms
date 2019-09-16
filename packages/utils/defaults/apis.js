@@ -7,5 +7,6 @@ exports.APIS = {
   veschdok: 'veschdok',
   krasnoeznamya: 'krasnoeznamya',
   // devs
+  'dev-main': 'dev-main',
   'krapiva-dev': 'dev-pages',
 }

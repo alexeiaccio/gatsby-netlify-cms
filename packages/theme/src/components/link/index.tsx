@@ -5,6 +5,7 @@ import { useLocation } from 'react-use'
 
 import { APIS } from '@krapiva-org/utils/defaults/apis'
 
+import { MetaContext } from '../layout/index'
 
 interface LinkProps {
   api?: string
@@ -19,7 +20,8 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   if (!to) {
     return <span {...props}>{children}</span>
   }
-
+  
+  const { meta } = React.useContext(MetaContext)
   const location = useLocation()
 
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.krapiva/
@@ -29,30 +31,56 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   if (api) {
     if ((host !== api) && !href.includes('localhost')) {
       return (
-        <a href={`https://${get(APIS, api, 'www')}.krapiva.org/${to}`} {...props}>
+        <a href={`https://${get(APIS, api, (meta.dev ? 'dev-main' : 'www'))}.krapiva.org${to}`} {...props}>
           {children}
         </a>
       )
-    } else {
+    }
+
+    if (href.includes('localhost:8002')) {
       return (
-        <GatsbyLink to={`/${to}`} {...props}>
+        <a href={`http://localhost:8001${to}`} {...props}>
           {children}
-        </GatsbyLink>
+        </a>
+      )
+    }
+
+    if (meta.dev) {
+      return (
+        <a href={`https://dev-pages.krapiva.org${to}`} {...props}>
+          {children}
+        </a>
       )
     }
   }
 
-  if (!api && (host !== 'www') && !href.includes('localhost')) {
+  if (!api && href.includes('localhost:8001')) {
     return (
-      <a href={`https://www.krapiva.org/${to}`} {...props}>
+      <a href={`http://localhost:8002${to}`} {...props}>
+        {children}
+      </a>
+    )
+  }
+
+  if (!api || (host === api) || href.includes('localhost')) {
+    return (
+      <GatsbyLink to={`/${to}`} {...props}>
+        {children}
+      </GatsbyLink>
+    )
+  }
+
+  if (!api && meta.dev) {
+    return (
+      <a href={`https://dev-main.krapiva.org${to}`} {...props}>
         {children}
       </a>
     )
   }
 
   return (
-    <GatsbyLink to={`/${to}`} {...props}>
+    <a href={`https://${meta.dev ? 'dev-main' : 'www'}.krapiva.org${to}`} {...props}>
       {children}
-    </GatsbyLink>
+    </a>
   )
 }

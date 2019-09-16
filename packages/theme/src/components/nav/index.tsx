@@ -39,10 +39,15 @@ export function Nav({
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
-  if (!pagesIndex && location.pathname === '/') {
+  if (location.href.includes('localhost:8001')) {
     menuItems = menuItems.map(item => ({
       ...item,
-      link: item.link && `#${item.link}`
+      link: item.link && `http://localhost:8002${item.link}`
+    }))
+  } else if (!pagesIndex && location.pathname === '/') {
+    menuItems = menuItems.map(item => ({
+      ...item,
+      link: item.link && `/#${item.link.replace(/\//g, '')}`
     }))
   }
 
@@ -50,8 +55,9 @@ export function Nav({
     <ul css={navStyles}>
       {menuItems.map(({ link, text, target }) => {
         const internal = link && /^\/(?!\/)/.test(link)
-        const anchor = link && /^\#/.test(link)
+        const anchor = link && /^\/\#/.test(link)
         let component: JSX.Element | string | null = null
+
         if (internal) {
           component = Link
         } else if (!anchor) {

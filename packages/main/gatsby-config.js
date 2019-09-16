@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const { keys } = require('lodash')
-const { APIS, CONFIG, SCHEMAS, linkResolver } = require('@krapiva-org/utils')
+const { CONFIG, SCHEMAS, linkResolver } = require('@krapiva-org/utils')
 const { about, authors, index } = SCHEMAS
 
 const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
@@ -40,7 +40,7 @@ module.exports = {
   siteMetadata: {
     ...CONFIG,
     clientApi: process.env.SLS_API || false,
-    origin: false,
+    origin: process.env.DEV ? 'dev-main' : 'www',
     special: process.env.SPECIAL || false,
     dev: process.env.DEV || false,
   },

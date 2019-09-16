@@ -26,7 +26,7 @@ export function Card({ data }: CardProps) {
     <Link
       css={cardStyles}
       api={api}
-      to={get(data, 'fields.slug')}
+      to={`/${get(data, 'fields.slug')}`}
     >
       <React.Fragment>
         <div css={imageWrapperStyles}>

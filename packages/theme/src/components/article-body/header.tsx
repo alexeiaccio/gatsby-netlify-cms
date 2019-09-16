@@ -32,7 +32,7 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
 
   return (
     <Header
-      onIndex={onIndex}
+      white={onIndex}
       image={image}
     >
       <TextContainer>
@@ -41,7 +41,7 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
           {tags && tags.map(tag => (
             <Link
               key={uuid()}
-              to={translite(tag)}
+              to={`/${translite(tag)}`}
             >
               <React.Fragment>
                 <span> </span>
@@ -55,7 +55,7 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
             author.document.map(({ data, fields }) => (
               <Link
                 key={uuid()}
-                to={fields.slug}
+                to={`/${fields.slug}`}
               >
                 <React.Fragment>
                   <span> </span>

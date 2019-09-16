@@ -5,7 +5,7 @@ import { get } from 'lodash'
 
 import { descriptionDefaults } from '../main/index'
 
-const backStyles = props => css`
+const blackStyles = props => css`
   background-image: 
     linear-gradient(to bottom, rgba(0, 0, 0, 0.99) 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0.99) 100%),
     url(${get(props.image, 'localFile.childImageSharp.fluid.src', get(props.image, 'url'))});
@@ -18,7 +18,7 @@ const backStyles = props => css`
   }
 `
 
-export const onIndexStyles =  css`
+export const whiteStyles =  css`
   ${tw`
     bg-white
     text-black
@@ -42,8 +42,8 @@ export const Header = styled.div`
     text-white
     bg-cover
   `};
-  ${props => !props.onIndex && backStyles};
-  ${props => props.onIndex && onIndexStyles};
+  ${props => !props.white && blackStyles};
+  ${props => props.white && whiteStyles};
 `
 
 export const imageWrapperStyles = css`

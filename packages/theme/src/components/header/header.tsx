@@ -36,7 +36,7 @@ export function Header(props: HeaderProps) {
   const scrolling = useScrolling(scrollRef)
   const { meta, index } = React.useContext(MetaContext)
   const items = get(index, 'categories', [])
-    .map(item => item ? ({ text: item.categorytitle.text, link: translite(item.categorytitle.text) }) : null)
+    .map(item => item ? ({ text: item.categorytitle.text, link: `/${translite(item.categorytitle.text)}` }) : null)
 
   const handleClick = () => open()
 
