@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
 import { navigate } from '@reach/router'
+import { get } from 'lodash'
 
 import { MENU } from '@krapiva-org/utils'
 
@@ -33,16 +34,22 @@ export function Nav({
   }
 }: NavProps) {
   const { location, pagesIndex, meta } = React.useContext(MetaContext)
+  const href = get(location, 'href', '')
   const toMainSite = pagesIndex ? [{
     text: meta.siteTitle,
     link: meta.siteUrl,
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
-  if (location.href.includes('localhost:8001')) {
+  if (href.includes('localhost:8001')) {
     menuItems = menuItems.map(item => ({
       ...item,
       link: item.link && `http://localhost:8002${item.link}`
+    }))
+  } else if (meta.dev) {
+    menuItems = menuItems.map(item => ({
+      ...item,
+      link: item.link && `https://dev-main.krapiva.org${item.link}`
     }))
   } else if (!pagesIndex && location.pathname === '/') {
     menuItems = menuItems.map(item => ({
