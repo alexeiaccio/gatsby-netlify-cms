@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { get } from 'lodash'
 
-import { Layout, ArticleBody } from '@krapiva-org/theme'
+import { Layout, ArticleBody, PrevNextLinks } from '@krapiva-org/theme'
 
 function ArticlesPage({ data, location }: any) {
   return (
@@ -17,12 +17,16 @@ function ArticlesPage({ data, location }: any) {
       blackHeader
     >
       <ArticleBody data={data.prismicArticles} />
+      <PrevNextLinks
+        prev={get(data, 'prev.nodes.0', null)}
+        next={get(data, 'next.nodes.0', null)}
+      />
     </Layout>
   )
 }
 
 export const PageQuery = graphql`
-  query ArticlesQuery($slug: String!) {
+  query ArticlesQuery($slug: String!, $date: Date!) {
     site {
       siteMetadata {
         siteTitle
@@ -278,6 +282,98 @@ export const PageQuery = graphql`
           }
           ... on PrismicArticlesBodyReferencesList {
             id
+          }
+        }
+      }
+    }
+    prev: allPrismicArticles(
+      filter: {
+        fields: {tags: {nin: ["afisha", "arhiv"]}},
+        first_publication_date: {lt: $date}
+      },
+      sort: {fields: first_publication_date, order: DESC},
+      limit: 1,
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
+        tags
+        href
+        data {
+          title {
+            text
+          }
+          image {
+            url
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 640, quality: 80) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+          authors {
+            author {
+              document {
+                ... on PrismicAuthors {
+                  data {
+                    name
+                  }
+                  fields {
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    next: allPrismicArticles(
+      filter: {
+        fields: {tags: {nin: ["afisha", "arhiv"]}},
+        first_publication_date: {gt: $date}
+      },
+      sort: {fields: first_publication_date, order: ASC},
+      limit: 1,
+    ) {
+      nodes {
+        fields {
+          slug
+        }
+        first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
+        tags
+        href
+        data {
+          title {
+            text
+          }
+          image {
+            url
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 640, quality: 80) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+          authors {
+            author {
+              document {
+                ... on PrismicAuthors {
+                  data {
+                    name
+                  }
+                  fields {
+                    slug
+                  }
+                }
+              }
+            }
           }
         }
       }

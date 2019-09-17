@@ -4,41 +4,43 @@ const { makePath, translite } = require('@krapiva-org/utils')
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
-
-  const articlesMaker = (data) => {
-    data.map(({ node }) => {
-      const { fields } = node
-      const { slug, tags } = fields
-      createPage({
-        component: path.resolve(`src/templates/articles.tsx`),
-        context: {
-          slug: slug,
-          tags: tags,
-        },
-        path: slug,
-      })
-    })
-  }
-
   const pages = await graphql(`
     {
       articles: allPrismicArticles(
-        filter: {tags: {nin: ["Афиша"]}},
-        limit: 2000,
+        filter: { tags: { nin: ["Афиша"] } }
+        limit: 2000
       ) {
         edges {
           node {
             fields {
               slug
             }
+            first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
+            date: first_publication_date
             tags
           }
         }
       }
-    }    
+    }
   `)
 
   const articles = get(pages, 'data.articles.edges')
+
+  const articlesMaker = data => {
+    data.map(({ node }) => {
+      const { fields, date } = node
+      const { slug, tags } = fields
+      createPage({
+        component: path.resolve(`src/templates/articles.tsx`),
+        context: {
+          slug: slug,
+          tags: tags,
+          date: date,
+        },
+        path: slug,
+      })
+    })
+  }
 
   articles && articlesMaker(articles)
 }

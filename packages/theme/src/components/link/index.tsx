@@ -45,7 +45,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
       )
     }
 
-    if (meta.dev) {
+    if (meta.dev && !href.includes('localhost')) {
       return (
         <a href={`https://dev-pages.krapiva.org${to}`} {...props}>
           {children}
