@@ -2,7 +2,7 @@ import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
 export const cardStyles = css`
-  ${tw`w-full`};
+  ${tw`block w-full`};
 `
 
 export const imageWrapperStyles = css`
