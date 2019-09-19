@@ -36,6 +36,8 @@ if (apis) {
   )
 }
 
+const productionPlugins = []
+
 if (!process.env.DEV) {
   const host = APIS[process.env.PRISMIC_API]
 
