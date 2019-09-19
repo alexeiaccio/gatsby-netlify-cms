@@ -2,8 +2,32 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-const { CONFIG, SCHEMAS, htmlSerializer, linkResolver, plugins } = require('@krapiva-org/utils')
+const {
+  APIS,
+  CONFIG,
+  SCHEMAS,
+  htmlSerializer,
+  linkResolver,
+  plugins,
+} = require('@krapiva-org/utils')
 const { about, authors, articles, index } = SCHEMAS
+const productionPlugins = []
+
+if (!process.env.DEV) {
+  const host = APIS[process.env.PRISMIC_API]
+
+  productionPlugins.push({
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      host: `https://${host}.krapiva.org`,
+      sitemap: `https://${host}.krapiva.org/sitemap.xml`,
+      policy: [
+        { userAgent: 'Yandex', allow: '/' },
+        { userAgent: '*', allow: '/' },
+      ],
+    },
+  })
+}
 
 module.exports = {
   siteMetadata: {
@@ -34,7 +58,10 @@ module.exports = {
         linkResolver,
         htmlSerializer,
         shouldNormalizeImage: ({ node }) => {
-          if (process.env.PRISMIC_API === 'krapiva-org' && node.type === 'articles') {
+          if (
+            process.env.PRISMIC_API === 'krapiva-org' &&
+            node.type === 'articles'
+          ) {
             return false
           }
           return true
@@ -46,5 +73,6 @@ module.exports = {
       },
     },
     ...plugins,
+    ...productionPlugins,
   ],
 }

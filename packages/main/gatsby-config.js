@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const { keys } = require('lodash')
-const { CONFIG, SCHEMAS, linkResolver } = require('@krapiva-org/utils')
+const { CONFIG, SCHEMAS, linkResolver, plugins } = require('@krapiva-org/utils')
 const { about, authors, index } = SCHEMAS
 
 const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
@@ -58,21 +58,14 @@ module.exports = {
       },
     },
     ...apisResolvers,
-    'gatsby-plugin-sharp',
-    `gatsby-transformer-sharp`,
-    {
-      resolve: `gatsby-theme-tailwindcss`,
+    ...(!process.env.DEV && {
+      resolve: 'gatsby-plugin-robots-txt',
       options: {
-        postCssPlugins: [require('autoprefixer')],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-typescript`,
-      options: {
-        isTSX: true, // defaults to false
-        jsxPragma: `jsx`, // defaults to "React"
-        allExtensions: true, // defaults to false
-      },
-    },
+        host: `https://www.krapiva.org`,
+        sitemap: `https://www.krapiva.org/sitemap.xml`,
+        policy: [{ userAgent: 'Yandex', allow: '/' }, { userAgent: '*', allow: '/' }]
+      }
+    }),
+    ...plugins,
   ],
 }

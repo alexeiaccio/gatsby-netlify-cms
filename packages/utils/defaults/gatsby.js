@@ -1,11 +1,11 @@
-// const { CONFIG } = require('./config')
-// const {
-//   siteTitle,
-//   utilsTitleShort,
-//   siteThemeColor,
-//   utilsBackgroundColor,
-//   utilsIcon,
-// } = CONFIG
+const { CONFIG } = require('./config')
+const {
+  siteTitle,
+  utilsTitleShort,
+  siteThemeColor,
+  utilsBackgroundColor,
+  utilsIcon,
+} = CONFIG
 
 exports.plugins = [
   {
@@ -33,23 +33,29 @@ exports.plugins = [
         'https://krapiva.us19.list-manage.com/subscribe/post?u=4076a0aa3adcc8abda830e362&amp;id=9c438f0938',
     },
   },
-  `gatsby-plugin-remove-serviceworker`,
+  // `gatsby-plugin-remove-serviceworker`,
   // `gatsby-plugin-offline`,
+  {
+    resolve: `gatsby-plugin-offline`,
+    options: {
+        importWorkboxFrom: `cdn`,
+      },
+  },
   {
     resolve: `gatsby-plugin-sitemap`,
   },
-  // {
-  //   resolve: 'gatsby-plugin-manifest',
-  //   options: {
-  //     name: siteTitle,
-  //     short_name: utilsTitleShort,
-  //     start_url: '/',
-  //     theme_color: siteThemeColor,
-  //     background_color: utilsBackgroundColor,
-  //     display: 'minimal-ui',
-  //     icon: utilsIcon, // This path is relative to the root of the site.
-  //   },
-  // },
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      name: siteTitle,
+      short_name: utilsTitleShort,
+      start_url: '/',
+      theme_color: siteThemeColor,
+      background_color: utilsBackgroundColor,
+      display: 'minimal-ui',
+      icon: utilsIcon, // This path is relative to the root of the site.
+    },
+  },
   {
     resolve: 'gatsby-plugin-netlify',
     options: {
