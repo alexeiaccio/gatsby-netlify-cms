@@ -2,7 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const { keys } = require('lodash')
-const { CONFIG, SCHEMAS, linkResolver, plugins } = require('@krapiva-org/utils')
+const { APIS, CONFIG, SCHEMAS, linkResolver, plugins } = require('@krapiva-org/utils')
 const { about, authors, index } = SCHEMAS
 
 const apis = process.env.APIS ? JSON.parse(process.env.APIS) : null
