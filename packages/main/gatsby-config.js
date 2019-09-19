@@ -36,6 +36,22 @@ if (apis) {
   )
 }
 
+if (!process.env.DEV) {
+  const host = APIS[process.env.PRISMIC_API]
+
+  productionPlugins.push({
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      host: `https://${host}.krapiva.org`,
+      sitemap: `https://${host}.krapiva.org/sitemap.xml`,
+      policy: [
+        { userAgent: 'Yandex', allow: '/' },
+        { userAgent: '*', allow: '/' },
+      ],
+    },
+  })
+}
+
 module.exports = {
   siteMetadata: {
     ...CONFIG,
@@ -58,14 +74,7 @@ module.exports = {
       },
     },
     ...apisResolvers,
-    ...(!process.env.DEV && {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        host: `https://www.krapiva.org`,
-        sitemap: `https://www.krapiva.org/sitemap.xml`,
-        policy: [{ userAgent: 'Yandex', allow: '/' }, { userAgent: '*', allow: '/' }]
-      }
-    }),
     ...plugins,
+    ...productionPlugins,
   ],
 }
