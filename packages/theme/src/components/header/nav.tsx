@@ -8,16 +8,17 @@ import { navStyles } from './styles'
 
 interface HeaderNavProps {
   items: any[]
-  opened: boolean
-  sticked: boolean
+  opened?: boolean
+  sticked?: boolean
 }
 
-export function HeaderNav({ items, sticked, opened }: HeaderNavProps) {
+export function HeaderNav({ items, sticked = false, opened = false }: HeaderNavProps) {
   const { location, pagesIndex } = React.useContext(MetaContext)
-  const [visible, setVisible] = React.useState(!pagesIndex && location.pathname === '/')
+  const isNotSticked = (!pagesIndex && (location.pathname === '/') && !sticked)
+  const [visible, setVisible] = React.useState(isNotSticked)
 
   useUpdateEffect(() => {
-    setVisible((!sticked && !pagesIndex && location.pathname === '/') || opened)
+    setVisible(isNotSticked || opened)
   }, [sticked, opened])
 
   if (!visible) { return null; }

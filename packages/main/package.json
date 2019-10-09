@@ -14,6 +14,7 @@
     "@emotion/styled": "^10.0.14",
     "@krapiva-org/theme": "*",
     "@krapiva-org/utils": "*",
+    "@modus/react-idle": "^1.1.1",
     "dotenv": "^8.0.0",
     "gatsby": "^2.13.65",
     "gatsby-image": "^2.2.8",

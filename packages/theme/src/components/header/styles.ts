@@ -13,13 +13,23 @@ export const headerStyles = css`
   `};
 `
 
+export const stickedStyles = css`
+  ${tw`
+    fixed
+    inset-0 bottom-auto
+    z-50
+  `};
+  transform: translateY(-100%);
+  transition: transform 200ms ease-in-out;
+`
+
 export const fadeStyles = css`
   ${tw`
     fixed inset-0
     bg-black
   `};
   opacity: 0.7;
-  z-index: -1;
+  z-index: 49;
 `
 
 export const navStyles = css`

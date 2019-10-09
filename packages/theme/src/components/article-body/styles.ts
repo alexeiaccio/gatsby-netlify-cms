@@ -7,7 +7,7 @@ import { descriptionDefaults } from '../main/index'
 
 const blackStyles = props => css`
   background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.99) 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0.99) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.99) 0%, rgba(0, 0, 0, 0.8) 35%, rgba(0, 0, 0, 0.8) 65%, rgba(0, 0, 0, 0.99) 100%),
     url(${get(props.image, 'localFile.childImageSharp.fluid.src', get(props.image, 'url'))});
   
   & a {

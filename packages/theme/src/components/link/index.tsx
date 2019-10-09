@@ -29,7 +29,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   const host = get(regExp.exec(href), '1', '')
 
   if (api) {
-    if ((host !== api) && !href.includes('localhost')) {
+    if ((host !== api) && !href.includes('localhost:')) {
       return (
         <a href={`https://${get(APIS, api, (meta.dev ? 'dev-main' : 'www'))}.krapiva.org${to}`} {...props}>
           {children}
@@ -45,7 +45,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
       )
     }
 
-    if (meta.dev && !href.includes('localhost')) {
+    if (meta.dev && !href.includes('localhost:')) {
       return (
         <a href={`https://dev-pages.krapiva.org${to}`} {...props}>
           {children}
@@ -62,7 +62,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     )
   }
 
-  if ((!api && (host === api)) || href.includes('localhost')) {
+  if ((!api && (host === api)) || href.includes('localhost:')) {
     return (
       <GatsbyLink to={`/${to}`} {...props}>
         {children}

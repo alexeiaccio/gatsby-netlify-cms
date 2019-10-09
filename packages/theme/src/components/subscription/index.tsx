@@ -57,8 +57,9 @@ export function SubscriptionForm() {
       />
       <Button
         css={buttonStyles}
-        color="#08a676"
+        color="#0cf3ad"
         inverted
+        contrast
         rounded={0.25}
         type="submit"
       >

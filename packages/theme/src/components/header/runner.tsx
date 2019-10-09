@@ -2,7 +2,7 @@ import React from 'react'
 
 interface RunnerProps {
   string: string
-  update: boolean
+  update?: boolean
 }
 
 interface RunnerState {

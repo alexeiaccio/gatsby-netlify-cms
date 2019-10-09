@@ -37,7 +37,7 @@ export function Nav({
   const href = get(location, 'href', '')
   const toMainSite = pagesIndex ? [{
     text: meta.siteTitle,
-    link: meta.siteUrl,
+    link: href.includes('localhost:8001') ? '/' : meta.siteUrl,
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
@@ -46,7 +46,7 @@ export function Nav({
       ...item,
       link: item.link && `http://localhost:8002${item.link}`
     }))
-  } else if (meta.dev) {
+  } else if (meta.dev && !href.includes('localhost:')) {
     menuItems = menuItems.map(item => ({
       ...item,
       link: item.link && `https://dev-main.krapiva.org${item.link}`

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useClickAway } from 'react-use'
 
 import { Button } from '../button/index'
 import { Popup } from '../popup/index'
@@ -10,11 +9,6 @@ import { formStyles, formHeadingStyles, openerStyles } from './styles'
 export function Subcribtion({ opened, onClose }) {
   if (!opened) { return null }
 
-  const ref = React.useRef(null)
-  useClickAway(ref, () => {
-    onClose()
-  })
-
   const styles = {
     color: '#0cf3ad',
     inverted: false,
@@ -24,7 +18,7 @@ export function Subcribtion({ opened, onClose }) {
   }
 
   return (
-    <Popup ref={ref}>
+    <Popup onClose={onClose}>
       <Button
         css={openerStyles}
         onClick={onClose}

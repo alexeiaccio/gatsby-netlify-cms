@@ -1,16 +1,34 @@
 import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
+import { useToggle } from 'react-use'
+import { get } from 'lodash'
+import OnIdle from '@modus/react-idle'
 
-import { Dummy } from './dummy'
+import { translite } from '@krapiva-org/utils'
+
+import { Border } from '../layout/styles'
+import { MetaContext } from '../layout/index'
+import { Meta } from '../../typings/meta'
+
 import { Header } from './header'
+import { StickedHeader } from './sticked-header'
 import { HeaderBunners } from './bunners'
 import { Wrapper } from './wrapper'
 
+export type HeaderProps = Readonly<{
+  openedForm: boolean
+  toggleForm: () => void
+  meta: Meta
+  items: Array<{
+    text: string
+    link: string
+  }>
+}>
+
 export function WrappedHeader() {
-  const headerRef = React.useRef(null)
-  const [headerHeight, setHeaderHeight] = React.useState(0);
   const [ref, inView] = useInView({
-    threshold: 1,
+    threshold: 0,
+    rootMargin: '100px',
   })
 
   async function loadPolyfills() {
@@ -23,24 +41,31 @@ export function WrappedHeader() {
     loadPolyfills();
   }, [])
 
-  React.useEffect(() => {
-    if (headerRef && headerRef.current) {
-      const newHeaderHeight = headerRef.current.getBoundingClientRect().height;
-      if (newHeaderHeight > headerHeight) {
-        setHeaderHeight(newHeaderHeight)
-      }
-    }
-  }, [inView])
-
-  const sticked = headerRef.current ? !inView : false
+  const [openedForm, toggleForm] = useToggle(false)
+  const { meta, index } = React.useContext(MetaContext)
+  const items = get(index, 'categories', [])
+    .map(item => item ? ({ text: item.categorytitle.text, link: `/${translite(item.categorytitle.text)}` }) : null)
 
   return (
     <React.Fragment>
-      <Wrapper ref={headerRef} sticked={sticked}>
-        <HeaderBunners sticked={sticked} />
-        <Header sticked={sticked} />
+      <Wrapper ref={ref}>
+        <HeaderBunners />
+        <Header
+          openedForm={openedForm}
+          toggleForm={toggleForm}
+          meta={meta}
+          items={items}
+        />
       </Wrapper>
-      <Dummy height={headerHeight} ref={ref} />
+      <OnIdle skipSSR placeholder={<Border side="top" />}>
+        <StickedHeader
+          openedForm={openedForm}
+          toggleForm={toggleForm}
+          meta={meta}
+          items={items}
+          sticked={!inView}
+        />
+      </OnIdle>
     </React.Fragment>
   )
 }

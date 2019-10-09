@@ -12,7 +12,7 @@ export const inputStyles = css`
   ${tw`
     px-4 py-2
     mb-4
-    border-green-600 border
+    border-green-500 border-4
     w-full
     outline-none focus:outline-none
     select-none

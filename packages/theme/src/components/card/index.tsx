@@ -22,39 +22,47 @@ export function Card({ data }: CardProps) {
   const href = get(data, 'href', '')
   const api = get(regExp.exec(href), '1')
 
-  return (
+  const renderContent = () => (
+    <React.Fragment>
+      <div css={imageWrapperStyles}>
+        <div css={imageStyles}>
+          <Img src={image} />
+        </div>
+      </div>
+      <h3 css={titleStyles}>{title}</h3>
+      <div css={descriptionStyles}>
+        {tags && tags.map(tag => (
+          <React.Fragment key={uuid()}>
+            <span> </span>
+            {tag}
+            <span> ·</span>
+          </React.Fragment>
+        ))}
+        {date && <span> {date} ·</span>}
+        {authors && authors.map(({ author }) => author &&
+          author.document.map(({ data }) => (
+            <React.Fragment key={uuid()}>
+              <span> </span>
+              {data.name}
+              <span> ·</span>
+            </React.Fragment>
+          ))
+        )}
+      </div>
+    </React.Fragment>
+  )
+
+  return get(data, 'fields.slug') ? (
     <Link
       css={cardStyles}
       api={api}
       to={`/${get(data, 'fields.slug')}`}
     >
-      <React.Fragment>
-        <div css={imageWrapperStyles}>
-          <div css={imageStyles}>
-            <Img src={image} />
-          </div>
-        </div>
-        <h3 css={titleStyles}>{title}</h3>
-        <div css={descriptionStyles}>
-          {tags && tags.map(tag => (
-            <React.Fragment key={uuid()}>
-              <span> </span>
-              {tag}
-              <span> ·</span>
-            </React.Fragment>
-          ))}
-          {date && <span> {date} ·</span>}
-          {authors && authors.map(({ author }) => author &&
-            author.document.map(({ data }) => (
-              <React.Fragment key={uuid()}>
-                <span> </span>
-                {data.name}
-                <span> ·</span>
-              </React.Fragment>
-            ))
-          )}
-        </div>
-      </React.Fragment>
+      {renderContent()}
     </Link>
-  )
+  ) : (
+      <div css={cardStyles}>
+        {renderContent()}
+      </div>
+    )
 }

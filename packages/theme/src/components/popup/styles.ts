@@ -19,6 +19,7 @@ export const fadeStyles = css`
   ${tw`
     fixed inset-0
     bg-black
+    cursor-pointer
   `};
   opacity: 0.7;
   z-index: 99;

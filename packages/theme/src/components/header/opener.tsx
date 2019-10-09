@@ -8,17 +8,17 @@ import { openerStyles } from './styles'
 
 interface OpenerProps {
   onClick: () => void
-  opened: boolean
-  sticked: boolean
+  opened?: boolean
+  sticked?: boolean
 }
 
-export function Opener({ onClick, sticked, opened }: OpenerProps) {
+export function Opener({ onClick, sticked = false, opened = false }: OpenerProps) {
   const { location, pagesIndex } = React.useContext(MetaContext)
-  const [isOpen, setIsOpen] = React.useState(!pagesIndex && location.pathname === '/')
+  const [isOpen, setIsOpen] = React.useState(false)
 
   useUpdateEffect(() => {
-    setIsOpen((!sticked && !pagesIndex && location.pathname === '/') || opened)
-  }, [sticked, opened])
+    setIsOpen(opened)
+  }, [opened])
 
   const styles = {
     color: '#0cf3ad',

@@ -5,13 +5,8 @@ import { useSessionStorage } from 'react-use'
 import { Bunner } from '../bunner/index'
 import { MetaContext } from '../layout/index'
 
-interface HeaderBunnersProps {
-  sticked: boolean
-}
 
-export function HeaderBunners({ sticked }: HeaderBunnersProps) {
-  if (sticked) { return null }
-
+export function HeaderBunners() {
   const { index } = React.useContext(MetaContext)
   const bunners = filter(get(index, 'body', []), x => (
     (get(x, '__typename') === 'PrismicIndexBodyBanner') &&
