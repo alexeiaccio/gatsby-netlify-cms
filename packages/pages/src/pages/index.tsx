@@ -6,12 +6,9 @@ import { Layout, ArticleBody } from '@krapiva-org/theme'
 
 function IndexPage({ data, location }: any) {
   React.useEffect(() => {
-    if (window !== undefined && !data.site.siteMetadata.special) {
-      if (location.href.includes('localhost:8001')) {
-        window.location.replace('http://localhost:8002/')
-      } else {
-        window.location.replace(`https://${data.site.siteMetadata.dev ? 'dev-main' : 'www'}.krapiva.org`)
-      }
+    if (window !== undefined && !process.env.SPECIAL && !location.href.includes('localhost:')) {
+      window.location.replace(`https://${process.env.PRISMIC_API === 'krapiva-dev' ?
+        'dev-main' : 'www'}.krapiva.org`)
     }
   }, [])
 
@@ -43,10 +40,6 @@ export const PageQuery = graphql`
         siteThemeColor
         twitter
         fbAppId
-        clientApi
-        origin
-        special
-        dev
       }
     }
     prismicIndex {

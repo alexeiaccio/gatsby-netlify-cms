@@ -7,7 +7,7 @@ import { MetaContext, StateContext } from '../layout/index'
 
 export function useUpdateViews(update: boolean) {
   const { views, setViews } = React.useContext(StateContext)
-  const { location, meta } = React.useContext(MetaContext)
+  const { location } = React.useContext(MetaContext)
   const pathname = get(location, 'pathname', '//').replace(/\/$/, '')
   const [done, setDone] = useSessionStorage('viewed', {})
   const defaultViews = {
@@ -17,9 +17,9 @@ export function useUpdateViews(update: boolean) {
   }
 
   useUpdateEffect(() => {
-    if (update && !done[pathname] && meta.clientApi) {
+    if (update && !done[pathname] && process.env.SLS_API) {
       axios
-        .get(`${meta.clientApi}/counter?path=${pathname}/&view=1&burned=0`)
+        .get(`${process.env.SLS_API}/counter?path=${pathname}/&view=1&burned=0`)
         .then(function() {
           setDone({
             ...done,

@@ -51,14 +51,14 @@ export function StickedHeader(props: Props) {
       >
         <Link
           css={titleStyles}
-          api={meta.special && meta.origin}
+          api={process.env.SPECIAL ? process.env.PRISMIC_API : undefined}
           to="/"
         >
           <React.Fragment>
             <Logo height={opened ? 100 : 50} />
             {opened && (
               <h1 css={css`${opened && tw`pt-2`}`}>
-                {meta.special || meta.siteTitle}
+                {process.env.SPECIAL || meta.siteTitle}
               </h1>
             )}
           </React.Fragment>

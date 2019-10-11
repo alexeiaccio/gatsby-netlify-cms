@@ -32,10 +32,6 @@ if (!process.env.DEV) {
 module.exports = {
   siteMetadata: {
     ...CONFIG,
-    clientApi: process.env.SLS_API || false,
-    origin: process.env.PRISMIC_API,
-    special: process.env.SPECIAL || false,
-    dev: process.env.DEV || false,
   },
   plugins: [
     {

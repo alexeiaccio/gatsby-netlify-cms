@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import { Link as GatsbyLink } from 'gatsby'
-import { useLocation } from 'react-use'
 
 import { APIS } from '@krapiva-org/utils/defaults/apis'
 
@@ -20,32 +19,43 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   if (!to) {
     return <span {...props}>{children}</span>
   }
-  
-  const { meta } = React.useContext(MetaContext)
-  const location = useLocation()
 
-  const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.krapiva/
+  const { location } = React.useContext(MetaContext)
   const href = get(location, 'href', '')
-  const host = get(regExp.exec(href), '1', '')
+  const host = process.env.PRISMIC_API
 
+  if (href.includes('localhost:')) {
+    return (
+      <GatsbyLink to={`/${to}`} {...props}>
+        {children}
+      </GatsbyLink>
+    )
+  }
+ 
   if (api) {
-    if ((host !== api) && !href.includes('localhost:')) {
+    if (host !== api) {
       return (
-        <a href={`https://${get(APIS, api, (meta.dev ? 'dev-main' : 'www'))}.krapiva.org${to}`} {...props}>
+        <a href={`https://${get(APIS, api, host)}.krapiva.org${to}`} {...props}>
+          {children}
+        </a>
+      )
+    } else {
+      return (
+        <GatsbyLink to={`/${to}`} {...props}>
+          {children}
+        </GatsbyLink>
+      )
+    }
+  } else {
+    if (host === 'krapiva-dev') {
+      return (
+        <a href={`https://dev-main.krapiva.org${to}`} {...props}>
           {children}
         </a>
       )
     }
 
-    if (href.includes('localhost:8002')) {
-      return (
-        <a href={`http://localhost:8001${to}`} {...props}>
-          {children}
-        </a>
-      )
-    }
-
-    if (meta.dev && !href.includes('localhost:')) {
+    if (host === 'dev-main') {
       return (
         <a href={`https://dev-pages.krapiva.org${to}`} {...props}>
           {children}
@@ -54,33 +64,9 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     }
   }
 
-  if (!api && href.includes('localhost:8001')) {
-    return (
-      <a href={`http://localhost:8002${to}`} {...props}>
-        {children}
-      </a>
-    )
-  }
-
-  if ((!api && (host === api)) || href.includes('localhost:')) {
-    return (
-      <GatsbyLink to={`/${to}`} {...props}>
-        {children}
-      </GatsbyLink>
-    )
-  }
-
-  if (!api && meta.dev) {
-    return (
-      <a href={`https://dev-main.krapiva.org${to}`} {...props}>
-        {children}
-      </a>
-    )
-  }
-
   return (
-    <a href={`https://${meta.dev ? 'dev-main' : 'www'}.krapiva.org${to}`} {...props}>
+    <GatsbyLink to={`/${to}`} {...props}>
       {children}
-    </a>
+    </GatsbyLink>
   )
 }

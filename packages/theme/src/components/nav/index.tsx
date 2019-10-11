@@ -37,16 +37,11 @@ export function Nav({
   const href = get(location, 'href', '')
   const toMainSite = pagesIndex ? [{
     text: meta.siteTitle,
-    link: href.includes('localhost:8001') ? '/' : meta.siteUrl,
+    link: href.includes('localhost:') ? '/' : meta.siteUrl,
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
-  if (href.includes('localhost:8001')) {
-    menuItems = menuItems.map(item => ({
-      ...item,
-      link: item.link && `http://localhost:8002${item.link}`
-    }))
-  } else if (meta.dev && !href.includes('localhost:')) {
+  if (process.env.PRISMIC_API === 'krapiva-dev' && !href.includes('localhost:')) {
     menuItems = menuItems.map(item => ({
       ...item,
       link: item.link && `https://dev-main.krapiva.org${item.link}`

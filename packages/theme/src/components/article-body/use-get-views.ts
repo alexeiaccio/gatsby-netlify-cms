@@ -5,7 +5,7 @@ import {
   split, flowRight, drop, parseInt,
 } from 'lodash/fp'
 
-import { MetaContext, StateContext } from '../layout/index'
+import { StateContext } from '../layout/index'
 
 const parseCSV = flowRight(
   keyBy('path'),
@@ -22,12 +22,11 @@ const parseCSV = flowRight(
 )
 
 export function useGetViews() {
-  const { meta } = React.useContext(MetaContext)
   const { views,  setViews } = React.useContext(StateContext)
 
   const getViews = () => {
-    if (meta.clientApi) {
-      axios.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQWl4mxUk47e8inBIEIYYC1P4K9cns_6sqEc-Mxa5j-dHAfAyvPgTLBLW7irATROLWgokETbXSdTpPI/pub?gid=674555330&single=true&output=csv')
+    if (process.env.SHEET_ID) {
+      axios.get(`https://docs.google.com/spreadsheets/d/e/${process.env.SHEET_ID}/pub?gid=674555330&single=true&output=csv`)
         .then(function (response) {
           setViews(parseCSV(response))
         })

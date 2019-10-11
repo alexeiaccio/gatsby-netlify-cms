@@ -8,7 +8,7 @@ import { Burn } from '../burn/index'
 
 export function FooterBurn() {
   const { views, setViews } = React.useContext(StateContext)
-  const { location, meta } = React.useContext(MetaContext)
+  const { location } = React.useContext(MetaContext)
   const pathname = get(location, 'pathname', '//').replace(/\/$/, '')
   const defaultViews = {
     path: pathname,
@@ -17,8 +17,8 @@ export function FooterBurn() {
   }
 
   const handleBurn = () => {
-    if (meta.clientApi) {
-      axios.get(`${meta.clientApi}/counter?path=${pathname}/&view=0&burned=1`)
+    if (process.env.SLS_API) {
+      axios.get(`${process.env.SLS_API}/counter?path=${pathname}/&view=0&burned=1`)
         .then(function () {
           setViews({
             ...views,
