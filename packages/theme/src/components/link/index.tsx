@@ -13,10 +13,9 @@ interface LinkProps {
   key?: any
   to?: string
   target?: string
-  internal?: boolean
 }
 
-export function Link({ api, children, internal, to,...props }: LinkProps) {
+export function Link({ api, children, to, ...props }: LinkProps) {
   if (!to) {
     return <span {...props}>{children}</span>
   }
@@ -25,7 +24,7 @@ export function Link({ api, children, internal, to,...props }: LinkProps) {
   const href = get(location, 'href', '')
   const host = process.env.PRISMIC_API
 
-  if (href.includes('localhost:') || internal) {
+  if (href.includes('localhost:')) {
     return (
       <GatsbyLink to={`/${to}`} {...props}>
         {children}
@@ -48,10 +47,18 @@ export function Link({ api, children, internal, to,...props }: LinkProps) {
       )
     }
   } else {
-    return (
-      <a href={`https://${host}.krapiva.org${to}`} {...props}>
-        {children}
-      </a>
-    )
+    if (host === 'krapiva-dev') {
+      return (
+        <a href={`https://dev-main.krapiva.org${to}`} {...props}>
+          {children}
+        </a>
+      )
+    }
   }
+
+  return (
+    <GatsbyLink to={`/${to}`} {...props}>
+      {children}
+    </GatsbyLink>
+  )
 }
