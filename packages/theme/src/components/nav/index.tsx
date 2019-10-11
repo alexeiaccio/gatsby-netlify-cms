@@ -78,7 +78,7 @@ export function Nav({
               target={!internal && !anchor && (target ? target : '_self')}
               to={internal && link}
               {...styles}
-              {...internal}
+              {...{internal}}
             >
               {text}
             </LinkButton>

@@ -54,10 +54,4 @@ export function Link({ api, children, internal, to,...props }: LinkProps) {
       </a>
     )
   }
-
-  return (
-    <GatsbyLink to={`/${to}`} {...props}>
-      {children}
-    </GatsbyLink>
-  )
 }
