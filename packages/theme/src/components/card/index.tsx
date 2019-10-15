@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
+import { css } from '@emotion/core'
+import tw from 'tailwind.macro'
 
 import { Article } from '../../typings/article'
 import { Img } from '../img/index'
@@ -10,9 +12,11 @@ import { cardStyles, descriptionStyles, imageStyles, imageWrapperStyles, titleSt
 
 interface CardProps {
   data: Article
+  children?: JSX.Element | null
+  onClick?: () => void
 }
 
-export function Card({ data }: CardProps) {
+export function Card({ data, children, onClick }: CardProps) {
   const title = get(data, 'data.title.text', '')
   const image = get(data, 'data.image')
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
@@ -28,6 +32,7 @@ export function Card({ data }: CardProps) {
         <div css={imageStyles}>
           <Img src={image} />
         </div>
+        {children || null}
       </div>
       <h3 css={titleStyles}>{title}</h3>
       <div css={descriptionStyles}>
@@ -56,12 +61,19 @@ export function Card({ data }: CardProps) {
     <Link
       css={cardStyles}
       api={api}
+      internal={data.internal}
       to={`/${get(data, 'fields.slug')}`}
     >
       {renderContent()}
     </Link>
   ) : (
-      <div css={cardStyles}>
+      <div
+        css={css`
+          ${cardStyles};
+          ${onClick && tw`cursor-pointer`};
+        `}
+        onClick={onClick}
+      >
         {renderContent()}
       </div>
     )

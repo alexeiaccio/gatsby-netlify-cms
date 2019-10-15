@@ -68,6 +68,7 @@ export interface ArticleBody {
 }
 
 export interface Article {
+  internal?: boolean
   fields: {
     slug: string
   }

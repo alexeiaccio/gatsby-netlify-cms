@@ -1,5 +1,8 @@
 import * as React from 'react'
-import { compact, filter, find, flatMap, flowRight, get, map, uniq, uniqBy } from 'lodash/fp'
+import {
+  compact, filter, find, flatMap, flowRight,
+  get, map, some, uniq, uniqBy,
+} from 'lodash/fp'
 
 import { Card } from '../card/index'
 import { Row, Col } from '../row/index'
@@ -60,34 +63,45 @@ export function Search({ articles }: SearchProps) {
     setFilter(current)
   }
 
+  const prepared = React.useMemo(() => articles.map(article => {
+    if (!article) return null
+
+    const { fields, ...item } = article
+
+    return some(tag => tag === 'Афиша', item.tags) ? {
+      ...item,
+      fields: {
+        slug: `arhiv-afishi#${fields.slug}`,
+      },
+      internal: true,
+    } : article
+  }), [])
   const tags = React.useMemo(() => flowRight([
     uniq,
     compact,
     flatMap('tags'),
-  ])(articles), [])
+  ])(prepared), [])
   const authors = React.useMemo(() => flowRight([
     map('name'),
     uniqBy('name'),
     map(get('author.document.0.data')),
     filter('author'),
     flatMap('data.authors'),
-  ])(articles), [])
-  const filtersList = map(filter => ({ name: filter, active: filter === activeFilter}),
+  ])(prepared), [])
+  const filtersList = map(filter => ({ name: filter, active: filter === activeFilter }),
     [...tags, ...authors])
-  let items = map(article => ({ article, result: null }), articles)
+  let items = map(article => ({ article, result: null }), prepared)
   let filtered = null
 
   if (activeFilter) {
-    // if (queryState.length > 0) setQuery('')
-    // if (results.length > 0) setResult([])
     filtered = filter(article =>
       find(tag => tag === activeFilter, article.tags) ||
       find(name => name === activeFilter,
         map(get('author.document.0.data.name'), filter('author', article.data.authors))),
-      articles)
+      prepared)
     items = map(article => ({
       article,
-      result : null,
+      result: null,
     }), filtered)
   }
 
@@ -98,7 +112,7 @@ export function Search({ articles }: SearchProps) {
         article,
         result,
       }) : ({ article: null, result: null })
-    }, filtered || articles))
+    }, filtered || prepared))
   }
 
   if ((items.length % 2) !== 0) {
@@ -129,8 +143,9 @@ export function Search({ articles }: SearchProps) {
               gap={1}
               cols={2}
             >
-              <Card data={item.article} />
-              <Matched query={queryState} result={item.result} />
+              <Card data={item.article}>
+                <Matched query={queryState} result={item.result} />
+              </Card>
             </Col>
           ))}
         </Row>

@@ -20,7 +20,6 @@ export const Col = styled.div`
   ${tw`
     flex flex-col
     items-start justify-center
-    relative
     w-full
   `};
   flex-grow: 1;
