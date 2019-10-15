@@ -1,7 +1,7 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-const { keys } = require('lodash')
+const { get, keys } = require('lodash')
 const { APIS, CONFIG, SCHEMAS, linkResolver, plugins } = require('@krapiva-org/utils')
 const { about, authors, index } = SCHEMAS
 
@@ -69,6 +69,34 @@ module.exports = {
           about,
           index,
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-lunr`,
+      options: {
+        languages: [{ name: 'ru' }, { name: 'en' }],
+        b: 0,
+        fields: [
+          { name: 'data', store: true },
+          { name: 'slug', store: true },
+        ],
+        resolvers: {
+          PrismicArticles: {
+            data: node => {
+              const str = node.dataString
+              const regexp = new RegExp('(?:text":")(.+?)(?:",")', 'gi')
+              const arr = []
+              let result
+              // eslint-disable-next-line no-cond-assign
+              while ((result = regexp.exec(str))) {
+                arr.push(result[1])
+              }
+              return arr.join(' ').replace(/\\n?/g, '').toLowerCase()
+            },
+            slug: node => node.fields.slug,
+          },
+        },
+        filename: 'search_index.json',
       },
     },
     ...apisResolvers,

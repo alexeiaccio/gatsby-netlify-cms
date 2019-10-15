@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
-import { css } from '@emotion/core'
 
 import { translite } from '@krapiva-org/utils'
 

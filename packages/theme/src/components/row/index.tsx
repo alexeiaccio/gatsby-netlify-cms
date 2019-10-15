@@ -18,8 +18,9 @@ export const Row = styled.div`
 
 export const Col = styled.div`
   ${tw`
-    flex
+    flex flex-col
     items-start justify-center
+    relative
     w-full
   `};
   flex-grow: 1;

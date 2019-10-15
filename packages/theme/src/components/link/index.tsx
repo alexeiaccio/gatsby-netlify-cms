@@ -9,13 +9,14 @@ import { MetaContext } from '../layout/index'
 interface LinkProps {
   api?: string
   css?: any
-  children?: JSX.Element
+  children?: JSX.Element | string | null
   key?: any
   to?: string
   target?: string
+  internal?: boolean
 }
 
-export function Link({ api, children, to, ...props }: LinkProps) {
+export function Link({ api, children, internal, to, ...props }: LinkProps) {
   if (!to) {
     return <span {...props}>{children}</span>
   }
@@ -24,7 +25,7 @@ export function Link({ api, children, to, ...props }: LinkProps) {
   const href = get(location, 'href', '')
   const host = process.env.PRISMIC_API
 
-  if (href.includes('localhost:')) {
+  if (href.includes('localhost:') || internal) {
     return (
       <GatsbyLink to={`/${to}`} {...props}>
         {children}
@@ -50,6 +51,14 @@ export function Link({ api, children, to, ...props }: LinkProps) {
     if (host === 'krapiva-dev') {
       return (
         <a href={`https://dev-main.krapiva.org${to}`} {...props}>
+          {children}
+        </a>
+      )
+    }
+
+    if (host !== 'www') {
+      return (
+        <a href={`https://www.krapiva.org${to}`} {...props}>
           {children}
         </a>
       )
