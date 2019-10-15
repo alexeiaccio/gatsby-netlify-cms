@@ -1,25 +1,23 @@
-import React from 'react'
+import * as React from 'react'
 import { graphql } from 'gatsby'
 
-import { Layout, IndexBody } from '@krapiva-org/theme'
+import { Layout, SearchBody } from '@krapiva-org/theme'
 
-function IndexPage({ data, location }: any) {
+function SearchPage({ data, location }) {
   return (
     <Layout
       location={location}
       meta={data.site.siteMetadata}
       index={data.prismicIndex.data}
+      seo={{ title: "Поиск" }}
     >
-      <IndexBody
-        articles={data.allPrismicArticles.nodes}
-        about={data.prismicAbout.data}
-      />
+      <SearchBody articles={data.allPrismicArticles.nodes} />
     </Layout>
   )
 }
 
 export const PageQuery = graphql`
-  query IndexQuery {
+  query SearchQuery {
     site {
       siteMetadata {
         siteTitle
@@ -30,7 +28,6 @@ export const PageQuery = graphql`
         siteThemeColor
         twitter
         fbAppId
-
       }
     }
     prismicIndex {
@@ -87,9 +84,7 @@ export const PageQuery = graphql`
       }
     }
     allPrismicArticles(
-      filter: {fields: {tags: {nin: ["afisha"]}}},
-      sort: {order: DESC, fields: first_publication_date},
-      limit: 100
+      sort: {order: DESC, fields: first_publication_date}
     ) {
       nodes {
         fields {
@@ -129,31 +124,7 @@ export const PageQuery = graphql`
         }
       }
     }
-    prismicAbout {
-      data {
-        body {
-          __typename
-          ... on PrismicAboutBodyLead {
-            primary {
-              text {
-                html
-              }
-            }
-          }
-          ... on PrismicAboutBodyImage {
-            primary {
-              imageimage {
-                url
-              }
-              imagecaption {
-                html
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `
 
-export default IndexPage
+export default SearchPage

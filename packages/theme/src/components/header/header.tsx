@@ -36,13 +36,13 @@ export function Header(props: HeaderProps) {
       >
         <Link
           css={titleStyles}
-          api={meta.special && meta.origin}
+          api={process.env.SPECIAL ? process.env.PRISMIC_API : undefined}
           to="/"
         >
           <React.Fragment>
             <Logo height={100} />
             <h1 css={css`${tw`pt-2`}`}>
-              {meta.special || meta.siteTitle}
+              {process.env.SPECIAL || meta.siteTitle}
             </h1>
           </React.Fragment>
         </Link>

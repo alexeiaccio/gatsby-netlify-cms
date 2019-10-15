@@ -22,6 +22,17 @@ exports.plugins = [
       allExtensions: true, // defaults to false
     },
   },
+  {
+    resolve: `gatsby-plugin-env-variables`,
+    options: {
+      whitelist: [
+        'SLS_API',
+        'PRISMIC_API',
+        'SPECIAL',
+        'DEV',
+      ]
+    },
+  },
   `gatsby-plugin-netlify-cache`,
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-sharp',

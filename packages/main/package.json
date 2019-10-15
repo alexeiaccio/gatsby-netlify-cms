@@ -1,6 +1,6 @@
 {
   "name": "@krapiva-org/main",
-  "version": "0.0.1",
+  "version": "2.0.1",
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -19,6 +19,8 @@
     "gatsby": "^2.13.65",
     "gatsby-image": "^2.2.8",
     "gatsby-plugin-emotion": "^4.1.2",
+    "gatsby-plugin-env-variables": "^1.0.1",
+    "gatsby-plugin-lunr": "^1.5.2",
     "gatsby-plugin-mailchimp": "^5.1.2",
     "gatsby-plugin-manifest": "^2.2.13",
     "gatsby-plugin-netlify": "^2.1.11",
