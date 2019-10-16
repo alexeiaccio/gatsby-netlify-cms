@@ -31,7 +31,8 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
       ...(opened ? items : notActive.slice(0, 4)),
       { name: opened ? 'Закрыть ↑' : 'Ещё ↓', active: false, toggle }
     ]
-    if (active && !opened) {
+    if (active) {
+      if (opened) toggle(false)
       setFilters(concat(active, newFilters))
     } else {
       setFilters(newFilters)
@@ -67,7 +68,6 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
               ${linkStyles};
               ${active && tw`bg-green-500 z-10`};
               ${args.toggle && tw`bg-gray-300`};
-              transform: scale(${active ? 1.2 : 1});
               &:hover:after {
                 ${linkStyles};
                 ${tw`absolute bg-green-500 hidden inset-0 left-auto`};

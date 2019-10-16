@@ -144,7 +144,7 @@ export function Search({ articles }: SearchProps) {
       </TextContainer>
       <section css={sectionStyles}>
         <Row gap={1} css={rowStyles}>
-          {items.slice(0, page * 4).map((item, idx) => (
+          {items.slice(0, page * 12).map((item, idx) => (
             <Col
               key={get('href', item) || `result-${idx}`}
               gap={1}
@@ -157,7 +157,7 @@ export function Search({ articles }: SearchProps) {
           ))}
         </Row>
       </section>
-      {(items.slice(page * 4).length > 0) && (
+      {(items.slice(page * 12).length > 0) && (
         <div css={buttonStyles}>
           <Button
             color="#08a676"
