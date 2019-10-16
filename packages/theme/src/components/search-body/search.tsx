@@ -6,13 +6,14 @@ import {
 
 import { Card } from '../card/index'
 import { Row, Col } from '../row/index'
+import { Button } from '../button/index'
 
 import { Article } from '../../typings/article'
 import { TextContainer } from '../main/index'
 
 import { Filters } from './filters'
 import { Matched } from './matched'
-import { searchStyles, Input, sectionStyles, rowStyles } from './styles'
+import { searchStyles, Input, sectionStyles, rowStyles, buttonStyles } from './styles'
 
 interface SearchProps {
   articles: Article[]
@@ -21,10 +22,10 @@ interface SearchProps {
 export function Search({ articles }: SearchProps) {
   const [queryState, setQuery] = React.useState('')
   const [results, setResult] = React.useState<any[]>([])
+  const [page, setPage] = React.useState<number>(1)
   const [activeFilter, setFilter] = React.useState<string | null>(null)
 
   const inputRef = React.useRef<any>(null)
-  // console.log(location)
 
   React.useEffect(() => {
     if (inputRef.current && inputRef.current.focus) {
@@ -94,6 +95,7 @@ export function Search({ articles }: SearchProps) {
   let filtered = null
 
   if (activeFilter) {
+    if (page > 1) setPage(1)
     filtered = filter(article =>
       find(tag => tag === activeFilter, article.tags) ||
       find(name => name === activeFilter,
@@ -106,6 +108,7 @@ export function Search({ articles }: SearchProps) {
   }
 
   if (queryState.length > 0 || results.length > 0) {
+    if (page > 1) setPage(1)
     items = filter('result', map(article => {
       const result = find(['slug', article.fields.slug], results);
       return result ? ({
@@ -133,11 +136,15 @@ export function Search({ articles }: SearchProps) {
           type="search"
           value={queryState}
         />
-        <Filters items={filtersList} onClick={handleFilter} />
+        <Filters
+          collapsed={queryState.length > 0 || results.length > 0}
+          items={filtersList}
+          onClick={handleFilter}
+        />
       </TextContainer>
       <section css={sectionStyles}>
         <Row gap={1} css={rowStyles}>
-          {items.slice(0, 12).map((item, idx) => (
+          {items.slice(0, page * 4).map((item, idx) => (
             <Col
               key={get('href', item) || `result-${idx}`}
               gap={1}
@@ -150,6 +157,21 @@ export function Search({ articles }: SearchProps) {
           ))}
         </Row>
       </section>
+      {(items.slice(page * 4).length > 0) && (
+        <div css={buttonStyles}>
+          <Button
+            color="#08a676"
+            inverted
+            rounded={0.25}
+            size={1}
+            onClick={() => setPage(current => current + 1)}
+          >
+            <span>
+              Ещё ↓
+            </span>
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

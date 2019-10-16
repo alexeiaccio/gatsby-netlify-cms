@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { menuStyles, linkStyles } from './styles'
+import { Link } from '../link/index'
 
 interface MenuProps {
   opened: boolean
@@ -40,6 +41,13 @@ export function Menu({ opened, toggleForm }: MenuProps) {
         >
           VK
         </a>
+        <Link
+          api={process.env.PRISMIC_API}
+          css={linkStyles}
+          to="/poisk"
+        >
+          ПОИСК
+        </Link>
       </menu>
     </React.Fragment>
   )

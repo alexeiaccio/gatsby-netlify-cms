@@ -8,7 +8,7 @@ export const footerStyles = css`
     flex flex-col
     font-sans
     py-8 px-4 sm:px-8
-    text-xxs sm:text-xs
+    text-xxs
     text-white
   `};
 `
@@ -48,4 +48,10 @@ export const linkStyles = css`
     text-green-500
   `};
   font-variant: small-caps;
+`
+
+export const navStyles = css`
+  ${tw`
+    mb-6
+  `};
 `

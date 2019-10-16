@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
-import { navigate } from '@reach/router'
 import { get } from 'lodash'
 
 import { MENU } from '@krapiva-org/utils'
@@ -46,24 +45,16 @@ export function Nav({
       ...item,
       link: item.link && `https://dev-main.krapiva.org${item.link}`
     }))
-  } else if (!pagesIndex && location.pathname === '/') {
-    menuItems = menuItems.map(item => ({
-      ...item,
-      link: item.link && `/#${item.link.replace(/\//g, '')}`
-    }))
   }
 
   return (
     <ul css={navStyles}>
       {menuItems.map(({ link, text, target }) => {
         const internal = link && /^\/(?!\/)/.test(link)
-        const anchor = link && /^\/\#/.test(link)
         let component: JSX.Element | string | null = null
 
         if (internal) {
           component = Link
-        } else if (!anchor) {
-          component = 'a'
         }
 
         return (
@@ -71,11 +62,10 @@ export function Nav({
             <LinkButton
               component={component}
               disabled={!link}
-              href={!internal && !anchor && link}
-              onClick={() => anchor && link && navigate(link, { replace: true })}
-              rel={!(internal || anchor) ? 'noopener noreferrer' : undefined}
+              href={!internal && link}
+              rel={!internal ? 'noopener noreferrer' : undefined}
               styles={buttonStyles}
-              target={!internal && !anchor && (target ? target : '_self')}
+              target={!internal && (target ? target : '_self')}
               to={internal && link}
               {...styles}
               {...{internal}}

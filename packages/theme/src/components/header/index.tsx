@@ -44,7 +44,10 @@ export function WrappedHeader() {
   const [openedForm, toggleForm] = useToggle(false)
   const { meta, index } = React.useContext(MetaContext)
   const items = get(index, 'categories', [])
-    .map(item => item ? ({ text: item.categorytitle.text, link: `/${translite(item.categorytitle.text)}` }) : null)
+    .map(item => item ? ({
+      text: item.categorytitle.text,
+      link: `/${translite(item.categorytitle.text)}`,
+    }) : null)
 
   return (
     <React.Fragment>

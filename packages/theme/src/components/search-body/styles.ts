@@ -43,7 +43,7 @@ export const itemStyles = css`
     mb-2
     px-1
   `};
-  flex-grow: 0;
+  flex-grow: 1;
   flex-shrink: 0;
 `
 
@@ -55,7 +55,7 @@ export const linkStyles = css`
     relative
     text-xs
   `};
-  flex-grow: 0;
+  flex-grow: 1;
   flex-shrink: 0;
   outline: none !important;
 `
