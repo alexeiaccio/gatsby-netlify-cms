@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as uuid from 'uuid/v1'
 import { css } from '@emotion/core'
 import { concat, find, filter } from 'lodash'
-import { useToggle, useUpdateEffect } from 'react-use'
+import { usePrevious, useToggle, useUpdateEffect } from 'react-use'
 import tw from 'tailwind.macro'
 
 import { listStyles, itemStyles, linkStyles } from './styles'
@@ -21,8 +21,8 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
   if (items.length === 0) return null
 
   const [opened, toggle] = useToggle(false)
+  const prevOpened = usePrevious(opened)
   const [filters, setFilters] = React.useState<any[]>([])
-
   const active = find(items, ['active', true])
   
   React.useEffect(() => {
@@ -31,9 +31,17 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
       ...(opened ? items : notActive.slice(0, 4)),
       { name: opened ? 'Закрыть ↑' : 'Ещё ↓', active: false, toggle }
     ]
+
     if (active) {
-      if (opened) toggle(false)
-      setFilters(concat(active, newFilters))
+      if (prevOpened) {
+        toggle(false)
+      }
+
+      if (opened) {
+        setFilters(newFilters)
+      } else {
+        setFilters(concat(active, newFilters))
+      }
     } else {
       setFilters(newFilters)
     }
