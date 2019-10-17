@@ -60,7 +60,7 @@ export function Nav({
         const internal = link && /^\/(?!\/)/.test(link)
         let component: JSX.Element | string | null = null
 
-        if (internal) {
+        if (internal || (link && link.includes('http'))) {
           component = Link
         }
 
