@@ -3,6 +3,7 @@ import * as uuid from 'uuid/v1'
 import { get } from 'lodash'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
+import { useMedia } from 'react-use'
 
 import { BodyImage } from '../slices/image/index'
 import { Card } from '../card/index'
@@ -25,12 +26,13 @@ interface SectionProps {
 
 export function IndexSection({ data }: SectionProps) {
   const items = data.articles.slice(0, 6)
+  const mdScreen = useMedia('(min-width: 640px)')
 
-  if ((items.length % 2) !== 0) {
+  if (mdScreen && (items.length % 2) !== 0) {
     items.push({})
   }
   if (items.length === 0) {
-    items.push({})
+    if (mdScreen) items.push({})
     items.push({})
   }
 

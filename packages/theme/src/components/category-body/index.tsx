@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
+import { useMedia } from 'react-use'
 
 import { Article } from '../../typings/article'
 import { Card } from '../card/index'
@@ -15,6 +16,17 @@ interface CategoryBodyProps {
 }
 
 export function CategoryBody({ articles, title }: CategoryBodyProps) {
+  const items: Array<Article | {}> = articles
+  const mdScreen = useMedia('(min-width: 640px)')
+
+  if (mdScreen && (items.length % 2) !== 0) {
+    items.push({})
+  }
+  if (items.length === 0) {
+    if (mdScreen) items.push({})
+    items.push({})
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -25,7 +37,7 @@ export function CategoryBody({ articles, title }: CategoryBodyProps) {
             </TextContainer>
           )}
           <Row gap={1} css={rowStyles}>
-            {articles.map(item => (
+            {items.map(item => (
               <Col
                 key={uuid()}
                 gap={1}

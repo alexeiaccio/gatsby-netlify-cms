@@ -47,6 +47,13 @@ export function Nav({
     }))
   }
 
+  if (process.env.PRISMIC_API !== 'www' && !href.includes('localhost:')) {
+    menuItems = menuItems.map(item => ({
+      ...item,
+      link: item.link && `https://www.krapiva.org${item.link}`
+    }))
+  }
+
   return (
     <ul css={navStyles}>
       {menuItems.map(({ link, text, target }) => {

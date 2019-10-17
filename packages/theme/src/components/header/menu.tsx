@@ -42,7 +42,7 @@ export function Menu({ opened, toggleForm }: MenuProps) {
           VK
         </a>
         <Link
-          api={process.env.PRISMIC_API}
+          api={process.env.PRISMIC_API === 'dev-main' ? process.env.PRISMIC_API : 'www'}
           css={linkStyles}
           to="/poisk"
         >

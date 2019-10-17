@@ -3,6 +3,7 @@ import {
   compact, filter, find, flatMap, flowRight,
   get, map, some, uniq, uniqBy,
 } from 'lodash/fp'
+import { useMedia } from 'react-use'
 
 import { Card } from '../card/index'
 import { Row, Col } from '../row/index'
@@ -24,6 +25,7 @@ export function Search({ articles }: SearchProps) {
   const [results, setResult] = React.useState<any[]>([])
   const [page, setPage] = React.useState<number>(1)
   const [activeFilter, setFilter] = React.useState<string | null>(null)
+  const mdScreen = useMedia('(min-width: 640px)')
 
   const inputRef = React.useRef<any>(null)
 
@@ -118,11 +120,11 @@ export function Search({ articles }: SearchProps) {
     }, filtered || prepared))
   }
 
-  if ((items.length % 2) !== 0) {
+  if (mdScreen && (items.length % 2) !== 0) {
     items.push({})
   }
   if (items.length === 0) {
-    items.push({})
+    if (mdScreen) items.push({})
     items.push({})
   }
 
