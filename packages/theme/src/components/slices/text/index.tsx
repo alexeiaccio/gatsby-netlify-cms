@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import { HTMLRef } from '../../html/index'
 import { TextContainer } from '../../main/index'
 
-import { Reference } from './ reference'
+import { Reference } from './reference'
 import { textStyles } from './styles'
 
 interface BodyTextProps {

@@ -19,16 +19,11 @@ const blackStyles = props => css`
 `
 
 export const whiteStyles =  css`
-  ${tw`
-    bg-white
-    text-black
-  `};
+  background-color: var(--bg-color);
+  color: var(--text-color);
 
   & a {
-    ${tw`
-      text-green-600
-      hover:text-green-600
-    `};
+    color: var(--link-color) !important;
   }
 `
 

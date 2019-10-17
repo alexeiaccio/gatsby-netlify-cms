@@ -49,12 +49,12 @@ export const itemStyles = css`
 
 export const linkStyles = css`
   ${tw`
-    bg-green-200
     font-sans
     px-2 py-1
     relative
     text-xs
   `};
+  background-color: var(--button-light-color);
   flex-grow: 1;
   flex-shrink: 0;
   outline: none !important;

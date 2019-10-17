@@ -14,6 +14,24 @@ export default css`
   a {
     ${tw`break-words`};
   }
+
+  :root {
+    --bg-color: #FFF;
+    --text-color: #000;
+    --link-color: #08a676;
+    --button-light-color: #fed7d7;
+    --gray-light-color: #edf2f7;
+  }
+
+  main {
+    @media (prefers-color-scheme: dark) {
+      --bg-color: #000;
+      --text-color: #FFF;
+      --link-color: #0cf3ad;
+      --button-light-color: #08a676;
+      --gray-light-color: #2d3748;
+    }
+  }
 `
 
 /* 

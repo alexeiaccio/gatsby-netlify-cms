@@ -19,9 +19,10 @@ export const Main = styled.main`
 
 export const Wrapper = styled.div`
   ${tw`
-    bg-white text-black
     w-full
   `};
+  background-color: var(--bg-color);
+  color: var(--text-color);
 `
 
 export const Container = styled.div`

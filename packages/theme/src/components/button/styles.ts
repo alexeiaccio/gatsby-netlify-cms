@@ -22,11 +22,12 @@ export const buttonOutlined = css`
 export const smallButton = css`
   ${tw`
     font-sans
-    bg-green-200 hover:bg-green-600
     outline-none focus:outline-none
     rounded-sm
     text-xxs
     hover:text-white
   `};
+  background-color: var(--button-light-color);
   padding: 0.05rem 0.35rem;
+  
 `

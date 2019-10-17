@@ -31,6 +31,6 @@ export const titleStyles = css`
 export const descriptionStyles = css`
   ${tw`
     text-xs md:text-sm
-    text-black
   `};
+  color: var(--text-color);
 `

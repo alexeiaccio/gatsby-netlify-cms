@@ -63,7 +63,7 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
         <span
           css={css`
             ${linkStyles};
-            ${tw`bg-white`};
+            background-color: var(--bg-color);
           `}
         >
           {'Фильтры:'}
@@ -74,8 +74,8 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
           <button
             css={css`
               ${linkStyles};
-              ${active && tw`bg-green-500 z-10`};
-              ${args.toggle && tw`bg-gray-300`};
+              ${active && tw`bg-green-500 text-black z-10`};
+              ${args.toggle && 'background-color: var(--gray-light-color)'};
               &:hover:after {
                 ${linkStyles};
                 ${tw`absolute bg-green-500 hidden inset-0 left-auto`};

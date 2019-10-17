@@ -31,7 +31,7 @@ export function IndexBody({ articles, about }: IndexBodyProps) {
       .filter(article => article.tags.some(tag => (tag !== 'Архив')))
       .slice(0, 7),
   }))
-  const after = MENU.after.map(item => ({
+  const after = MENU.after.filter(({ link }) => !link.includes('poisk')).map(item => ({
     id: item.link,
     description: null,
     title: item.text,

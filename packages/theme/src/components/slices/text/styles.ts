@@ -17,19 +17,21 @@ export const textStyles = css`
 export const refStyles = css`
   ${tw`
     absolute
-    bg-black
     p-4
+    text-sm
     text-center
-    text-white
     w-full
     z-10
   `};
+  background-color: var(--text-color);
+  color: var(--bg-color);
+
   &:before {
     ${tw`
       absolute
-      bg-black
       block
     `};
+    background-color: var(--text-color);
     content: '';
     top: -10px;
     height: 22px;

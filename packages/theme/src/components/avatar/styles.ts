@@ -30,7 +30,7 @@ export const titleStyles = css`
 
 export const descriptionStyles = css`
   ${tw`
-    text-xs md:text-sm
-    text-black
+    text-sm
   `};
+  color: var(--text-color);
 `
