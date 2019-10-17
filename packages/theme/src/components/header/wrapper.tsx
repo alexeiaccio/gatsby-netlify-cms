@@ -10,7 +10,7 @@ export const Wrapper = React.forwardRef(({ children }: WrapperProps, ref: any) =
   return (
     <div
       css={css`
-        ${tw`relative`};
+        ${tw`relative z-10`};
       `}
       ref={ref}
     >
