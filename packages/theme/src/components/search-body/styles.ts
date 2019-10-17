@@ -84,7 +84,6 @@ export const matchedStyles = css`
   ${tw`
     absolute inset-0
     flex items-center justify-center
-    m-2
     p-4
     text-white
     text-sm
