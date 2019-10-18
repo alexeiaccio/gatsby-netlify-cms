@@ -35,7 +35,7 @@ export const fadeStyles = css`
 export const navStyles = css`
   ${tw`
     max-w-2xl 
-    mt-4
+    mt-4 mx-auto
     px-6
   `};
 `
