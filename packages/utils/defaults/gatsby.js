@@ -30,6 +30,7 @@ exports.plugins = [
         'PRISMIC_API',
         'SPECIAL',
         'DEV',
+        'SHEET_ID'
       ]
     },
   },

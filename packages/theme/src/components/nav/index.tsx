@@ -58,9 +58,9 @@ export function Nav({
     <ul css={navStyles}>
       {menuItems.map(({ link, text, target }) => {
         const internal = link && /^\/(?!\/)/.test(link)
-        let component: JSX.Element | string | null = null
+        let component: JSX.Element | string | null = 'a'
 
-        if (internal || (link && link.includes('http'))) {
+        if (internal) {
           component = Link
         }
 
