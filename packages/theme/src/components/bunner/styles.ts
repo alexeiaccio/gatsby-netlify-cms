@@ -11,6 +11,10 @@ export const bunnerStyles = css`
     py-2 px-4
     font-sans
   `};
+
+  & a {
+    ${tw`underline`};
+  }
 `
 
 export const buttonWrapperStyles = css`

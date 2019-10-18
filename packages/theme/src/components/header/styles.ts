@@ -68,6 +68,14 @@ export const openerStyles = css`
   font-variant: small-caps;
 `
 
+export const themeToggle = css`
+  ${tw`
+    absolute
+  `};
+  left: 0.8rem;
+  top: 0.65rem;
+`
+
 export const menuStyles = css`
   ${tw`
     flex flex-row flex-wrap

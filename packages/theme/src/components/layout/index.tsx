@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Global } from '@emotion/core'
-import { useSessionStorage } from 'react-use'
+import { useLocalStorage, useMedia, useSessionStorage } from 'react-use'
 
 import '../../fonts/cormorant/stylesheet.css'
 import '../../fonts/montserrat/stylesheet.css'
@@ -27,7 +27,9 @@ export const MetaContext = React.createContext<any>({
 })
 export const StateContext = React.createContext<any>({
   views: {},
-  setViews: () => { }
+  setViews: () => {},
+  isDark: false,
+  toggleDarkMode: () => {}
 })
 
 interface LayoutProps {
@@ -45,6 +47,8 @@ function LayoutComponent({
   index, seo, blackHeader, pagesIndex
 }: LayoutProps): JSX.Element {
   const [views, setViews] = useSessionStorage('views', null)
+  const isDarkPreferScheme = useMedia('(prefers-color-scheme: dark)')
+  const [isDark, toggleDarkMode] = useLocalStorage('darkTheme', isDarkPreferScheme)
 
   return (
     <React.Fragment>
@@ -52,9 +56,9 @@ function LayoutComponent({
       <SEO meta={meta} location={location} data={seo} />
       <Borders />
       <MetaContext.Provider value={{ location, meta, index, blackHeader, pagesIndex }}>
-        <StateContext.Provider value={{ views, setViews }}>
+        <StateContext.Provider value={{ views, setViews, isDark, toggleDarkMode }}>
           <WrappedHeader />
-          <Main>
+          <Main isDark={isDark}>
             {children}
           </Main>
           <Footer />

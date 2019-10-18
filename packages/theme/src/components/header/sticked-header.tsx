@@ -6,6 +6,7 @@ import tw from 'tailwind.macro'
 import { Logo } from '../logo/index'
 import { Link } from '../link/index'
 
+import { DarkModeToggle } from './dark-mode-toggle'
 import { HeaderProps } from './index'
 import { HeaderNav } from './nav'
 import { Menu } from './menu'
@@ -13,7 +14,7 @@ import { Opener } from './opener'
 import { Runner } from './runner'
 import { Subcribtion } from './subscription'
 import { useOpen } from './use-open'
-import { headerStyles, runnerStyles, titleStyles, stickedStyles, fadeStyles } from './styles'
+import { headerStyles, runnerStyles, titleStyles, stickedStyles, fadeStyles, themeToggle } from './styles'
 
 interface Props extends HeaderProps {
   sticked: boolean
@@ -27,7 +28,7 @@ export function StickedHeader(props: Props) {
     items,
     sticked: propsSticked = false,
   } = props
-  
+
   const { sticked, opened, toggle, open, handleClick } = useOpen(propsSticked)
 
   React.useEffect(() => {
@@ -91,7 +92,12 @@ export function StickedHeader(props: Props) {
           />
         </div>
         <Subcribtion opened={openedForm} onClose={toggleForm} />
+        {opened && (
+          <div css={themeToggle}>
+            <DarkModeToggle />
+          </div>
+        )}
       </div>
     </React.Fragment>
-  )
-}
+      )
+    }

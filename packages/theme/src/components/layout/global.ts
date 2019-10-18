@@ -22,16 +22,6 @@ export default css`
     --button-light-color: #c6f6d5;
     --gray-light-color: #edf2f7;
   }
-
-  main {
-    @media (prefers-color-scheme: dark) {
-      --bg-color: #000;
-      --text-color: #FFF;
-      --link-color: #0cf3ad;
-      --button-light-color: #08a676;
-      --gray-light-color: #2d3748;
-    }
-  }
 `
 
 /* 

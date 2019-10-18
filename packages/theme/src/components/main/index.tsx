@@ -10,11 +10,22 @@ export const headingStyles = css`
   `};
 `
 
+const themeColors = props => css`
+  ${props.isDark && `
+    --bg-color: #000;
+    --text-color: #FFF;
+    --link-color: #0cf3ad;
+    --button-light-color: #08a676;
+    --gray-light-color: #2d3748;
+  `};
+`
+
 export const Main = styled.main`
   ${tw`
     font-serif font-medium
     w-full
   `};
+  ${themeColors};
 `
 
 export const Wrapper = styled.div`
