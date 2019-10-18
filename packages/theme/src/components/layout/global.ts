@@ -19,7 +19,7 @@ export default css`
     --bg-color: #FFF;
     --text-color: #000;
     --link-color: #08a676;
-    --button-light-color: #fed7d7;
+    --button-light-color: #c6f6d5;
     --gray-light-color: #edf2f7;
   }
 
