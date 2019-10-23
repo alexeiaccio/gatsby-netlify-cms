@@ -51,8 +51,8 @@ export function WrappedHeader() {
 
   return (
     <React.Fragment>
+      <HeaderBunners />
       <Wrapper ref={ref}>
-        <HeaderBunners />
         <Header
           openedForm={openedForm}
           toggleForm={toggleForm}

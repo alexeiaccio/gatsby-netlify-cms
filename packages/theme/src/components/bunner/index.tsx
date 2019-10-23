@@ -5,7 +5,7 @@ import { Button } from '../button/index'
 import { HTML } from '../html/index'
 import { LinkButton } from '../button/link'
 
-import { bunnerStyles, buttonWrapperStyles, closeStyles } from './styles'
+import { bunnerStyles, textStyles, buttonWrapperStyles, closeStyles } from './styles'
 
 interface BunnerProps {
   bunner?: {
@@ -28,7 +28,7 @@ export function Bunner({ bunner, onClick, atFooter }: BunnerProps) {
 
   return (
     <div css={bunnerStyles}>
-      <HTML>
+      <HTML css={textStyles}>
         {get(bunner, 'bannertext.html')}
       </HTML>
       <div css={buttonWrapperStyles}>

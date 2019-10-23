@@ -10,8 +10,12 @@ export const bunnerStyles = css`
     w-full
     py-2 px-4
     font-sans
+    relative
+    z-10
   `};
+`
 
+export const textStyles = css`
   & a {
     ${tw`underline`};
   }
