@@ -17,7 +17,7 @@ import { Meta } from '../../typings/meta'
 import { Seo } from '../../typings/seo'
 
 import { Borders } from './styles'
-import { HeaderBunners } from './bunners'
+// import { HeaderBunners } from './bunners'
 import globalStyles from './global'
 
 export const MetaContext = React.createContext<any>({
@@ -56,7 +56,7 @@ function LayoutComponent({
       <Global styles={globalStyles} />
       <SEO meta={meta} location={location} data={seo} />
       <Borders />
-      <HeaderBunners index={index} />
+      {/* <HeaderBunners index={index} /> */}
       <MetaContext.Provider value={{ location, meta, index, blackHeader, pagesIndex }}>
         <StateContext.Provider value={{ views, setViews, isDark, toggleDarkMode }}>
           <WrappedHeader />
