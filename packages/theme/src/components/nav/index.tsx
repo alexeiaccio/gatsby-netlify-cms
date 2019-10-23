@@ -40,18 +40,18 @@ export function Nav({
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
-  if (process.env.PRISMIC_API === 'krapiva-dev' && !href.includes('localhost:')) {
-    menuItems = menuItems.map(item => ({
-      ...item,
-      link: item.link && `https://dev-main.krapiva.org${item.link}`
-    }))
-  }
-
-  if (process.env.PRISMIC_API !== 'www' && !href.includes('localhost:')) {
-    menuItems = menuItems.map(item => ({
-      ...item,
-      link: item.link && `https://www.krapiva.org${item.link}`
-    }))
+  if (!href.includes('localhost:')) {
+    if (process.env.PRISMIC_API === 'krapiva-dev') {
+      menuItems = menuItems.map(item => ({
+        ...item,
+        link: item.link && `https://dev-main.krapiva.org${item.link}`
+      }))
+    } else if (process.env.PRISMIC_API !== 'www') {
+      menuItems = menuItems.map(item => ({
+        ...item,
+        link: item.link && `https://www.krapiva.org${item.link}`
+      }))
+    }
   }
 
   return (
