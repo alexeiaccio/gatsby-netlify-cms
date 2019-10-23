@@ -3,11 +3,9 @@ import { get, filter } from 'lodash'
 import { useSessionStorage } from 'react-use'
 
 import { Bunner } from '../bunner/index'
-import { MetaContext } from '../layout/index'
 
 
-export function HeaderBunners() {
-  const { index } = React.useContext(MetaContext)
+export function HeaderBunners({ index }) {
   const bunners = filter(get(index, 'body', []), x => (
     (get(x, '__typename') === 'PrismicIndexBodyBanner') &&
     (get(x, 'primary.expiredate') <= 0)

@@ -68,6 +68,16 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-theme-tailwindcss`,
+      options: {
+        postCssPlugins: [require('autoprefixer')],
+        emotionOptions: {
+          autoLabel: true,
+          labelFormat: `${process.env.PRISMIC_API}--[local]`,
+        }
+      },
+    },
     ...plugins,
     ...productionPlugins,
   ],

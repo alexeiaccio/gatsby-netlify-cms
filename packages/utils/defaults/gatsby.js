@@ -9,12 +9,6 @@ const {
 
 exports.plugins = [
   {
-    resolve: `gatsby-theme-tailwindcss`,
-    options: {
-      postCssPlugins: [require('autoprefixer')],
-    },
-  },
-  {
     resolve: `gatsby-plugin-typescript`,
     options: {
       isTSX: true, // defaults to false

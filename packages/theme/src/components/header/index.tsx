@@ -12,7 +12,6 @@ import { Meta } from '../../typings/meta'
 
 import { Header } from './header'
 import { StickedHeader } from './sticked-header'
-import { HeaderBunners } from './bunners'
 import { Wrapper } from './wrapper'
 
 export type HeaderProps = Readonly<{
@@ -51,7 +50,6 @@ export function WrappedHeader() {
 
   return (
     <React.Fragment>
-      <HeaderBunners />
       <Wrapper ref={ref}>
         <Header
           openedForm={openedForm}
