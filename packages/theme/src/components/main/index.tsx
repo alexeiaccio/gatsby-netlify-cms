@@ -39,7 +39,7 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   ${tw`
     mx-auto 
-    pb-12 px-4 sm:px-8
+    pb-12 px-4
     max-w-2xl
   `};
 `

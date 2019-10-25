@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { get } from 'lodash'
+import { get, filter } from 'lodash'
 import * as uuid from 'uuid/v1'
 
 import { translite, MENU } from '@krapiva-org/utils'
 
 import { MetaContext } from '../layout/index'
 import { Container, Wrapper } from '../main/index'
+import { Highlights } from './highlights'
 import { IndexSection } from './section'
 
 interface IndexBodyProps {
@@ -39,9 +40,13 @@ export function IndexBody({ articles, about }: IndexBodyProps) {
     about,
   }))
   const sections = [...before, ...items, ...after];
+  const highlights = filter(get(index, 'body'),
+    item => (get(item, '__typename') === 'PrismicIndexBodyHighlight'
+      && get(item, 'primary.expiredate', 1) <= 0))
 
   return (
     <Wrapper>
+      <Highlights highlights={highlights} />
       <Container>
         {sections.map(item => (
           <IndexSection

@@ -70,28 +70,6 @@ export const PageQuery = graphql`
               }
             }
           }
-          ... on PrismicIndexBodyHighlight {
-            primary {
-              image {
-                url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 640, quality: 80) {
-                      ...GatsbyImageSharpFluid_tracedSVG
-                    }
-                  }
-                }
-              }
-              text {
-                html
-              }
-              link {
-                url
-                target
-              }
-              expiredate(difference: "days")
-            }
-          }
         }
       }
     }
