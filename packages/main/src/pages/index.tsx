@@ -80,7 +80,7 @@ export const PageQuery = graphql`
                 url
                 target
               }
-              expiredate(difference: "days")
+              expiredate
             }
           }
         }

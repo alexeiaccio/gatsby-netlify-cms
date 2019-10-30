@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { get, filter } from 'lodash'
 import * as uuid from 'uuid/v1'
+import * as moment from 'moment'
 
 import { translite, MENU } from '@krapiva-org/utils'
 
@@ -42,7 +43,7 @@ export function IndexBody({ articles, about }: IndexBodyProps) {
   const sections = [...before, ...items, ...after];
   const highlights = filter(get(index, 'body'),
     item => (get(item, '__typename') === 'PrismicIndexBodyHighlight'
-      && get(item, 'primary.expiredate', 1) <= 0))
+      && moment(item.primary.expiredate).diff(moment(), 'days') >= 0))
 
   return (
     <Wrapper>
