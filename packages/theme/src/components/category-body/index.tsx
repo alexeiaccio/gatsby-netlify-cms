@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as uuid from 'uuid/v1'
 import { useMedia } from 'react-use'
 
+import { sortArticlesByDate } from '../../utils/sort-by-date'
 import { Article } from '../../typings/article'
 import { Card } from '../card/index'
 import { Row, Col } from '../row/index'
@@ -16,7 +17,7 @@ interface CategoryBodyProps {
 }
 
 export function CategoryBody({ articles, title }: CategoryBodyProps) {
-  const items: Array<Article | {}> = articles
+  const items: Array<Article> = articles.sort(sortArticlesByDate)
   const mdScreen = useMedia('(min-width: 640px)')
 
   if (mdScreen && (items.length % 2) !== 0) {

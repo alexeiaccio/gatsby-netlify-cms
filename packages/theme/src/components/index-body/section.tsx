@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 import { useMedia } from 'react-use'
 
+import { sortArticlesByDate } from '../../utils/sort-by-date'
 import { BodyImage } from '../slices/image/index'
 import { Card } from '../card/index'
 import { HTML } from '../html/index'
@@ -25,7 +26,7 @@ interface SectionProps {
 }
 
 export function IndexSection({ data }: SectionProps) {
-  const items = data.articles.slice(0, 6)
+  const items = data.articles.sort(sortArticlesByDate).slice(0, 6)
   const mdScreen = useMedia('(min-width: 640px)')
 
   if (mdScreen && (items.length % 2) !== 0) {

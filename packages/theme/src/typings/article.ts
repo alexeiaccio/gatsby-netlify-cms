@@ -73,9 +73,12 @@ export interface Article {
     slug: string
   }
   first_publication_date: string
+  publicationdate: string
   tags: string[]
   href: string
   data: {
+    releasedate: string
+    date: string
     title: { text: string }
     image: Image
     authors: [

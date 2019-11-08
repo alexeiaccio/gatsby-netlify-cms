@@ -20,7 +20,7 @@ export function Card({ data, children, onClick }: CardProps) {
   const title = get(data, 'data.title.text', '')
   const image = get(data, 'data.image')
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
-  const date = get(data, 'first_publication_date')
+  const date = get(data, 'data.releasedate') || get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.cdn.prismic/
   const href = get(data, 'href', '')

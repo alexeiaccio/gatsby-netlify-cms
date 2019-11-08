@@ -5,6 +5,7 @@ import {
 } from 'lodash/fp'
 import { useMedia } from 'react-use'
 
+import { sortArticlesByDate } from '../../utils/sort-by-date'
 import { Card } from '../card/index'
 import { Row, Col } from '../row/index'
 import { Button } from '../button/index'
@@ -146,17 +147,20 @@ export function Search({ articles }: SearchProps) {
       </TextContainer>
       <section css={sectionStyles}>
         <Row gap={1} css={rowStyles}>
-          {items.slice(0, page * 12).map((item, idx) => (
-            <Col
-              key={get('href', item) || `result-${idx}`}
-              gap={1}
-              cols={2}
-            >
-              <Card data={item.article}>
-                <Matched query={queryState} result={item.result} />
-              </Card>
-            </Col>
-          ))}
+          {items
+            .sort(sortArticlesByDate)
+            .slice(0, page * 12)
+            .map((item, idx) => (
+              <Col
+                key={get('href', item) || `result-${idx}`}
+                gap={1}
+                cols={2}
+              >
+                <Card data={item.article}>
+                  <Matched query={queryState} result={item.result} />
+                </Card>
+              </Col>
+            ))}
         </Row>
       </section>
       {(items.slice(page * 12).length > 0) && (

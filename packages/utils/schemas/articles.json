@@ -45,6 +45,13 @@
         "placeholder": "Image Caption"
       }
     },
+    "releasedate": {
+      "type": "Date",
+      "config": {
+        "label": "ReleaseDate",
+        "placeholder": "Choose Date"
+      }
+    },
     "body": {
       "type": "Slices",
       "fieldset": "Slice zone",

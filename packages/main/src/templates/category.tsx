@@ -85,9 +85,12 @@ export const PagetQuery = graphql`
           tags
         }
         first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
+        publicationdate: first_publication_date(formatString: "x")
         tags
         href
         data {
+          releasedate(locale: "ru", formatString: "DD MMMM YYYY")
+          date: releasedate(formatString: "x")
           title {
             text
           }
