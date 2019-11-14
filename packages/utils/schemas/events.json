@@ -1,0 +1,95 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+        "allowTargetBlank": true,
+        "label": "Description",
+        "placeholder": "Description"
+      }
+    },
+    "start": {
+      "type": "Date",
+      "config": {
+        "label": "Start",
+        "placeholder": "Start Date"
+      }
+    },
+    "starttime": {
+      "type": "Text",
+      "config": {
+        "label": "StartTime",
+        "placeholder": "Start Time (Format HH:MM)"
+      }
+    },
+    "end": {
+      "type": "Date",
+      "config": {
+        "label": "End",
+        "placeholder": "End Date (Leave empty for once event)"
+      }
+    },
+    "links": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "link": {
+            "type": "Link",
+            "config": {
+              "allowTargetBlank": true,
+              "label": "Link",
+              "placeholder": "link"
+            }
+          }
+        },
+        "label": "Links"
+      }
+    },
+    "places": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "place": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["places"],
+              "label": "Place",
+              "placeholder": "Place"
+            }
+          }
+        },
+        "label": "Places"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 1920,
+          "height": 1200
+        },
+        "thumbnails": [],
+        "label": "Image"
+      }
+    },
+    "caption": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph, strong, em, hyperlink",
+        "allowTargetBlank": true,
+        "label": "Caption",
+        "placeholder": "Caption"
+      }
+    }
+  }
+}

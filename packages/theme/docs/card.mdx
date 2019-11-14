@@ -3,21 +3,21 @@ name: Card
 route: /card
 ---
 
-import { Card } from '../src/components/card'
+import { ArticleCard } from '../src/components/card/article'
 import { data } from './__mocks__/card'
 
-# Card
+# ArticleCard
 
 <div className="theme">
   <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
     <div style={{ width: '50%', padding: '0 5px' }}>
-      <Card data={data[0]} />
+      <ArticleCard data={data[0]} />
     </div>
     <div style={{ width: '50%', padding: '0 5px' }}>
-      <Card data={data[1]} />
+      <ArticleCard data={data[1]} />
     </div>
     <div style={{ width: '50%', padding: '0 5px' }}>
-      <Card data={data[2]} />
+      <ArticleCard data={data[2]} />
     </div>
   </div>
 </div>

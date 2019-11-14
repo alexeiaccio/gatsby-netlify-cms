@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as uuid from 'uuid/v1'
 
 import { Article } from '../../../typings/article'
-import { Card } from '../../card/index'
+import { ArticleCard } from '../../card/article'
 import { Row, Col } from '../../row/index'
 
 import { rowStyles } from './styles'
@@ -21,7 +21,7 @@ export function ArticlesList({ articles }: ArticlesListProps) {
           gap={1}
           cols={2}
         >
-          <Card data={item} />
+          <ArticleCard data={item} />
         </Col>
       ))}
     </Row>

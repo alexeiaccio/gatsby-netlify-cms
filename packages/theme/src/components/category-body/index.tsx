@@ -4,7 +4,7 @@ import { useMedia } from 'react-use'
 
 import { sortArticlesByDate } from '../../utils/sort-by-date'
 import { Article } from '../../typings/article'
-import { Card } from '../card/index'
+import { ArticleCard } from '../card/article'
 import { Row, Col } from '../row/index'
 import { TextContainer } from '../main/index'
 import { Container, Wrapper } from '../main/index'
@@ -44,7 +44,7 @@ export function CategoryBody({ articles, title }: CategoryBodyProps) {
                 gap={1}
                 cols={2}
               >
-                <Card data={item} />
+                <ArticleCard data={item} />
               </Col>
             ))}
           </Row>

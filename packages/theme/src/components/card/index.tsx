@@ -5,23 +5,23 @@ import { css } from '@emotion/core'
 import tw from 'tailwind.macro'
 
 import { Article } from '../../typings/article'
+import { Event } from '../../typings/event'
+import { Place } from '../../typings/place'
 import { Img } from '../img/index'
 import { Link } from '../link/index'
 
 import { cardStyles, descriptionStyles, imageStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface CardProps {
-  data: Article
+  data: Article | Event | Place
   children?: JSX.Element | null
   onClick?: () => void
+  renderDescription?: () => JSX.Element | null
 }
 
-export function Card({ data, children, onClick }: CardProps) {
+export function BaseCard({ data, children, renderDescription, onClick }: CardProps) {
   const title = get(data, 'data.title.text', '')
   const image = get(data, 'data.image')
-  const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
-  const date = get(data, 'data.releasedate') || get(data, 'first_publication_date')
-  const authors = get(data, 'data.authors')
   const regExp = /^https?\:\/\/([a-z0-9._%+-]+)\.cdn.prismic/
   const href = get(data, 'href', '')
   const api = get(regExp.exec(href), '1')
@@ -36,23 +36,7 @@ export function Card({ data, children, onClick }: CardProps) {
       </div>
       <h3 css={titleStyles}>{title}</h3>
       <div css={descriptionStyles}>
-        {tags && tags.map(tag => (
-          <React.Fragment key={uuid()}>
-            <span> </span>
-            {tag}
-            <span> ·</span>
-          </React.Fragment>
-        ))}
-        {date && <span> {date} ·</span>}
-        {authors && authors.map(({ author }) => author &&
-          author.document.map(({ data }) => (
-            <React.Fragment key={uuid()}>
-              <span> </span>
-              {data.name}
-              <span> ·</span>
-            </React.Fragment>
-          ))
-        )}
+        {renderDescription && renderDescription()}
       </div>
     </React.Fragment>
   )

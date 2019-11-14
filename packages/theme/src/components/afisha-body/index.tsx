@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { navigate } from '@reach/router'
 
-import { Article } from '../../typings/article'
+import { Event } from '../../typings/event'
 import { Row } from '../row/index'
 import { TextContainer } from '../main/index'
 import { Container, Wrapper } from '../main/index'
@@ -10,12 +10,12 @@ import { AfishaItem } from './item'
 import { sectionStyles, rowStyles } from './styles'
 
 interface AfishaBodyProps {
-  articles: Article[]
+  events: Event[]
   title: string
   location: any
 }
 
-export function AfishaBody({ articles, title, location }: AfishaBodyProps) {
+export function AfishaBody({ events, title, location }: AfishaBodyProps) {
   const [active, setActive] = React.useState<string | null>(null)
   const handleClick = (slug) => {
     setActive(active === slug ? null : slug)
@@ -38,7 +38,7 @@ export function AfishaBody({ articles, title, location }: AfishaBodyProps) {
         </TextContainer>
         <section css={sectionStyles}>
           <Row gap={1} css={rowStyles}>
-            {articles.slice(0, 12).map(item => (
+            {events.slice(0, 12).map(item => (
               <AfishaItem
                 key={item.fields.slug}
                 active={active === item.fields.slug}
