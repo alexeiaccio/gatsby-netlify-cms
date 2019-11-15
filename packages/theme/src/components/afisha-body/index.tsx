@@ -16,6 +16,8 @@ interface AfishaBodyProps {
 }
 
 export function AfishaBody({ events, title, location }: AfishaBodyProps) {
+  if (events.length === 0) return null
+
   const [active, setActive] = React.useState<string | null>(null)
   const handleClick = (slug) => {
     setActive(active === slug ? null : slug)

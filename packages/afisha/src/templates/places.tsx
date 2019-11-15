@@ -1,30 +1,27 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-// import { get } from 'lodash'
+import { get } from 'lodash'
 
-// import { Layout, ArticleBody, PrevNextLinks } from '@krapiva-org/theme'
+import { Layout, PlaceBody } from '@krapiva-org/theme'
 
 function PlacePage({ data, location }: any) {
-  console.log(data)
-  return <div>Poop</div>
-  // return (
-  //   <Layout
-  //     location={location}
-  //     meta={data.site.siteMetadata}
-  //     index={data.prismicIndex.data}
-  //     seo={{
-  //       title: get(data.prismicPlace, 'data.title.text'),
-  //       image: get(data.prismicPlace, 'data.image'),
-  //     }}
-  //     blackHeader
-  //   >
-  //     <ArticleBody data={data.prismicPlace} />
-  //     <PrevNextLinks
-  //       prev={get(data, 'prev.nodes.0', null)}
-  //       next={get(data, 'next.nodes.0', null)}
-  //     />
-  //   </Layout>
-  // )
+  return (
+    <Layout
+      location={location}
+      meta={data.site.siteMetadata}
+      index={data.prismicIndex.data}
+      seo={{
+        title: get(data.prismicPlaces, 'data.title.text'),
+        image: get(data.prismicPlaces, 'data.image'),
+      }}
+    >
+      <PlaceBody
+        place={data.prismicPlaces}
+        events={data.allPrismicEvents.nodes}
+        location={location}
+      />
+    </Layout>
+  )
 }
 
 export const PageQuery = graphql`
@@ -105,6 +102,62 @@ export const PageQuery = graphql`
         }
         caption {
           html
+        }
+      }
+    }
+    allPrismicEvents(
+      filter: {fields: {places: {in: [$slug]}}},
+      sort: {fields: data___start, order: DESC}
+    ) {
+      nodes {
+        tags
+        fields {
+          slug
+        }
+        data {
+          title {
+            text
+          }
+          start(locale: "ru", formatString: "DD MMMM YYYY")
+          starttime
+          end(locale: "ru", formatString: "DD MMMM YYYY")
+          description {
+            html
+          }
+          image {
+            url
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 640, quality: 80) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+          caption {
+            html
+          }
+          links {
+            link {
+              url
+            }
+          }
+          places {
+            place {
+              document {
+                ... on PrismicPlaces {
+                  fields {
+                    slug
+                  }
+                  data {
+                    title {
+                      text
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

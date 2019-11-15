@@ -113,7 +113,7 @@ exports.onCreateNode = ({ node, actions }) => {
       name: `authors`,
       value: compact(authors.map(author => {
         const name = get(author, 'author.slug')
-        return name? translite(decodeURI(name)) : null
+        return name ? translite(decodeURI(name)) : null
       })) || [],
     })
   }

@@ -1,5 +1,6 @@
 const path = require('path')
 const get = require('lodash/get')
+const compact = require('lodash/compact')
 const moment = require('moment')
 const { makePath, translite, getCategories } = require('@krapiva-org/utils')
 
@@ -13,6 +14,7 @@ exports.createPages = async ({ actions, graphql }) => {
             tags
             fields {
               slug
+              places
             }
             data {
               title {
@@ -84,11 +86,13 @@ exports.createPages = async ({ actions, graphql }) => {
     })
   }
   
-  const categories = getCategories(events)
+  const eventsCategories = getCategories(events)
+  const placesCategories = getCategories(places)
 
   events && eventsMaker(events)
   places && placesMaker(places)
-  categories && categoriesMaker(categories)
+  eventsCategories && categoriesMaker(eventsCategories)
+  placesCategories && categoriesMaker(placesCategories)
 }
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -96,6 +100,8 @@ exports.onCreateNode = ({ node, actions }) => {
 
   if (node && node.internal.type === `PrismicEvents`) {
     const { data, tags } = node
+    const places = get(data, 'places', [])
+
     createNodeField({
       node,
       name: `slug`,
@@ -105,6 +111,14 @@ exports.onCreateNode = ({ node, actions }) => {
       node,
       name: `tags`,
       value: tags ? tags.map(tag => translite(tag)) : [],
+    })
+    createNodeField({
+      node,
+      name: `places`,
+      value: compact(places.map(place => {
+        const name = get(place, 'place.slug')
+        return name ? translite(decodeURI(name)) : null
+      })) || [],
     })
   }
   if (node && node.internal.type === `PrismicPlaces`) {

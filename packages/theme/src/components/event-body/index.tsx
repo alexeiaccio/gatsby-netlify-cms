@@ -93,7 +93,7 @@ export function EventBody({ event, onClick }: EventBodyProps) {
           <h1>{event.data.title.text}</h1>
           { renderDescription() }
           {eventDescription && <HTML>{eventDescription}</HTML>}
-          {links && <Links items={links} />}
+          <Links items={links} />
         </TextContainer>
       </Container>
     </Wrapper>

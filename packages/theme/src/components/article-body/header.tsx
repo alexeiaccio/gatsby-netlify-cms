@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
-import { useMedia } from 'react-use'
 
 import { translite } from '@krapiva-org/utils'
 
@@ -39,16 +38,16 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
         <h1 css={titleStyles}>{title}</h1>
         <div css={descriptionStyles}>
           {tags && tags.map(tag => (
-            <Link
-              key={uuid()}
-              to={`/${translite(tag)}`}
-            >
-              <React.Fragment>
-                <span> </span>
+            <React.Fragment>
+              <span> </span>
+              <Link
+                key={uuid()}
+                to={`/${translite(tag)}`}
+              >
                 {tag}
-                <span> ·</span>
-              </React.Fragment>
-            </Link>
+              </Link>
+              <span> ·</span>
+            </React.Fragment>
           ))}
           {date && <span> {date} ·</span>}
           {authors && authors.map(({ author }) => author &&

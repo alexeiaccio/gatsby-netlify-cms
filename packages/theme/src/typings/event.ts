@@ -14,6 +14,7 @@ export interface Event {
       text: string
     }
     start: string | null
+    startDate?: string | null
     starttime: string | null
     end: string | null
     endDate?: string | null

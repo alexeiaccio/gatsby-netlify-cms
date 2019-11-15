@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { get } from 'lodash'
+import * as moment from 'moment'
 
 import { AfishaBody, Layout } from '@krapiva-org/theme'
 
@@ -16,7 +17,12 @@ function PastPage({ data, location }: any) {
       }}
     >
       <AfishaBody
-        events={data.allPrismicEvents.nodes}
+        events={data.allPrismicEvents.nodes.filter(node => {
+          const date = get(node, 'data.endDate') || get(node, 'data.startDate')
+          if (!date) return false
+          const diff = moment(date).diff(moment(), 'days')
+          return diff < 0
+        })}
         title="История событий"
         location={location}
       />
@@ -80,6 +86,7 @@ export const PageQuery = graphql`
             text
           }
           start(locale: "ru", formatString: "DD MMMM YYYY")
+          startDate: start
           starttime
           end(locale: "ru", formatString: "DD MMMM YYYY")
           endDate: end

@@ -46,6 +46,11 @@ export function Nav({
         ...item,
         link: item.link && `https://dev-main.krapiva.org${item.link}`
       }))
+    } else if ((process.env.PRISMIC_API || '').includes('afisha')) {
+      menuItems = menuItems.map(item => (item.link || '').includes('afisha') ? ({
+        ...item,
+        link: `/`
+      }) : item)
     } else if (process.env.PRISMIC_API !== 'www') {
       menuItems = menuItems.map(item => ({
         ...item,

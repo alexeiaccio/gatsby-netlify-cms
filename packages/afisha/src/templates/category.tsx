@@ -2,13 +2,16 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 import { get, find } from 'lodash'
 
-import { Layout, AfishaBody } from '@krapiva-org/theme'
+import { Layout, AfishaBody, Places } from '@krapiva-org/theme'
 import { translite } from '@krapiva-org/utils'
 
 function CategoryPage({ data, location, pageContext}) {
-  const node = get(data.allPrismicEvents, 'nodes.0')
+  const node = [
+    ...get(data.allPrismicEvents, 'nodes.0.tags', []),
+    ...get(data.allPrismicPlaces, 'nodes.0.tags', [])
+  ]
   const title = find(
-    get(node, 'tags', []),
+    node,
     tag => (translite(tag) === pageContext.slug)
   )
 
@@ -24,8 +27,12 @@ function CategoryPage({ data, location, pageContext}) {
     >
       <AfishaBody
         events={data.allPrismicEvents.nodes}
-        title={title || ''}
+        title={`${title || ''} | События`}
         location={location}
+      />
+      <Places
+        places={data.allPrismicPlaces.nodes}
+        title={data.allPrismicEvents.nodes.length === 0 ? `${title || ''} | Места` : 'Места'}
       />
     </Layout>
   )
@@ -78,7 +85,7 @@ export const PagetQuery = graphql`
     }
     allPrismicEvents(
       filter: {tags: {}, fields: {tags: {in: $slug}}},
-      sort: {fields: first_publication_date, order: DESC}
+      sort: {fields: data___start, order: DESC}
     ) {
       nodes {
         tags
@@ -125,6 +132,32 @@ export const PagetQuery = graphql`
                       text
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    allPrismicPlaces(filter: {tags: {}, fields: {tags: {in: $slug}}}) {
+      nodes {
+        fields {
+          slug
+        }
+        tags
+        href
+        data {
+          title {
+            text
+          }
+          address
+          image {
+            alt
+            url
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 640, quality: 80) {
+                  ...GatsbyImageSharpFluid_tracedSVG
                 }
               }
             }
