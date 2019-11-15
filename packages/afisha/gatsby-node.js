@@ -117,7 +117,7 @@ exports.onCreateNode = ({ node, actions }) => {
       name: `places`,
       value: compact(places.map(place => {
         const name = get(place, 'place.slug')
-        return name ? translite(decodeURI(name)) : null
+        return name ? translite(getThreeWords(decodeURI(name))) : null
       })) || [],
     })
   }
