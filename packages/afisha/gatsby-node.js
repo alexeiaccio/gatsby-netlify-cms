@@ -2,7 +2,7 @@ const path = require('path')
 const get = require('lodash/get')
 const compact = require('lodash/compact')
 const moment = require('moment')
-const { makePath, translite, getCategories } = require('@krapiva-org/utils')
+const { makePath, translite, getCategories, getThreeWords } = require('@krapiva-org/utils')
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
@@ -126,7 +126,7 @@ exports.onCreateNode = ({ node, actions }) => {
     createNodeField({
       node,
       name: `slug`,
-      value: translite(data.title.text),
+      value: translite(getThreeWords(data.title.text)),
     })
     createNodeField({
       node,
