@@ -44,6 +44,7 @@ export function PlaceBody({ place, events, location }: PlaceBodyProps) {
                 <Link
                   key={uuid()}
                   to={`/${translite(tag)}`}
+                  internal
                 >
                   {tag}
                 </Link>

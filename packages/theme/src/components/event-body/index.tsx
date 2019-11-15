@@ -45,6 +45,7 @@ export function EventBody({ event, onClick }: EventBodyProps) {
           <Link
             key={uuid()}
             to={`/${translite(tag)}`}
+            internal
           >
             {tag}
           </Link>
@@ -59,6 +60,7 @@ export function EventBody({ event, onClick }: EventBodyProps) {
             <Link
               key={uuid()}
               to={`/${fields.slug}`}
+              internal
             >
               {data.title.text}
             </Link>
