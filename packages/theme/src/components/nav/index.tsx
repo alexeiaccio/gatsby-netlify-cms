@@ -47,10 +47,10 @@ export function Nav({
         link: item.link && `https://dev-main.krapiva.org${item.link}`
       }))
     } else if ((process.env.PRISMIC_API || '').includes('afisha')) {
-      menuItems = menuItems.map(item => (item.link || '').includes('afisha') ? ({
+      menuItems = menuItems.map(item => ({
         ...item,
-        link: `/`
-      }) : item)
+        link: item.link && (item.link.includes('afisha') ? `/` : `https://www.krapiva.org${item.link}`)
+      }))
     } else if (process.env.PRISMIC_API !== 'www') {
       menuItems = menuItems.map(item => ({
         ...item,

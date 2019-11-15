@@ -22,7 +22,6 @@
     "co-develop:main": "yarn workspace @krapiva-org/main co-develop",
     "co-develop:pages": "yarn workspace @krapiva-org/pages co-develop",
     "develop": "concurrently \"yarn co-develop:main\" \"yarn co-develop:pages\"",
-    "build": "yarn workspace @krapiva-org/afisha build",
     "build:afisha": "yarn workspace @krapiva-org/afisha build",
     "build:theme": "yarn workspace @krapiva-org/theme build",
     "build:main": "yarn workspace @krapiva-org/main build",
