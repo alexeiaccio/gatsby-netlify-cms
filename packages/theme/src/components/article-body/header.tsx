@@ -27,7 +27,6 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')
-  const isBlackTheme = useMedia('(prefers-color-scheme: dark)')
 
   useGetViews()
 
@@ -66,7 +65,7 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
               </Link>
             ))
           )}
-          <Views onIndex={onIndex && !isBlackTheme} />
+          <Views onIndex={onIndex} />
         </div>
       </TextContainer>
       <div css={imageWrapperStyles}>
