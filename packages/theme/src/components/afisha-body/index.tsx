@@ -4,6 +4,8 @@ import {
   compact, filter, find, flatMap, flowRight, map, uniq, sortBy, get,
 } from 'lodash/fp'
 
+import { translite } from '@krapiva-org/utils'
+
 import { Event } from '../../typings/event'
 import { Button } from '../button/index'
 import { Row } from '../row/index'
@@ -54,6 +56,7 @@ export function AfishaBody({ events, title, location }: AfishaBodyProps) {
     flatMap('data.startDate'),
   ])(events), [])
   const tags = React.useMemo(() => flowRight([
+    filter(tag => translite(tag) !== location.pathname.replace('/', '')),
     uniq,
     compact,
     flatMap('tags'),

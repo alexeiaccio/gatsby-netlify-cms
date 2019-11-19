@@ -1,6 +1,5 @@
 import moment from 'moment'
 import 'moment/locale/ru'
-import { startCase } from 'lodash'
 
 function getDiff(date) {
   return Math.ceil(moment().diff(moment(date), 'days', true))
@@ -34,5 +33,5 @@ export function formatDate(date: string): string {
     }
   })
     
-  return startCase(moment(date).calendar())
+  return moment(date).calendar()
 }

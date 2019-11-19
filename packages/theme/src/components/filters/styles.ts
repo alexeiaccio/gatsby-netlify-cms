@@ -27,6 +27,7 @@ export const linkStyles = css`
     px-2 py-1
     relative
     text-xs
+    capitalize
   `};
   background-color: var(--button-light-color);
   flex-grow: 1;
