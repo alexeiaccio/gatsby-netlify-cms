@@ -71,17 +71,6 @@ export function Footer() {
         </div>
         <div css={rowStyles}>
           <div css={blockStyles}>
-            <span>При поддержке </span>
-            <a
-              css={linkStyles}
-              href="https://chtodelat.org/category/aid-fund-ru/?lang=ru"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              фонда взаимопомощи «что делать»
-        </a>
-          </div>
-          <div css={blockStyles}>
             <span> Разработка </span>
             <a
               css={linkStyles}
@@ -90,7 +79,7 @@ export function Footer() {
               target="_blank"
             >
               accio
-        </a>
+            </a>
           </div>
         </div>
       </footer>

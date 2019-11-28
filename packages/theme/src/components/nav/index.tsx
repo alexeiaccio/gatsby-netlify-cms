@@ -36,7 +36,7 @@ export function Nav({
   const href = get(location, 'href', '')
   const toMainSite = pagesIndex ? [{
     text: meta.siteTitle,
-    link: href.includes('localhost:') ? '/' : meta.siteUrl,
+    link: '/',
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
