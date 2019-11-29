@@ -6,6 +6,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "clean": "gatsby clean",
+    "serve": "gatsby serve",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {

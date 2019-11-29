@@ -11,7 +11,7 @@ type Props = Readonly<{
 }>
 
 export function Links({ items }: Props): JSX.Element | null {
-  if (items.length === 0) return null
+  if (!get(items, '0.link.url')) return null
 
   return (
     <ul css={listStyles}>
@@ -19,7 +19,7 @@ export function Links({ items }: Props): JSX.Element | null {
         <li css={itemStyles} key={uuid()}>
           <a
             css={linkStyles}
-            href={link.url || ''}
+            href={get(link, 'url', '')}
             rel="noopener noreferrer"
             target="_blank"
           >
