@@ -37,6 +37,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "concurrently": "^4.1.2"
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "gatsby": "^2.19.5",
+    "gatsby-plugin-sharp": "^2.4.0"
   }
 }

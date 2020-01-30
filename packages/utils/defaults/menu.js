@@ -1,6 +1,6 @@
 exports.MENU = {
   before: [
-    { text: 'Афиша', link: '/afisha'},
+    // { text: 'Афиша', link: '/afisha'},
     { text: 'Новое', link: '/novoe'},
   ],
   after: [
