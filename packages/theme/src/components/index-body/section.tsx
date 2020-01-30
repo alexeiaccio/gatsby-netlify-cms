@@ -5,13 +5,13 @@ import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 import { useMedia } from 'react-use'
 
-import { sortArticlesByDate } from '../../utils/sort-by-date'
+import { ArticleCard } from '../card/article'
 import { BodyImage } from '../slices/image/index'
-import { Card } from '../card/index'
 import { HTML } from '../html/index'
 import { LinkButton } from '../button/link'
 import { Row, Col } from '../row/index'
 import { TextContainer } from '../main/index'
+import { sortArticlesByDate } from '../../utils/sort-by-date'
 import { buttonStyles, leadStyles, sectionStyles, rowStyles } from './styles'
 
 interface SectionProps {
@@ -78,7 +78,7 @@ export function IndexSection({ data }: SectionProps) {
                 gap={1}
                 cols={2}
               >
-                <Card data={item} />
+                <ArticleCard data={item} />
               </Col>
             ))}
           </Row>

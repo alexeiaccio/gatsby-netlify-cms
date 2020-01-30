@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { get } from 'lodash'
 
-import { Layout, AfishaBody } from '@krapiva-org/theme'
+import { Layout, ArhivAfishiBody } from '@krapiva-org/theme'
 
 function AfishaPage({ data, location }: any) {
   return (
@@ -15,7 +15,7 @@ function AfishaPage({ data, location }: any) {
         image: get(data.allPrismicArticles.nodes, '0.data.image'),
       }}
     >
-    <AfishaBody
+    <ArhivAfishiBody
       title="Архив афиши"
       articles={data.allPrismicArticles.nodes}
       location={location}

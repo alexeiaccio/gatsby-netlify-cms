@@ -11,15 +11,22 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
+    "clean:afisha": "yarn workspace @krapiva-org/afisha clean",
     "clean:theme": "yarn workspace @krapiva-org/theme clean",
     "clean:main": "yarn workspace @krapiva-org/main clean",
     "clean:pages": "yarn workspace @krapiva-org/pages clean",
+    "serve:afisha": "yarn workspace @krapiva-org/afisha serve",
+    "serve:theme": "yarn workspace @krapiva-org/theme serve",
+    "serve:main": "yarn workspace @krapiva-org/main serve",
+    "serve:pages": "yarn workspace @krapiva-org/pages serve",
+    "develop:afisha": "yarn workspace @krapiva-org/afisha develop",
     "develop:theme": "yarn workspace @krapiva-org/theme develop",
     "develop:main": "yarn workspace @krapiva-org/main develop",
     "develop:pages": "yarn workspace @krapiva-org/pages develop",
     "co-develop:main": "yarn workspace @krapiva-org/main co-develop",
     "co-develop:pages": "yarn workspace @krapiva-org/pages co-develop",
     "develop": "concurrently \"yarn co-develop:main\" \"yarn co-develop:pages\"",
+    "build:afisha": "yarn workspace @krapiva-org/afisha build",
     "build:theme": "yarn workspace @krapiva-org/theme build",
     "build:main": "yarn workspace @krapiva-org/main build",
     "build:pages": "yarn workspace @krapiva-org/pages build",
@@ -30,6 +37,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "concurrently": "^4.1.2"
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "gatsby": "^2.19.5",
+    "gatsby-plugin-sharp": "^2.4.0"
   }
 }

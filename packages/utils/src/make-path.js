@@ -173,3 +173,4 @@ const getCategories = flowRight(
 
 exports.translite = translite
 exports.getCategories = getCategories
+exports.getThreeWords = getThreeWords

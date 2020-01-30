@@ -6,6 +6,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "clean": "gatsby clean",
+    "serve": "gatsby serve",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -35,7 +36,7 @@
     "gatsby-plugin-typescript": "^2.1.2",
     "gatsby-theme-tailwindcss": "^1.0.0",
     "react-intersection-observer": "^8.24.1",
-    "react-use": "^10.5.0",
+    "react-use": "^13.22.3",
     "uuid": "^3.3.2"
   }
 }

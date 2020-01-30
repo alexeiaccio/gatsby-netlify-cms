@@ -12,7 +12,7 @@ import * as burnblack from './burn-black.svg'
 
 export function Views({ onIndex }) {
   const { location } = React.useContext(MetaContext)
-  const { views } = React.useContext(StateContext)
+  const { isDark, views } = React.useContext(StateContext)
   const page = get(views, location.pathname.replace(/\/+$/, ''))
 
   if (!page) { return null }
@@ -22,7 +22,7 @@ export function Views({ onIndex }) {
       <Icon
         css={css`
           &::before {
-            background-image: url(${onIndex ? eyeblack : eye});
+            background-image: url(${onIndex && !isDark ? eyeblack : eye});
           }
         `}
         title={`${page.views} просмотр${page.views < 5 ? page.views === 1 ? '' : 'a' : 'ов'}`}
@@ -30,7 +30,7 @@ export function Views({ onIndex }) {
       <Icon
         css={css`
           &::before {
-            background-image: url(${onIndex ? burnblack : burn});
+            background-image: url(${onIndex && !isDark ? burnblack : burn});
           }
         `}
         title={`${page.burns} раз${(page.burns > 1 % 10) && (page.burns % 10) < 5 ? 'a' : ''} прижгли`}

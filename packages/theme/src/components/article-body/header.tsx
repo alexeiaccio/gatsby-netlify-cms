@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
-import { useMedia } from 'react-use'
 
 import { translite } from '@krapiva-org/utils'
 
@@ -27,7 +26,6 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')
-  const isBlackTheme = useMedia('(prefers-color-scheme: dark)')
 
   useGetViews()
 
@@ -40,16 +38,16 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
         <h1 css={titleStyles}>{title}</h1>
         <div css={descriptionStyles}>
           {tags && tags.map(tag => (
-            <Link
-              key={uuid()}
-              to={`/${translite(tag)}`}
-            >
-              <React.Fragment>
-                <span> </span>
+            <React.Fragment>
+              <span> </span>
+              <Link
+                key={uuid()}
+                to={`/${translite(tag)}`}
+              >
                 {tag}
-                <span> ·</span>
-              </React.Fragment>
-            </Link>
+              </Link>
+              <span> ·</span>
+            </React.Fragment>
           ))}
           {date && <span> {date} ·</span>}
           {authors && authors.map(({ author }) => author &&
@@ -66,7 +64,7 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
               </Link>
             ))
           )}
-          <Views onIndex={onIndex && !isBlackTheme} />
+          <Views onIndex={onIndex} />
         </div>
       </TextContainer>
       <div css={imageWrapperStyles}>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as uuid from 'uuid/v1'
 
-import { Card } from '../card/index'
+import { ArticleCard } from '../card/article'
 import { Container, TextContainer, Wrapper } from '../main/index'
 import { Row, Col } from '../row/index'
 import { Article } from '../../typings/article'
@@ -25,14 +25,14 @@ export function PrevNextLinks({ prev, next }: Props) {
             gap={1}
             cols={2}
           >
-            <Card data={prev} />
+            <ArticleCard data={prev} />
           </Col>
           <Col
             key={uuid()}
             gap={1}
             cols={2}
           >
-            <Card data={next} />
+            <ArticleCard data={next} />
           </Col>
         </Row>
       </Container>

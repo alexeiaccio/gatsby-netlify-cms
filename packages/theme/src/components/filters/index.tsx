@@ -29,7 +29,7 @@ export function Filters({ collapsed, items, onClick }: Props): JSX.Element | nul
     const notActive = filter(items, ['active', false])
     const newFilters = [
       ...(opened ? items : notActive.slice(0, 4)),
-      { name: opened ? 'Закрыть ↑' : 'Ещё ↓', active: false, toggle }
+      ...(items.length > 4 ? [{ name: opened ? 'Закрыть ↑' : 'Ещё ↓', active: false, toggle }] : []),
     ]
 
     if (active) {

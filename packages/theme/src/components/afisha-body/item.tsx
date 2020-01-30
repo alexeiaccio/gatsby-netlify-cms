@@ -1,21 +1,20 @@
 import * as React from 'react'
 import { assign } from 'lodash'
 
-import { Article } from '../../typings/article'
-import { ArticleBodyContent } from '../article-body/body'
-import { Card } from '../card/index'
+import { Event } from '../../typings/event'
+import { EventBody } from '../event-body/index'
+import { EventCard } from '../card/event'
 import { Col } from '../row/index'
 
 type Props = Readonly<{
   active: boolean
-  data: Article
+  data: Event
   onClick: () => void
 }>
 
 export function AfishaItem({ active, data, onClick }: Props) {
   const { data: bodyData, fields, ...headerKeys } = data
-  const { body, ...headerData } = bodyData
-  const header = assign(headerKeys, { data: headerData })
+  const header = assign(headerKeys, { data: bodyData })
  
   if (active) {
     return (
@@ -24,8 +23,7 @@ export function AfishaItem({ active, data, onClick }: Props) {
         gap={1}
         cols={1}
       >
-        <Card data={header} onClick={onClick} />
-        <ArticleBodyContent body={body} />
+        <EventBody event={data} onClick={onClick} />
       </Col>
     )
   }
@@ -36,7 +34,7 @@ export function AfishaItem({ active, data, onClick }: Props) {
       gap={1}
       cols={2}
     >
-      <Card data={header} onClick={onClick} />
+      <EventCard data={header} onClick={onClick} />
     </Col>
   )
 }

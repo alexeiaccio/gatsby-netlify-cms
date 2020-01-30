@@ -2,6 +2,8 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { get } from 'lodash'
 
+import { APIS } from '@krapiva-org/utils/defaults/apis'
+
 import jsonldGenerator from './jsonld-generator'
 
 export const SEO = ({ data, location, meta }) => {
@@ -17,14 +19,15 @@ export const SEO = ({ data, location, meta }) => {
     siteDescription,
     siteKeywords,
     siteThemeColor,
-    fbAppId,
+    // fbAppId,
     twitter,
   } = meta
+  const api = process.env.PRISMIC_API
   const pageTitleFull = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
   const pageDescriptionFull = siteDescription
-  const pageKeywordsFull =  siteKeywords
-  const pageImageFull = pageImage || '/images/social.png'
-  const siteUrl = location.origin || metaSiteUrl
+  const pageKeywordsFull = siteKeywords
+  const siteUrl = get(APIS, api) ? `https://${get(APIS, api)}.krapiva.org` : metaSiteUrl
+  const pageImageFull = `${siteUrl}${pageImage}` || '/images/social.png'
   const slug = location.pathname
   const canonical = `${siteUrl}${slug}`
 
@@ -58,7 +61,7 @@ export const SEO = ({ data, location, meta }) => {
 
       <meta content="website" property="og:type" />
       <meta content={siteTitle} property="og:site_name" />
-      <meta content={fbAppId} property="fb:app_id" />
+      {/* <meta content={fbAppId} property="fb:app_id" /> */}
       <meta content="summary_large_image" name="twitter:card" />
       <meta content={`@${twitter}`} name="twitter:site" />
       <meta content={`@${twitter}`} name="twitter:creator" />

@@ -7,6 +7,7 @@
     "develop": "gatsby develop",
     "co-develop": "gatsby develop --port 8002",
     "clean": "gatsby clean",
+    "serve": "gatsby serve",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -16,7 +17,7 @@
     "@krapiva-org/utils": "*",
     "@modus/react-idle": "^1.1.1",
     "dotenv": "^8.0.0",
-    "gatsby": "^2.13.65",
+    "gatsby": "^2.19.5",
     "gatsby-image": "^2.2.8",
     "gatsby-plugin-emotion": "^4.1.2",
     "gatsby-plugin-env-variables": "^1.0.1",
@@ -25,11 +26,11 @@
     "gatsby-plugin-manifest": "^2.2.13",
     "gatsby-plugin-netlify": "^2.1.11",
     "gatsby-plugin-netlify-cache": "^1.2.0",
-    "gatsby-plugin-offline": "2.2.9",
+    "gatsby-plugin-offline": "3.0.33",
     "gatsby-plugin-react-helmet": "^3.1.6",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-robots-txt": "^1.5.0",
-    "gatsby-plugin-sharp": "^2.2.12",
+    "gatsby-plugin-sharp": "^2.4.0",
     "gatsby-plugin-sitemap": "^2.2.10",
     "gatsby-plugin-typescript": "^2.1.2",
     "gatsby-source-filesystem": "^2.1.9",
@@ -43,8 +44,8 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-intersection-observer": "^8.24.1",
-    "react-use": "^10.5.0",
-    "sharp": "^0.23.0",
+    "react-use": "^13.22.3",
+    "sharp": "^0.24.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@ import * as uuid from 'uuid/v1'
 import { Author } from '../../typings/author'
 import { Article } from '../../typings/article'
 import { Container, Wrapper } from '../main/index'
-import { Card } from '../card/index'
+import { ArticleCard } from '../card/article'
 import { Row, Col } from '../row/index'
 
 import { Avatar } from './avatar'
@@ -28,7 +28,7 @@ export function AuthorBody({ author, articles }: AuthorBodyProps) {
                 gap={1}
                 cols={2}
               >
-                <Card data={item} />
+                <ArticleCard data={item} />
               </Col>
             ))}
           </Row>

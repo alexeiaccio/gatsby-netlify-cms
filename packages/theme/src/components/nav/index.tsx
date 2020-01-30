@@ -36,7 +36,7 @@ export function Nav({
   const href = get(location, 'href', '')
   const toMainSite = pagesIndex ? [{
     text: meta.siteTitle,
-    link: href.includes('localhost:') ? '/' : meta.siteUrl,
+    link: '/',
   }] : []
   let menuItems = [...toMainSite, ...MENU.before, ...items, ...MENU.after]
 
@@ -45,6 +45,11 @@ export function Nav({
       menuItems = menuItems.map(item => ({
         ...item,
         link: item.link && `https://dev-main.krapiva.org${item.link}`
+      }))
+    } else if ((process.env.PRISMIC_API || '').includes('afisha')) {
+      menuItems = menuItems.map(item => ({
+        ...item,
+        link: item.link && (item.link.includes('afisha') ? `/` : `https://www.krapiva.org${item.link}`)
       }))
     } else if (process.env.PRISMIC_API !== 'www') {
       menuItems = menuItems.map(item => ({

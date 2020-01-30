@@ -1,0 +1,64 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Title",
+        "placeholder": "Title"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item",
+        "allowTargetBlank": true,
+        "label": "Description",
+        "placeholder": "Description"
+      }
+    },
+    "address": {
+      "type": "Text",
+      "config": {
+        "label": "Address",
+        "placeholder": "Address"
+      }
+    },
+    "links": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "link": {
+            "type": "Link",
+            "config": {
+              "allowTargetBlank": true,
+              "label": "Link",
+              "placeholder": "link"
+            }
+          }
+        },
+        "label": "Links"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {
+          "width": 1920,
+          "height": 1200
+        },
+        "thumbnails": [],
+        "label": "Image"
+      }
+    },
+    "caption": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph, strong, em, hyperlink",
+        "allowTargetBlank": true,
+        "label": "Caption",
+        "placeholder": "Caption"
+      }
+    }
+  }
+}
