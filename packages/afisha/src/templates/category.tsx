@@ -104,12 +104,8 @@ export const PagetQuery = graphql`
           }
           image {
             url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 640, quality: 80) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
+            fluid(maxWidth: 640) {
+              ...GatsbyPrismicImageFluid
             }
           }
           caption {
@@ -154,12 +150,8 @@ export const PagetQuery = graphql`
           image {
             alt
             url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 640, quality: 80) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
+            fluid(maxWidth: 640) {
+              ...GatsbyPrismicImageFluid
             }
           }
         }

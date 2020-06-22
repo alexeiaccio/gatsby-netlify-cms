@@ -18,9 +18,8 @@ interface ImgProps {
 }
 
 export function Img({ src, ...props }: ImgProps) {
-  const imageSharp = get(src, 'localFile.childImageSharp')
-  const fluid = get(imageSharp, 'fluid')
-  const fixed = get(imageSharp, 'fixed')
+  const fluid = get(src, 'fluid')
+  const fixed = get(src, 'fixed')
   const url = get(src, 'url')
 
   if (fluid) {

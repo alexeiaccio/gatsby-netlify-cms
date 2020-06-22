@@ -53,15 +53,6 @@ module.exports = {
         accessToken: process.env.PRISMIC_TOKEN,
         linkResolver,
         htmlSerializer,
-        shouldNormalizeImage: ({ node }) => {
-          if (
-            process.env.PRISMIC_API === 'krapiva-org' &&
-            node.type === 'articles'
-          ) {
-            return false
-          }
-          return true
-        },
         schemas: {
           authors,
           articles,

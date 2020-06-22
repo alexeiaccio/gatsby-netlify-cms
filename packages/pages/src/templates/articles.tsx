@@ -84,12 +84,8 @@ export const PageQuery = graphql`
         image {
           alt
           url
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1280, quality: 80) {
-                ...GatsbyImageSharpFluid_tracedSVG
-              }
-            }
+          fluid(maxWidth: 1280) {
+            ...GatsbyPrismicImageFluid
           }
         }
         caption {
@@ -142,12 +138,8 @@ export const PageQuery = graphql`
             primary {
               imageimage {
                 url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 1280, quality: 80) {
-                      ...GatsbyImageSharpFluid_tracedSVG
-                    }
-                  }
+                fluid(maxWidth: 1280) {
+                  ...GatsbyPrismicImageFluid
                 }
               }
               imagecaption {
@@ -185,12 +177,8 @@ export const PageQuery = graphql`
                       }
                       image {
                         url
-                        localFile {
-                          childImageSharp {
-                            fluid(maxWidth: 640, quality: 80) {
-                              ...GatsbyImageSharpFluid_tracedSVG
-                            }
-                          }
+                        fluid(maxWidth: 640) {
+                          ...GatsbyPrismicImageFluid
                         }
                       }
                     }
@@ -203,12 +191,8 @@ export const PageQuery = graphql`
             primary {
               mediacover {
                 url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 640, quality: 80) {
-                      ...GatsbyImageSharpFluid_tracedSVG
-                    }
-                  }
+                fluid(maxWidth: 640) {
+                  ...GatsbyPrismicImageFluid
                 }
               }
               mediacaption {
@@ -223,12 +207,8 @@ export const PageQuery = graphql`
             items {
               sliderimage {
                 url
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 1280, quality: 80) {
-                      ...GatsbyImageSharpFluid_tracedSVG
-                    }
-                  }
+                fluid(maxWidth: 1280) {
+                  ...GatsbyPrismicImageFluid
                 }
               }
               slidercaptions {
@@ -281,12 +261,8 @@ export const PageQuery = graphql`
           }
           image {
             url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 640, quality: 80) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
+            fluid(maxWidth: 640) {
+              ...GatsbyPrismicImageFluid
             }
           }
           authors {
@@ -327,12 +303,8 @@ export const PageQuery = graphql`
           }
           image {
             url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 640, quality: 80) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
+            fluid(maxWidth: 640) {
+              ...GatsbyPrismicImageFluid
             }
           }
           authors {

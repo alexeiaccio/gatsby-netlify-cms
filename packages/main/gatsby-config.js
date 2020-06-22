@@ -17,7 +17,6 @@ const makeApiResolver = (repositoryName, accessToken) => {
       linkResolver,
       // htmlSerializer,
       lang: '*',
-      shouldNormalizeImage: () => true,
       schemas: {
         articles: require('./assets/schemas/articles.json'),
         authors,

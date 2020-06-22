@@ -10,7 +10,7 @@ export const SEO = ({ data, location, meta }) => {
   const pageTitle = get(data, 'title')
   const pageImage = get(
     data,
-    'image.localFile.childImageSharp.fluid.src',
+    'image.fluid.src',
     get(data, 'image.url')
   )
   const {

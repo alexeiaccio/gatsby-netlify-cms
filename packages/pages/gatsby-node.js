@@ -2,49 +2,6 @@ const path = require('path')
 const get = require('lodash/get')
 const { makePath, translite } = require('@krapiva-org/utils')
 
-exports.createPages = async ({ actions, graphql }) => {
-  const { createPage } = actions
-  const pages = await graphql(`
-    {
-      articles: allPrismicArticles(
-        filter: { tags: { nin: ["Афиша"] } }
-        limit: 2000
-      ) {
-        edges {
-          node {
-            fields {
-              slug
-            }
-            first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
-            date: first_publication_date
-            tags
-          }
-        }
-      }
-    }
-  `)
-
-  const articles = get(pages, 'data.articles.edges')
-
-  const articlesMaker = data => {
-    data.map(({ node }) => {
-      const { fields, date } = node
-      const { slug, tags } = fields
-      createPage({
-        component: path.resolve(`src/templates/articles.tsx`),
-        context: {
-          slug: slug,
-          tags: tags,
-          date: date,
-        },
-        path: slug,
-      })
-    })
-  }
-
-  articles && articlesMaker(articles)
-}
-
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
 
@@ -86,9 +43,52 @@ exports.onCreateBabelConfig = ({ actions }) => {
 }
 
 exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
-	const config = getConfig()
-	config.node = {
-		fs: 'empty',
-	}
-	actions.replaceWebpackConfig(config)
+  const config = getConfig()
+  config.node = {
+    fs: 'empty',
+  }
+  actions.replaceWebpackConfig(config)
+}
+
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage } = actions
+  const pages = await graphql(`
+    {
+      articles: allPrismicArticles(
+        filter: { tags: { nin: ["Афиша"] } }
+        limit: 2000
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            first_publication_date(locale: "ru", formatString: "DD MMMM YYYY")
+            date: first_publication_date
+            tags
+          }
+        }
+      }
+    }
+  `)
+
+  const articles = get(pages, 'data.articles.edges')
+
+  const articlesMaker = data => {
+    data.map(({ node }) => {
+      const { fields, date } = node
+      const { slug, tags } = fields
+      createPage({
+        component: path.resolve(`src/templates/articles.tsx`),
+        context: {
+          slug: slug,
+          tags: tags,
+          date: date,
+        },
+        path: slug,
+      })
+    })
+  }
+
+  articles && articlesMaker(articles)
 }

@@ -98,12 +98,8 @@ export const PageQuery = graphql`
           }
           image {
             url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 640, quality: 80) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
+            fluid(maxWidth: 640) {
+              ...GatsbyPrismicImageFluid
             }
           }
           caption {
