@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { get } from 'lodash'
 import * as uuid from 'uuid/v1'
-import { useMedia } from 'react-use'
+// import { useMedia } from 'react-use'
 
 import { translite } from '@krapiva-org/utils'
 
@@ -11,8 +11,8 @@ import { Img } from '../img/index'
 import { Link } from '../link/index'
 import { TextContainer } from '../main/index'
 
-import { Views } from './views'
-import { useGetViews } from './use-get-views'
+// import { Views } from './views'
+// import { useGetViews } from './use-get-views'
 import { Header, descriptionStyles, captionStyles, imageWrapperStyles, titleStyles } from './styles'
 
 interface ArticleHeaderProps {
@@ -27,9 +27,9 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')
-  const isBlackTheme = useMedia('(prefers-color-scheme: dark)')
+  // const isBlackTheme = useMedia('(prefers-color-scheme: dark)')
 
-  useGetViews()
+  // useGetViews()
 
   return (
     <Header
@@ -66,7 +66,7 @@ export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
               </Link>
             ))
           )}
-          <Views onIndex={onIndex && !isBlackTheme} />
+          {/* <Views onIndex={onIndex && !isBlackTheme} /> */}
         </div>
       </TextContainer>
       <div css={imageWrapperStyles}>

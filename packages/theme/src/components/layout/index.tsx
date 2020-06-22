@@ -17,7 +17,7 @@ import { Meta } from '../../typings/meta'
 import { Seo } from '../../typings/seo'
 
 import { Borders } from './styles'
-// import { HeaderBunners } from './bunners'
+import { Bunners } from './bunners'
 import globalStyles from './global'
 
 export const MetaContext = React.createContext<any>({
@@ -64,6 +64,7 @@ function LayoutComponent({
             {children}
           </Main>
           <Footer />
+          <Bunners /> 
         </StateContext.Provider>
       </MetaContext.Provider>
     </React.Fragment>

@@ -5,7 +5,7 @@ import { translite } from '@krapiva-org/utils'
 
 import { MetaContext } from '../layout/index'
 
-import { FooterBunners } from './bunners'
+// import { FooterBunners } from './bunners'
 import { FooterNav } from './nav'
 import { footerStyles, rowStyles, blockStyles, publicStyles, linkStyles } from './styles'
 
@@ -19,7 +19,7 @@ export function Footer() {
 
   return (
     <React.Fragment>
-      <FooterBunners />
+      {/* <FooterBunners /> */}
       <footer css={footerStyles}>
         <FooterNav items={items} />
         <div css={rowStyles}>

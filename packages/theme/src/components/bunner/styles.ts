@@ -3,7 +3,7 @@ import tw from 'tailwind.macro'
 
 export const bunnerStyles = css`
   ${tw`
-    flex flex-row
+    flex flex-col
     items-center justify-between
     bg-green-500
     select-none
@@ -16,6 +16,9 @@ export const bunnerStyles = css`
 `
 
 export const textStyles = css`
+  & > * {
+    ${tw`my-8`};
+  }
   & a {
     ${tw`underline`};
   }
@@ -24,12 +27,14 @@ export const textStyles = css`
 export const buttonWrapperStyles = css`
   ${tw`
     flex flex-row flex-no-wrap
-    ml-auto
+    mx-auto
+    my-8
   `};
 `
 
 export const closeStyles = css`
   ${tw`
     ml-2
+    self-end
   `};
 `

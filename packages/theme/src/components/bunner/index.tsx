@@ -4,8 +4,14 @@ import { get } from 'lodash'
 import { Button } from '../button/index'
 import { HTML } from '../html/index'
 import { LinkButton } from '../button/link'
+import { TextContainer } from '../main/index'
 
-import { bunnerStyles, textStyles, buttonWrapperStyles, closeStyles } from './styles'
+import {
+  bunnerStyles,
+  textStyles,
+  buttonWrapperStyles,
+  closeStyles,
+} from './styles'
 
 interface BunnerProps {
   bunner?: {
@@ -24,13 +30,26 @@ interface BunnerProps {
 }
 
 export function Bunner({ bunner, onClick, atFooter }: BunnerProps) {
-  if (!bunner) { return null }
+  if (!bunner) {
+    return null
+  }
 
   return (
     <div css={bunnerStyles}>
-      <HTML css={textStyles}>
-        {get(bunner, 'bannertext.html')}
-      </HTML>
+      {!atFooter && (
+        <Button
+          inverted
+          color="#08a676"
+          css={closeStyles}
+          rounded={0.25}
+          onClick={onClick}
+        >
+          ✕
+        </Button>
+      )}
+      <TextContainer css={textStyles}>
+        <HTML>{get(bunner, 'bannertext.html')}</HTML>
+      </TextContainer>
       <div css={buttonWrapperStyles}>
         <LinkButton
           color="#08a676"
@@ -40,17 +59,6 @@ export function Bunner({ bunner, onClick, atFooter }: BunnerProps) {
         >
           {get(bunner, 'bannerbutton', 'Перейти')}
         </LinkButton>
-        {!atFooter && (
-          <Button
-            inverted
-            color="#08a676"
-            css={closeStyles}
-            rounded={0.25}
-            onClick={onClick}
-          >
-            ✕
-          </Button>
-        )}
       </div>
     </div>
   )

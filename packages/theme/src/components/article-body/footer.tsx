@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import { FooterBurn } from './burn'
+// import { FooterBurn } from './burn'
 import { Container } from '../main/index'
 
 import { useUpdateViews } from './use-update-views'
@@ -22,7 +22,7 @@ export function ArticleFooter({ onIndex }) {
   return (
     <aside css={footerStyles} ref={ref}>
       <Container>
-        <FooterBurn />
+        {/* <FooterBurn /> */}
         <FooterDiscuss />
       </Container>
     </aside>
