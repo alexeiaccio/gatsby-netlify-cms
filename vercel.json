@@ -1,0 +1,28 @@
+{
+  "routes": [
+    { "src": "/zhurnal-krapiva-nulevoi-nomer-14-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-krapiva-nulevoi-14-09-2018" } },
+    { "src": "/zhurnal-krapiva-pervii-nomer-07-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-krapiva-pervii-07-10-2018" } },
+    { "src": "/s-chego-nachinaetsya-rodina-10-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/s-chego-nachinaetsya-10-10-2018" } },
+    { "src": "/mariya-baturina-zaschita-luzhina-09-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/mariya-baturina-zaschita-09-10-2018" } },
+    { "src": "/opit-novoi-russkoi-karti-24-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/opit-novoi-russkoi-24-09-2018" } },
+    { "src": "/aleksandra-gart-drugoe-mesto-fftn-sentyabrya-25-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/aleksandra-gart-drugoe-25-09-2018" } },
+    { "src": "/velikaya-prekrasnaya-rossiya-v-okruzhenii-dobrih-sosedei-o-vistavke-vasi-lozhkina-v-artmuze-21-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/velikaya-prekrasnaya-rossiya-21-10-2018" } },
+    { "src": "/zhurnal-krapiva-ustanovochnaya-diskussiya-nulevoi-nomer-02-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-krapiva-ustanovochnaya-02-09-2018" } },
+    { "src": "from", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-krapiva-ustanovochnaya-02-09-2018" } },
+    { "src": "/-gnusnie-duhovnie-urodi-beseda-s-kompozitorom-alekseem-sisoevim-15-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/gnusnie-duhovnie-urodi-15-10-2018" } },
+    { "src": "/-reviziya-mesta-i-soobschestva-podvodnii-kontinent-30-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/reviziya-mesta-i-30-09-2018" } },
+    { "src": "/-marksnash-18-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/marksnash-18-10-2018" } },
+    { "src": "/zhurnal-krapiva-nulevoi-14-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-k-r-14-09-2018" } },
+    { "src": "/zhurnal-krapiva-nulevoi-nomer-14-09-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-k-r-14-09-2018" } },
+    { "src": "/zhurnal-krapiva-pervii-07-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-k-r-07-10-2018" } },
+    { "src": "/zhurnal-krapiva-pervii-nomer-07-10-2018", "status": 308, "headers": { "Location": "https://pervaya.krapiva.org/zhurnal-k-r-09-11-2018" } },
+    { "src": "/new", "dest": "/novoe" },
+    { "src": "/reviews", "dest": "/revyu" },
+    { "src": "/analitics", "dest": "/analitika" },
+    { "src": "/discussions", "dest": "/diskussii" },
+    { "src": "/practice", "dest": "/praktiki-pisma" },
+    { "src": "/archive", "dest": "/arhiv" },
+    { "src": "/persons", "dest": "/intervyui" },
+    { "src": "/documents", "dest": "/dokumenti" }
+  ]
+}
