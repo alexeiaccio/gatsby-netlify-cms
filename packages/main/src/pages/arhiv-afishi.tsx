@@ -87,13 +87,6 @@ export const PageQuery = graphql`
           image {
             alt
             url
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 1280, quality: 80) {
-                  ...GatsbyImageSharpFluid_tracedSVG
-                }
-              }
-            }
           }
           caption {
             html
@@ -145,13 +138,6 @@ export const PageQuery = graphql`
               primary {
                 imageimage {
                   url
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 1280, quality: 80) {
-                        ...GatsbyImageSharpFluid_tracedSVG
-                      }
-                    }
-                  }
                 }
                 imagecaption {
                   html
@@ -188,13 +174,6 @@ export const PageQuery = graphql`
                         }
                         image {
                           url
-                          localFile {
-                            childImageSharp {
-                              fluid(maxWidth: 640, quality: 80) {
-                                ...GatsbyImageSharpFluid_tracedSVG
-                              }
-                            }
-                          }
                         }
                       }
                     }
@@ -206,13 +185,6 @@ export const PageQuery = graphql`
               primary {
                 mediacover {
                   url
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 640, quality: 80) {
-                        ...GatsbyImageSharpFluid_tracedSVG
-                      }
-                    }
-                  }
                 }
                 mediacaption {
                   html
@@ -226,13 +198,6 @@ export const PageQuery = graphql`
               items {
                 sliderimage {
                   url
-                  localFile {
-                    childImageSharp {
-                      fluid(maxWidth: 1280, quality: 80) {
-                        ...GatsbyImageSharpFluid_tracedSVG
-                      }
-                    }
-                  }
                 }
                 slidercaptions {
                   html

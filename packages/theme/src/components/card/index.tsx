@@ -18,7 +18,7 @@ interface CardProps {
 
 export function Card({ data, children, onClick }: CardProps) {
   const title = get(data, 'data.title.text', '')
-  const image = get(data, 'data.image')
+  const image = get(data, 'data.image.url')
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'data.releasedate') || get(data, 'first_publication_date')
   const authors = get(data, 'data.authors')

@@ -1,7 +1,7 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-const { get, keys } = require('lodash')
+const { keys } = require('lodash')
 const { APIS, CONFIG, SCHEMAS, linkResolver, plugins } = require('@krapiva-org/utils')
 const { about, authors, index } = SCHEMAS
 

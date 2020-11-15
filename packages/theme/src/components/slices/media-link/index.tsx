@@ -68,7 +68,7 @@ export function MediaLink({ primary }: MediaLinkProps) {
             <div css={imageStyles}>
               <Img
                 css={imgStyles}
-                src={get(primary, 'mediacover')}
+                src={get(primary, 'mediacover.url')}
               />
             </div>
           </Wrapper>

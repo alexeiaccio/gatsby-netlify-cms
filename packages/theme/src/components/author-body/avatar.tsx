@@ -14,7 +14,7 @@ interface CardProps {
 
 export function Avatar({ author }: CardProps) {
   const name = get(author, 'data.name')
-  const image = get(author, 'data.avatar')
+  const image = get(author, 'data.avatar.url')
   const statement = get(author, 'data.statement.html')
 
   return (
@@ -22,7 +22,7 @@ export function Avatar({ author }: CardProps) {
       <div css={wrapperStyles}>
         <div css={imageWrapperStyles}>
           <div css={imageStyles}>
-            <Img src={image} />
+            <Img src={image} aspectRatio="1:1" />
           </div>
         </div>
       </div>

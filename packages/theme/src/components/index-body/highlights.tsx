@@ -23,7 +23,7 @@ export function Highlights({ highlights }) {
     setCurrent(getRandom(highlights.length))
   }, [location.pathname])
 
-  const image = get(highlights, [current, 'primary', 'image'])
+  const image = get(highlights, [current, 'primary', 'image', 'url'])
   const text = get(highlights, [current, 'primary', 'text', 'html'])
   const link = get(highlights, [current, 'primary', 'link'])
   const internal = link && /^\/(?!\/)/.test(link)

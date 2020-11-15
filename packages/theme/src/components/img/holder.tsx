@@ -6,12 +6,7 @@ import tw from 'tailwind.macro'
 import { Logo } from '../logo/index'
 
 export const Holder = styled('div')`
-  ${tw`
-    flex items-center justify-center
-    h-full w-full
-    overflow-hidden
-    rounded-sm
-  `};
+  ${tw`flex items-center justify-center w-full h-full overflow-hidden rounded-sm `};
   background-color: var(--gray-light-color);
 `
 
