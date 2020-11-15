@@ -19,19 +19,11 @@ exports.plugins = [
   {
     resolve: `gatsby-plugin-env-variables`,
     options: {
-      whitelist: [
-        'SLS_API',
-        'PRISMIC_API',
-        'SPECIAL',
-        'DEV',
-        'SHEET_ID'
-      ]
+      whitelist: ['SLS_API', 'PRISMIC_API', 'SPECIAL', 'DEV', 'SHEET_ID'],
     },
   },
   `gatsby-plugin-netlify-cache`,
   'gatsby-plugin-react-helmet',
-  'gatsby-plugin-sharp',
-  `gatsby-transformer-sharp`,
   {
     resolve: 'gatsby-plugin-mailchimp',
     options: {
@@ -44,8 +36,8 @@ exports.plugins = [
   {
     resolve: `gatsby-plugin-offline`,
     options: {
-        importWorkboxFrom: `cdn`,
-      },
+      importWorkboxFrom: `cdn`,
+    },
   },
   {
     resolve: `gatsby-plugin-sitemap`,

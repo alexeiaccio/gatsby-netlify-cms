@@ -22,7 +22,7 @@ interface ArticleHeaderProps {
 
 export function ArticleHeader({ data, onIndex = false }: ArticleHeaderProps) {
   const title = get(data, 'data.title.text', '')
-  const image = get(data, 'data.image')
+  const image = get(data, 'data.image.url')
   const caption = get(data, 'data.caption')
   const tags = get(data, 'tags', []).filter(tag => tag.search(/\d/) === -1)
   const date = get(data, 'first_publication_date')

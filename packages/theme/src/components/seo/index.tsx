@@ -8,11 +8,7 @@ import jsonldGenerator from './jsonld-generator'
 
 export const SEO = ({ data, location, meta }) => {
   const pageTitle = get(data, 'title')
-  const pageImage = get(
-    data,
-    'image.localFile.childImageSharp.fluid.src',
-    get(data, 'image.url')
-  )
+  const pageImage = get(data, 'image.url')
   const {
     siteTitle,
     siteUrl: metaSiteUrl,

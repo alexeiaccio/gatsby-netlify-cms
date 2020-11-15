@@ -16,7 +16,7 @@ export function BodySlider({ items }: any) {
   return (
     <figure css={figureStyles}>
       <div css={slideStyles}>
-        <Img src={get(items, [current, 'sliderimage'])} />
+        <Img src={get(items, [current, 'sliderimage', 'url'])} />
         <button
           onClick={() => setCurrent((current - 1) < 0 ? (items.length - 1) : (current - 1))}
           css={prevStyles}
