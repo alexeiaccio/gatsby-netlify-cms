@@ -12,11 +12,11 @@ interface BodyImageProps {
 }
 
 export function BodyImage({ image, caption }: BodyImageProps) {
-  if (!image.src) { return null }
+  if (!image.url) { return null }
 
   return (
     <figure css={figureStyles}>
-      <Img src={image.src} />
+      <Img src={image.url} />
       {caption && (
         <figcaption css={captionStyles}>
           <SpanHTML>

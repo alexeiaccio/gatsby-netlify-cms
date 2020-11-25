@@ -7,5 +7,5 @@ interface LocalImg {
 }
 
 export interface Image {
-  src?: string | null | undefined
+  url?: string | null | undefined
 }

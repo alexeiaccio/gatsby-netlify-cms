@@ -9,6 +9,7 @@ type ImageProps = {
   aspectRatio?: '1:1' | '16:9' | '4:3' | '3:2' | '8:5'
   className?: string
   css?: string
+  maxSize?: number 
 }
 
 const RATIOS = {
@@ -25,6 +26,7 @@ const Image: React.FC<ImageProps> = ({
   aspectRatio = '4:3',
   className = '',
   css: styles = '',
+  // maxSize = 1920,
 }) => {
   const srcSet: string[] = []
 
@@ -33,8 +35,8 @@ const Image: React.FC<ImageProps> = ({
     const [w, h] = aspectRatio.split(':')
     const ratio = parseInt(h) / parseInt(w)
     srcSet.push(`${url}&amp;fit=max&amp;w=1920&amp;h=${1920 * ratio} 1920w`)
-    srcSet.push(`${url}&amp;fit=max&amp;w=3840&amp;h=${3840 * ratio} 3840w`)
-    srcSet.push(`${url}&amp;fit=max&amp;w=2880&amp;h=${2880 * ratio} 2880w`)
+    // srcSet.push(`${url}&amp;fit=max&amp;w=3840&amp;h=${3840 * ratio} 3840w`)
+    // srcSet.push(`${url}&amp;fit=max&amp;w=2880&amp;h=${2880 * ratio} 2880w`)
     srcSet.push(`${url}&amp;fit=max&amp;w=960&amp;h=${960 * ratio} 960w`)
     srcSet.push(`${url}&amp;fit=max&amp;w=480&amp;h=${480 * ratio} 480w`)
   }
