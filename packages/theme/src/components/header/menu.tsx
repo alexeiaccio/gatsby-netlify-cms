@@ -19,11 +19,11 @@ export function Menu({ opened, toggleForm }: MenuProps) {
         </button>
         <a
           css={linkStyles}
-          href="https://money.yandex.ru/to/410012396039377"
+          href="https://www.patreon.com/krapivajournal"
           rel="noopener noreferrer"
           target="_blank"
         >
-          ПОДДЕРЖАТЬ
+          PATREON
         </a>
         <a
           css={linkStyles}

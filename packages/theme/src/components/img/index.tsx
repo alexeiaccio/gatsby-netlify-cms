@@ -31,23 +31,25 @@ const Image: React.FC<ImageProps> = ({
   const srcSet: string[] = []
 
   if (src && src.includes('prismic')) {
-    const url = `${src.replace(/\?.+$/g, '')}?auto=compress,format`
+    const url = `${src.replace(/\?.+$/g, '')}?auto=format`
     const [w, h] = aspectRatio.split(':')
     const ratio = parseInt(h) / parseInt(w)
-    srcSet.push(`${url}&amp;fit=max&amp;w=1920&amp;h=${1920 * ratio} 1920w`)
+    srcSet.push(`${url}&amp;fit=max&amp;w=960&amp;h=${960 * ratio} 1920w`)
     // srcSet.push(`${url}&amp;fit=max&amp;w=3840&amp;h=${3840 * ratio} 3840w`)
     // srcSet.push(`${url}&amp;fit=max&amp;w=2880&amp;h=${2880 * ratio} 2880w`)
-    srcSet.push(`${url}&amp;fit=max&amp;w=960&amp;h=${960 * ratio} 960w`)
-    srcSet.push(`${url}&amp;fit=max&amp;w=480&amp;h=${480 * ratio} 480w`)
+    srcSet.push(`${url}&amp;fit=max&amp;w=800&amp;h=${800 * ratio} 960w`)
+    srcSet.push(`${url}&amp;fit=max&amp;w=640&amp;h=${640 * ratio} 800w`)
+    srcSet.push(`${url}&amp;fit=max&amp;w=320&amp;h=${320 * ratio} 480w`)
   }
 
   return (
     <div className={`relative overflow-hidden ${className}`} css={styles}>
       <div
-        className="w-full"
+        className="w-full bg-center bg-no-repeat bg-cover"
         css={css`
           padding-bottom: ${RATIOS[aspectRatio]};
           background-color: var(--color);
+          background-image: url(${src ? src.replace(/\?.+$/g, '') : '/social.png'}?px=20&w=320);
         `}
       />
       {!src ? (
