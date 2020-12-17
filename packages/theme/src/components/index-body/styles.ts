@@ -41,14 +41,14 @@ export const highlightWrapperStyles = css`
       absolute
       inset-0
     `};
-    background-color: var(--bg-color);
+    background-color: var(--link-color);
     content: '';
     opacity: 0;
     transition: opacity 400ms ease-in-out;
   }
 
   &:hover::after {
-    opacity: 0.66;
+    opacity: 0.99;
   }
 `
 

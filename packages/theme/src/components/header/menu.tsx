@@ -27,6 +27,14 @@ export function Menu({ opened, toggleForm }: MenuProps) {
         </a>
         <a
           css={linkStyles}
+          href="https://t.me/krapivajournal"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          TG
+        </a>
+        <a
+          css={linkStyles}
           href="https://www.facebook.com/krapivapiter"
           rel="noopener noreferrer"
           target="_blank"

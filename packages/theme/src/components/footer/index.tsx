@@ -7,15 +7,24 @@ import { MetaContext } from '../layout/index'
 
 // import { FooterBunners } from './bunners'
 import { FooterNav } from './nav'
-import { footerStyles, rowStyles, blockStyles, publicStyles, linkStyles } from './styles'
+import {
+  footerStyles,
+  rowStyles,
+  blockStyles,
+  publicStyles,
+  linkStyles,
+} from './styles'
 
 export function Footer() {
   const { index } = React.useContext(MetaContext)
-  const items = get(index, 'categories', [])
-    .map(item => item ? ({
-      text: item.categorytitle.text,
-      link: `/${translite(item.categorytitle.text)}`,
-    }) : null)
+  const items = get(index, 'categories', []).map(item =>
+    item
+      ? {
+          text: item.categorytitle.text,
+          link: `/${translite(item.categorytitle.text)}`,
+        }
+      : null
+  )
 
   return (
     <React.Fragment>
@@ -25,10 +34,7 @@ export function Footer() {
         <div css={rowStyles}>
           <div css={blockStyles}>
             <span>·К·Р·А·П·И·В·А·</span>
-            <span
-              css={publicStyles}
-              title="Общественное достояние"
-            />
+            <span css={publicStyles} title="Общественное достояние" />
             <span>2018—{new Date(Date.now()).getFullYear()}</span>
           </div>
           <div css={blockStyles}>
@@ -39,7 +45,7 @@ export function Footer() {
               target="_blank"
             >
               PATREON
-          </a>
+            </a>
             <span>{' · '}</span>
             <a
               css={linkStyles}
@@ -48,7 +54,16 @@ export function Footer() {
               target="_blank"
             >
               MAIL
-          </a>
+            </a>
+            <span>{' · '}</span>
+            <a
+              css={linkStyles}
+              href="https://t.me/krapivajournal"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              TG
+            </a>
             <span>{' · '}</span>
             <a
               css={linkStyles}
@@ -57,7 +72,7 @@ export function Footer() {
               target="_blank"
             >
               FB
-          </a>
+            </a>
             <span>{' · '}</span>
             <a
               css={linkStyles}
@@ -66,7 +81,7 @@ export function Footer() {
               target="_blank"
             >
               VK
-          </a>
+            </a>
           </div>
         </div>
         <div css={rowStyles}>
