@@ -47,9 +47,14 @@ export function Bunner({ bunner, onClick, atFooter }: BunnerProps) {
           ✕
         </Button>
       )}
-      <TextContainer css={textStyles}>
-        <HTML>{get(bunner, 'bannertext.html')}</HTML>
-      </TextContainer>
+      <a
+        href={get(bunner, 'bannerlink.url')}
+        target={get(bunner, 'bannerlink.target', '_blank')}
+      >
+        <TextContainer css={textStyles}>
+          <HTML>{get(bunner, 'bannertext.html')}</HTML>
+        </TextContainer>
+      </a>
       <div css={buttonWrapperStyles}>
         <LinkButton
           color="#08a676"

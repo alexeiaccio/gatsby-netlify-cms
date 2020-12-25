@@ -2,9 +2,7 @@ import * as React from 'react'
 import { get, filter } from 'lodash'
 import { css } from '@emotion/core'
 import {
-  useLockBodyScroll,
-  useToggle,
-  useLocalStorage,
+  useSessionStorage,
   useClickAway,
 } from 'react-use'
 
@@ -12,20 +10,17 @@ import { Bunner } from '../bunner/index'
 import { MetaContext } from '../layout/index'
 
 const Bunners = React.memo(function Bunners() {
-  const { index, location } = React.useContext(MetaContext)
+  const { index } = React.useContext(MetaContext)
   const bunners = filter(
     get(index, 'body', []),
     x =>
       get(x, '__typename') === 'PrismicIndexBodyBanner' &&
       get(x, 'primary.expiredate') <= 0
   )
-  const [current, setCurrent] = useLocalStorage('current-banner', 0)
-  const [locked, toggleLocked] = useToggle(bunners.length > 0)
-  useLockBodyScroll(locked)
+  const [current, setCurrent] = useSessionStorage('current-banner', 0)
   const ref = React.useRef(null)
 
   const handleClick = () => {
-    toggleLocked(false)
     setCurrent(current + 1)
   }
 
@@ -39,7 +34,7 @@ const Bunners = React.memo(function Bunners() {
 
   return (
     <div
-      className="fixed inset-0 overflow-y-auto p-8"
+      className="fixed inset-0 p-8 overflow-y-auto"
       css={css`
         z-index: 10000;
       `}
