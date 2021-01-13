@@ -67,7 +67,7 @@ const Image: React.FC<ImageProps> = ({
                 alt={alt}
                 // @ts-ignore
                 loading="lazy"
-                className="absolute inset-0 object-cover object-center w-full h-full"
+                className="absolute inset-0 object-contain object-center w-full h-full"
                 css={css`
                   image-rendering: pixelated;
                 `}
@@ -79,7 +79,7 @@ const Image: React.FC<ImageProps> = ({
               alt={alt}
               // @ts-ignore
               loading="lazy"
-              className="absolute inset-0 object-cover object-center w-full h-full"
+              className="absolute inset-0 object-contain object-center w-full h-full"
               css={css`
                 image-rendering: pixelated;
               `}
