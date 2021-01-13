@@ -4,33 +4,32 @@ import tw from 'tailwind.macro'
 import { smallButton } from '../../button/styles'
 
 export const textStyles = css`
-  ${tw`
-    relative
-    pt-8
-  `};
+  ${tw`relative pt-8 `};
 
   & .reference {
     ${smallButton};
   }
 `
 
+export const rightStyles = css`
+  & p {
+    ${tw`text-right`};
+  }
+`
+
+export const centerStyles = css`
+  & p {
+    ${tw`text-center`};
+  }
+`
+
 export const refStyles = css`
-  ${tw`
-    absolute
-    p-4
-    text-sm
-    text-center
-    w-full
-    z-10
-  `};
+  ${tw`absolute z-10 w-full p-4 text-sm text-center `};
   background-color: var(--text-color);
   color: var(--bg-color);
 
   &:before {
-    ${tw`
-      absolute
-      block
-    `};
+    ${tw`absolute block `};
     background-color: var(--text-color);
     content: '';
     top: -10px;
@@ -45,7 +44,5 @@ export const refStyles = css`
 `
 
 export const numStyles = css`
-  ${tw`
-    pb-2
-  `};
+  ${tw`pb-2 `};
 `

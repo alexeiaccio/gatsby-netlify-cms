@@ -110,6 +110,7 @@ export const PageQuery = graphql`
                 html
               }
             }
+            slice_label
           }
           ... on PrismicArticlesBodyQuote {
             primary {

@@ -5,22 +5,22 @@ import { HTMLRef } from '../../html/index'
 import { TextContainer } from '../../main/index'
 
 import { Reference } from './reference'
-import { textStyles } from './styles'
+import { textStyles, rightStyles, centerStyles } from './styles'
 
 interface BodyTextProps {
   text: string
   references?: any
+  label?: 'right' | 'center' | 'left' | string
 }
 
-export function BodyText({ text, references = {} }: BodyTextProps) {
-  if (!text) { return null }
+export function BodyText({ text, references = {}, label }: BodyTextProps) {
   const textRef: any = React.useRef(null)
   let refNodes: any[] = React.useRef([]).current
   const [openedRef, toggleRef] = React.useState<any>(null)
 
   const handleToggle = ({ toElement }) => {
     const reference = get(references, [toElement.dataset.href, 'primary'])
-  
+
     toggleRef({
       height: toElement.offsetHeight,
       left: toElement.offsetLeft,
@@ -41,7 +41,9 @@ export function BodyText({ text, references = {} }: BodyTextProps) {
 
   React.useEffect(() => {
     if (textRef.current) {
-      refNodes = textRef.current.querySelectorAll('button[data-type="reference"]')
+      refNodes = textRef.current.querySelectorAll(
+        'button[data-type="reference"]'
+      )
 
       handleRefs()
     }
@@ -68,18 +70,27 @@ export function BodyText({ text, references = {} }: BodyTextProps) {
       if (window !== undefined) {
         window.removeEventListener('resize', resetRef)
       }
-    };
+    }
   }, [])
 
+  const styles = React.useMemo(() => {
+    if (label === 'right') {
+      return [textStyles, rightStyles]
+    } else if (label === 'center') {
+      return [textStyles, centerStyles]
+    } else {
+      return [textStyles]
+    }
+  }, [label])
+
+  if (!text) {
+    return null
+  }
+
   return (
-    <TextContainer css={textStyles}>
-      <HTMLRef ref={textRef}>
-        {text}
-      </HTMLRef>
-      <Reference
-        data={openedRef}
-        close={resetRef}
-      />
+    <TextContainer css={styles}>
+      <HTMLRef ref={textRef}>{text}</HTMLRef>
+      <Reference data={openedRef} close={resetRef} />
     </TextContainer>
   )
 }

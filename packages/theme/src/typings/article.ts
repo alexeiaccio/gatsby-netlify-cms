@@ -61,6 +61,7 @@ export interface ArticleSlice {
     }
   }
   items?: Item[]
+  slice_label?: string
 }
 
 export interface ArticleBody {

@@ -16,7 +16,9 @@
             "type": "Link",
             "config": {
               "select": "document",
-              "customtypes": ["authors"],
+              "customtypes": [
+                "authors"
+              ],
               "label": "Author",
               "placeholder": "Author"
             }
@@ -56,6 +58,22 @@
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
+        "labels": {
+          "text": [
+            {
+              "name": "left",
+              "display": "Left"
+            },
+            {
+              "name": "right",
+              "display": "Right"
+            },
+            {
+              "name": "center",
+              "display": "Center"
+            }
+          ]
+        },
         "choices": {
           "text": {
             "type": "Slice",
@@ -73,7 +91,8 @@
                 }
               }
             },
-            "repeat": {}
+            "repeat": {},
+            "display": "list"
           },
           "quote": {
             "type": "Slice",
@@ -194,7 +213,9 @@
                 "type": "Link",
                 "config": {
                   "select": "document",
-                  "customtypes": ["articles"],
+                  "customtypes": [
+                    "articles"
+                  ],
                   "label": "ArticleLink",
                   "placeholder": "Select Article"
                 }

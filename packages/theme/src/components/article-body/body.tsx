@@ -24,7 +24,7 @@ export function ArticleBodyContent({ body }: ArticleBody) {
 
   return (
     <React.Fragment>
-      {body.map(({ __typename, primary, items }) => (
+      {body.map(({ __typename, primary, items, slice_label }) => (
         <React.Fragment key={uuid()}>
           {__typename === 'PrismicArticlesBodyImage' && (
             <BodyImage
@@ -56,6 +56,7 @@ export function ArticleBodyContent({ body }: ArticleBody) {
           {__typename === 'PrismicArticlesBodyText' && (
             <BodyText
               text={get(primary, 'text.html')}
+              label={slice_label}
               references={references}
             />
           )}
