@@ -45,7 +45,7 @@ const Image: React.FC<ImageProps> = ({
   return (
     <div className={`relative overflow-hidden ${className}`} css={styles}>
       <div
-        className="w-full bg-center bg-no-repeat bg-cover"
+        className="w-full bg-center bg-no-repeat bg-contain"
         css={css`
           padding-bottom: ${RATIOS[aspectRatio]};
           background-color: var(--color);
