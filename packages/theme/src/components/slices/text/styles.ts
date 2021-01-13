@@ -17,6 +17,12 @@ export const rightStyles = css`
   }
 `
 
+export const leftStyles = css`
+  & p {
+    ${tw`text-left`};
+  }
+`
+
 export const centerStyles = css`
   & p {
     ${tw`text-center`};

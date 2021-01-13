@@ -5,7 +5,7 @@ import { HTMLRef } from '../../html/index'
 import { TextContainer } from '../../main/index'
 
 import { Reference } from './reference'
-import { textStyles, rightStyles, centerStyles } from './styles'
+import { textStyles, rightStyles, centerStyles, leftStyles } from './styles'
 
 interface BodyTextProps {
   text: string
@@ -76,6 +76,8 @@ export function BodyText({ text, references = {}, label }: BodyTextProps) {
   const styles = React.useMemo(() => {
     if (label === 'right') {
       return [textStyles, rightStyles]
+    } if (label === 'left') {
+      return [textStyles, leftStyles]
     } else if (label === 'center') {
       return [textStyles, centerStyles]
     } else {
