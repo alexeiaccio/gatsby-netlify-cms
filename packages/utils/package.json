@@ -11,7 +11,7 @@
   "devDependencies": {
     "favicons": "^5.4.1",
     "gatsby": "^2.13.50",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "uuid": "^3.3.2"
   }
 }
